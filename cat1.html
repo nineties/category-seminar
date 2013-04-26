@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-    <title>第1回 圏論勉強会 @ ワークスアプリケーションズ</title>
+    <title>圏論勉強会 第1回 @ ワークスアプリケーションズ</title>
 
 		<meta name="description" content="Seminar of category theory">
     <meta name="author" content="Koichi Nakamura">
@@ -56,7 +56,7 @@
 			<div class="slides">
 
         <section>
-        <h1>第1回圏論勉強会</h1>
+        <h1>圏論勉強会<br>第1回</h1>
         <h3>@ワークスアプリケーションズ</h3>
         <small> 中村晃一 <br> 2013年5月16日</small>
         </section>
@@ -64,7 +64,7 @@
         <section>
         <h3>謝辞</h3>
         <p>
-        この勉強会の企画、会場設備の提供をして頂きました<br>
+        この勉強会の企画，会場設備の提供をして頂きました<br>
         &#12849; ワークスアプリケーションズ<br>
         様にこの場をお借りして御礼申し上げます。
         </p>
@@ -73,11 +73,11 @@
         <section>
         <h3> 自己紹介 </h3>
         <ul>
-          <li> 中村晃一
+          <li> 中村晃一</li>
           <li> 東京大学大学院情報理工学系研究科コンピュータ科学専攻<br>
-               後期博士課程2年
-          <li> プログラム最適化・言語処理系の実装技術・人間と言語の関係等に興味があります。
-          <li> twitter: <a href="http://twitter.com/9_ties">@9_ties</a>
+               後期博士課程2年</li>
+          <li> プログラム最適化・言語処理系の実装技術・人間と言語の関係等に興味があります。</li>
+          <li> twitter: <a href="http://twitter.com/9_ties">@9_ties</a></li>
         </ul>
         </section>
 
@@ -88,21 +88,20 @@
         <section>
         <h3> この会について </h3>
         <ul>
-          <li> <span style="color:red">圏論(Category Theory)</span>を題材にいろんなことを学びます。
-          <li> 計算機科学関係の話題が多めになると思います。
-          <li> 毎週1回、全12週くらいの予定です。
-          <li> 何らかの関数型言語に触れていた方が今後の授業をより楽しめると思います。
-          <li> 質問・コメント大歓迎です。他の聴衆の為にもなるので後回しにせずその場でどうぞ。
-          <li> この資料は<a href="http://github.com/nineties/category-seminar">http://github.com/nineties/category-seminar</a>に置いてあります。
+          <li> <span style="color:red">圏論(Category Theory)</span>を題材にいろんなことを学びます。</li>
+          <li> 計算機科学関係の話題が多めになると思います。</li>
+          <li> 毎週1回，全12週くらいの予定です。</li>
+          <li> 何らかの関数型言語に触れていた方が今後の授業をより楽しめると思います。</li>
+          <li> 質問・コメント大歓迎です。他の聴衆の為にもなるので後回しにせずその場でどうぞ。</li>
+          <li> この資料は<a href="http://github.com/nineties/category-seminar">http://github.com/nineties/category-seminar</a>に置いてあります。</li>
         </ul>
         </section>
 
         <section>
         <h3> 参考書 </h3>
         <ul>
-          <li> Steve Awodey著 Category Theory をお薦めします。
-          <li> 非数学専攻者向けに書かれています。
-          <li>
+          <li> Steve Awodey著 Category Theory をお薦めします。</li>
+          <li> 非数学専攻者向けに書かれています。</li>
           <a href="http://www.andrew.cmu.edu/course/80-413-713/notes/">
           http://www.andrew.cmu.edu/course/80-413-713/notes/
           </a>
@@ -130,8 +129,8 @@
         <section>
         <h3> 具体例から始めよう </h3>
         <p>
-        問: データ型A,Bが与えられているとします。<br>
-        AとBの<span style="color:red">対(pair)</span>を表すデータ型Pをどう定義すれば良いでしょうか？
+        問: データ型$A$,$B$が与えられているとします。<br>
+        $A$と$B$の<span style="color:red">対(pair)</span>を表すデータ型Pをどう定義すれば良いでしょうか？
         </p>
         <pre class="fragment"><code contenteditable>
 /* C言語での例 */
@@ -150,31 +149,31 @@ data P = Pair { first :: A, second :: B }
         </section>
 
         <section>
-        <h3> 沢山の例ありがとうございました </h3>
+        <h3> 結局「対」って何? </h3>
         <p>
-        どの例も「A,Bの対」と言えそうです。<span class="fragment">一方</span>
+        一つの概念に多くの実装方法があり，どの例も「$A$,$B$の対」と言えそうです。一方
         </p>
-        <pre class="fragment" data-fragment-index="1"><code contenteditable>
+        <div class="fragment">
+        <pre><code contenteditable>
 type P = (A, B, Int)
         </code></pre>
-        <p class="fragment">
-        みたいなのは「A,Bの対」とは言えなさそうです。<br>
-        <span class="fragment"><u>結局「対」とは何なのでしょうか?</u></span>
+        <p>
+        みたいなのは「$A$,$B$の対」とは言えなさそうです。
         </p>
+        </div>
         </section>
 
         <section>
         <h3> 抽象的に考えよう </h3>
-        <p>A,B,Pの<u>具体的な内部構造に一切触れず</u>に「対」の概念を考える必要があります。
+        <p>$A$,$B$,$P$の<u>具体的な内部構造に一切触れず</u>に「対」の概念を考える必要があります。
         </p>
         </section>
 
         <section>
         <div style="text-align:left">
-        PがA,Bの対であるならばまず
-        <ul>
-          <li>P(型のデータ,以下略)からA,Bを読み出す関数<span style="color:red">first</span>,<span style="color:red">second</span>
-        </ul>
+         $P$が$A$,$B$の対であるならば，<br>
+         $P$型のデータ(以下同様)から$A$,$B$を読み出す関数
+        <center>  <span style="color:red">$first$</span>と<span style="color:red">$second$</span> </center>
         が必要です。
         <div class="fragment">
         この様な状況を以下のように<span style="color:red">図式(Diagram)</span>で表現してみます。
@@ -190,23 +189,158 @@ type P = (A, B, Int)
         </section>
 
         <section>
+        <p>
         ある型からA,B型への関数は無数に存在し得ます。<br>
         データを取り出す他にも様々な計算が行えるからです。
+        </p>
         <center> <img src="fig/1/product3.png" alt="直積その3"> </center>
         </section>
 
         <section>
         <p>
-        そこで任意の型$X$と任意の関数$f: X\rightarrow A$、$g: X\rightarrow B$に対して、以下のような図式を考えます。
+        そこで任意の型$X$と任意の関数$f: X\rightarrow A$，$g: X\rightarrow B$に対して，以下のような図式を考えます。
         </p>
         <center> <img src="fig/1/product4.png" alt="直積その4"></center>
         </section>
 
         <section>
         <p>
-        $X$から$A$,$B$の値を作れるなら、それらの値の対を$X$から作る関数$u$が必ず存在するはずです。
+        $X$から$A$,$B$の値を作れるなら，それらの値の対を$X$から作る関数$u$が必ず存在するはずです。
         </p>
         <center> <img src="fig/1/product5.png" alt="直積その5"></center>
+        </section>
+
+        <section>
+        <p>
+        このとき，$u$で対を作って$first$で取り出す事は，$f$と等しく<br>
+        　
+        </p>
+        <center> <img src="fig/1/product6.png" alt="直積その6"> </center>
+        </section>
+
+        <section>
+        <p>
+        $second$で取り出す事は，$g$と等しくなければいけません。<br>
+        　
+        </p>
+        <center> <img src="fig/1/product7.png" alt="直積その7"> </center>
+        </section>
+
+        <section>
+        <p>
+        このことは関数合成の記号$\circ$を用いると
+        </p>
+        <center> $first \circ u = f \qquad second \circ u = g$ </center>
+        <p>
+        と表す事が出来ます。
+        </p>
+
+        <div class="fragment">
+        <p>
+        もしくは「以下の図式が<span style="color:red">可換(Commutative)</span>である」と表現します。
+        </p>
+        <center> <img src="fig/1/product5.png" alt="直積その5"> </center>
+        </div>
+        </section>
+
+        <section>
+        <h3> $u$の唯一性 </h3>
+        <p>
+        $P$が$A$,$B$以外の余分なデータを持っている(対より大きい)なら，余分なデータをどう生成するかの選択肢があり
+        $u$は唯一に定まりません。
+        </p>
+        </section>
+
+        <section>
+        <h3> 「対」の定義 </h3>
+        <p>
+        型$P$が型$A$,$B$の対であるという事は，関数$first: P\rightarrow A$，$second: P\rightarrow B$が存在し
+        任意の型$X$と任意の関数$f: X\rightarrow A$, $g: X\rightarrow B$に対して，以下の図式が可換となるような
+        $u: X\rightarrow P$が唯一つ存在する事である。
+        </p>
+        <center> <img src="fig/1/product5.png" alt="直積その5"> </center>
+        </section>
+
+        <section style="color:red">
+        <h3> 普遍性 <small class="fragment">(詳しくは後の回で)</small> </h3>
+        <p>
+        <span style="color:lightgrey">型$P$が型$A$,$B$の対であるという事は，関数$first: P\rightarrow A$，$second: P\rightarrow B$が存在し</span>
+        任意の<span style="color:lightgrey">型$X$</span>と任意の<span style="color:lightgrey">関数$f: X\rightarrow A$, $g: X\rightarrow B$</span>に対して，<span style="color:lightgrey">以下の図式</span>が可換となるような
+        <span style="color:lightgrey">$u: X\rightarrow P$</span>が唯一つ存在する事<span style="color:lightgrey">である。</span>
+        </p>
+        <center> <img src="fig/1/product8.png" alt="直積その8"> </center>
+        </section>
+
+        <section>
+        <h3> 具体例から圏論へ </h3>
+        <p>
+        今の例において
+        </p>
+
+        <ul>
+          <li> $P$,$A$,$B$,$X$が型であるという事 </li>
+          <li> $first$, $second$, $u$, $f$, $g$が関数であるという事 </li>
+          <li> $\circ$が関数合成であるという事 </li>
+        </ul>
+
+        <p>
+        は本質的ではありません。
+        </p>
+
+        <p class="fragment">
+        何らかの「もの」と「矢」と「矢の連結」を用いて考える事が重要です。
+        </p>
+        </section>
+
+        <section>
+        <h3> 「対」のアナロジー </h3>
+        <p>
+        <ul>
+          <li> 「もの」をある集合$A$の部分集合 </li>
+          <li> 「矢」を集合の包含関係 </li>
+          <li> 「矢の連結」を包含関係の合成 </li>
+        </p>
+        に置き換えると「対」の何に対応するかを考えてみます。
+        </p>
+
+        <p>
+        具体例として$A=\{1,2,3\}$として$\{1,2\}$と$\{1,3\}$の「対」を考えます。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        別の矢をつなげて作れる矢は省略してます。
+        </p>
+        <center> <img height="80%" src="fig/1/product9.png" alt="ベキ集合その1"> </center>
+        </section>
+
+        <section>
+        <p>
+        $\{1,2\}$と$\{1,3\}$に向かう矢を持つものは$\cdots$
+        </p>
+        <center> <img height="80%" src="fig/1/product9.png" alt="ベキ集合その1"> </center>
+        </section>
+
+        <section>
+        <p>
+        $\{1,2\}$と$\{1,3\}$に向かう矢を持つものは$\cdots$$\{1\}$と
+        </p>
+        <center> <img height="80%" src="fig/1/product10.png" alt="ベキ集合その2"> </center>
+        </section>
+
+        <section>
+        <p>
+        $\{1,2\}$と$\{1,3\}$に向かう矢を持つものは$\cdots$$\{1\}$と$\emptyset$
+        </p>
+        <center> <img height="80%" src="fig/1/product11.png" alt="ベキ集合その3"> </center>
+        </section>
+
+        <section>
+        <p>
+        $\emptyset$から$\{1\}$に向う矢が唯一存在して、以下の図式は可換。
+        </p>
+        <center> <img height="80%" src="fig/1/product12.png" alt="ベキ集合その4"> </center>
         </section>
 
 			</div>
