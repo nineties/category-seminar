@@ -10,9 +10,9 @@
    version="1.1"
    width="210mm"
    height="297mm"
-   id="svg3322">
+   id="svg3446">
   <defs
-     id="defs3324">
+     id="defs3448">
     <marker
        refX="0"
        refY="0"
@@ -29,72 +29,24 @@
        refX="0"
        refY="0"
        orient="auto"
-       id="marker3253"
+       id="Arrow1LendE"
        style="overflow:visible">
       <path
          d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
          transform="matrix(-0.8,0,0,-0.8,-10,0)"
-         id="path3255"
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt" />
+         id="path3473"
+         style="fill:#b3b3b3;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:1pt" />
     </marker>
     <marker
        refX="0"
        refY="0"
        orient="auto"
-       id="marker3257"
+       id="marker3468"
        style="overflow:visible">
       <path
          d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
          transform="matrix(-0.8,0,0,-0.8,-10,0)"
-         id="path3259"
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt" />
-    </marker>
-    <marker
-       refX="0"
-       refY="0"
-       orient="auto"
-       id="marker3261"
-       style="overflow:visible">
-      <path
-         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
-         transform="matrix(-0.8,0,0,-0.8,-10,0)"
-         id="path3263"
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt" />
-    </marker>
-    <marker
-       refX="0"
-       refY="0"
-       orient="auto"
-       id="marker3265"
-       style="overflow:visible">
-      <path
-         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
-         transform="matrix(-0.8,0,0,-0.8,-10,0)"
-         id="path3267"
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt" />
-    </marker>
-    <marker
-       refX="0"
-       refY="0"
-       orient="auto"
-       id="marker3269"
-       style="overflow:visible">
-      <path
-         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
-         transform="matrix(-0.8,0,0,-0.8,-10,0)"
-         id="path3271"
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt" />
-    </marker>
-    <marker
-       refX="0"
-       refY="0"
-       orient="auto"
-       id="marker3273"
-       style="overflow:visible">
-      <path
-         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
-         transform="matrix(-0.8,0,0,-0.8,-10,0)"
-         id="path3275"
+         id="path3470"
          style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt" />
     </marker>
     <marker
@@ -106,24 +58,72 @@
       <path
          d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
          transform="matrix(-0.8,0,0,-0.8,-10,0)"
-         id="path3470"
+         id="path3474"
          style="fill:#b3b3b3;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:1pt" />
     </marker>
     <marker
        refX="0"
        refY="0"
        orient="auto"
-       id="Arrow1LendE"
+       id="marker3476"
        style="overflow:visible">
       <path
          d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
          transform="matrix(-0.8,0,0,-0.8,-10,0)"
-         id="path3473"
-         style="fill:#b3b3b3;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:1pt" />
+         id="path3478"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt" />
+    </marker>
+    <marker
+       refX="0"
+       refY="0"
+       orient="auto"
+       id="marker3480"
+       style="overflow:visible">
+      <path
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         id="path3482"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt" />
+    </marker>
+    <marker
+       refX="0"
+       refY="0"
+       orient="auto"
+       id="marker3484"
+       style="overflow:visible">
+      <path
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         id="path3486"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt" />
+    </marker>
+    <marker
+       refX="0"
+       refY="0"
+       orient="auto"
+       id="Arrow1LendH"
+       style="overflow:visible">
+      <path
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         id="path3721"
+         style="fill:#ff0000;fill-rule:evenodd;stroke:#ff0000;stroke-width:1pt" />
+    </marker>
+    <marker
+       refX="0"
+       refY="0"
+       orient="auto"
+       id="Arrow1Lendb"
+       style="overflow:visible">
+      <path
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         id="path3724"
+         style="fill:#ff0000;fill-rule:evenodd;stroke:#ff0000;stroke-width:1pt" />
     </marker>
   </defs>
   <metadata
-     id="metadata3327">
+     id="metadata3451">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -137,7 +137,7 @@
   <g
      id="layer1">
     <g
-       transform="translate(-269.97092,295.8655)"
+       transform="translate(-347.82806,155.8655)"
        id="g2996">
       <g
          transform="matrix(1.0629921,0,0,-1.0629921,-186.02362,789.27165)"
@@ -148,7 +148,7 @@
            id="path2999"
            style="fill:#000000;stroke-width:0" /></g>    </g>
     <g
-       transform="translate(360.02908,295.8655)"
+       transform="translate(282.17194,155.8655)"
        id="g3015"
        style="fill:#b3b3b3;stroke:#b3b3b3">
       <g
@@ -160,7 +160,7 @@
            id="path3019"
            style="fill:#b3b3b3;stroke:#b3b3b3;stroke-width:0" /></g>    </g>
     <g
-       transform="translate(46.914133,295.8655)"
+       transform="translate(-30.94301,155.8655)"
        id="g3041">
       <g
          transform="matrix(1.0629921,0,0,-1.0629921,-186.02362,789.27165)"
@@ -171,7 +171,7 @@
            id="path3045"
            style="fill:#000000;stroke-width:0" /></g>    </g>
     <g
-       transform="translate(-148.54234,255.01165)"
+       transform="translate(-226.39948,115.01165)"
        id="g3073">
       <g
          transform="matrix(1.0629921,0,0,-1.0629921,-186.02362,789.27165)"
@@ -197,7 +197,7 @@
            id="path3087"
            style="fill:#000000;stroke-width:0" /></g>    </g>
     <g
-       transform="translate(144.3148,261.29278)"
+       transform="translate(66.457657,121.29278)"
        id="g3131"
        style="fill:#b3b3b3;stroke:#b3b3b3">
       <g
@@ -224,23 +224,23 @@
            id="path3145"
            style="fill:#b3b3b3;stroke:#b3b3b3;stroke-width:0" /></g>    </g>
     <path
-       d="m 332.88623,635.26295 -255.714292,0"
+       d="m 255.02909,495.26295 -255.714295,0"
        id="path3175"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)" />
     <path
-       d="m 391.46417,635.26295 262.84412,0"
+       d="m 313.60703,495.26295 262.84412,0"
        id="path4389"
        style="fill:#b3b3b3;stroke:#b3b3b3;stroke-width:1.0130198px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1LendE)" />
     <rect
        width="778.99457"
        height="352.09595"
        ry="0"
-       x="-14.497284"
-       y="336.31421"
+       x="-92.354424"
+       y="196.31421"
        id="rect4573"
        style="fill:none;stroke:none" />
     <g
-       transform="translate(44.697794,38.249149)"
+       transform="translate(-33.159349,-101.75085)"
        id="g3414">
       <g
          transform="matrix(1.0629921,0,0,-1.0629921,-186.02362,789.27165)"
@@ -251,15 +251,15 @@
            id="path3417"
            style="fill:#000000;stroke-width:0" /></g>    </g>
     <path
-       d="M 329.458,392.41677 66.352761,604.81943"
+       d="M 251.60086,252.41677 -11.504382,464.81943"
        id="path6829"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)" />
     <path
-       d="M 396.60464,392.41677 670.67259,602.07875"
+       d="M 318.7475,252.41677 592.81545,462.07875"
        id="path7013"
        style="fill:#b3b3b3;stroke:#b3b3b3;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1LendG)" />
     <g
-       transform="translate(-123.52196,115.31341)"
+       transform="translate(-201.3791,-24.68659)"
        id="g3290">
       <g
          transform="matrix(1.0629921,0,0,-1.0629921,-186.02362,789.27165)"
@@ -270,7 +270,7 @@
            id="path3293"
            style="fill:#000000;stroke-width:0" /></g>    </g>
     <g
-       transform="translate(226.35875,108.3455)"
+       transform="translate(148.50161,-31.6545)"
        id="g3309"
        style="fill:#b3b3b3;stroke:#b3b3b3">
       <g
@@ -282,11 +282,11 @@
            id="path3313"
            style="fill:#b3b3b3;stroke:#b3b3b3;stroke-width:0" /></g>    </g>
     <path
-       d="m 365.08683,406.12017 1.37034,195.95858"
+       d="m 287.22969,266.12017 1.37034,195.95858"
        id="path3357"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)" />
     <g
-       transform="translate(79.160751,160.07661)"
+       transform="translate(1.303608,20.07661)"
        id="g4328">
       <g
          transform="matrix(1.0629921,0,0,-1.0629921,-186.02362,789.27165)"
@@ -297,12 +297,12 @@
            id="path4331"
            style="fill:#000000;stroke-width:0" /></g>    </g>
     <path
-       d="M 321.23596,380.08371 55.390043,587.00502"
+       d="M 243.37882,240.08371 -22.4671,447.00502"
        id="path3765"
-       style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)" />
+       style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1LendH)" />
     <path
-       d="m 345.90207,404.74983 c 0,0 0,56.18393 0,141.14499 0,84.96107 -65.77631,75.36869 -65.77631,75.36869 L 78.685818,618.52283"
+       d="m 268.04493,264.74983 c 0,0 0,56.18393 0,141.14499 0,84.96107 -65.77631,75.36869 -65.77631,75.36869 L 0.828675,478.52283"
        id="path4905"
-       style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)" />
+       style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lendb)" />
   </g>
 </svg>

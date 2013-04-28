@@ -148,7 +148,7 @@ data P = Pair { first :: A, second :: B }
         </section>
 
         <section>
-        <h3> 結局「対」って何? </h3>
+        <h3> 「対」って何? </h3>
         <p>
         「$A$,$B$の対」とみなせる、多くの具体的な定義があります。一方
         </p>
@@ -163,21 +163,22 @@ type P = (A, B, Int)
 
         <section>
         <h3> 抽象的に考えよう </h3>
-        <p>$A$,$B$,$P$の<u>具体的な内部構造に一切触れず</u>に「対」の概念を考える必要があります。
-        </p>
+        <p> $P$の具体的な内部構造に依存しない「対」の定義を考えます。 </p>
         </section>
 
         <section>
-        <div style="text-align:left">
-         $P$が$A$,$B$の対であるならば，<br>
-         $P$型のデータ(以下同様)から$A$,$B$を読み出す関数
-        <center>  <span style="color:red">$first$</span>と<span style="color:red">$second$</span> </center>
-        が必要です。
+        <p>
+        $P$が$A$,$B$の対であるならば，$P$型のデータ(以下同様)から$A$,$B$を読み出す方法があるはずです。
+        </p>
+        <p class="fragment">
+        言い換えると$P$から$A$,$B$への特定の関数が存在します($first$と$second$と呼ぶ事にします。)。
+        </p>
         <div class="fragment">
+        <p>
         この様な状況を以下のように<span style="color:red">図式(Diagram)</span>で表現してみます。
+        </p>
 
         <center> <img src="fig/1/product1.png"> </center>
-        </div>
         </div>
         </section>
 
@@ -252,6 +253,36 @@ type P = (A, B, Int)
         <section>
         <h3> 「対」の定義 </h3>
         <p>
+        型$P$が型$A$,$B$の対であるという事は，<span style="color:transparent">関数$first: P\rightarrow A$，$second: P\rightarrow B$が存在し
+        任意の型$X$と任意の関数$f: X\rightarrow A$, $g: X\rightarrow B$に対して，以下の図式が可換となるような
+        $u: X\rightarrow P$が唯一つ存在する事である。</span>
+        </p>
+        <center> <img src="fig/1/product5-2.png"> </center>
+        </section>
+
+        <section>
+        <h3> 「対」の定義 </h3>
+        <p>
+        型$P$が型$A$,$B$の対であるという事は，関数$first: P\rightarrow A$，$second: P\rightarrow B$が存在し
+        <span style="color:transparent">任意の型$X$と任意の関数$f: X\rightarrow A$, $g: X\rightarrow B$に対して，以下の図式が可換となるような
+        $u: X\rightarrow P$が唯一つ存在する事である。</span>
+        </p>
+        <center> <img src="fig/1/product5-3.png"> </center>
+        </section>
+
+        <section>
+        <h3> 「対」の定義 </h3>
+        <p>
+        型$P$が型$A$,$B$の対であるという事は，関数$first: P\rightarrow A$，$second: P\rightarrow B$が存在し
+        任意の型$X$と任意の関数$f: X\rightarrow A$, $g: X\rightarrow B$に対して，<span style="color:transparent">以下の図式が可換となるような
+        $u: X\rightarrow P$が唯一つ存在する事である。</span>
+        </p>
+        <center> <img src="fig/1/product5-4.png"> </center>
+        </section>
+
+        <section>
+        <h3> 「対」の定義 </h3>
+        <p>
         型$P$が型$A$,$B$の対であるという事は，関数$first: P\rightarrow A$，$second: P\rightarrow B$が存在し
         任意の型$X$と任意の関数$f: X\rightarrow A$, $g: X\rightarrow B$に対して，以下の図式が可換となるような
         $u: X\rightarrow P$が唯一つ存在する事である。
@@ -263,14 +294,17 @@ type P = (A, B, Int)
         <h3> 普遍性</h3>
         <p>
         <span style="color:lightgrey">型$P$が型$A$,$B$の対であるという事は，関数$first: P\rightarrow A$，$second: P\rightarrow B$が存在し</span>
-        任意の<span style="color:lightgrey">型$X$</span>と任意の<span style="color:lightgrey">関数$f: X\rightarrow A$, $g: X\rightarrow B$</span>に対して，<span style="color:lightgrey">以下の図式</span>が可換となるような
-        <span style="color:lightgrey">$u: X\rightarrow P$</span>が唯一つ存在する事<span style="color:lightgrey">である。</span>
+        任意の<span style="color:lightgrey">型$X$</span>と任意の<span style="color:lightgrey">関数$f: X\rightarrow A$, $g: X\rightarrow B$</span>に対して，<span style="color:lightgrey">以下の図式が可換となるような
+        $u: X\rightarrow P$</span>が唯一つ存在する事<span style="color:lightgrey">である。</span>
         </p>
         <center> <img src="fig/1/product8.png"> </center>
         </section>
 
         <section>
-        <h3> 具体例から圏論へ </h3>
+        <h3> 抽象化の力 </h3>
+        </section>
+
+        <section>
         <p>
         今の例において
         </p>
@@ -292,13 +326,14 @@ type P = (A, B, Int)
 
         <section>
         <h3> 「対」のアナロジー </h3>
+        <p> アナロジー的に </p>
         <ul>
           <li> 「もの」をある集合$X$の部分集合 </li>
           <li> 「矢」を集合の包含関係 </li>
           <li> 「矢の連結」を包含関係の合成 </li>
         </ul>
         <p>
-        に置き換えると「対」の何に対応するかを考えてみます。
+        に置き換えると「対」の概念は何に対応するのかを考えてみます。
         </p>
 
         <p class="fragment">
@@ -347,7 +382,7 @@ type P = (A, B, Int)
 
         <section>
         <p>
-        $\{1, 2\}$と$\{1, 3\}$の「対」に相当するものは$\{1\}$です。
+        つまり$\{1, 2\}$と$\{1, 3\}$の「対」に相当するものは$\{1\}$です。
         </p>
         <p class="fragment">
         実は「型と関数」の場合の「$A$,$B$の対」は、「ある集合$X$の部分集合と包含関係」の場合には<span style="color:red">「$A$,$B$の共通部分」</span>となります。
@@ -384,14 +419,14 @@ type P = (A, B, Int)
         <section>
         <p>
         $4$,$6$の両方への矢を備えるのは$\cdots,1,2,3,4$。<br>
-        このうち普遍性の条件を満たすのは$4$です。
+        このうち「対」と同じ普遍性の条件を満たすのは$4$です。
         </p>
         <center> <img src="fig/1/product15.png"> </center>
         </section>
 
         <section>
         <p>
-        $4$と$6$の「対」に相当するものは$4$です。
+        つまり$4$と$6$の「対」に相当するものは$4$です。
         </p>
         <p class="fragment">
         実は「型と関数」の場合の「$A$,$B$の対」は、「整数と順序」の場合には<span style="color:red">「$\min\{A,B\}$」</span>となります。
@@ -399,36 +434,35 @@ type P = (A, B, Int)
         </section>
 
         <section>
-        <h3> 異なる概念の間の共通構造が見えてくる </h3>
-        <p style="height:40%; border:3px solid #999999; padding:1em">
+        <h3> 素朴な定義では共通性が見えない </h3>
+        <p style="height:5em; border:3px solid #999999; padding:1em">
         $A$,$B$の共通部分とは$A$,$B$の両方に含まれる要素全てからなる集合である。
         </p>
-        <p style="height:40%; border:3px solid #999999; padding:1em">
+        <p style="height:5em; border:3px solid #999999; padding:1em">
             $\min\{A,B\}$とは$A$,$B$のうち小さい方である。
         </p>
         </section>
 
         <section>
-        <h3> 異なる概念の間の共通構造が見えてくる </h3>
-        <p style="height:40%; border:3px solid #999999; padding:1em">
+        <h3> 実は全く同じ形の定義を持っている </h3>
+        <p style="height:5em; border:3px solid #999999; padding:1em">
         集合$A$,$B$の共通部分$P$とは$P\subseteq A$,$P\subseteq B$であって、$X\subseteq A$,$X\subseteq B$であるような任意の$X$について$X \subseteq P$となる集合の事である。
         </p>
-        <p style="height:40%; border:3px solid #999999; padding:1em">
+        <p style="height:5em; border:3px solid #999999; padding:1em">
         整数$A$,$B$の最小値$M$とは$M\leqq A$,$M\leqq B$であって、$X\leqq A$,$X\leqq B$であるような任意の$X$について$X \leqq M$である整数の事である。
         </p>
         </section>
 
 
         <section>
-        <h3> 直積 </h3>
         <p>
         一見すると無関係な3つの概念が、同じ言葉で説明出来る事を見ました。
         </p>
         <center>
         <table border="3">
-          <tr><td> 型と関数 </td><td> 対 </td></tr>
-          <tr><td> 集合と包含関係 </td><td> 共通部分 </td></tr>
-          <tr><td> 整数と順序 </td><td> 最小値 </td></tr>
+          <tr><td> 型と関数</td><td>・・・ </td><td> 対 </td></tr>
+          <tr><td> 集合と包含関係</td><td>・・・ </td><td> 共通部分 </td></tr>
+          <tr><td> 整数と順序</td><td>・・・ </td><td> 小さい方 </td></tr>
         </table>
         </center>
         <p class="fragment">
@@ -440,7 +474,7 @@ type P = (A, B, Int)
         <section>
         <h3> 抽象化の力 </h3>
         <p>
-        概念を「内的な性質」ではなく「外的な関係」によって特徴付ける事によって
+        概念を「内的な性質」ではなく「外的な関係性」によって特徴付ける事によって
         </p>
         <ul>
           <li> 様々な概念の背後にある、本質的な構造が見えてくる。
@@ -488,6 +522,9 @@ type P = (A, B, Int)
 					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
+      Reveal.addEventListener( 'slidechanged', function( event ) {
+        MathJax.Hub.Rerender(event.currentSlide);
+      });
 
 		</script>
 
