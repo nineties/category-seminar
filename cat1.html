@@ -85,7 +85,7 @@
         <section>
         <h3> この会について </h3>
         <ul>
-          <li> <span style="color:red">圏論(Category Theory)</span>を題材にいろんなことを学びます。</li>
+          <li> <span style="color:red">圏論(category theory)</span>を題材にいろんなことを学びます。</li>
           <li> 計算機科学関係の話題が多めになると思います。</li>
           <li> 毎週1回，全12週くらいの予定です。</li>
           <li> 何らかの関数型言語に触れていた方が今後の授業をより楽しめると思います。</li>
@@ -138,11 +138,6 @@ struct P {
   B second;
 };
 
--- Haskellでの例
-type P = (A, B)
-data P = Pair A B
-data P = Pair { first :: A, second :: B }
-
 他にもいろいろ考えて下さい。
         </code></pre>
         </section>
@@ -175,7 +170,7 @@ type P = (A, B, Int)
         </p>
         <div class="fragment">
         <p>
-        この様な状況を以下のように<span style="color:red">図式(Diagram)</span>で表現してみます。
+        この様な状況を以下のように<span style="color:red">図式(diagram)</span>で表現してみます。
         </p>
 
         <center> <img src="fig/1/product1.png"> </center>
@@ -236,7 +231,7 @@ type P = (A, B, Int)
 
         <div class="fragment">
         <p>
-        もしくは「以下の図式が<span style="color:red">可換(Commutative)</span>である」と表現します。
+        もしくは「以下の図式が<span style="color:red">可換(commutative)</span>である」と表現します。
         </p>
         <center> <img src="fig/1/product5.png"> </center>
         </div>
@@ -446,10 +441,10 @@ type P = (A, B, Int)
         <section>
         <h3> 実は全く同じ形の定義を持っている </h3>
         <p style="height:5em; border:3px solid #999999; padding:1em">
-        集合$A$,$B$の共通部分$P$とは$P\subseteq A$,$P\subseteq B$であって、$X\subseteq A$,$X\subseteq B$であるような任意の$X$について$X \subseteq P$となる集合の事である。
+        集合$A$,$B$の共通部分$P$とは$P\subseteq A$,$P\subseteq B$であって、$X\subseteq A$,$X\subseteq B$であるような任意の$X$に対して$X \subseteq P$となる集合の事である。
         </p>
         <p style="height:5em; border:3px solid #999999; padding:1em">
-        整数$A$,$B$の最小値$M$とは$M\leqq A$,$M\leqq B$であって、$X\leqq A$,$X\leqq B$であるような任意の$X$について$X \leqq M$である整数の事である。
+        整数$A$,$B$の最小値$M$とは$M\leqq A$,$M\leqq B$であって、$X\leqq A$,$X\leqq B$であるような任意の$X$に対して$X \leqq M$である整数の事である。
         </p>
         </section>
 
@@ -467,7 +462,7 @@ type P = (A, B, Int)
         </center>
         <p class="fragment">
         まだ一切圏論的な定式化を行なっていませんが、これらを圏論では
-        <span style="color:red">直積(Product)</span>と呼びます。
+        <span style="color:red">直積(product)</span>と呼びます。
         </p>
         </section>
 
@@ -488,6 +483,77 @@ type P = (A, B, Int)
         <section>
         <h3> 圏の定義 </h3>
         </section>
+
+        <section>
+        <p>
+        <span style="color:red">圏(category)</span>とは
+        </p>
+        <ul>
+          <li> 対象(object):$A,B,C,\cdots$ </li>
+          <li> 射(arrow,morphism):$f,g,h,\cdots$ </li>
+          <li> 射の合成(composition): $\circ$ </li>
+        </ul>
+        <p>
+        からなり、以後の条件を全て満たすものである。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        任意の射$f$には
+        </p>
+        <ul>
+          <li> ドメイン(domain): $\mathrm{dom}(f)$ </li>
+          <li> コドメイン(codomain): $\mathrm{cod}(f)$ </li>
+        </ul>
+        <p>
+        という２つの対象が備わる。<br>
+        $\mathrm{dom}(f) = A$,$\mathrm{cod}(f) = B$である事を $ f: A\rightarrow B$ と表す。
+        </p>
+        <center> <img src="fig/1/category1.png"> </center>
+        </section>
+
+        <section>
+        <p> 射$f:A\rightarrow B$,$g:B\rightarrow C$が存在するならば、 </p>
+        <ul>
+          <li> 合成射(composite)　  $ g\circ f: A \rightarrow C $ </li>
+        </ul>
+        <p>
+        も存在する。
+        </p>
+        <center> <img src="fig/1/category2.png"> </center>
+        </section>
+
+        <section>
+        <p> 任意の射$f: A \rightarrow B$, $g: B \rightarrow C$, $h: C \rightarrow D$に対して<br> 結合律(associative law) </p>
+        <center> $ (h\circ g)\circ f = h \circ (g\circ f)$ </center>
+        <p> が成り立つ。すなわち、下図が可換である。</p>
+        <center> <img src="fig/1/category4.png"> </center>
+        </section>
+
+        <section>
+        <p> 任意の対象$A$に対して </p>
+        <ul>
+          <li> 恒等射(identity)　 $ 1_A: A \rightarrow A $ </li>
+        </ul>
+        <p> が存在し、任意の$f: A \rightarrow B$に対して単位元律(identity law) </p>
+        <center> $ f\circ 1_A = 1_B \circ f = f $ </center>
+        <p> が成り立つ。すなわち、右下図が可換である。</p>
+        <center> <img src="fig/1/category3.png"> </center>
+        </section>
+
+        <section>
+        <h3> 端的に言うと </h3>
+        <p> 圏とは </p>
+        <ul>
+          <li> 対象、対象から対象への射からなり </li>
+          <li> 同じオブジェクトに出入りする射と射は必ず合成でき </li>
+          <li> 合成の順番は関係なく </li>
+          <li> 恒等射がある </li>
+        </ul>
+        <p> ようなもの。 </p>
+        </section>
+
 
 			</div>
 
