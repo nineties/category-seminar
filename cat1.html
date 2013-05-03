@@ -103,7 +103,7 @@
           http://www.andrew.cmu.edu/course/80-413-713/notes/
           </a>
         </ul>
-        <center><img height="50%" src="http://images-jp.amazon.com/images/P/0199237182" alt='Awodey "Category Theory'></center>
+        <div align="center"><img height="50%" src="http://images-jp.amazon.com/images/P/0199237182" alt='Awodey "Category Theory'></div>
         </section>
 
         <section>
@@ -113,13 +113,13 @@
         <section>
         <h3> 第1回の内容</h3>
         <p>
-        初回は圏論の全体像をつかむ為の話をします。
+        初回はあまりテクニカルな話をせず、圏論の全体像をつかむ為の話をします。
         </p>
         <ul>
-          <li class="fragment"> 圏論って何？ </li>
-          <li class="fragment"> 圏論って何の役に立つの? </li>
-          <li class="fragment"> 圏論ってどう勉強するの? </li>
-          <li class="fragment"> 圏論って学ぶ価値があるの? </li>
+          <li> 圏論って何？ </li>
+          <li> 圏論って何の役に立つの? </li>
+          <li> 圏論ってどう勉強するの? </li>
+          <li> 圏論って学ぶ価値があるの? </li>
         </ul>
         </section>
 
@@ -173,13 +173,13 @@ type P = (A, B, Int)
         この様な状況を以下のように<span style="color:red">図式(diagram)</span>で表現してみます。
         </p>
 
-        <center> <img src="fig/1/product1.png"> </center>
+        <div align="center"> <img src="fig/1/product1.png"> </div>
         </div>
         </section>
 
         <section>
         A,B型への関数を持つデータ型は無数に存在します。
-        <center> <img src="fig/1/product2.png"> </center>
+        <div align="center"> <img src="fig/1/product2.png"> </div>
         </section>
 
         <section>
@@ -187,21 +187,21 @@ type P = (A, B, Int)
         ある型からA,B型への関数は無数に存在し得ます。<br>
         データを取り出す他にも様々な計算が行えるからです。
         </p>
-        <center> <img src="fig/1/product3.png"> </center>
+        <div align="center"> <img src="fig/1/product3.png"> </div>
         </section>
 
         <section>
         <p>
         そこで任意の型$X$と任意の関数$f: X\rightarrow A$，$g: X\rightarrow B$に対して，以下のような図式を考えます。
         </p>
-        <center> <img src="fig/1/product4.png"></center>
+        <div align="center"> <img src="fig/1/product4.png"></div>
         </section>
 
         <section>
         <p>
         $X$から$A$,$B$の値を作れるなら，それらの値の対を$X$から作る関数$u$が必ず存在するはずです。
         </p>
-        <center> <img src="fig/1/product5.png"></center>
+        <div align="center"> <img src="fig/1/product5.png"></div>
         </section>
 
         <section>
@@ -209,7 +209,7 @@ type P = (A, B, Int)
         このとき，$u$で対を作って$first$で取り出す事は，$f$と等しく<br>
         　
         </p>
-        <center> <img src="fig/1/product6.png"> </center>
+        <div align="center"> <img src="fig/1/product6.png"> </div>
         </section>
 
         <section>
@@ -217,14 +217,14 @@ type P = (A, B, Int)
         $second$で取り出す事は，$g$と等しくなければいけません。<br>
         　
         </p>
-        <center> <img src="fig/1/product7.png"> </center>
+        <div align="center"> <img src="fig/1/product7.png"> </div>
         </section>
 
         <section>
         <p>
         このことは関数合成の記号$\circ$を用いると
         </p>
-        <center> $first \circ u = f \qquad second \circ u = g$ </center>
+        <div align="center"> $first \circ u = f \qquad second \circ u = g$ </div>
         <p>
         と表す事が出来ます。
         </p>
@@ -233,7 +233,7 @@ type P = (A, B, Int)
         <p>
         もしくは「以下の図式が<span style="color:red">可換(commutative)</span>である」と表現します。
         </p>
-        <center> <img src="fig/1/product5.png"> </center>
+        <div align="center"> <img src="fig/1/product5.png"> </div>
         </div>
         </section>
 
@@ -252,7 +252,7 @@ type P = (A, B, Int)
         任意の型$X$と任意の関数$f: X\rightarrow A$, $g: X\rightarrow B$に対して，以下の図式が可換となるような
         $u: X\rightarrow P$が唯一つ存在する事である。</span>
         </p>
-        <center> <img src="fig/1/product5-2.png"> </center>
+        <div align="center"> <img src="fig/1/product5-2.png"> </div>
         </section>
 
         <section>
@@ -262,7 +262,7 @@ type P = (A, B, Int)
         <span style="color:transparent">任意の型$X$と任意の関数$f: X\rightarrow A$, $g: X\rightarrow B$に対して，以下の図式が可換となるような
         $u: X\rightarrow P$が唯一つ存在する事である。</span>
         </p>
-        <center> <img src="fig/1/product5-3.png"> </center>
+        <div align="center"> <img src="fig/1/product5-3.png"> </div>
         </section>
 
         <section>
@@ -272,7 +272,7 @@ type P = (A, B, Int)
         任意の型$X$と任意の関数$f: X\rightarrow A$, $g: X\rightarrow B$に対して，<span style="color:transparent">以下の図式が可換となるような
         $u: X\rightarrow P$が唯一つ存在する事である。</span>
         </p>
-        <center> <img src="fig/1/product5-4.png"> </center>
+        <div align="center"> <img src="fig/1/product5-4.png"> </div>
         </section>
 
         <section>
@@ -282,7 +282,7 @@ type P = (A, B, Int)
         任意の型$X$と任意の関数$f: X\rightarrow A$, $g: X\rightarrow B$に対して，以下の図式が可換となるような
         $u: X\rightarrow P$が唯一つ存在する事である。
         </p>
-        <center> <img src="fig/1/product5.png"> </center>
+        <div align="center"> <img src="fig/1/product5.png"> </div>
         </section>
 
         <section style="color:red">
@@ -292,7 +292,7 @@ type P = (A, B, Int)
         任意の<span style="color:lightgrey">型$X$</span>と任意の<span style="color:lightgrey">関数$f: X\rightarrow A$, $g: X\rightarrow B$</span>に対して，<span style="color:lightgrey">以下の図式が可換となるような
         $u: X\rightarrow P$</span>が唯一つ存在する事<span style="color:lightgrey">である。</span>
         </p>
-        <center> <img src="fig/1/product8.png"> </center>
+        <div align="center"> <img src="fig/1/product8.png"> </div>
         </section>
 
         <section>
@@ -328,7 +328,7 @@ type P = (A, B, Int)
           <li> 「矢の連結」を包含関係の合成 </li>
         </ul>
         <p>
-        に置き換えると「対」の概念は何に対応するのかを考えてみます。
+        とすると「対」の概念は何に対応するのかを考えてみます。
         </p>
 
         <p class="fragment">
@@ -341,7 +341,7 @@ type P = (A, B, Int)
         別の矢をつなげて作れる矢は省略してます。<br>
         　
         </p>
-        <center> <img height="80%" src="fig/1/product9.png"> </center>
+        <div align="center"> <img height="80%" src="fig/1/product9.png"> </div>
         </section>
 
         <section>
@@ -349,7 +349,7 @@ type P = (A, B, Int)
         $\{1,2\}$と$\{1,3\}$に向かう矢を持つものは$\cdots$<br>
         　
         </p>
-        <center> <img height="80%" src="fig/1/product10.png"> </center>
+        <div align="center"> <img height="80%" src="fig/1/product10.png"> </div>
         </section>
 
         <section>
@@ -357,7 +357,7 @@ type P = (A, B, Int)
         $\{1,2\}$と$\{1,3\}$に向かう矢を持つものは$\cdots$$\{1\}$と<br>
         　
         </p>
-        <center> <img height="80%" src="fig/1/product11.png"> </center>
+        <div align="center"> <img height="80%" src="fig/1/product11.png"> </div>
         </section>
 
         <section>
@@ -365,14 +365,14 @@ type P = (A, B, Int)
         $\{1,2\}$と$\{1,3\}$に向かう矢を持つものは$\cdots$$\{1\}$と$\emptyset$<br>
         　
         </p>
-        <center> <img height="80%" src="fig/1/product12.png"> </center>
+        <div align="center"> <img height="80%" src="fig/1/product12.png"> </div>
         </section>
 
         <section>
         <p>
         $\emptyset$,$\{1\}$のそれぞれから$\{1\}$に向う矢が唯一存在して以下の図式は可換。
         </p>
-        <center> <img height="80%" src="fig/1/product13.png"> </center>
+        <div align="center"> <img height="80%" src="fig/1/product13.png"> </div>
         </section>
 
         <section>
@@ -408,7 +408,7 @@ type P = (A, B, Int)
         ここでも別の矢をつなげて作れる矢は省略してます。<br>
         　
         </p>
-        <center> <img src="fig/1/product14.png"> </center>
+        <div align="center"> <img src="fig/1/product14.png"> </div>
         </section>
 
         <section>
@@ -416,7 +416,7 @@ type P = (A, B, Int)
         $4$,$6$の両方への矢を備えるのは$\cdots,1,2,3,4$。<br>
         このうち「対」と同じ普遍性の条件を満たすのは$4$です。
         </p>
-        <center> <img src="fig/1/product15.png"> </center>
+        <div align="center"> <img src="fig/1/product15.png"> </div>
         </section>
 
         <section>
@@ -439,7 +439,7 @@ type P = (A, B, Int)
         </section>
 
         <section>
-        <h3> 実は全く同じ形の定義を持っている </h3>
+        <h3> 言葉を変えると共通性が見えてくる </h3>
         <p style="height:5em; border:3px solid #999999; padding:1em">
         集合$A$,$B$の共通部分$P$とは$P\subseteq A$,$P\subseteq B$であって、$X\subseteq A$,$X\subseteq B$であるような任意の$X$に対して$X \subseteq P$となる集合の事である。
         </p>
@@ -448,18 +448,17 @@ type P = (A, B, Int)
         </p>
         </section>
 
-
         <section>
         <p>
         一見すると無関係な3つの概念が、同じ言葉で説明出来る事を見ました。
         </p>
-        <center>
+        <div align="center">
         <table border="3">
           <tr><td> 型と関数</td><td>・・・ </td><td> 対 </td></tr>
           <tr><td> 集合と包含関係</td><td>・・・ </td><td> 共通部分 </td></tr>
           <tr><td> 整数と順序</td><td>・・・ </td><td> 小さい方 </td></tr>
         </table>
-        </center>
+        </div>
         <p class="fragment">
         まだ一切圏論的な定式化を行なっていませんが、これらを圏論では
         <span style="color:red">直積(product)</span>と呼びます。
@@ -503,14 +502,14 @@ type P = (A, B, Int)
         任意の射$f$には
         </p>
         <ul>
-          <li> ドメイン(domain): $\mathrm{dom}(f)$ </li>
-          <li> コドメイン(codomain): $\mathrm{cod}(f)$ </li>
+          <li> 始域(domain): $\mathrm{dom}(f)$ </li>
+          <li> 終域(codomain): $\mathrm{cod}(f)$ </li>
         </ul>
         <p>
         という２つの対象が備わる。<br>
         $\mathrm{dom}(f) = A$,$\mathrm{cod}(f) = B$である事を $ f: A\rightarrow B$ と表す。
         </p>
-        <center> <img src="fig/1/category1.png"> </center>
+        <div align="center"> <img src="fig/1/category1.png"> </div>
         </section>
 
         <section>
@@ -521,14 +520,14 @@ type P = (A, B, Int)
         <p>
         も存在する。
         </p>
-        <center> <img src="fig/1/category2.png"> </center>
+        <div align="center"> <img src="fig/1/category2.png"> </div>
         </section>
 
         <section>
         <p> 任意の射$f: A \rightarrow B$, $g: B \rightarrow C$, $h: C \rightarrow D$に対して<br> 結合律(associative law) </p>
-        <center> $ (h\circ g)\circ f = h \circ (g\circ f)$ </center>
+        <div align="center"> $ (h\circ g)\circ f = h \circ (g\circ f)$ </div>
         <p> が成り立つ。すなわち、下図が可換である。</p>
-        <center> <img src="fig/1/category4.png"> </center>
+        <div align="center"> <img height="55%" src="fig/1/category4.png"> </div>
         </section>
 
         <section>
@@ -537,24 +536,140 @@ type P = (A, B, Int)
           <li> 恒等射(identity)　 $ 1_A: A \rightarrow A $ </li>
         </ul>
         <p> が存在し、任意の$f: A \rightarrow B$に対して単位元律(identity law) </p>
-        <center> $ f\circ 1_A = 1_B \circ f = f $ </center>
+        <div align="center"> $ f\circ 1_A = 1_B \circ f = f $ </div>
         <p> が成り立つ。すなわち、右下図が可換である。</p>
-        <center> <img src="fig/1/category3.png"> </center>
+        <div align="center"> <img height="45%" src="fig/1/category3.png"> </div>
         </section>
 
         <section>
-        <h3> 端的に言うと </h3>
-        <p> 圏とは </p>
+        <p> 端的に言うと、圏とは </p>
         <ul>
-          <li> 対象、対象から対象への射からなり </li>
-          <li> 同じオブジェクトに出入りする射と射は必ず合成でき </li>
+          <li> 対象の集まりと </li>
+          <li> 対象から対象への者の集まりからなり </li>
+          <li> 同じ対象に出入りする射と射は必ず合成でき </li>
           <li> 合成の順番は関係なく </li>
           <li> 恒等射がある </li>
         </ul>
-        <p> ようなもの。 </p>
+        <p> ものです。</p>
+        <p> 次回、様々な圏の例を見てみます。 </p>
         </section>
 
+        <section>
+        <h3> 先ほどの例における恒等射 </h3>
+        <ul>
+          <li> 集合と関数の圏: 恒等関数 $1_A(x) = x$</li>
+          <li> 集合と包含関係の圏: $A \subseteq A$ </li>
+          <li> 整数と順序の圏: $A \leqq A$ </li>
+        </ul>
+        </section>
 
+        <section>
+        <h3> 恒等射の一意性 </h3>
+        <p>
+        対象$A$についての恒等射を<span style="color:red">$1_A$</span>と表せるのは、
+        任意の$A$について<span style="color:red">恒等射が一意に定まる</span>からです。
+        </p>
+
+        <div class="fragment">
+        <p style="font-size:80%">
+        <img width="40%" src="fig/1/id_is_uniq.png" align="right" hspace="20">
+        【一意性の証明】<br>
+        $1_A,1'_A: A\rightarrow A$が共に恒等射だとする。<br>
+        恒等射の性質より右図の上半分、下半分はどちらも可換だから
+        $$ 1_A = 1'_A $$
+        となる。つまり恒等射は一意に定まる。<span style="float:right">□</span>
+        </p>
+        </div>
+
+        <br clear="right">
+
+        <p class="fragment">
+        このような証明スタイルを<span style="color:red">diagram chasing</span>といいます。
+        </p>
+        </section>
+
+        <section>
+        <h2> 同型 </h2>
+        </section>
+
+        <section>
+        <h3> 「等しさ」とは </h3>
+        <p>
+        あるものとあるものの「等しさ」というのは曖昧な概念です。<br>
+        例えば集合$\{0, 1, 2\}$と$\{1, 3, 5\}$は異なりますが
+        「要素の数」という観点では<span style="color:red">ある意味等しい</span>です。
+        </p>
+        <p class="fragment">
+        圏論には「～と～がある意味等しい」という事について正確に述べる為の、様々な言葉が登場します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 同型射 </h3>
+        <p>
+        $f: A\rightarrow B$に対して、$g: B\rightarrow A$が存在し、
+        </p>
+        <div align="center"> $ g\circ f = 1_A\qquad f\circ g = 1_B$ </div>
+        <p>
+        が成り立つならば$f$を<span style="color:red">同型射(isomorphism)</span>と呼ぶ。<br>
+        また、圏$\mathbf{C}$において$A$と$B$の間に同型射が存在するならば、$\mathbf{C}$において$A$は$B$と<span style="color:red">同型(isomorphic)</span>であると言う。
+        </p>
+        <div align="center"><img src="fig/1/inverse.png"> </div>
+        </section>
+
+        <section>
+        <h3> 例 </h3>
+        <ul>
+          <li> 対象: 集合 </li>
+          <li> 射: 恒等関数のみ </li>
+        </ul>
+        <p>
+        からなる圏では$\{0,1,2\}$と$\{1,3,5\}$は同型ではありません。
+        </p>
+
+        <div align="center"><img src="fig/1/iso_example1.png"> </div>
+        <p>
+        注: 同じ色の矢印を全部合わせて一つの関数(つまり射)です。
+        </p>
+        </section>
+
+        <section>
+        <h3> 例 </h3>
+        <ul>
+          <li> 対象: 集合 </li>
+          <li> 射: 任意の関数 </li>
+        </ul>
+        <p>
+        からなる圏では$\{0,1,2\}$と$\{1,3,5\}$は同型です。
+        </p>
+
+        <div align="center"><img src="fig/1/iso_example2.png"> </div>
+        <p>
+        注: この図にあるのは恒等射のうちの一つ(全部で6つ)です。恒等射が一つでも存在すれば同型です。
+        </p>
+        </section>
+
+        <section>
+        <h3> 逆射 </h3>
+        <p>
+        $f: A\rightarrow B$に対して
+        </p>
+        <div align="center"> $ g\circ f = 1_A\qquad f\circ g = 1_B$ </div>
+        <p>
+        となる$g$は一意に定まる。このような$g$を<span style="color:red">逆射(inverse)</span>と言い$f^{-1}$と表す。
+        </p>
+
+        <div class="fragment">
+        <p style="font-size:80%">
+        <img width="50%" src="fig/1/inv_is_uniq5.png" align="right" hspace="20">
+        【一意性の証明】<br>
+        $g, h: B\rightarrow A$が$f$の逆射であるとすると右図が可換となるから、
+        $$ g = h $$
+        となる。つまり逆射は一意に定まる。
+        <span style="float:right">□</span>
+        </p>
+        </div>
+        </section>
 			</div>
 
 		</div>
