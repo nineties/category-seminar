@@ -54,7 +54,7 @@
 
         <section>
         <h1>圏論勉強会<br>第1回</h1>
-        <h3>@ワークスアプリケーションズ</h3>
+        <h3>@ークスアプリケーションズ</h3>
         <small> 中村晃一 <br> 2013年5月16日</small>
         </section>
 
@@ -62,8 +62,8 @@
         <h3>謝辞</h3>
         <p>
         この勉強会の企画，会場設備の提供をして頂きました<br>
-        &#12849; ワークスアプリケーションズ<br>
-        様にこの場をお借りして御礼申し上げます。
+        &#12849; ワークスアプリケーションズ様<br>
+        にこの場をお借りして御礼申し上げます。
         </p>
         </section>
 
@@ -89,7 +89,7 @@
           <li> 計算機科学関係の話題が多めになると思います。分かり易さを重視して,非常にカジュアルな例を使います。</li>
           <li> 毎週1回，全12週くらいの予定です。</li>
           <li> 何らかの関数型言語に触れていた方が今後の授業をより楽しめると思います。資料中ではHaskellを使う事が多いです。</li>
-          <li> 質問・コメント大歓迎です。他の聴衆の為にもなるので後回しにせずその場でどうぞ。</li>
+          <li> 他の聴衆の為にもなるので,質問・コメントを歓迎します。</li>
           <li> この資料は<a href="http://github.com/nineties/category-seminar">http://github.com/nineties/category-seminar</a>に置いてあります。</li>
         </ul>
         </section>
@@ -130,7 +130,7 @@
         問: データ型$A$,$B$が与えられているとします。<br>
         $A$と$B$の<span style="color:red">対(pair)</span>を表すデータ型Pをどう定義すれば良いでしょうか？
         </p>
-        <pre class="fragment"><code contenteditable>
+        <pre><code contenteditable>
 /* C言語での例 */
 struct P {
   A first;
@@ -183,8 +183,7 @@ type P = (A, B, Int)
 
         <section>
         <p>
-        ある型からA,B型への関数は無数に存在し得ます。<br>
-        データを取り出す他にも様々な計算が行えるからです。
+        ある型からA,B型への関数は無数に存在し得ます。
         </p>
         <div align="center"> <img src="fig/1/product3.png"> </div>
         </section>
@@ -460,7 +459,7 @@ type P = (A, B, Int)
         <section>
         <h3> 抽象化の力 </h3>
         <p>
-        概念を「内的な性質」ではなく「外的な関係性」によって特徴付ける事によって
+        概念を「内的な構造」ではなく「外的な関係」によって特徴付ける事によって
         </p>
         <ul>
           <li> 様々な概念の背後にある,本質的な構造が見えてくる。
@@ -468,6 +467,15 @@ type P = (A, B, Int)
         </ul>
         <p>
         という事が解ります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 圏論を学ぶ意義 </h3>
+        <p>
+        良い言葉を使う事は良い思考をする事を助けます。<br>
+        圏論は今見たような外的な関係に基いて様々な概念を説明する為の非常に良い言語体系となっています。<br>
+        どのようなプログラミング言語を使っても,プログラミング以外の場面でも役に立つと思います。
         </p>
         </section>
 
@@ -544,7 +552,7 @@ type P = (A, B, Int)
           <li> 恒等射がある </li>
         </ul>
         <p> ものです。</p>
-        <p> 様々な圏の具体例を見るのは次週にまわします。 </p>
+        <p> 様々な圏の具体例を見るのは次回以降にまわします。 </p>
         </section>
 
         <section>
@@ -784,7 +792,7 @@ type P = (A, B, Int)
           <li> 集合$A$に$A$の要素数 </li>
           <li> $\subseteq$に$\leqq$ </li>
         </ul><br>
-        を対応させる事は$\mathbf{C}$から$\mathbf{D}$への函手と見なせます。
+        を対応させる事は$\mathbf{C}$から$\mathbf{D}$への函手です。
         </div>
         </section>
 
@@ -796,7 +804,7 @@ type P = (A, B, Int)
           <li> 型$A$に,リスト型$[A]$ </li>
           <li> 関数$f$に,$\mathrm{map} f$ </li>
         </ul><br>
-        を対応させる事は$\mathbf{C}$から$\mathbf{C}$への函手(リスト函手$[-]$)と見なせます。
+        を対応させる事は$\mathbf{C}$から$\mathbf{C}$への函手(リスト函手$[-]$)です。
         </div>
         <div align="center"><img height="50%" src="fig/1/list_functor.png"> </div>
         </section>
@@ -1111,12 +1119,12 @@ data Shape = Circle { radius :: Double }
         <section>
         <h3> 自然性とは </h3>
         <p>
-        リスト型$[A]$はリスト函手$[-]$によって型$A$から作られるのでした。<br>
+        リスト型$[A]$はリスト函手$[-]$で型$A$から作られるのでした。<br>
         一般化して,概念$A$から派生概念$F(A)$を得る事は函手と見なせます。
         派生概念$F(X)$から$G(X)$への対応が自然であるというのは,この<span style="color:red">対応が特定の$X$に依っていない</span>事だと考える事が出来ます。
         </p>
         <p>
-        つまり,(完全に同じという訳ではないですが)型と関数の圏での自然な対応とは多相関数の事だと考えて良いです。
+        例えば(完全に同じという訳ではないですが)型と関数の圏での自然な対応とは多相関数の事だと考えて良いです。
         </p>
         </section>
 
@@ -1133,12 +1141,42 @@ data Shape = Circle { radius :: Double }
         <section>
         <h3> 例:$\mathrm{length}$ </h3>
         <div align="left">
-          関数$\mathrm{length}$はリスト函手$[-]$から定函手$\mathrm{Int}$(全ての型を$\mathrm{Int}$へ、全ての関数を$\mathrm{Int}$上の恒等関数へ写す)への自然変換になっています。
+          多相関数$\mathrm{length}$はリスト函手$[-]$から定函手$\mathrm{Int}$(全ての型を$\mathrm{Int}$型,全ての関数を$\mathrm{Int}$上の恒等関数へ写す)への自然変換
           $$ \mathrm{length} : [-] \rightarrow \mathrm{Int} $$
+          となっています。
         </div>
         <div align="center"> <img height="50%" src="fig/1/length.png"> </div>
         </section>
 
+        <section>
+        <h3> 函手圏 </h3>
+        <p>
+        自然変換とは函手と函手の対応関係でした。
+        </p>
+        <div class="fragment">
+        <p>
+        すると,2つの圏$\mathbf{C}$と$\mathbf{D}$から
+        </p>
+        <ul>
+          <li> 対象: $\mathbf{C}$から$\mathbf{D}$への函手 </li>
+          <li> 射: 自然変換
+        </ul>
+        <p>
+        という圏を作る事ができます。これを<span style="color:red">函手圏(functor category)</span>と言います。詳しくは後の回に説明します。
+        </p>
+        </div>
+        <p class="fragment">
+          ところで,圏$\mathbf{C}$から同じ圏$\mathbf{C}$への函手を<span style="color:red">自己函手(endofunctor)</span>と言います。
+        </p>
+        </section>
+
+        <section>
+        <div style="font-size:150%">
+          モナドは単なる<span style="color:red">自己関手の圏</span>における<br>
+          モノイド対象だよ。何か問題でも？
+        </div>
+        <span style="float:right; font-size:80%"><a href="http://www.aoky.net/articles/james_iry/brief-incomplete-and-mostly-wrong.htm">不完全にしておよそ正しくないプログラミング言語小史</a></span>
+        </section>
 			</div>
 		</div>
 
