@@ -54,7 +54,7 @@
 
         <section>
         <h1>圏論勉強会<br>第1回</h1>
-        <h3>@ークスアプリケーションズ</h3>
+        <h3>@ワークスアプリケーションズ</h3>
         <small> 中村晃一 <br> 2013年5月16日</small>
         </section>
 
@@ -86,7 +86,7 @@
         <h3> この会について </h3>
         <ul>
           <li> <span style="color:red">圏論(category theory)</span>を題材にいろんなことを学びます。</li>
-          <li> 計算機科学関係の話題が多めになると思います。分かり易さを重視して,初歩的な例を多用します。</li>
+          <li> 計算機科学関係の話題が多めになると思います。分かり易さを重視して初歩的な例を多用します。</li>
           <li> 毎週1回，全12週くらいの予定です。</li>
           <li> 何らかの関数型言語に触れていた方が今後の授業をより楽しめると思います。資料中ではHaskellを使う事が多いです。</li>
           <li> 他の聴衆の為にもなるので,質問・コメントを歓迎します。</li>
@@ -128,10 +128,11 @@
         <section>
         <h3> 具体例から始めよう </h3>
         </section>
+
         <section>
+        <h3> 「対」とは何か? </h3>
         <p>
-        問: データ型$A$,$B$が与えられているとします。<br>
-        $A$と$B$の<span style="color:red">対(pair)</span>を表すデータ型Pをどう定義すれば良いでしょうか？
+        データ型$A$,$B$が与えられているとします。この時，$A$と$B$の<span style="color:red">対(pair)</span>を表すデータ型Pとはどのようなものでしょうか？
         </p>
         <pre><code contenteditable>
 /* Haskellでの例 */
@@ -146,38 +147,29 @@ data P = Pair A B
         </section>
 
         <section>
-        <h3> 「対」って何? </h3>
+        <h3> 定義が必要! </h3>
         <p>
-        「$A$,$B$の対」とみなせる,多くの具体的な定義があります。一方
-        </p>
-        <pre><code contenteditable>
-type P = (A, B, Int)
-
-とか
-
-type P = String
-        </code></pre>
-        <p>
-        みたいなのは「$A$,$B$の対」とはみなせそうにありません。<br>
-        「対」とそれ以外はどのように区別されるのでしょうか？
+        抽象的な概念の具体的な例はいくらでも挙げる事が可能ですが，議論を前に進める為にはその概念の<span style="color:red">定義を定める</span>事が必要です。<br>
+        「～とは～とか～みたいなものである。」という曖昧な理解のまま歩を進めるとその内よく分からなくなります。
         </p>
         </section>
 
         <section>
-        <h3> 抽象的に考えよう </h3>
-        <p> $P$の具体的な内部構造に依存しない「対」の定義を考えます。 </p>
+        <h3> 抽象的な定義が欲しい! </h3>
+        <p> より抽象的な定義はより多くの具体例を包括します。 </p>
+        <p> 具体的な内部構造に依存しない「対」の定義を考えましょう。 </p>
         </section>
 
         <section>
         <p>
-        $P$が$A$,$B$の対であるならば，$P$型のデータ(以下同様)から$A$,$B$を読み出す方法があるはずです。
+        $P$が$A$,$B$の対であるならば，$P$型のデータから$A$,$B$型のデータを得る方法があるはずです。
         </p>
         <p class="fragment">
-        言い換えると$P$から$A$,$B$への特定の関数が存在します($\mathrm{first}$と$\mathrm{second}$と呼ぶ事にします。)。
+        言い換えると$P$から$A$,$B$への特定の関数($\mathrm{first}$と$\mathrm{second}$と呼ぶ事にします。)が存在します。
         </p>
         <div class="fragment">
         <p>
-        この様な状況を以下のように<span style="color:red">図式(diagram)</span>で表現してみます。
+        この状況を以下のように<span style="color:red">図式(diagram)</span>で表現してみます。
         </p>
 
         <div align="center"> <img src="fig/1/product1.png"> </div>
@@ -198,7 +190,7 @@ type P = String
 
         <section>
         <div align="left" style="height:3em">
-        そこで任意の型$X$と任意の関数$f: X\rightarrow A$，$g: X\rightarrow B$に対して，以下のような図式を考えます。
+        そこで，任意の型$X$と任意の関数$f: X\rightarrow A$，$g: X\rightarrow B$に対して以下のような図式を考えます。
         </div>
         <div align="center"> <img src="fig/1/product4.png"></div>
         </section>
@@ -382,7 +374,7 @@ type P = String
         つまり$\{1, 2\}$と$\{1, 3\}$の「対」に相当するものは$\{1\}$です。
         </p>
         <p class="fragment">
-        実は「型と関数」の場合の「$A$,$B$の対」は,「ある集合$X$の部分集合と包含関係」の場合には<span style="color:red">「$A$,$B$の共通部分」</span>となります。
+        実は「型と関数」の場合の「$A$,$B$の対」は,「集合と包含関係」の場合には<span style="color:red">「$A$,$B$の共通部分」</span>となります。
         </p>
         </section>
 
@@ -447,7 +439,7 @@ type P = String
         集合$A$,$B$の共通部分$P$とは$P\subseteq A$,$P\subseteq B$であって,$X\subseteq A$,$X\subseteq B$であるような任意の$X$に対して$X \subseteq P$となる集合の事である。
         </p>
         <p style="height:5em; border:3px solid #999999; padding:1em">
-        整数$A$,$B$の最小値$M$とは$M\leqq A$,$M\leqq B$であって,$X\leqq A$,$X\leqq B$であるような任意の$X$に対して$X \leqq M$である整数の事である。
+        整数$A$,$B$の最小値$M$とは$M\leqq A$,$M\leqq B$であって,$X\leqq A$,$X\leqq B$であるような任意の$X$に対して$X \leqq M$となる整数の事である。
         </p>
         </section>
 
@@ -462,8 +454,8 @@ type P = String
           <tr><td> 整数と順序</td><td>・・・ </td><td> 小さい方 </td></tr>
         </table>
         </div>
-        <p class="fragment">
-        まだ一切圏論的な定式化を行なっていませんが,これらを圏論では
+        <p>
+        圏論的な定式化は後でやりますが,これらを圏論では
         <span style="color:red">積(product)</span>と呼びます。
         </p>
         </section>
@@ -474,7 +466,7 @@ type P = String
         概念を「内的な構造」ではなく「外的な関係」によって特徴付ける事によって
         </p>
         <ul>
-          <li> 様々な概念の背後にある,本質的な構造が見えてくる。
+          <li> 概念の背後にある,本質的な構造が見えてくる。
           <li> 概念から概念への,強力なアナロジーが可能になる。
         </ul>
         <p>
@@ -485,7 +477,8 @@ type P = String
         <section>
         <h3> 圏論を学ぶ意義 </h3>
         <p>
-        良い言葉を使う事は良い思考をする事を助けます。今見たような外的な関係に基いて様々な概念を抽象的に記述する為には、圏論が良い選択肢であると思います。
+        良い言葉を使う事は良い思考をする事を助けます。様々な抽象概念を明快に記述する為の体系として圏論は良い選択肢であると思います。
+        圏論の概念を積極的に利用するHaskellなどを使う場合はもちろん,それ以外の言語を使う場合やプログラミング以外の場面においても役に立つと思います。
         </p>
         </section>
 
@@ -513,8 +506,8 @@ type P = String
         任意の射$f$には
         </p>
         <ul>
-          <li> 始域(domain): $\mathrm{dom}(f)$ </li>
-          <li> 終域(codomain): $\mathrm{cod}(f)$ </li>
+          <li> 域(domain): $\mathrm{dom}(f)$ </li>
+          <li> 余域(codomain): $\mathrm{cod}(f)$ </li>
         </ul>
         <p>
         という２つの対象が備わる。<br>
@@ -639,7 +632,7 @@ type P = String
         </section>
 
         <section>
-        <h3> 例 </h3>
+        <h3> 先ほどの例 </h3>
         <ul>
           <li> 対象: 集合 </li>
           <li> 射: 恒等関数のみ </li>
@@ -655,7 +648,7 @@ type P = String
         </section>
 
         <section>
-        <h3> 例 </h3>
+        <h3> 先ほどの例 </h3>
         <ul>
           <li> 対象: 集合 </li>
           <li> 射: 任意の関数 </li>
@@ -704,7 +697,7 @@ type P = String
         </p>
         <div class="fragment">
         <p>
-        圏の構造とは
+        ところで圏の構造とは
         </p>
         <ul>
           <li> 対象 </li>
@@ -819,10 +812,12 @@ type P = String
         <div align="center"><img height="50%" src="fig/1/list_functor.png"> </div>
         </section>
 
+<!--
         <section>
         <h3> 函手は図式である </h3>
         <div align="left" style="height:5em">
-        函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすことも出来ます。(注:函手と図式が一対一に対応するという意味ではありません。)
+        函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすことも出来ます。
+        (注:函手と図式が一対一に対応するという意味ではありません。)
         </div>
 
         <div align="center"><img src="fig/1/functor_as_diagram1.png"> </div>
@@ -875,6 +870,7 @@ type P = String
         </div>
         <div align="center"><img src="fig/1/functor_as_diagram7.png"> </div>
         </section>
+-->
 
         <section>
         <h2> 双対性・積・余積 </h2>
@@ -888,7 +884,7 @@ type P = String
         </p>
         <ul>
           <li> 共通部分と和集合 </li>
-          <li> $\max$と$\min$ </li>
+          <li> $\min$と$\max$ </li>
           <li> 「かつ」と「または」 </li>
         </ul>
         <p>
@@ -935,6 +931,7 @@ type P = String
         <section>
         <h3> 余積 </h3>
         <p> 双対圏における積(product)を元の圏における<span style="color:red">余積(coproduct)</span>と言います。</p>
+        <p> 一般に,双対圏における"xxx"をもとの件における"co-xxx"と呼びます。日本語では「余」を使います。</p>
         </section>
 
         <section id="coproduct">
@@ -959,38 +956,28 @@ type P = String
         <section>
         <h3> 「対」の双対は？ </h3>
         <p>
-        型と関数からなる圏における積は「対」でした。<br>
-        では余積は何に対応するでしょうか？
-        </p>
-        <div style="height:20em">
-        <pre ><code contenteditable>
--- 任意のf,gについて以下が成り立つようなuが存在
-u (left x) = f x
-u (right x) = g x
-        </code></pre>
-        <div class="fragment" align="left">
-        つまり$A$,$B$の余積は次のようなものです。
+        $A$,$B$の余積$Q$とは次のようなものです。
         <ul>
-          <li> $A$,$B$の「どちらか一方」を表している。 </li>
-          <li> $A$からは$\mathrm{left}$という関数で作れる。 </li>
-          <li> $B$からは$\mathrm{right}$という関数で作れる。 </li>
-          <li> $u$は$\mathrm{left}$,$\mathrm{right}$のどちらで作られたかによって,$f$,$g$に「振り分ける」関数である。</li>
+          <li> $Q$は$A$,$B$を「貼りあわせた型」である。 </li>
+          <li> $A$からは$\mathrm{left}$という関数で値を埋め込む。 </li>
+          <li> $B$からは$\mathrm{right}$という関数で値を埋め込む。 </li>
+          <li> $u$は$\mathrm{left}$,$\mathrm{right}$のどちらで作られたかによって,$f$,$g$に値を「振り分ける」関数である。</li>
         </ul>
+        <img src="fig/1/either2.png">
         </p>
-        </div>
         </section>
 
         <section>
         <h3> 代数的データ型 </h3>
         <p>
-        HaskellやO'Caml等の関数型言語で用いられる「代数的データ型」には,
-        積・余積の概念が使われています。
+        これまで「対」とか「貼り合わせ」とか言っていましたが，普通は「直積」「直和」と呼びます。<br>
+        ところでHaskellやO'Caml等の関数型言語で用いられる「代数的データ型」では直積・直和の概念が基本になっています。
         </p>
         <pre ><code contenteditable>
 -- 文字列,整数の積
 data Person = Person { name :: String, age :: Int }
 
--- (積の)余積
+-- (いくつかの直積の)直和
 data Shape = Circle { radius :: Double }
            | Rectangle { height :: Double, width :: Double }
 
@@ -1193,34 +1180,8 @@ data Shape = Circle { radius :: Double }
 
         <section>
         <h3> 随伴とは </h3>
-        <p>
-        この会の大きな目標の一つは随伴という概念を理解する事です。<br>
-        次回以降説明する様々な抽象的な構成方法は,最終的に全て随伴という概念として捉える事が出来ます。<br>
-        </p>
-        </section>
-
-        <section>
-        <h3> </h3>
-        </section>
-
-        <section>
-        <h3> 準備 </h3>
-        </section>
-
-        <section>
-        <h3> 随伴の定義(Hom-set定義) </h3>
-        </section>
-
-        <section>
-        <div align="center"> <img height="50%" src="fig/1/product16.png"> </div>
-        </section>
-
-        <section>
-        <div align="center"> <img height="50%" src="fig/1/adjoint1.png"> </div>
-        </section>
-
-        <section>
-        <div align="center"> <img height="50%" src="fig/1/adjoint2.png"> </div>
+        MacLaneのスローガン"随伴は至る所に現れる"
+        今後学ぶ様々な圏論的構成はすべて随伴として結実します。
         </section>
 			</div>
 		</div>
