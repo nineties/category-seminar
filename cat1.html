@@ -126,15 +126,7 @@
         <section>
         <h3> 第1回の内容</h3>
         <p>
-        初回は以下のような事が何となく解るように,いくつかの重要な題材をピックアップして駆け足で目を通します。
-        </p>
-        <ul>
-          <li> 圏論って何？ </li>
-          <li> 圏論って何の役に立つの? </li>
-          <li> 圏論って学ぶ価値があるの? </li>
-        </ul>
-        <p>
-        次回以降は,各題材毎に地道に進めていきます。
+        初回は「圏論とは一体何なのか？」「何の役に立つのか？」といった事が何となく解るように,いくつかの重要な題材をピックアップしてざっと紹介します。
         </p>
         </section>
 
@@ -148,14 +140,36 @@
         データ型$A$,$B$が与えられているとします。この時，$A$と$B$の<span style="color:red">対(pair)</span>を表すデータ型Pとはどのようなものでしょうか？
         </p>
         <pre><code contenteditable>
-/* Haskellでの例 */
+Haskellだと
+
 type P = (A, B)
 
 とか
 
 data P = Pair A B
 
-など
+などと書ける。
+
+C言語なら
+
+struct P {
+  A first;
+  B second;
+};
+
+とか。
+A,Bが16bit自然数という特殊なケースではビット演算を使って
+
+(a << 16) | b
+
+みたいにしても良い。
+
+A,Bが自然数の場合のもっと奇抜な方法は
+
+2**a * 3**b
+
+など。但し**は累乗で多倍長演算を前提としている。
+つまり対の実装なんて"いくらでも方法がある"。
         </code></pre>
         </section>
 
@@ -170,12 +184,12 @@ data P = Pair A B
         <section>
         <h3> 抽象的な定義が欲しい! </h3>
         <p> より抽象的な定義はより多くの具体例を包括します。 </p>
-        <p> 具体的な内部構造に依存しない「対」の定義を考えましょう。 </p>
+        <p> データの具体的な内部構造に依存しない「対」の定義を考えましょう。 </p>
         </section>
 
         <section>
         <p>
-        $P$が$A$,$B$の対であるならば，$P$型のデータから$A$,$B$型のデータを得る方法があるはずです。
+        まず$P$が$A$,$B$の対であるならば，$P$型のデータから$A$,$B$型のデータを得る方法があるはずです。
         </p>
         <p class="fragment">
         言い換えると$P$から$A$,$B$への特定の関数($\mathrm{first}$と$\mathrm{second}$と呼ぶ事にします。)が存在します。
@@ -255,7 +269,7 @@ data P = Pair A B
         </section>
 
         <section>
-        <h3> まとめ:「対」の定義 </h3>
+        <h3> 「対」の定義 </h3>
         <p>
         型$P$が型$A$,$B$の対であるという事は，<span style="color:transparent">関数$\mathrm{first}: P\rightarrow A$，$\mathrm{second}: P\rightarrow B$が存在し
         任意の型$X$と任意の関数$f: X\rightarrow A$, $g: X\rightarrow B$に対して，以下の図式が可換となるような
@@ -324,7 +338,7 @@ data P = Pair A B
         </p>
 
         <p class="fragment">
-        何らかの「もの」と「矢」と「矢の連結」を用いて考える事が重要です。
+        使われている言葉は何らかの「もの」と「矢」と「矢の連結」のみです。
         </p>
         </section>
 
@@ -447,7 +461,7 @@ data P = Pair A B
         </section>
 
         <section>
-        <h3> 言葉を変えると共通性が見えてくる </h3>
+        <h3> 言葉を変えると共通性が見える </h3>
         <p style="height:5em; border:3px solid #999999; padding:1em">
         集合$A$,$B$の共通部分$P$とは$P\subseteq A$,$P\subseteq B$であって,$X\subseteq A$,$X\subseteq B$であるような任意の$X$に対して$X \subseteq P$となる集合の事である。
         </p>
@@ -766,10 +780,10 @@ data P = Pair A B
         <div align="left">
         <ul>
           <li> $\mathbf{C}$の各対象$A$に$\mathbf{D}$の対象$F(A)$を,</li>
-          <li> $\mathbf{C}$の各射$f: A\rightarrow B$に$\mathbf{D}$の射$ F(f): F(A) \rightarrow F(B) $</li>
+          <li> $\mathbf{C}$の各射$f: A\rightarrow B$に$\mathbf{D}$の射$ F(f): F(A) \rightarrow F(B) $を</li>
         </ul>
         </div>
-        <p> を対応付ける関数の組であり,以下の条件を満たすものである。 </p>
+        <p> 対応付ける関数の組であり,以下の条件を満たすものである。 </p>
         <div align="left">
         <ul>
           <li> 任意の$\mathbf{C}$の射$f: A\rightarrow B$, $g: B\rightarrow C$に対して
@@ -982,15 +996,12 @@ data P = Pair A B
         ところでHaskellやO'Caml等の関数型言語で用いられる「代数的データ型」では直積・直和の概念が基本になっています。
         </p>
         <pre ><code contenteditable>
--- 文字列,整数の積
+-- 文字列,整数の直積
 data Person = Person { name :: String, age :: Int }
 
 -- (いくつかの直積の)直和
 data Shape = Circle { radius :: Double }
            | Rectangle { height :: Double, width :: Double }
-
-
-
 
 
 
@@ -1059,7 +1070,7 @@ data Shape = Circle { radius :: Double }
         <section>
         <h3> 積・余積の表記 </h3>
         <p>
-        積・余積は複数存在しても全て同型なので,それらを区別する言葉・記号は特に必要有りません。
+        積・余積は複数存在しても全て同型なので,それらを区別する言葉・記号は特に必要有りませんから以下の様に表記出来ます。
         <ul>
           <li> $A$,$B$の任意の積を$A\times B$と表す。 </li>
           <li> $f$, $g$から一意に定まる$A\times B$への射を
@@ -1073,7 +1084,7 @@ data Shape = Circle { radius :: Double }
         <section>
         <h3> 積・余積の表記 </h3>
         <p>
-        積・余積は複数存在しても全て同型なので,それらを区別する言葉・記号は特に必要有りません。
+        積・余積は複数存在しても全て同型なので,それらを区別する言葉・記号は特に必要有りませんから以下の様に表記出来ます。
         <ul>
           <li> $A$,$B$の任意の余積を$A + B$と表す。 </li>
           <li> $f$, $g$から一意に定まる$A+ B$からの射を
@@ -1128,7 +1139,7 @@ data Shape = Circle { radius :: Double }
         </p>
 
         <p class="fragment">
-        一般化して,函手$F:\mathbf{C}\rightarrow\mathbf{D}$は$\mathbf{C}$は<span style="color:red">$\mathbf{C}$の対象をパラメータに持つ概念</span>であると言えます。
+        一般化して,函手$F:\mathbf{C}\rightarrow\mathbf{D}$を<span style="color:red">$\mathbf{C}$の対象をパラメータに持つ概念</span>と思う事が出来ます。
         すると,概念$F$と概念$G$の対応が自然であるというのは<span style="color:red">対応関係がパラメータの構造に依存していない事</span>だと考える事が出来ます。
         </p>
         </section>
@@ -1281,14 +1292,14 @@ data Shape = Circle { radius :: Double }
         <section>
         <h3> 随伴による定式化 </h3>
         <p>
-        実はある函手$F$が与えられたとき,その右随伴$G$はもし存在するなら<span style="color:red">同型を除いて一意</span>となります。逆も然りです。従って「～とは～の右(左)随伴である」といった形で,概念を定式化する事が出来るわけです。
+        実はある函手$F$が与えられたとき,その右随伴$G$はもし存在するなら<span style="color:red">同型を除いて一意</span>となります。逆も然りです。従って「～とは～の右(左)随伴である」といった形での定式化が可能になります。
         </p>
         </section>
 
         <section>
         <h3> 随伴の良い所 </h3>
         <p>
-        随伴の記述では函手と自然変換(単位元と余単位元)が基本的な言葉となります。
+        随伴の記述では函手と自然変換(単位元と余単位元)が基本的な語彙となります。
         これは個々の対象・射に基づく記述よりも使い勝手が良いのではないかと思います。
         </p>
         <p class="fragment">
@@ -1299,6 +1310,7 @@ data Shape = Circle { radius :: Double }
         <section>
         <h3> 第１回はここで終わります </h3>
         <p>
+        お疲れ様でした。<br>
         時間の関係上扱えなかった話題が大量にあるのですが,圏論とはどんな学問で,これからどのような事を学ぶのか,何となく分かってもらえたのではないかと思います。
         次回以降は最初に戻って圏の定義から一歩ずつ進めて行きます。
         </p>
