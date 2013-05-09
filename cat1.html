@@ -107,6 +107,19 @@
         </section>
 
         <section>
+        <h3> 参考書 </h3>
+        <ul>
+          <li> 資料中の日本語表現はに習っています。
+          <li> Steve Awodey著 Category Theory をお薦めします。</li>
+          <li> 非数学専攻者向けに書かれています。</li>
+          <a href="http://www.andrew.cmu.edu/course/80-413-713/notes/">
+          http://www.andrew.cmu.edu/course/80-413-713/notes/
+          </a>
+        </ul>
+        <div align="center"><img height="50%" src="http://images-jp.amazon.com/images/P/0199237182" alt='Awodey "Category Theory'></div>
+        </section>
+
+        <section>
         <h2> 第１回:圏論って何? </h2>
         </section>
 
@@ -726,25 +739,25 @@ data P = Pair A B
         <section>
         <h3> 函手とは </h3>
         <p> ドメイン・コドメインを保ち </p>
-        <div align="center"><img src="fig/1/functor2-2.png"> </div>
-        </section>
-
-        <section>
-        <h3> 函手とは </h3>
-        <p> 合成射を対応する合成射に写し </p>
         <div align="center"><img src="fig/1/functor3.png"> </div>
         </section>
 
         <section>
         <h3> 函手とは </h3>
-        <p> 恒等射を対応する恒等射に写すような </p>
+        <p> 合成射を対応する合成射に写し </p>
         <div align="center"><img src="fig/1/functor4.png"> </div>
         </section>
 
         <section>
         <h3> 函手とは </h3>
-        <p> マッピングのこと。 </p>
+        <p> 恒等射を対応する恒等射に写すような </p>
         <div align="center"><img src="fig/1/functor5.png"> </div>
+        </section>
+
+        <section>
+        <h3> 函手とは </h3>
+        <p> マッピングのこと。 </p>
+        <div align="center"><img src="fig/1/functor6.png"> </div>
         </section>
 
         <section id="functor">
@@ -778,8 +791,8 @@ data P = Pair A B
         </div>
         <div align="left" class="fragment" style="font-size:80%">
           <p>
-          例えば,下図の上の図式が可換ならば下の図式も可換です。つまり,逆射も保たれます。
-          $$ F(f^{-1}) = F(f)^{-1} $$
+          例えば,下図の上の図式が可換ならば下の図式も可換です。つまり,逆射も保たれますし,同型性も保たれます。
+          $$ F(f^{-1}) = F(f)^{-1} \qquad A\cong B \Rightarrow F(A) \cong F(B)$$
           </p>
         <div align="center"><img height="50%" src="fig/1/inverse_is_preserved.png"> </div>
         </div>
@@ -892,15 +905,10 @@ data P = Pair A B
         </p>
         </section>
 
-        <section>
+        <section id="opposite_category">
         <h3> 双対圏 </h3>
-        <p> 圏$\mathbf{C}$に対して </p>
-        <ul>
-          <li> $\mathbf{C}$の対象 </li>
-          <li> $\mathbf{C}$の射を逆向きにした射 </li>
-        </ul>
-        <p>
-        からなる圏を$\mathbf{C}$の<span style="color:red">双対圏(opposite category)</span>と言い
+        <p> 圏$\mathbf{C}$に対して,対象はそのままにし射を逆向きにした圏を<br>
+        $\mathbf{C}$の<span style="color:red">双対圏(opposite category)</span>と言い
         $ \mathbf{C}^{\mathrm{op}} $と表す。
         </p>
         <div align="center"><img height="50%" src="fig/1/dual.png"> </div>
@@ -931,7 +939,7 @@ data P = Pair A B
         <section>
         <h3> 余積 </h3>
         <p> 双対圏における積(product)を元の圏における<span style="color:red">余積(coproduct)</span>と言います。</p>
-        <p> 一般に,双対圏における"xxx"をもとの件における"co-xxx"と呼びます。日本語では「余」を使います。</p>
+        <p> 一般に,双対圏における"xxx"をもとの圏における"co-xxx"と呼びます。日本語では「余」を使います。</p>
         </section>
 
         <section id="coproduct">
@@ -1001,7 +1009,7 @@ data Shape = Circle { radius :: Double }
 
         <section>
         <div align="left" style="font-size:80%">
-        【積が全て同型である事の証明】<br>
+        【積が同型を除いて一意である事の証明】<br>
         <img width="40%" align="right" src="fig/1/product_is_unique1.png">
         $(P,p_1,p_2)$, $(Q, q_1, q_2)$が共に$A$,$B$の積であるとして右の図式を考える。積の性質よりこれは可換図式である。
         <span style="color:transparent">
@@ -1014,7 +1022,7 @@ data Shape = Circle { radius :: Double }
 
         <section>
         <div align="left" style="font-size:80%">
-        【積が全て同型である事の証明】<br>
+        【積が同型を除いて一意である事の証明】<br>
         <img width="40%" align="right" src="fig/1/product_is_unique2.png">
         $(P,p_1,p_2)$, $(Q, q_1, q_2)$が共に$A$,$B$の積であるとして右の図式を考える。積の性質よりこれは可換図式である。
         すると,右図も積の可換図式となっている。つまり,右図が可換となる$P$から$P$への射は一意に定まる。<span style="color:transparent">ところで,射$v\circ u$も$1_P$も右図を可換とするので,そのような射の一意性より$ v\circ u = 1_P $である。全く同様にして$ u\circ v = 1_Q $
@@ -1026,7 +1034,7 @@ data Shape = Circle { radius :: Double }
 
         <section>
         <div align="left" style="font-size:80%">
-        【積が全て同型である事の証明】<br>
+        【積が同型を除いて一意である事の証明】<br>
         <img width="40%" align="right" src="fig/1/product_is_unique3.png">
         $(P,p_1,p_2)$, $(Q, q_1, q_2)$が共に$A$,$B$の積であるとして右の図式を考える。積の性質よりこれは可換図式である。
         すると,右図も積の可換図式となっている。つまり,右図が可換となる$P$から$P$への射は一意に定まる。ところで,射$v\circ u$も$1_P$も右図を可換とするので,そのような射の一意性より$ v\circ u = 1_P $である。<span style="color:transparent">全く同様にして$ u\circ v = 1_Q $
@@ -1038,7 +1046,7 @@ data Shape = Circle { radius :: Double }
 
         <section>
         <div align="left" style="font-size:80%">
-        【積が全て同型である事の証明】<br>
+        【積が同型を除いて一意である事の証明】<br>
         <img width="40%" align="right" src="fig/1/product_is_unique3.png">
         $(P,p_1,p_2)$, $(Q, q_1, q_2)$が共に$A$,$B$の積であるとして右の図式を考える。積の性質よりこれは可換図式である。
         すると,右図も積の可換図式となっている。つまり,右図が可換となる$P$から$P$への射は一意に定まる。ところで,射$v\circ u$も$1_P$も右図を可換とするので,そのような射の一意性より$ v\circ u = 1_P $である。全く同様にして$ u\circ v = 1_Q $
@@ -1116,11 +1124,12 @@ data Shape = Circle { radius :: Double }
         <h3> 自然性とは </h3>
         <p>
         リスト型$[A]$はリスト函手$[-]$で型$A$から作られるのでした。<br>
-        一般化して,概念$A$から派生概念$F(A)$を得る事は函手と見なせます。
-        派生概念$F(X)$から$G(X)$への対応が自然であるというのは,この<span style="color:red">対応が特定の$X$に依っていない</span>事だと考える事が出来ます。
+        つまり,リストとは要素の型というパラメータを持つ型(多相型)です。
         </p>
-        <p>
-        例えば(完全に同じという訳ではないですが)型と関数の圏での自然な対応とは多相関数の事だと考えて良いです。
+
+        <p class="fragment">
+        一般化して,函手$F:\mathbf{C}\rightarrow\mathbf{D}$は$\mathbf{C}$は<span style="color:red">$\mathbf{C}$の対象をパラメータに持つ概念</span>であると言えます。
+        すると,概念$F$と概念$G$の対応が自然であるというのは<span style="color:red">対応関係がパラメータの構造に依存していない事</span>だと考える事が出来ます。
         </p>
         </section>
 
@@ -1135,7 +1144,7 @@ data Shape = Circle { radius :: Double }
         </section>
 
         <section>
-        <h3> 例:$\mathrm{length}$ </h3>
+        <h3> 例1:$\mathrm{length}$ </h3>
         <div align="left">
           多相関数$\mathrm{length}$はリスト函手$[-]$から定函手$\mathrm{Int}$(全ての型を$\mathrm{Int}$型,全ての関数を$\mathrm{Int}$上の恒等関数へ写す)への自然変換
           $$ \mathrm{length} : [-] \rightarrow \mathrm{Int} $$
@@ -1145,9 +1154,25 @@ data Shape = Circle { radius :: Double }
         </section>
 
         <section>
+        <h3> 例2:単調増加数列の上の順序 </h3>
+        <div align="left">
+        <ul>
+          <li> $\mathbf{N}$: 自然数と順序$\leqq$からなる圏
+          <li> $\mathbf{R}$: 実数と順序$\leqq$からなる圏
+        </ul><br>
+        とすると,函手$a: \mathbf{N}\rightarrow\mathbf{R}$とは(広義)単調増加数列
+        $$ a_0 \leqq a_1 \leqq a_2 \leqq \cdots $$
+        の事です。<br>
+        すると2つの単調増加数列$a,b$について
+        $$ \text{全ての$i = 0,1,2,\cdots$について}\ a_i \leqq b_i$$
+        であるとき,この数列全体としての順序が自然変換となります。
+        </div>
+        </section>
+
+        <section>
         <h3> 函手圏 </h3>
         <p>
-        自然変換とは函手と函手の対応関係でした。
+        自然変換は函手と函手の対応関係です。
         </p>
         <div class="fragment">
         <p>
@@ -1180,8 +1205,103 @@ data Shape = Circle { radius :: Double }
 
         <section>
         <h3> 随伴とは </h3>
-        MacLaneのスローガン"随伴は至る所に現れる"
-        今後学ぶ様々な圏論的構成はすべて随伴として結実します。
+        <p>
+        この勉強会で今後学習する様々な抽象概念の構成法は,最終的に<span style="color:red">随伴(adjunction)</span>という概念によって統一的に理解する事が出来ます。
+        さらに随伴を通してしか目に見えてこないものもあるのでとても重要です。
+        </p>
+        <p>
+        本日の知識では随伴の定義を与える事は出来ませんが,今後どんな事を学ぶのか感じてもらう為にその雰囲気だけ説明します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 積の復習 </h3>
+        <p>
+        任意の$X$と任意の射$f: X\rightarrow A$,$g: X\rightarrow B$に対して以下の図式が可換になるような射$\langle f, g\rangle: X\rightarrow A\times B$が唯一つ存在する事が$A\times B$の定義でした。これを例として随伴を説明したいと思います。
+        </p>
+        <div align="center"> <img src="fig/1/product16.png"> </div>
+        </section>
+
+        <section>
+        <div align="left" style="height:8em">
+          まず,$\langle f, g \rangle$の普遍性により$f, g$の対と$\langle f, g\rangle$が<span style="color:red">一対一に対応</span>する事が解ります。これを下図の様に表して見ましょう。横線の上と下の図式が一対一に対応するという意味です。
+        </div>
+        <div align="center"> <img src="fig/1/product_as_adjoint1.png"> </div>
+        </section>
+
+        <section>
+        <div align="left" style="height:8em">
+        対象の対・射の対からできる積圏(product category)という圏を用いると,
+        この事は圏$\mathbf{C}$と圏$\mathbf{C}\times\mathbf{C}$の射の対応関係として捉える事が出来ます。
+        </div>
+        <div align="center"> <img src="fig/1/product_as_adjoint2.png"> </div>
+        </section>
+
+        <section>
+        <div align="left" style="height:8em">
+        さらに,圏$\mathbf{C}$に於いて任意の対象$A$,$B$が積$A\times B$を持つならば,
+        これは$A$,$B$,$X$に依らない<span style="color:red">自然な対応関係</span>となります。
+        </div>
+        <div align="center"> <img src="fig/1/product_as_adjoint2.png"> </div>
+        </section>
+
+        <section>
+        <div align="left" style="height:8em">
+        ここで,図の左右に
+        $$F: X \longmapsto (X, X)\qquad G: (A, B) \longmapsto A\times B$$
+        という２つの函手が見えると思いますが,この２つの函手と射の自然な一対一対応を併せて$\mathbf{C}$から$\mathbf{C}\times\mathbf{C}$への随伴(adjunction)と言います。
+        </div>
+        <div align="center"> <img src="fig/1/product_as_adjoint3.png"> </div>
+        </section>
+
+        <section>
+        <h3> 随伴とは </h3>
+        <p>
+        一般化して,圏$\mathbf{C}$と$\mathbf{D}$を結ぶ函手$F$,$G$について,
+        </p>
+        <div align="center"> <img src="fig/1/adjunction2.png"> </div>
+        <p>
+        以下の$\mathbf{C}$の射と$\mathbf{D}$の射が$X$,$Y$において自然に一対一対応するとき,$F$,$G$,一対一対応を併せて$\mathbf{C}$から$\mathbf{D}$への随伴と言い,
+        $F$を$G$の<span style="color:red">左随伴(left adjoint)</span>,$G$を$F$の<span style="color:red">右随伴(right adjoint)</span>と言います。
+        </p>
+        <div align="center"> <img src="fig/1/adjunction.png"> </div>
+        </section>
+
+        <section>
+        <h3> ところで$p_1$,$p_2$はどこいった？ </h3>
+        <p>
+        積の例に戻って$X = A\times B$とし,下側に恒等射$1_{A\times B}$を取ってみると, 上側に$p_1$と$p_2$の対が現れます。
+        </p>
+        <p class="fragment">
+        この事は$(p_1, p_2)$(全体のなす自然変換)がこの随伴の <span style="color:red">余単位元(counit)</span>であると説明されます。全く同様にして上側に恒等射を取ると<span style="color:red">単位元(unit)</span>という自然変換も作れます。
+        </p>
+        <div align="center"> <img src="fig/1/product_counit.png"> </div>
+        </section>
+
+        <section>
+        <h3> 随伴による定式化 </h3>
+        <p>
+        実はある函手$F$が与えられたとき,その右随伴$G$はもし存在するなら<span style="color:red">同型を除いて一意</span>となります。逆も然りです。従って「～とは～の右(左)随伴である」といった形で,概念を定式化する事が出来るわけです。
+        </p>
+        </section>
+
+        <section>
+        <h3> 随伴の良い所 </h3>
+        <p>
+        随伴の記述では函手と自然変換(単位元と余単位元)が基本的な言葉となります。
+        これは個々の対象・射に基づく記述よりも使い勝手が良いのではないかと思います。
+        </p>
+        <p class="fragment">
+        特にプログラミングの場面では特定の型・関数よりも,便利な多相型・多相関数の構成法の方が興味があるはずです。随伴が備える２つの函手・単位元・余単位元はそうした構成を行う際の部品として使う事が出来ます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 第１回はここで終わります </h3>
+        <p>
+        時間の関係上扱えなかった話題が大量にあるのですが,圏論とはどんな学問で,これからどのような事を学ぶのか,何となく分かってもらえたのではないかと思います。
+        次回以降は最初に戻って圏の定義から一歩ずつ進めて行きます。
+        </p>
         </section>
 			</div>
 		</div>
