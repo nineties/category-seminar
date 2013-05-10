@@ -160,12 +160,7 @@ A,Bが16bit自然数という特殊なケースではビット演算を使って
 
 みたいにしても良い。
 
-A,Bが自然数の場合のもっと奇抜な方法は
-
-2**a * 3**b
-
-など。但し**は累乗で多倍長演算を前提としている。
-つまり対の実装なんて"いくらでも方法がある"。
+対の実装なんて"いくらでも方法がある"。
         </code></pre>
         </section>
 
@@ -195,48 +190,48 @@ A,Bが自然数の場合のもっと奇抜な方法は
         この状況を以下のように<span style="color:red">図式(diagram)</span>で表現してみます。
         </p>
 
-        <div align="center"> <img src="fig/1/product1.png"> </div>
+        <div align="center"> <img src="fig/product1.png"> </div>
         </div>
         </section>
 
         <section>
         A,B型への関数を持つデータ型は無数に存在します。
-        <div align="center"> <img src="fig/1/product2.png"> </div>
+        <div align="center"> <img src="fig/product2.png"> </div>
         </section>
 
         <section>
         <p>
         ある型からA,B型への関数は無数に存在し得ます。
         </p>
-        <div align="center"> <img src="fig/1/product3.png"> </div>
+        <div align="center"> <img src="fig/product3.png"> </div>
         </section>
 
         <section>
         <div align="left" style="height:3em">
         そこで，任意の型$X$と任意の関数$f: X\rightarrow A$，$g: X\rightarrow B$に対して以下のような図式を考えます。
         </div>
-        <div align="center"> <img src="fig/1/product4.png"></div>
+        <div align="center"> <img src="fig/product4.png"></div>
         </section>
 
         <section>
         <div align="left" style="height:3em">
         $X$から$A$,$B$の値を作れるなら，それらの値の対を$X$から作る関数$u$が必ず存在するはずです。
         </div>
-        <div align="center"> <img src="fig/1/product5.png"></div>
+        <div align="center"> <img src="fig/product5.png"></div>
         </section>
 
         <section>
         <div align="left" style="height:3em">
         このとき，$u$で対を作って$\mathrm{first}$で取り出す事は，$f$と等しく
         </div>
-        <div align="center"> <img src="fig/1/product6.png"> </div>
+        <div align="center"> <img src="fig/product6.png"> </div>
         </section>
 
         <section>
         <div align="left" style="height:3em">
         $\mathrm{second}$で取り出す事は，$g$と等しくなければいけません。
         </div>
-        <div align="center"> <img src="fig/1/product7.png"> </div>
+        <div align="center"> <img src="fig/product7.png"> </div>
         </section>
 
         <section>
@@ -252,7 +247,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         <p>
         もしくは「以下の図式が<span style="color:red">可換(commutative)</span>である」と表現します。
         </p>
-        <div align="center"> <img src="fig/1/product5.png"> </div>
+        <div align="center"> <img src="fig/product5.png"> </div>
         </div>
         </section>
 
@@ -271,7 +266,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         任意の型$X$と任意の関数$f: X\rightarrow A$, $g: X\rightarrow B$に対して，以下の図式が可換となるような
         $u: X\rightarrow P$が唯一つ存在する事である。</span>
         </p>
-        <div align="center"> <img src="fig/1/product5-2.png"> </div>
+        <div align="center"> <img src="fig/product5-2.png"> </div>
         </section>
 
         <section>
@@ -281,7 +276,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         <span style="color:transparent">任意の型$X$と任意の関数$f: X\rightarrow A$, $g: X\rightarrow B$に対して，以下の図式が可換となるような
         $u: X\rightarrow P$が唯一つ存在する事である。</span>
         </p>
-        <div align="center"> <img src="fig/1/product5-3.png"> </div>
+        <div align="center"> <img src="fig/product5-3.png"> </div>
         </section>
 
         <section>
@@ -291,7 +286,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         任意の型$X$と任意の関数$f: X\rightarrow A$, $g: X\rightarrow B$に対して，<span style="color:transparent">以下の図式が可換となるような
         $u: X\rightarrow P$が唯一つ存在する事である。</span>
         </p>
-        <div align="center"> <img src="fig/1/product5-4.png"> </div>
+        <div align="center"> <img src="fig/product5-4.png"> </div>
         </section>
 
         <section>
@@ -301,7 +296,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         任意の型$X$と任意の関数$f: X\rightarrow A$, $g: X\rightarrow B$に対して，以下の図式が可換となるような
         $u: X\rightarrow P$が唯一つ存在する事である。
         </p>
-        <div align="center"> <img src="fig/1/product5.png"> </div>
+        <div align="center"> <img src="fig/product5.png"> </div>
         </section>
 
         <section style="color:red">
@@ -311,7 +306,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         任意の<span style="color:lightgrey">型$X$</span>と任意の<span style="color:lightgrey">関数$f: X\rightarrow A$, $g: X\rightarrow B$</span>に対して，<span style="color:lightgrey">以下の図式が可換となるような
         $u: X\rightarrow P$</span>が唯一つ存在する事<span style="color:lightgrey">である。</span>
         </p>
-        <div align="center"> <img src="fig/1/product8.png"> </div>
+        <div align="center"> <img src="fig/product8.png"> </div>
         </section>
 
         <section>
@@ -361,35 +356,35 @@ A,Bが自然数の場合のもっと奇抜な方法は
         <div align="left" style="height:3em">
         別の矢をつなげて作れる矢は省略してます。
         </div>
-        <div align="center"> <img height="80%" src="fig/1/product9.png"> </div>
+        <div align="center"> <img height="80%" src="fig/product9.png"> </div>
         </section>
 
         <section>
         <div align="left" style="height:3em">
         $\{1,2\}$と$\{1,3\}$に向かう矢を持つものは$\cdots$
         </div>
-        <div align="center"> <img height="80%" src="fig/1/product10.png"> </div>
+        <div align="center"> <img height="80%" src="fig/product10.png"> </div>
         </section>
 
         <section>
         <div align="left" style="height:3em">
         $\{1,2\}$と$\{1,3\}$に向かう矢を持つものは$\cdots$$\{1\}$と
         </div>
-        <div align="center"> <img height="80%" src="fig/1/product11.png"> </div>
+        <div align="center"> <img height="80%" src="fig/product11.png"> </div>
         </section>
 
         <section>
         <div align="left" style="height:3em">
         $\{1,2\}$と$\{1,3\}$に向かう矢を持つものは$\cdots$$\{1\}$と$\emptyset$
         </div>
-        <div align="center"> <img height="80%" src="fig/1/product12.png"> </div>
+        <div align="center"> <img height="80%" src="fig/product12.png"> </div>
         </section>
 
         <section>
         <div align="left" style="height:3em">
         $\emptyset$,$\{1\}$のそれぞれから$\{1\}$に向う矢が唯一存在して以下の図式は可換。
         </div>
-        <div align="center"> <img height="80%" src="fig/1/product13.png"> </div>
+        <div align="center"> <img height="80%" src="fig/product13.png"> </div>
         </section>
 
         <section>
@@ -426,7 +421,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         <div align="left" style="height:3em">
         ここでも別の矢をつなげて作れる矢は省略してます。
         </div>
-        <div align="center"> <img src="fig/1/product14.png"> </div>
+        <div align="center"> <img src="fig/product14.png"> </div>
         </section>
 
         <section>
@@ -434,7 +429,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         $4$,$6$の両方への矢を備えるのは$\cdots,1,2,3,4$。<br>
         このうち「対」と同じ普遍性の条件を満たすのは$4$です。
         </div>
-        <div align="center"> <img src="fig/1/product15.png"> </div>
+        <div align="center"> <img src="fig/product15.png"> </div>
         </section>
 
         <section>
@@ -536,7 +531,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         という２つの対象が備わる。<br>
         $\mathrm{dom}(f) = A$,$\mathrm{cod}(f) = B$である事を $ f: A\rightarrow B$ と表す。
         </p>
-        <div align="center"> <img src="fig/1/category1.png"> </div>
+        <div align="center"> <img src="fig/category1.png"> </div>
         </section>
 
         <section>
@@ -547,14 +542,14 @@ A,Bが自然数の場合のもっと奇抜な方法は
         <p>
         も存在する。
         </p>
-        <div align="center"> <img src="fig/1/category2.png"> </div>
+        <div align="center"> <img src="fig/category2.png"> </div>
         </section>
 
         <section>
         <p> 任意の射$f: A \rightarrow B$, $g: B \rightarrow C$, $h: C \rightarrow D$に対して<br> 結合律(associative law) </p>
         <div align="center"> $ (h\circ g)\circ f = h \circ (g\circ f)$ </div>
         <p> が成り立つ。すなわち,下図が可換である。</p>
-        <div align="center"> <img height="55%" src="fig/1/category4.png"> </div>
+        <div align="center"> <img height="55%" src="fig/category4.png"> </div>
         </section>
 
         <section>
@@ -565,7 +560,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         <p> が存在し,任意の$f: A \rightarrow B$に対して単位元律(identity law) </p>
         <div align="center"> $ f\circ 1_A = 1_B \circ f = f $ </div>
         <p> が成り立つ。すなわち,右下図が可換である。</p>
-        <div align="center"> <img height="45%" src="fig/1/category3.png"> </div>
+        <div align="center"> <img height="45%" src="fig/category3.png"> </div>
         </section>
 
         <section>
@@ -599,7 +594,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
 
         <div class="fragment">
         <p style="font-size:80%">
-        <img width="40%" src="fig/1/id_is_uniq.png" align="right" hspace="20">
+        <img width="40%" src="fig/id_is_uniq.png" align="right" hspace="20">
         【一意性の証明】<br>
         $1_A,1'_A: A\rightarrow A$が共に恒等射だとする。<br>
         恒等射の性質より右図の上半分,下半分はどちらも可換だから
@@ -620,7 +615,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         <p>
         対象$P$が対象$A$,$B$の積であるということは,射$p_1: P\rightarrow A$, $p_2: P\rightarrow B$が存在し,任意の対象$X$と射$f: X\rightarrow A$, $g: X\rightarrow B$に対して,以下の図式が可換となるような$u: X\rightarrow P$が唯一つ存在する事である。
         </p>
-        <div align="center"> <img src="fig/1/product.png"> </div>
+        <div align="center"> <img src="fig/product.png"> </div>
         </section>
 
         <section>
@@ -651,7 +646,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         $$ A \cong B$$
         と表す。
         </p>
-        <div align="center"><img src="fig/1/inverse.png"> </div>
+        <div align="center"><img src="fig/inverse.png"> </div>
         </section>
 
         <section>
@@ -664,7 +659,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         からなる圏では$\{0,1,2\}$と$\{1,3,5\}$は同型ではありません。
         </p>
 
-        <div align="center"><img src="fig/1/iso_example1.png"> </div>
+        <div align="center"><img src="fig/iso_example1.png"> </div>
         <p>
         注: 同じ色の矢印を全部合わせて1つの関数(射)です。
         </p>
@@ -680,7 +675,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         からなる圏では$\{0,1,2\}$と$\{1,3,5\}$は同型です。
         </p>
 
-        <div align="center"><img src="fig/1/iso_example2.png"> </div>
+        <div align="center"><img src="fig/iso_example2.png"> </div>
         <p>
         注: この図にあるのは同型射のうちの1つ(全部で6つ)です。同型射が1つでも存在すれば同型です。
         </p>
@@ -698,7 +693,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
 
         <div class="fragment">
         <p style="font-size:80%">
-        <img width="50%" src="fig/1/inv_is_uniq5.png" align="right" hspace="20">
+        <img width="50%" src="fig/inv_is_uniq5.png" align="right" hspace="20">
         【一意性の証明】<br>
         $g, h: B\rightarrow A$が$f$の逆射であるとすると右図が可換となるから,
         $$ g = h $$
@@ -737,37 +732,37 @@ A,Bが自然数の場合のもっと奇抜な方法は
         <section>
         <h3> 函手とは </h3>
         <p> 圏$\mathbf{C}$から圏$\mathbf{D}$への函手$F: \mathbf{C}\rightarrow\mathbf{D}$とは</p>
-        <div align="center"><img src="fig/1/functor1.png"> </div>
+        <div align="center"><img src="fig/functor1.png"> </div>
         </section>
 
         <section>
         <h3> 函手とは </h3>
         <p> $\mathbf{C}$の対象を$\mathbf{D}$の対象へ写し </p>
-        <div align="center"><img src="fig/1/functor2.png"> </div>
+        <div align="center"><img src="fig/functor2.png"> </div>
         </section>
 
         <section>
         <h3> 函手とは </h3>
         <p> ドメイン・コドメインを保ち </p>
-        <div align="center"><img src="fig/1/functor3.png"> </div>
+        <div align="center"><img src="fig/functor3.png"> </div>
         </section>
 
         <section>
         <h3> 函手とは </h3>
         <p> 合成射を対応する合成射に写し </p>
-        <div align="center"><img src="fig/1/functor4.png"> </div>
+        <div align="center"><img src="fig/functor4.png"> </div>
         </section>
 
         <section>
         <h3> 函手とは </h3>
         <p> 恒等射を対応する恒等射に写すような </p>
-        <div align="center"><img src="fig/1/functor5.png"> </div>
+        <div align="center"><img src="fig/functor5.png"> </div>
         </section>
 
         <section>
         <h3> 函手とは </h3>
         <p> マッピングのこと。 </p>
-        <div align="center"><img src="fig/1/functor6.png"> </div>
+        <div align="center"><img src="fig/functor6.png"> </div>
         </section>
 
         <section id="functor">
@@ -804,7 +799,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
           例えば,下図の上の図式が可換ならば下の図式も可換です。つまり,逆射も保たれますし,同型性も保たれます。
           $$ F(f^{-1}) = F(f)^{-1} \qquad A\cong B \Rightarrow F(A) \cong F(B)$$
           </p>
-        <div align="center"><img height="50%" src="fig/1/inverse_is_preserved.png"> </div>
+        <div align="center"><img height="50%" src="fig/inverse_is_preserved.png"> </div>
         </div>
         </section>
 
@@ -813,7 +808,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         <div align="left">
         $\mathbf{C}$を有限集合と包含関係からなる圏,
         $\mathbf{D}$を自然数と大小関係からなる圏として<br>
-        <img height="50%" align="right" src="fig/1/subset_leqq.png">
+        <img height="50%" align="right" src="fig/subset_leqq.png">
         <ul>
           <li> 集合$A$に$A$の要素数 </li>
           <li> $\subseteq$に$\leqq$ </li>
@@ -832,7 +827,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         </ul><br>
         を対応させる事は$\mathbf{C}$から$\mathbf{C}$への函手(リスト函手$[-]$)です。
         </div>
-        <div align="center"><img height="50%" src="fig/1/list_functor.png"> </div>
+        <div align="center"><img height="50%" src="fig/list_functor.png"> </div>
         </section>
 
 <!--
@@ -843,7 +838,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         (注:函手と図式が一対一に対応するという意味ではありません。)
         </div>
 
-        <div align="center"><img src="fig/1/functor_as_diagram1.png"> </div>
+        <div align="center"><img src="fig/functor_as_diagram1.png"> </div>
         </section>
 
         <section>
@@ -851,7 +846,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         <div align="left" style="height:5em">
         函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすことも出来ます。
         </div>
-        <div align="center"><img src="fig/1/functor_as_diagram2.png"> </div>
+        <div align="center"><img src="fig/functor_as_diagram2.png"> </div>
         </section>
 
         <section>
@@ -859,7 +854,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         <div align="left" style="height:5em">
         函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすことも出来ます。
         </div>
-        <div align="center"><img src="fig/1/functor_as_diagram3.png"> </div>
+        <div align="center"><img src="fig/functor_as_diagram3.png"> </div>
         </section>
 
         <section>
@@ -867,7 +862,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         <div align="left" style="height:5em">
         函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすことも出来ます。
         </div>
-        <div align="center"><img src="fig/1/functor_as_diagram4.png"> </div>
+        <div align="center"><img src="fig/functor_as_diagram4.png"> </div>
         </section>
 
         <section>
@@ -875,7 +870,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         <div align="left" style="height:5em">
         函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすことも出来ます。
         </div>
-        <div align="center"><img src="fig/1/functor_as_diagram5.png"> </div>
+        <div align="center"><img src="fig/functor_as_diagram5.png"> </div>
         </section>
 
         <section>
@@ -883,7 +878,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         <div align="left" style="height:5em">
         函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすことも出来ます。
         </div>
-        <div align="center"><img src="fig/1/functor_as_diagram6.png"> </div>
+        <div align="center"><img src="fig/functor_as_diagram6.png"> </div>
         </section>
 
         <section>
@@ -891,7 +886,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         <div align="left" style="height:5em">
         函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすことも出来ます。
         </div>
-        <div align="center"><img src="fig/1/functor_as_diagram7.png"> </div>
+        <div align="center"><img src="fig/functor_as_diagram7.png"> </div>
         </section>
 -->
 
@@ -921,29 +916,29 @@ A,Bが自然数の場合のもっと奇抜な方法は
         $\mathbf{C}$の<span style="color:red">双対圏(opposite category)</span>と言い
         $ \mathbf{C}^{\mathrm{op}} $と表す。
         </p>
-        <div align="center"><img height="50%" src="fig/1/dual.png"> </div>
+        <div align="center"><img height="50%" src="fig/dual.png"> </div>
         </section>
 
         <section>
         <h3> 双対性の例 </h3>
         <p> 下図の圏(整数と$\leqq$)における$4$と$6$の積は$\min\{4, 6\}$でした。 </p>
-        <div align="center"><img src="fig/1/dual_minmax1.png"> </div>
+        <div align="center"><img src="fig/dual_minmax1.png"> </div>
         <div class="fragment">
         <p> 一方,双対圏における$4$と$6$の積は$\max\{4, 6\}$となります。</p>
-        <div align="center"><img src="fig/1/dual_minmax2.png"> </div>
+        <div align="center"><img src="fig/dual_minmax2.png"> </div>
         </div>
         </section>
 
         <section>
         <h3> 双対性の例(その2) </h3>
         <p> 下図の圏($\{1,2,3\}$の部分集合と包含関係)における$\{1,2\}$と$\{1, 3\}$の積は$\{1\}$,つまり共通部分でした。</p>
-        <div align="center"><img height="60%" src="fig/1/dual_product1.png"> </div>
+        <div align="center"><img height="60%" src="fig/dual_product1.png"> </div>
         </section>
 
         <section>
         <h3> 双対性の例(その2) </h3>
         <p> 一方,双対圏における$\{1, 2\}$と$\{1, 3\}$の積は$\{1,2,3\}$,つまり和集合となります。</p>
-        <div align="center"><img height="60%" src="fig/1/dual_product2.png"> </div>
+        <div align="center"><img height="60%" src="fig/dual_product2.png"> </div>
         </section>
 
         <section>
@@ -957,7 +952,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         <p>
         対象$Q$が対象$A$,$B$の積であるということは,射$q_1: A\rightarrow Q$, $q_2: B\rightarrow Q$が存在し,任意の対象$X$と射$f: A\rightarrow X$, $g: B\rightarrow X$に対して,以下の図式が可換となるような$u: Q\rightarrow X$が唯一つ存在する事である。
         </p>
-        <div align="center"> <img src="fig/1/coproduct.png"> </div>
+        <div align="center"> <img src="fig/coproduct.png"> </div>
         </section>
 
         <section>
@@ -967,7 +962,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
         では余積は何に対応するでしょうか？
         </p>
         <div class="fragment" style="height:20em">
-        <div align="center"> <img src="fig/1/either.png"> </div>
+        <div align="center"> <img src="fig/either.png"> </div>
         </div>
         </section>
 
@@ -981,7 +976,7 @@ A,Bが自然数の場合のもっと奇抜な方法は
           <li> $B$からは$\mathrm{right}$という関数で値を埋め込む。 </li>
           <li> $u$は$\mathrm{left}$,$\mathrm{right}$のどちらで作られたかによって,$f$,$g$に値を「振り分ける」関数である。</li>
         </ul>
-        <img src="fig/1/either2.png">
+        <img src="fig/either2.png">
         </p>
         </section>
 
@@ -1017,7 +1012,7 @@ data Shape = Circle { radius :: Double }
         <section>
         <div align="left" style="font-size:80%">
         【積が同型を除いて一意である事の証明】<br>
-        <img width="40%" align="right" src="fig/1/product_is_unique1.png">
+        <img width="40%" align="right" src="fig/product_is_unique1.png">
         $(P,p_1,p_2)$, $(Q, q_1, q_2)$が共に$A$,$B$の積であるとして右の図式を考える。積の性質よりこれは可換図式である。
         <span style="color:transparent">
         すると,右図も積の可換図式となっている。つまり,右図が可換となる$P$から$P$への射は一意に定まる。ところで,射$v\circ u$も$1_P$も右図を可換とするので,そのような射の一意性より$ v\circ u = 1_P $である。全く同様にして$ u\circ v = 1_Q $
@@ -1030,7 +1025,7 @@ data Shape = Circle { radius :: Double }
         <section>
         <div align="left" style="font-size:80%">
         【積が同型を除いて一意である事の証明】<br>
-        <img width="40%" align="right" src="fig/1/product_is_unique2.png">
+        <img width="40%" align="right" src="fig/product_is_unique2.png">
         $(P,p_1,p_2)$, $(Q, q_1, q_2)$が共に$A$,$B$の積であるとして右の図式を考える。積の性質よりこれは可換図式である。
         すると,右図も積の可換図式となっている。つまり,右図が可換となる$P$から$P$への射は一意に定まる。<span style="color:transparent">ところで,射$v\circ u$も$1_P$も右図を可換とするので,そのような射の一意性より$ v\circ u = 1_P $である。全く同様にして$ u\circ v = 1_Q $
         も成り立つので$u$,$v$は同型射である。すなわち
@@ -1042,7 +1037,7 @@ data Shape = Circle { radius :: Double }
         <section>
         <div align="left" style="font-size:80%">
         【積が同型を除いて一意である事の証明】<br>
-        <img width="40%" align="right" src="fig/1/product_is_unique3.png">
+        <img width="40%" align="right" src="fig/product_is_unique3.png">
         $(P,p_1,p_2)$, $(Q, q_1, q_2)$が共に$A$,$B$の積であるとして右の図式を考える。積の性質よりこれは可換図式である。
         すると,右図も積の可換図式となっている。つまり,右図が可換となる$P$から$P$への射は一意に定まる。ところで,射$v\circ u$も$1_P$も右図を可換とするので,そのような射の一意性より$ v\circ u = 1_P $である。<span style="color:transparent">全く同様にして$ u\circ v = 1_Q $
         も成り立つので$u$,$v$は同型射である。すなわち
@@ -1054,7 +1049,7 @@ data Shape = Circle { radius :: Double }
         <section>
         <div align="left" style="font-size:80%">
         【積が同型を除いて一意である事の証明】<br>
-        <img width="40%" align="right" src="fig/1/product_is_unique3.png">
+        <img width="40%" align="right" src="fig/product_is_unique3.png">
         $(P,p_1,p_2)$, $(Q, q_1, q_2)$が共に$A$,$B$の積であるとして右の図式を考える。積の性質よりこれは可換図式である。
         すると,右図も積の可換図式となっている。つまり,右図が可換となる$P$から$P$への射は一意に定まる。ところで,射$v\circ u$も$1_P$も右図を可換とするので,そのような射の一意性より$ v\circ u = 1_P $である。全く同様にして$ u\circ v = 1_Q $
         も成り立つので$u$,$v$は同型射である。すなわち
@@ -1074,7 +1069,7 @@ data Shape = Circle { radius :: Double }
           と表す。</li>
         </ul>
         </p>
-        <div align="center"> <img src="fig/1/product16.png"> </div>
+        <div align="center"> <img src="fig/product16.png"> </div>
         </section>
 
         <section>
@@ -1088,7 +1083,7 @@ data Shape = Circle { radius :: Double }
           と表す。</li>
         </ul>
         </p>
-        <div align="center"> <img src="fig/1/coproduct2.png"> </div>
+        <div align="center"> <img src="fig/coproduct2.png"> </div>
         </section>
 
         <section>
@@ -1147,7 +1142,7 @@ data Shape = Circle { radius :: Double }
         $$ \vartheta: F \rightarrow G$$
         とは,$\mathbf{D}$の射$\vartheta_X: F(X) \rightarrow G(X)$の集まりであり,任意の$\mathbf{C}$の射$f: A\rightarrow B$に対して以下の図式が可換であるもの。
         </div>
-        <div align="center"> <img height="50%" src="fig/1/natural_transformation.png"> </div>
+        <div align="center"> <img height="50%" src="fig/natural_transformation.png"> </div>
         </section>
 
         <section>
@@ -1157,7 +1152,7 @@ data Shape = Circle { radius :: Double }
           $$ \mathrm{length} : [-] \rightarrow \mathrm{Int} $$
           となっています。
         </div>
-        <div align="center"> <img height="50%" src="fig/1/length.png"> </div>
+        <div align="center"> <img height="50%" src="fig/length.png"> </div>
         </section>
 
         <section>
@@ -1226,14 +1221,14 @@ data Shape = Circle { radius :: Double }
         <p>
         任意の$X$と任意の射$f: X\rightarrow A$,$g: X\rightarrow B$に対して以下の図式が可換になるような射$\langle f, g\rangle: X\rightarrow A\times B$が唯一つ存在する事が$A\times B$の定義でした。これを例として随伴を説明したいと思います。
         </p>
-        <div align="center"> <img src="fig/1/product16.png"> </div>
+        <div align="center"> <img src="fig/product16.png"> </div>
         </section>
 
         <section>
         <div align="left" style="height:8em">
           まず,$\langle f, g \rangle$の普遍性により$f, g$の対と$\langle f, g\rangle$が<span style="color:red">一対一に対応</span>する事が解ります。これを下図の様に表して見ましょう。横線の上と下の図式が一対一に対応するという意味です。
         </div>
-        <div align="center"> <img src="fig/1/product_as_adjoint1.png"> </div>
+        <div align="center"> <img src="fig/product_as_adjoint1.png"> </div>
         </section>
 
         <section>
@@ -1241,7 +1236,7 @@ data Shape = Circle { radius :: Double }
         対象の対・射の対からできる積圏(product category)という圏を用いると,
         この事は圏$\mathbf{C}$と圏$\mathbf{C}\times\mathbf{C}$の射の対応関係として捉える事が出来ます。
         </div>
-        <div align="center"> <img src="fig/1/product_as_adjoint2.png"> </div>
+        <div align="center"> <img src="fig/product_as_adjoint2.png"> </div>
         </section>
 
         <section>
@@ -1249,7 +1244,7 @@ data Shape = Circle { radius :: Double }
         さらに,圏$\mathbf{C}$に於いて任意の対象$A$,$B$が積$A\times B$を持つならば,
         これは$A$,$B$,$X$に依らない<span style="color:red">自然な対応関係</span>となります。
         </div>
-        <div align="center"> <img src="fig/1/product_as_adjoint2.png"> </div>
+        <div align="center"> <img src="fig/product_as_adjoint2.png"> </div>
         </section>
 
         <section>
@@ -1258,7 +1253,7 @@ data Shape = Circle { radius :: Double }
         $$F: X \longmapsto (X, X)\qquad G: (A, B) \longmapsto A\times B$$
         という２つの函手が見えると思いますが,この２つの函手と射の自然な一対一対応を併せて$\mathbf{C}$から$\mathbf{C}\times\mathbf{C}$への随伴(adjunction)と言います。
         </div>
-        <div align="center"> <img src="fig/1/product_as_adjoint3.png"> </div>
+        <div align="center"> <img src="fig/product_as_adjoint3.png"> </div>
         </section>
 
         <section>
@@ -1266,12 +1261,12 @@ data Shape = Circle { radius :: Double }
         <p>
         一般化して,圏$\mathbf{C}$と$\mathbf{D}$を結ぶ函手$F$,$G$について,
         </p>
-        <div align="center"> <img src="fig/1/adjunction2.png"> </div>
+        <div align="center"> <img src="fig/adjunction2.png"> </div>
         <p>
         以下の$\mathbf{C}$の射と$\mathbf{D}$の射が$X$,$Y$において自然に一対一対応するとき,$F$,$G$,一対一対応を併せて$\mathbf{C}$から$\mathbf{D}$への随伴と言い,
         $F$を$G$の<span style="color:red">左随伴(left adjoint)</span>,$G$を$F$の<span style="color:red">右随伴(right adjoint)</span>と言います。
         </p>
-        <div align="center"> <img src="fig/1/adjunction.png"> </div>
+        <div align="center"> <img src="fig/adjunction.png"> </div>
         </section>
 
         <section>
@@ -1282,7 +1277,7 @@ data Shape = Circle { radius :: Double }
         <p class="fragment">
         この事は$(p_1, p_2)$(全体のなす自然変換)がこの随伴の <span style="color:red">余単位元(counit)</span>であると説明されます。全く同様にして上側に恒等射を取ると<span style="color:red">単位元(unit)</span>という自然変換も作れます。
         </p>
-        <div align="center"> <img src="fig/1/product_counit.png"> </div>
+        <div align="center"> <img src="fig/product_counit.png"> </div>
         </section>
 
         <section>
