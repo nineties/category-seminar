@@ -266,7 +266,7 @@
         <section>
         <h3> $\mathbf{2}$ </h2>
         <p>
-        対象が２つ，恒等射以外の射が下図のようになっている圏を<span style="color:red">$\mathbf{2}$</span>と表します。
+        対象が２つ，恒等射以外の射が下図のよう1つある圏を<span style="color:red">$\mathbf{2}$</span>と表します。
         </p>
         <div align="center"><img height="50%" src="fig/category-2.png"> </div>
         </section>
@@ -284,7 +284,7 @@
         <p class="fragment">
         これらの圏それ自体はつまらないですが，これらの圏から任意の圏$\mathbf{C}$への函手が面白いです。
         </p>
-        <div class="fragment" align="center"><img height="80%" src="fig/functor_from_123.png"> </div>
+        <div class="fragment" align="center"><img height="60%" src="fig/functor_from_123.png"> </div>
         </section>
 
         <section>
@@ -297,27 +297,27 @@
           <li> $\mathbf{3}$から$\mathbf{C}$への函手は，$\mathbf{C}$の合成可能な射の対と一対一に対応。 </li>
         </ul>
         <p class="fragment">
-        <span style="color:red">函手と対象や射を同一視できる</span>という視点を持つ事はとても重要です。
+        このように<span style="color:red">函手と対象や射を同一視できる</span>という視点を持つ事はとても重要です。
         </p>
         </section>
 
         <section>
         <h3> 空圏 </h3>
         <p>
-        対象も射も無い圏を<span style="color:red">空圏(empty category)</span>と言って$\mathbf{0}$と表します。
+        対象も射も無い圏を<span style="color:red">空圏(empty category)</span>と言って<span style="color:red">$\mathbf{0}$</span>と表します。
         以下の事が言えます。<br>
         <ul>
-          <li> 空圏から任意の圏$\mathbf{C}$へ函手が唯一つ存在する。 (次に説明)</li>
-          <li> 圏$\mathbf{C}$が空圏でないなら，$\mathbf{C}$から空圏への函手は存在しない。(対象・射の移り先が無いから)</li>
+          <li> 空圏から任意の圏$\mathbf{C}$へ函手が唯一つ存在する。</li>
+          <li> 圏$\mathbf{C}$が空圏でないなら，$\mathbf{C}$から空圏への函手は存在しない。(対象・射の移り先が無い)</li>
         </ul>
         </p>
-        <div align="center"><img height="50%" src="fig/category-0.png"> </div>
+        <div align="center"><img height="40%" src="fig/category-0.png"> </div>
         </section>
 
         <section>
         <h3> 空関数 </h3>
         <p>
-        <span style="color:red">空集合$\emptyset$から任意の集合への関数は唯一</span>です。この唯一の関数を空関数と呼びます。
+        <span style="color:red">空集合$\emptyset$から任意の集合への関数は唯一</span>です。この唯一の関数を<span style="color:red">空関数</span>と呼びます。
         空圏から任意の圏への函手が唯一つである事はこの事実から言えます。今後の為に覚えておきましょう。
         </p>
         <p class="fragment" style="font-size:80%">
@@ -325,7 +325,7 @@
         集合$A$から$B$への関数は$A$,$B$の要素の対からなる集合$F$で，
         「任意の$x \in A$に対して$(x, y) \in F$となる$y\in B$が唯一つ存在する(※)」
         という条件を満たすもの(グラフと呼ぶ)によって定まります。$A = \emptyset$の場合には$A$の要素など存在しないのですから，
-        $F = \emptyset$である事が必要で，さらに(※)は真となります。したがってグラフが$\emptyset$しかないのですから対応する関数も唯一つとなります。
+        $F = \emptyset$である事が必要で，さらに(※)は前提が偽なので真となります。したがってグラフが$\emptyset$しかないのですから対応する関数も唯一つとなります。
         </p>
         </section>
 
@@ -354,22 +354,33 @@
         </section>
 
         <section id="monoid">
-        <h3> モノイドの本質的に等価な定義 </h3>
+        <h3> 圏を用いないモノイドの定義 </h3>
         <p>
-        モノイドとは集合$M$，$M$上の二項演算$\circ$，$M$の要素$e$の三つ組$(M, \circ, e)$であり，以下の条件を満たすものである。<br>
+        モノイドとは集合$M$，$M$上の二項演算$\circ$の組$(M, \circ)$であり，以下の条件を満たすものである。<br>
         <ul>
           <li>結合律: 任意の$x,y,z \in M$について
           $$ (x\circ y)\circ z = x\circ (y \circ z)$$
           </li>
-          <li> 単位元の存在: 任意の$x \in M$について
+          <li> 単位元の存在: ある$e \in M$が存在し,任意の$x \in M$について
           $$ e\circ x = x\circ e = x $$
           </li>
         </ul>
         </p>
         <p class="fragment">
-        先ほどの定義と見比べると，$M$が射の集合,$\circ$が射の合成,$e$が恒等射に対応しています。「本質的に」等価と言っているのは，
-        この定義からは「唯一つの対象」
+        先ほどの定義と見比べると，$M$が射の集合,$\circ$が射の合成,$e$が恒等射に対応しています。
         </p>
+        </section>
+
+        <section id="monoid">
+        <h3> モノイドの例 </h3>
+        <p>
+        $\mathcal{N}$を$0$以上の自然数の集合,$+$を自然数の足し算としたとき,
+        $$ (\mathcal{N}, +) $$
+        はモノイドです。<br>
+        </p>
+        <p class="fragment">
+        </p>
+        <div align="center"><img height="50%" src="fig/monoid_nat_add.png"> </div>
         </section>
 			</div>
 		</div>
