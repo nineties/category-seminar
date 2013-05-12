@@ -61,7 +61,7 @@
         <section>
         <h3>謝辞</h3>
         <p>
-        この勉強会の企画，会場設備の提供をして頂きました<br>
+        この会の企画・会場設備の提供をして頂きました<br>
         &#12849; ワークスアプリケーションズ様<br>
         にこの場をお借りして御礼申し上げます。
         </p>
@@ -71,8 +71,8 @@
         <h3> 自己紹介 </h3>
         <ul>
           <li> 中村晃一</li>
-          <li> 東京大学大学院情報理工学系研究科コンピュータ科学専攻<br>
-               後期博士課程2年</li>
+          <li> 東京大学 大学院 情報理工学系研究科<br>
+               コンピュータ科学専攻 後期博士課程 2年</li>
           <li> プログラム最適化・言語処理系の実装技術・人間と言語の関係等に興味があります。</li>
           <li> twitter: <a href="http://twitter.com/9_ties">@9_ties</a></li>
         </ul>
@@ -86,11 +86,11 @@
         <h3> この会について </h3>
         <ul>
           <li> <span style="color:red">圏論(category theory)</span>を題材にいろんなことを学びます。</li>
-          <li> 計算機科学関係の話題が多めになると思います。分かり易さを重視して初歩的な例を多用します。</li>
           <li> 毎週1回，全12週くらいの予定です。</li>
-          <li> 何らかの関数型言語に触れていた方が今後の授業をより楽しめると思います。資料中ではHaskellを使う事が多いです。</li>
-          <li> 他の聴衆の為にもなるので,質問・コメントを歓迎します。</li>
-          <li> この資料は<a href="http://github.com/nineties/category-seminar">http://github.com/nineties/category-seminar</a>に置いてあります。</li>
+          <li> 計算機科学関係の話題が多めになると思います。分かり易さを重視して初歩的な例を多用します。</li>
+          <li> 何らかの関数型言語に触れていた方が授業をより楽しめると思います。資料中ではHaskellを使う事が多いです。</li>
+          <li> 他の方の為にもなるので,質問・コメントを歓迎します。</li>
+          <li> この資料は<a href="http://nineties.github.com/category-seminar/">http://nineties.github.com/category-seminar</a>に置いてあります。</li>
         </ul>
         </section>
 
@@ -103,7 +103,7 @@
           http://www.andrew.cmu.edu/course/80-413-713/notes/
           </a>
         </ul>
-        <div align="center"><img height="50%" src="http://images-jp.amazon.com/images/P/0199237182" alt='Awodey "Category Theory'></div>
+        <div align="center"><img height="50%" src="http://images-jp.amazon.com/images/P/0199237182" alt="Category Theory"></div>
         </section>
 
         <section>
@@ -122,7 +122,7 @@
         <section>
         <h3> 第1回の内容</h3>
         <p>
-        初回は「圏論とは一体何なのか？」「何の役に立つのか？」といった事が何となく解るように,いくつかの重要な題材をピックアップしてざっと紹介します。
+        初回は「圏論とは一体何なのか？」「何の役に立つのか？」といった事が何となく解るように,重要な題材をピックアップして紹介します。
         </p>
         </section>
 
@@ -133,7 +133,7 @@
         <section>
         <h3> 「対」とは何か? </h3>
         <p>
-        データ型$A$,$B$が与えられているとします。この時，$A$と$B$の<span style="color:red">対(pair)</span>を表すデータ型Pとはどのようなものでしょうか？
+        データ型$A$,$B$があるとします。この時，$A$と$B$の<span style="color:red">対(pair)</span>を表すデータ型Pとはどのようなものでしょうか？
         </p>
         <pre><code contenteditable>
 Haskellだと
@@ -144,7 +144,23 @@ type P = (A, B)
 
 data P = Pair A B
 
-などと書ける。
+など。
+
+
+
+
+
+
+
+Lispならドット対そのもの
+
+(A型のデータ . B型のデータ)
+
+
+
+
+
+
 
 C言語なら
 
@@ -153,21 +169,68 @@ struct P {
   B second;
 };
 
-とか。
-A,Bが16bit自然数という特殊なケースではビット演算を使って
+など。
+
+
+
+
+
+
+
+フィールドの名前や順番はどうでも良いので
+
+struct P {
+  B bar;
+  A foo;
+};
+
+とかでも良い。
+
+
+
+
+
+
+
+例えばA,Bが浮動少数点数なら,複素数型
+
+double _Complex
+
+だって対と見なせる。
+
+
+
+
+
+
+
+例えばA,Bが16bit自然数ならばビット演算を使って
 
 (a << 16) | b
 
 みたいにしても良い。
 
-対の実装なんて"いくらでも方法がある"。
+
+
+
+
+
+
+つまり,対の具体例なんて"いくらでもある"のだけど, これらの共通点は何？
+
+
+
+
+
+
+
         </code></pre>
         </section>
 
         <section>
         <h3> 定義が必要! </h3>
         <p>
-        抽象的な概念の具体的な例はいくらでも挙げる事が可能ですが，議論を前に進める為にはその概念の<span style="color:red">定義を定める</span>事が必要です。<br>
+        抽象概念の具体例はいくらでも挙げる事が可能ですが，議論を前に進める為にはその概念の<span style="color:red">定義を定める</span>事が必要です。<br>
         「～とは～とか～みたいなものである。」という曖昧な理解のまま歩を進めるとその内よく分からなくなります。
         </p>
         </section>
@@ -175,7 +238,7 @@ A,Bが16bit自然数という特殊なケースではビット演算を使って
         <section>
         <h3> 抽象的な定義が欲しい! </h3>
         <p> より抽象的な定義はより多くの具体例を包括します。 </p>
-        <p> データの具体的な内部構造に依存しない「対」の定義を考えましょう。 </p>
+        <p> 具体的な内部構造に依存しない「対」の定義を考えましょう。 </p>
         </section>
 
         <section>
@@ -458,6 +521,16 @@ A,Bが16bit自然数という特殊なケースではビット演算を使って
         </p>
         <p style="height:5em; border:3px solid #999999; padding:1em">
         整数$A$,$B$の最小値$M$とは$M\leqq A$,$M\leqq B$であって,$X\leqq A$,$X\leqq B$であるような任意の$X$に対して$X \leqq M$となる整数の事である。
+        </p>
+        </section>
+
+        <section>
+        <h3> 分かりやすく言い換えると </h3>
+        <p style="height:5em; border:3px solid #999999; padding:1em">
+        集合$A$,$B$の共通部分$P$とは$A$,$B$の両方に含まれる集合のうち,もっとも大きいものである。
+        </p>
+        <p style="height:5em; border:3px solid #999999; padding:1em">
+        整数$A$,$B$の最小値$M$とは$A$,$B$以下である整数のうち,もっとも大きいものである。
         </p>
         </section>
 
