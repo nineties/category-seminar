@@ -399,14 +399,14 @@
           <li> $(\{2^a3^b|a,b\in\mathbb{N}\},\cdot)$ </li>
           <li> $(\{1,-1,i,-i\}, \cdot)$ </li>
         </ul>
+        $\vdots$
         </section>
 
         <section>
         <h3> モノイドの例:文字列と連結</h3>
         <p>
-        文字$\Sigma=\{a,b,c,\cdots\}$からなる文字列を$\Sigma^{*}$と表すことにします。
-        $\Sigma^{*}$と文字列連結($++$)
-        $$ (\Sigma^{*}, ++) $$
+        文字列と文字列の連結
+        $$ ({\tt String}, ++) $$
         はモノイドとなります。単位元は空文字列$\tt{""}$です。
         </p>
         <div align="center"><img height="50%" src="fig/monoid_string_append.png"></div>
@@ -415,7 +415,7 @@
         <section>
         <h3> モノイドの例:リストと連結 </h3>
         <p>
-        要素の型が$A$のリスト型を$[A]$とすると,これとリストの連結$++$
+        リスト型とリストの連結
         $$ ([A], ++) $$
         はモノイドとなります。単位元は空リスト$[\,]$です。
         </p>
@@ -452,8 +452,12 @@
           <li> 集合のmeet: $(\mathcal{P}(A), \cap)$ </li>
           <li> 最大値: $(\{0,1,2,\cdots,n\},\max)$ </li>
           <li> 最小値: $(\{0,1,2,\cdots,n\},\min)$ </li>
-        </ul><br>
-        $\mathcal{P}(A)$は$A$の部分集合全てからなる集合($A$のべき集合)です。
+        </ul>
+        </p>
+        <p style="font-size:80%">
+        $\mathcal{P}(A)$は$A$の部分集合全てからなる集合($A$のべき集合)です。例えば
+        $$ \mathcal{P}(\{1,2,3\}) = \{\emptyset,\{1\},\{2\},\{3\},\{1,2\},\{2,3\},\{1,3\},\{1,2,3\}\}$$
+        となります。
         </p>
         </section>
 
@@ -470,7 +474,7 @@
         <p>
         GHC(Haskellの処理系)の<code>foldMap</code>という関数を使う例です。<span style="color:red">具体的な処理内容を書かなくても</span>,値をモノイド型にマッピングするだけで様々な畳み込みが出来ます。
         </p>
-        <pre><code contenteditable>
+        <pre class="haskell"><code contenteditable>
 % ghci
 Prelude> :set prompt "> "
 > :m +Data.Tree +Data.Monoid +Data.Foldable
@@ -547,13 +551,17 @@ Just (Product {getProduct = 45})
         <section id="monoid-homomorphism">
         <h3> モノイド準同型(monoid homomorphism) </h3>
         <p>
-        モノイド間の構造を保つマッピングを<span style="color:red">モノイド準同型(monoid homomorphism)</span>と言う。
-        すなわち,モノイド$M=(|M|,\circ_M)$から$N=(|N|,\circ_N)$への準同型$F: M\rightarrow N$とは,関数$f: |M|\rightarrow |N|$で,以下の条件を満たすもの。<br>
+        モノイド間の構造を保つマッピングを<span style="color:red">モノイド準同型(monoid homomorphism)</span>と言います。
+        </p>
+        <div style="border:1px solid #C0C0C0;padding:5px 5px 5px 5px">
+        <p>
+        モノイド$M=(|M|,\circ_M)$から$N=(|N|,\circ_N)$への準同型$F: M\rightarrow N$とは,関数$f: |M|\rightarrow |N|$で,以下の条件を満たすもの。<br>
         <ul>
           <li> $ f(x\circ_M y) = f(x)\circ_N f(y) $ </li>
           <li> $ f(e_M) = e_N \qquad (\text{$e_M$,$e_N$は$M$,$N$の単位元}) $ </li>
         </ul>
         </p>
+        </div>
         <p class="fragment">
         モノイドを圏とみなした場合は,準同型とは関手の事です。
         </p>
