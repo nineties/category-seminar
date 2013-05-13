@@ -356,7 +356,7 @@
         <section id="monoid">
         <h3> 圏を用いないモノイドの定義 </h3>
         <p>
-        モノイドとは集合$M$，$M$上の二項演算$\circ$の組<span style="color:red">$(M, \circ)$</span>であり，以下の条件を満たすものである。<br>
+        モノイドとは集合$M$，$M$上の二項演算$\circ$の組<span style="color:red">$(M, \circ)$</span>で，以下の条件を満たすものである。<br>
         <ul>
           <li>結合律: 任意の$x,y,z \in M$について
           $$ (x\circ y)\circ z = x\circ (y \circ z)$$
@@ -367,22 +367,198 @@
         </ul>
         </p>
         <p class="fragment">
-        先ほどの定義と見比べると，$M$が射の集合,$\circ$が射の合成,$e$が恒等射に対応しています。
+        圏として解釈すると，$M$が射の集合,$\circ$が射の合成,$e$が恒等射に対応します。
         </p>
         </section>
 
         <section>
-        <h3> モノイドの例 </h3>
+        <h3> モノイドの例:自然数と加法 </h3>
         <p>
         $\mathbb{N}$を$0$以上の自然数の集合,$+$を自然数の足し算としたとき,
         $$ (\mathbb{N}, +) $$
-        はモノイドです。<br>
-        単位元は$0$です。
+        はモノイドとなります。単位元は$0$です。
+        </p>
+        <div class="fragment">
+        <p>
+        <img align="right" height="50%" src="fig/monoid_nat_add.png">
+        圏として描くと下図のように<span style="color:red">$\{0,1,2,3\cdots\}$が射</span>になります。
+        (★は全部同じ対象です。)
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> モノイドの例:加法・乗法によるモノイド </h3>
+        <ul>
+          <li> $(\mathbb{Z}, +),\quad(\mathbb{Q},+),\quad(\mathbb{R},+),\quad(\mathbb{C},+)$ </li>
+          <li> $(\{0,2,4,8,\cdots\}, +),\quad(\{0,3,6,9,\cdots\}, +)$ </li>
+          <li> $(\{\cdots,-10,-5,0,5,10,\cdots\},+)$ </li>
+          <li> $(\{a+b\sqrt{2}|a,b\in \mathbb{Z}\}, +)$ </li>
+          <li> $(\mathbb{Z}, \cdot),\quad(\mathbb{Q},\cdot),\quad(\mathbb{R},\cdot),\quad(\mathbb{C},\cdot)$ </li>
+          <li> $(\{1,2,4,8,16,\cdots\},\cdot),\quad(\{1,3,9,27,\cdots\},\cdot)$ </li>
+          <li> $(\{2^a3^b|a,b\in\mathbb{N}\},\cdot)$ </li>
+          <li> $(\{1,-1,i,-i\}, \cdot)$ </li>
+        </ul>
+        </section>
+
+        <section>
+        <h3> モノイドの例:文字列と連結</h3>
+        <p>
+        文字$\Sigma=\{a,b,c,\cdots\}$からなる文字列を$\Sigma^{*}$と表すことにします。
+        $\Sigma^{*}$と文字列連結($++$)
+        $$ (\Sigma^{*}, ++) $$
+        はモノイドとなります。単位元は空文字列$\tt{""}$です。
+        </p>
+        <div align="center"><img height="50%" src="fig/monoid_string_append.png"></div>
+        </section>
+
+        <section>
+        <h3> モノイドの例:リストと連結 </h3>
+        <p>
+        要素の型が$A$のリスト型を$[A]$とすると,これとリストの連結$++$
+        $$ ([A], ++) $$
+        はモノイドとなります。単位元は空リスト$[\,]$です。
+        </p>
+        <div align="center"><img height="50%" src="fig/monoid_list_append.png"></div>
+        </section>
+
+        <section>
+        <h3> モノイドの例: endofunction </h3>
+        <p>
+        ドメインとコドメインが同じ集合の関数$f: A\rightarrow A$を<span style="color:red">endofunction</span>と言います。
         </p>
         <p class="fragment">
+        集合$A$上のendofunction全ての集合を$\mathrm{Endo}(A)$と表す事にすると,これと関数合成
+        $$ (\mathrm{Endo}(A), \circ) $$
+        はモノイドとなります。単位元は恒等関数$\mathrm{id}_A: A\rightarrow A$です。
         </p>
-        <div align="center"><img height="50%" src="fig/monoid_nat_add.png"> </div>
         </section>
+
+        <section>
+        <h3> モノイドの例: プログラム </h3>
+        <p>
+        プログラムを「文(statement)の列」と思うと,「何もしない文」を単位元とし「文を並べる事」を演算とするモノイドと見なせます。
+        </p>
+        <div align="center"><img height="50%" src="fig/monoid_program.png"></div>
+        </section>
+
+        <section>
+        <h3> その他のモノイド </h3>
+        <p>
+        <ul> 
+          <li> 論理積: $(\{\mathrm{true},\mathrm{false}\}, \mathrm{and})$ </li>
+          <li> 論理和: $(\{\mathrm{true},\mathrm{false}\}, \mathrm{or})$ </li>
+          <li> 集合のjoin: $(\mathcal{P}(A), \cup)$ </li>
+          <li> 集合のmeet: $(\mathcal{P}(A), \cap)$ </li>
+          <li> 最大値: $(\{0,1,2,\cdots,n\},\max)$ </li>
+          <li> 最小値: $(\{0,1,2,\cdots,n\},\min)$ </li>
+        </ul><br>
+        $\mathcal{P}(A)$は$A$の部分集合全てからなる集合($A$のべき集合)です。
+        </p>
+        </section>
+
+        <section>
+        <h3> プログラミングでのモノイド </h3>
+        <p>
+        値の列を<span style="color:red">畳み込む</span>操作の多くはモノイド演算として抽象化できます。
+        </p>
+        <div align="center"><img height="50%" src="fig/folding.png"></div>
+        </section>
+
+        <section>
+        <h3> プログラミングでのモノイド </h3>
+        <p>
+        GHC(Haskellの処理系)の<code>foldMap</code>という関数を使う例です。<span style="color:red">具体的な処理内容を書かなくても</span>,値をモノイド型にマッピングするだけで様々な畳み込みが出来ます。
+        </p>
+        <pre><code contenteditable>
+% ghci
+Prelude> :set prompt "> "
+> :m +Data.Tree +Data.Monoid +Data.Foldable
+> let tree = unfoldTree (\x -> (x, [1..x-1])) 5
+> putStr . drawTree . fmap show $ tree
+5
+|
++- 1
+|
++- 2
+|  |
+|  `- 1
+|
++- 3
+|  |
+|  +- 1
+|  |
+|  `- 2
+|     |
+|     `- 1
+|
+`- 4
+   |
+   +- 1
+   |
+   +- 2
+   |  |
+   |  `- 1
+   |
+   `- 3
+      |
+      +- 1
+      |
+      `- 2
+         |
+         `- 1
+> foldMap (\x -> [x]) tree
+[5,1,2,1,3,1,2,1,4,1,2,1,3,1,2,1]
+> foldMap show tree
+"5121312141213121"
+> foldMap Data.Set.singleton tree
+fromList [1,2,3,4,5]
+> foldMap Sum tree
+Sum {getSum = 31}
+> foldMap Product tree
+Product {getProduct = 2880}
+> foldMap (Sum . const 1) tree
+Sum {getSum = 16}
+> foldMap (All . (> 3)) tree
+All {getAll = False}
+> foldMap (Any . (> 3)) tree
+Any {getAny = True}
+> foldMap (Sum . fromEnum . (> 3)) tree
+Sum {getSum = 2}
+> foldMap (\x -> if even x then Just (Sum x) else Nothing) tree
+Just (Sum {getSum = 12})
+> foldMap (\x -> (Sum x, Product x)) tree
+(Sum {getSum = 31},Product {getProduct = 2880})
+> foldMap (First . (\x -> if even x then Just x else Nothing)) tree
+First {getFirst = Just 2}
+> foldMap (Last . (\x -> if even x then Just x else Nothing)) tree
+Last {getLast = Just 2}
+> foldMap (Last . (\x -> if odd x then Just x else Nothing)) tree
+Last {getLast = Just 1}
+> foldMap (First . (\x -> if odd x then Just x else Nothing)) tree
+First {getFirst = Just 5}
+> foldMap (fmap Sum . (\x -> if odd x then Just x else Nothing)) tree
+Just (Sum {getSum = 19})
+> foldMap (fmap Product . (\x -> if odd x then Just x else Nothing)) tree
+Just (Product {getProduct = 45})
+        </code></pre>
+        </section>
+
+        <section id="monoid-homomorphism">
+        <h3> モノイド準同型(monoid homomorphism) </h3>
+        <p>
+        モノイド間の構造を保つマッピングを<span style="color:red">モノイド準同型(monoid homomorphism)</span>と言う。
+        すなわち,モノイド$M=(|M|,\circ_M)$から$N=(|N|,\circ_N)$への準同型$F: M\rightarrow N$とは,関数$f: |M|\rightarrow |N|$で,以下の条件を満たすもの。<br>
+        <ul>
+          <li> $ f(x\circ_M y) = f(x)\circ_N f(y) $ </li>
+          <li> $ f(e_M) = e_N \qquad (\text{$e_M$,$e_N$は$M$,$N$の単位元}) $ </li>
+        </ul>
+        </p>
+        <p class="fragment">
+        モノイドを圏とみなした場合は,準同型とは関手の事です。
+        </p>
+        </section>
+
 			</div>
 		</div>
 
