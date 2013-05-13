@@ -20,7 +20,7 @@
     <meta http-equiv="X-UA-Compatible" CONTENT="IE=EmulateIE7" />
 
 		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/github.css">
+    <link rel="stylesheet" href="plugin/highlight/styles/github.css">
 
 		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
@@ -474,7 +474,7 @@
         <p>
         GHC(Haskellの処理系)の<code>foldMap</code>という関数を使う例です。<span style="color:red">具体的な処理内容を書かなくても</span>,値をモノイド型にマッピングするだけで様々な畳み込みが出来ます。
         </p>
-        <pre><code class="haskell" contenteditable>
+        <pre><code data-trim class="haskell" contenteditable>
 % ghci
 Prelude> :set prompt "> "
 > :m +Data.Tree +Data.Monoid +Data.Foldable

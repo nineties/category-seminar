@@ -20,7 +20,7 @@
     <meta http-equiv="X-UA-Compatible" CONTENT="IE=EmulateIE7" />
 
 		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/github.css">
+    <link rel="stylesheet" href="plugin/highlight/styles/github.css">
 
 		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
@@ -134,7 +134,7 @@
         <p>
         データ型$A$,$B$があるとします。この時，$A$と$B$の<span style="color:red">対(pair)</span>を表すデータ型Pとはどのようなものでしょうか？
         </p>
-        <pre><code contenteditable>
+        <pre><code data-trim class="no-highlight" style="font-size:120%" contenteditable>
 Haskellだと
 
 type P = (A, B)
@@ -235,7 +235,7 @@ double _Complex
         </section>
 
         <section>
-        <h3> 抽象的な定義が欲しい! </h3>
+        <h3> 抽象的な定義が良い! </h3>
         <p> より抽象的な定義はより多くの具体例を包括します。 </p>
         <p> 具体的な内部構造に依存しない「対」の定義を考えましょう。 </p>
         </section>
@@ -573,6 +573,10 @@ double _Complex
         </section>
 
         <section>
+        <h3> 質問タイム </h3>
+        </section>
+
+        <section>
         <h2> 圏 </h2>
         </section>
 
@@ -655,15 +659,20 @@ double _Complex
           <li> 恒等射がある </li>
         </ul>
         <p> ものです。</p>
-        <p> 様々な圏の具体例を見るのは次回以降にまわします。 </p>
         </section>
 
         <section>
         <h3> 先ほどの例における恒等射 </h3>
         <ul>
-          <li> 集合と関数の圏: 恒等関数 $1_A(x) = x$</li>
-          <li> 集合と包含関係の圏: $A \subseteq A$ </li>
-          <li> 整数と順序の圏: $A \leqq A$ </li>
+          <li> 型と関数の圏 
+          $$ \text{恒等関数}\ 1_A(x) = x $$
+          </li>
+          <li> 集合と包含関係の圏
+          $$A \subseteq A$$
+          </li>
+          <li> 整数と順序の圏
+          $$A \leqq A$$
+          </li>
         </ul>
         </section>
 
@@ -736,7 +745,6 @@ double _Complex
         </section>
 
         <section>
-        <h3> 先ほどの例 </h3>
         <ul>
           <li> 対象: 集合 </li>
           <li> 射: 恒等関数のみ </li>
@@ -752,7 +760,6 @@ double _Complex
         </section>
 
         <section>
-        <h3> 先ほどの例 </h3>
         <ul>
           <li> 対象: 集合 </li>
           <li> 射: 任意の関数 </li>
@@ -763,7 +770,7 @@ double _Complex
 
         <div align="center"><img src="fig/iso_example2.png"> </div>
         <p>
-        注: この図にあるのは同型射のうちの1つ(全部で6つ)です。同型射が1つでも存在すれば同型です。
+        注: この図にあるのは同型射のうちの1つ(全部で6つ)です。
         </p>
         </section>
 
@@ -981,6 +988,10 @@ double _Complex
 -->
 
         <section>
+        <h3> 質問タイム </h3>
+        </section>
+
+        <section>
         <h2> 双対性・積・余積 </h2>
         </section>
 
@@ -1081,16 +1092,11 @@ double _Complex
         これまで「対」とか「貼り合わせ」とか言っていましたが，普通は「直積」「直和」と呼びます。<br>
         ところでHaskellやO'Caml等の関数型言語で用いられる「代数的データ型」では直積・直和の概念が基本になっています。
         </p>
-        <pre ><code contenteditable>
--- 文字列,整数の直積
+        <pre><code data-trim class="haskell" contenteditable>
 data Person = Person { name :: String, age :: Int }
 
--- (いくつかの直積の)直和
 data Shape = Circle { radius :: Double }
            | Rectangle { height :: Double, width :: Double }
-
-
-
         </code></pre>
         </section>
 
@@ -1303,17 +1309,21 @@ data Shape = Circle { radius :: Double }
         </section>
 
         <section>
+        <h3> 質問タイム </h3>
+        </section>
+
+        <section>
         <h2> 随伴 </h2>
         </section>
 
         <section>
         <h3> 随伴とは </h3>
         <p>
-        この勉強会で今後学習する様々な抽象概念の構成法は,最終的に<span style="color:red">随伴(adjunction)</span>という概念によって統一的に理解する事が出来ます。
-        さらに随伴を通してしか目に見えてこないものもあるのでとても重要です。
+        今後扱う抽象概念の様々な構成法は,最終的に<span style="color:red">随伴(adjunction)</span>という概念によって統一的されます。
+        随伴を通してしか見えてこないものもあり,とても重要です。
         </p>
         <p>
-        本日の知識では随伴の定義を与える事は出来ませんが,今後どんな事を学ぶのか感じてもらう為にその雰囲気だけ説明します。
+        本日の知識では随伴の定義は出来ませんが,今後どんな事を学ぶのか感じてもらう為にその雰囲気だけ説明します。
         </p>
         </section>
 
@@ -1327,7 +1337,8 @@ data Shape = Circle { radius :: Double }
 
         <section>
         <div align="left" style="height:8em">
-          まず,$\langle f, g \rangle$の普遍性により$f, g$の対と$\langle f, g\rangle$が<span style="color:red">一対一に対応</span>する事が解ります。これを下図の様に表して見ましょう。横線の上と下の図式が一対一に対応するという意味です。
+          まず,$\langle f, g \rangle$の普遍性により$f, g$の対と$\langle f, g\rangle$が<span style="color:red">一対一に対応</span>する事が解ります。正確には<span style="color:red">全単射である</span>と言います。<br>
+          これを下図の様に表して見ましょう。上下の図式間に全単射があります。
         </div>
         <div align="center"> <img src="fig/product_as_adjoint1.png"> </div>
         </section>
@@ -1352,7 +1363,8 @@ data Shape = Circle { radius :: Double }
         <div align="left" style="height:8em">
         ここで,図の左右に
         $$F: X \longmapsto (X, X)\qquad G: (A, B) \longmapsto A\times B$$
-        という２つの函手が見えると思いますが,この２つの函手と射の自然な一対一対応を併せて$\mathbf{C}$から$\mathbf{C}\times\mathbf{C}$への随伴(adjunction)と言います。
+        という２つの函手が見えます。<br>
+        この函手と,射の自然な全単射からなる関係を$\mathbf{C}$から$\mathbf{C}\times\mathbf{C}$への随伴(adjunction)と言います。
         </div>
         <div align="center"> <img src="fig/product_as_adjoint3.png"> </div>
         </section>
@@ -1364,7 +1376,7 @@ data Shape = Circle { radius :: Double }
         </p>
         <div align="center"> <img src="fig/adjunction2.png"> </div>
         <p>
-        以下の$\mathbf{C}$の射と$\mathbf{D}$の射が$X$,$Y$において自然に一対一対応するとき,$F$,$G$,一対一対応を併せて$\mathbf{C}$から$\mathbf{D}$への随伴と言い,
+        以下の$\mathbf{C}$の射と$\mathbf{D}$の射が$X$,$Y$において自然に同型対応するとき,$F$,$G$,一対一対応を併せて$\mathbf{C}$から$\mathbf{D}$への随伴と言い,
         $F$を$G$の<span style="color:red">左随伴(left adjoint)</span>,$G$を$F$の<span style="color:red">右随伴(right adjoint)</span>と言います。
         </p>
         <div align="center"> <img src="fig/adjunction.png"> </div>
@@ -1403,12 +1415,13 @@ data Shape = Circle { radius :: Double }
         <h3> 第１回はここで終わります </h3>
         <p>
         お疲れ様でした。<br>
-        時間の関係上扱えなかった話題が大量にあるのですが,圏論とはどんな学問で,これからどのような事を学ぶのか,何となく分かってもらえたのではないかと思います。
+        圏論とはどんな学問で,これからどのような事を学ぶのか,何となく分かってもらえたのではないかと思います。
         次回以降は最初に戻って圏の定義から一歩ずつ進めて行きます。
         </p>
         </section>
 
         <section>
+        <h3> 質問タイム </h3>
         </section>
 			</div>
 		</div>
