@@ -201,7 +201,7 @@ struct P {
 
 
 
-例えばA,Bが浮動少数点数なら,複素数型
+例えばA,Bがdouble型なら,複素数型
 
 double _Complex
 
@@ -247,7 +247,7 @@ double _Complex
         <section>
         <h3> 定義の抽象性が重要 </h3>
         <p> より抽象的な定義はより多くの具体例を包括します。 </p>
-        <p> 具体的な内部構造に依存しない「対」の定義を考えましょう。 </p>
+        <p> データの構造に依らない「対」の定義を考えましょう。 </p>
         </section>
 
         <section>
@@ -308,7 +308,7 @@ double _Complex
 
         <section>
         <p>
-        このことは関数合成の記号$\circ$を用いると
+        この事は関数合成の記号$\circ$を用いると
         </p>
         <div align="center"> $\mathrm{first} \circ u = f \qquad \mathrm{second} \circ u = g$ </div>
         <p>
@@ -318,6 +318,7 @@ double _Complex
         <div class="fragment">
         <p>
         または「以下の図式が<span style="color:red">可換(commutative)</span>である」と言います。
+        可換性とは任意の2つの対象を結ぶ射が図式内のどのパスを合成しても等しい事を言います。
         </p>
         <div align="center"> <img src="fig/product5.png"> </div>
         </div>
@@ -392,6 +393,10 @@ double _Complex
         </p>
         <div align="center"> <img height="45%" src="fig/product8.png"> </div>
         </div>
+        </section>
+
+        <section>
+        <p> これで本当に「定義」と呼べるのか？疑問だと思いますが,後ほど説明します。 </p>
         </section>
 
         <section>
@@ -917,7 +922,7 @@ double _Complex
         <h3> 函手の例 </h3>
         <div align="left">
         $\mathbf{C}$を有限集合と包含関係からなる圏,
-        $\mathbf{D}$を自然数と大小関係からなる圏として<br>
+        $\mathbf{D}$を自然数と順序関係からなる圏として<br>
         <img height="50%" align="right" src="fig/subset_leqq.png">
         <ul>
           <li> 集合$A$に$A$の要素数 </li>
@@ -1061,7 +1066,7 @@ double _Complex
         <section>
         <h3> 余積 </h3>
         <p> 双対圏における積(product)を元の圏における<span style="color:red">余積(coproduct)</span>と言います。</p>
-        <p> 一般に,双対圏における"xxx"をもとの圏における"co-xxx"と呼びます。日本語では「余」を使います。</p>
+        <p> 一般に,双対圏における"xxx"を元の圏における"co-xxx"と呼びます。日本語では「余」を使います。</p>
         </section>
 
         <section id="coproduct">
@@ -1080,7 +1085,7 @@ double _Complex
         型と関数からなる圏における積は「対」でした。<br>
         では余積は何に対応するでしょうか？
         </p>
-        <div class="fragment" style="height:20em">
+        <div style="height:20em">
         <div align="center"> <img src="fig/either.png"> </div>
         </div>
         </section>
@@ -1102,7 +1107,7 @@ double _Complex
         <section>
         <h3> 代数的データ型 </h3>
         <p>
-        これまで「対」とか「貼り合わせ」とか言っていましたが，普通は「直積」「直和」と呼びます。<br>
+        これまで「対」とか「貼り合わせ」とか言っていましたが，普通は<span style="color:red">「直積」「直和」</span>と呼びます。<br>
         ところでHaskellやO'Caml等の関数型言語で用いられる「代数的データ型」では直積・直和の概念が基本になっています。
         </p>
         <pre><code data-trim class="haskell" contenteditable>
@@ -1268,7 +1273,7 @@ data Shape = Circle { radius :: Double }
         </section>
 
         <section>
-        <h3> 例1:$\mathrm{length}$ </h3>
+        <h3> 自然変換の例: $\mathrm{length}$ </h3>
         <div align="left">
           多相関数$\mathrm{length}$はリスト函手$[-]$から定函手$\mathrm{Int}$(全ての型を$\mathrm{Int}$型,全ての関数を$\mathrm{Int}$上の恒等関数へ移す)への自然変換
           $$ \mathrm{length} : [-] \rightarrow \mathrm{Int} $$
@@ -1278,7 +1283,7 @@ data Shape = Circle { radius :: Double }
         </section>
 
         <section>
-        <h3> 例2:単調増加数列の上の順序 </h3>
+        <h3> 自然変換の例:単調増加数列の上の順序 </h3>
         <div align="left">
         <ul>
           <li> $\mathbf{N}$: 自然数と順序$\leqq$からなる圏
@@ -1334,7 +1339,7 @@ data Shape = Circle { radius :: Double }
         <section>
         <h3> 随伴とは </h3>
         <p>
-        今後扱う抽象概念の様々な構成法は,最終的に<span style="color:red">随伴(adjunction)</span>という概念によって統一的されます。
+        今後扱う抽象概念の様々な構成法は,最終的に<span style="color:red">随伴(adjunction)</span>という概念によって統一されます。
         随伴を通してしか見えてこないものもあり,とても重要です。
         </p>
         <p>
@@ -1361,7 +1366,7 @@ data Shape = Circle { radius :: Double }
         <section>
         <div align="left" style="height:8em">
         対象の対・射の対からできる積圏(product category)という圏を用いると,
-        この事は圏$\mathbf{C}$と圏$\mathbf{C}\times\mathbf{C}$の射の対応関係として捉える事が出来ます。
+        この事は圏$\mathbf{C}$と積圏$\mathbf{C}\times\mathbf{C}$の射の対応関係として捉える事が出来ます。
         </div>
         <div align="center"> <img src="fig/product_as_adjoint2.png"> </div>
         </section>
