@@ -1059,14 +1059,16 @@ double _Complex
         <section>
         <h3> 余積 </h3>
         <p> 双対圏における積(product)を元の圏における<span style="color:red">余積(coproduct)</span>と言います。</p>
-        <p> 一般に,双対圏における"xxx"を元の圏における"co-xxx"と呼びます。日本語では「余」を使います。</p>
+        <p> 一般に,双対な概念を表す場合に接頭辞"co-"を使います。日本語では「余」を使います。</p>
         </section>
 
         <section id="coproduct">
         <h3> 余積の定義</h3>
         <div class="definition">
         <p>
-        対象$Q$が対象$A$,$B$の積であるということは,射$q_1: A\rightarrow Q$, $q_2: B\rightarrow Q$が存在し,任意の対象$X$と射$f: A\rightarrow X$, $g: B\rightarrow X$に対して,以下の図式が可換となるような$u: Q\rightarrow X$が唯一つ存在する事である。
+        対象$A$,$B$の余積とは対象$Q$,射$q_1: A\rightarrow Q$，$q_2: B\rightarrow Q$からなり,
+        任意の対象$X$と任意の射$f: A\rightarrow X$, $g: B\rightarrow X$に対して，以下の図式が可換となるような
+        $u: Q\rightarrow X$が唯一つ存在するものである。
         </p>
         <div align="center"> <img src="fig/coproduct.png"> </div>
         </div>
@@ -1091,7 +1093,7 @@ double _Complex
           <li> $Q$は$A$,$B$を「貼りあわせた型」である。 </li>
           <li> $A$からは$\mathrm{left}$という関数で値を埋め込む。 </li>
           <li> $B$からは$\mathrm{right}$という関数で値を埋め込む。 </li>
-          <li> $u$は$\mathrm{left}$,$\mathrm{right}$のどちらで作られたかによって,$f$,$g$に値を「振り分ける」関数である。</li>
+          <li> $u$は$\mathrm{left}$,$\mathrm{right}$のどちらで作られたかによって$f$,$g$に値を「振り分ける」関数である。</li>
         </ul>
         <img src="fig/either2.png">
         </p>
@@ -1116,10 +1118,7 @@ data Shape = Circle { radius :: Double }
         <section>
         <h3> 同型を除いて一意 </h3>
         <p>
-        任意の圏$\mathbf{C}$の対象$A$,$B$についてその積が存在するなら,それらは全て同型である。このことを$A$,$B$の積は<span style="color:red">同型を除いて一意である(unique up to isomorphism)</span>という。
-        </p>
-        <p class="fragment">
-        また,$\mathbf{C}$での余積は$\mathbf{C^{\mathrm{op}}}$での積であるから余積も同型を除いて一意である。
+        任意の圏$\mathbf{C}$の対象$A$,$B$についてその積が存在するなら,それらは全て同型です。このことを$A$,$B$の積は<span style="color:red">同型を除いて一意である(unique up to isomorphism)</span>と言います。
         </p>
         </section>
 
@@ -1173,13 +1172,14 @@ data Shape = Circle { radius :: Double }
         </section>
 
         <section>
-        <h3> 積・余積の表記 </h3>
-        <p>
-        積・余積は複数存在しても全て同型なので,それらを区別する言葉・記号は特に必要有りませんから以下の様に表記できます。
+        <h3> 積の表記 </h3>
+        <p style="font-size:90%">
+        $A$,$B$の積は全て同型なので,特定の一つを指定しなくても様々な議論を矛盾なく進める事が出来ます。
+        そこで今後は下の表記を使います。
         </p>
         <div class="definition">
         <ul>
-          <li> $A$,$B$の任意の積を$A\times B$と表す。 </li>
+          <li> $A$,$B$の積を$A\times B$と表す。 </li>
           <li> $f$, $g$から一意に定まる$A\times B$への射を
           $ \langle f, g \rangle$
           と表す。</li>
@@ -1189,25 +1189,20 @@ data Shape = Circle { radius :: Double }
         </section>
 
         <section>
-        <h3> 積・余積の表記 </h3>
-        <p>
-        積・余積は複数存在しても全て同型なので,それらを区別する言葉・記号は特に必要有りませんから以下の様に表記できます。
+        <h3> 余積の表記 </h3>
+        <p style="font-size:90%">
+        余積は双対圏での積なので自動的に「余積も同型を除いて一意」である事が言えます。
+        従って積の場合と同様に下の表記を使う事が出来ます。
         </p>
         <div class="definition">
         <ul>
-          <li> $A$,$B$の任意の余積を$A + B$と表す。 </li>
+          <li> $A$,$B$の余積を$A + B$と表す。 </li>
           <li> $f$, $g$から一意に定まる$A+ B$からの射を
           $ [f, g] $
           と表す。</li>
         </ul>
         <div align="center"> <img height="45%" src="fig/coproduct2.png"> </div>
         </div>
-        </section>
-
-        <section>
-        <p>
-        今回紹介した積・余積のように圏論の言葉を使って定義される抽象的な構造には様々なものがあります。次回以降詳しく見ていきます。
-        </p>
         </section>
 
         <section>
