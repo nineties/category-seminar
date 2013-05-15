@@ -325,22 +325,18 @@ double _Complex
         $P$が対でなくても図式は可換になり得ます。例えば$u$が余分なデータを付け足し$\mathrm{first}$,$\mathrm{second}$がそれを捨てる場合などです。
         </p>
         <p class="fragment">
-        余分なデータがあれば,それをどう生成するか選択肢があるので$u$は唯一に定まりません。
+        余分なデータがあれば,その生成方法がいくつかあるので$u$は唯一に定まりません。
         従って,$f$,$g$に対して<span style="color:red">$u$が唯一である</span>事を要請する必要がありそうです。
         </p>
-        </section>
-
-        <section>
-        <p> 以上で「対」という概念が定義されます。この事は後ほどまた説明します。 </p>
         </section>
 
         <section>
         <h3> 「対」の定義 </h3>
         <div class="definition">
         <p style="font-size:90%">
-        型$P$が型$A$,$B$の対であるという事は，<span style="color:transparent">関数$\mathrm{first}: P\rightarrow A$，$\mathrm{second}: P\rightarrow B$が存在し
+        型$A$,$B$の対とは<span style="color:transparent">型$P$,関数$\mathrm{first}: P\rightarrow A$，$\mathrm{second}: P\rightarrow B$からなり,
         任意の型$X$と任意の関数$f: X\rightarrow A$, $g: X\rightarrow B$に対して，以下の図式が可換となるような
-        $u: X\rightarrow P$が唯一つ存在する事である。</span>
+        $u: X\rightarrow P$が唯一つ存在するものである。</span>
         </p>
         <div align="center"> <img height="45%" src="fig/product5-2.png"> </div>
         </div>
@@ -350,9 +346,9 @@ double _Complex
         <h3> 「対」の定義 </h3>
         <div class="definition">
         <p style="font-size:90%">
-        型$P$が型$A$,$B$の対であるという事は，関数$\mathrm{first}: P\rightarrow A$，$\mathrm{second}: P\rightarrow B$が存在し
+        型$A$,$B$の対とは型$P$,関数$\mathrm{first}: P\rightarrow A$，$\mathrm{second}: P\rightarrow B$からなり,
         <span style="color:transparent">任意の型$X$と任意の関数$f: X\rightarrow A$, $g: X\rightarrow B$に対して，以下の図式が可換となるような
-        $u: X\rightarrow P$が唯一つ存在する事である。</span>
+        $u: X\rightarrow P$が唯一つ存在するものである。</span>
         </p>
         <div align="center"> <img height="45%" src="fig/product5-3.png"> </div>
         </div>
@@ -362,9 +358,9 @@ double _Complex
         <h3> 「対」の定義 </h3>
         <div class="definition">
         <p style="font-size:90%">
-        型$P$が型$A$,$B$の対であるという事は，関数$\mathrm{first}: P\rightarrow A$，$\mathrm{second}: P\rightarrow B$が存在し
+        型$A$,$B$の対とは型$P$,関数$\mathrm{first}: P\rightarrow A$，$\mathrm{second}: P\rightarrow B$からなり,
         任意の型$X$と任意の関数$f: X\rightarrow A$, $g: X\rightarrow B$に対して，<span style="color:transparent">以下の図式が可換となるような
-        $u: X\rightarrow P$が唯一つ存在する事である。</span>
+        $u: X\rightarrow P$が唯一つ存在するものである。</span>
         </p>
         <div align="center"> <img height="45%" src="fig/product5-4.png"> </div>
         </div>
@@ -374,24 +370,22 @@ double _Complex
         <h3> 「対」の定義 </h3>
         <div class="definition">
         <p style="font-size:90%">
-        型$P$が型$A$,$B$の対であるという事は，関数$\mathrm{first}: P\rightarrow A$，$\mathrm{second}: P\rightarrow B$が存在し
+        型$A$,$B$の対とは型$P$,関数$\mathrm{first}: P\rightarrow A$，$\mathrm{second}: P\rightarrow B$からなり,
         任意の型$X$と任意の関数$f: X\rightarrow A$, $g: X\rightarrow B$に対して，以下の図式が可換となるような
-        $u: X\rightarrow P$が唯一つ存在する事である。
+        $u: X\rightarrow P$が唯一つ存在するものである。
         </p>
         <div align="center"> <img height="45%" src="fig/product5.png"> </div>
         </div>
         </section>
 
-        <section style="color:red">
+        <section>
         <h3> 普遍性による定義 </h3>
-        <div class="definition">
         <p style="font-size:90%">
-        <span style="color:lightgrey">型$P$が型$A$,$B$の対であるという事は，関数$\mathrm{first}: P\rightarrow A$，$\mathrm{second}: P\rightarrow B$が存在し</span>
-        任意の<span style="color:lightgrey">型$X$</span>と任意の<span style="color:lightgrey">関数$f: X\rightarrow A$, $g: X\rightarrow B$</span>に対して，<span style="color:lightgrey">以下の図式</span>が可換となるような<span style="color:lightgrey">
-        $u: X\rightarrow P$</span>が唯一つ存在する事<span style="color:lightgrey">である。</span>
+        この定義では,全ての$f,g$が$P$を経由して$\mathrm{first},\mathrm{second}$によって<span style="color:red">一意的に分解</span>される事を要請しています。
+        このような性質を$P$,$\mathrm{first}$,$\mathrm{second}$の<span style="color:red">普遍性</span>と言います。<br>
+        後で説明しますがこのように定義すると$P$が(同型という対応を除いて)<span style="color:red">一意的に定義されます</span>。
         </p>
-        <div align="center"> <img height="45%" src="fig/product8.png"> </div>
-        </div>
+        <div align="center"> <img height="45%" src="fig/product5.png"> </div>
         </section>
 
         <section>
