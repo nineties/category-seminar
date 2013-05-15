@@ -96,9 +96,8 @@
         <h3> この会について </h3>
         <ul>
           <li> <span style="color:red">圏論(category theory)</span>を題材にいろんなことを学びます。</li>
-          <li> 計算機科学関係の話題が多めになると思います。</li>
           <li> 分かり易さを重視して初歩的な例を多用します。</li>
-          <li> 何らかの関数型言語に触れていた方が授業をより楽しめると思います。資料中ではHaskellを主に使います。 </li>
+          <li> 関数型言語の経験がある方が授業をより楽しめると思います。資料中では主にHaskellを使います。 </li>
           <li> この資料は<a href="http://nineties.github.com/category-seminar/">http://nineties.github.com/category-seminar</a>に置いてあります。</li>
         </ul>
         </section>
@@ -119,7 +118,7 @@
         <h3> 参考書 </h3>
         <ul>
           <li> 資料中の日本語表現はS.マックレーン著 三好博之/高木理訳「圏論の基礎」に倣います。 </li>
-          <li> 数学専攻者向けに書かれているので,初学用にはお薦めしません。</li>
+          <li> 数学専攻者向けです。 </li>
         </ul>
         <div align="center"><img height="50%" src="http://images-jp.amazon.com/images/P/4621063243" alt="圏論の基礎"></div>
         </section>
@@ -131,7 +130,7 @@
         <section>
         <h3> 第1回の内容</h3>
         <p>
-        初回は「圏論とは一体何なのか？」「役に立つのか？」が何となく解るように,一部の重要な題材をピックアップして紹介します。
+        初回は「圏論とは一体何なのか？」がなんとなく解るように,一部の重要な題材をピックアップして紹介します。
         </p>
         </section>
 
@@ -205,7 +204,7 @@ struct P {
 
 double _Complex
 
-だって対と見なせる。
+も対と見なせる。
 
 
 
@@ -217,7 +216,7 @@ double _Complex
 
 (a << 16) | b
 
-みたいにしても良い。
+も対と見なせる。
 
 
 
@@ -225,7 +224,7 @@ double _Complex
 
 
 
-つまり,対の具体例なんて"いくらでもある"のだけど, これらの共通点は何？
+つまり対の具体例なんて"いくらでもある"のだけど, これらの共通点は何？
 
 
 
@@ -240,7 +239,7 @@ double _Complex
         <h3> 定義が必要! </h3>
         <p>
         抽象的な概念の具体例を挙げる事はいくらでも可能ですが,<span style="color:red">定義</span>を定めなければ前に進めません。<br>
-        「$X$とは$A$とか$B$とか$C$みたいなものである。」という曖昧な理解のまま歩を進めるとその内よく分からなくなります。
+        「$X$とは$A$とか$B$みたいなものである。」という曖昧な理解のままではその内よく分からなくなります。
         </p>
         </section>
 
@@ -252,14 +251,11 @@ double _Complex
 
         <section>
         <p>
-        まず$P$が$A$,$B$の対であるならば，$P$型のデータから$A$,$B$型のデータを得る方法があるはずです。
-        </p>
-        <p class="fragment">
-        つまり$P$とは$A$,$B$へ特定の関数($\mathrm{first}$と$\mathrm{second}$とします。)を備える型です。
+        まず$P$はそれから$A$,$B$型のデータを得る特定の関数($\mathrm{first}$と$\mathrm{second}$とします。)を備えているはずです。
         </p>
         <div class="fragment">
         <p>
-        この状況を以下のように<span style="color:red">図式(diagram)</span>で表現してみます。
+        この事は,以下のような<span style="color:red">図式(diagram)</span>で表現できます。
         </p>
 
         <div align="center"> <img src="fig/product1.png"> </div>
@@ -273,28 +269,28 @@ double _Complex
 
         <section>
         <p>
-        ある型からA,B型への関数も無数に存在し得ます。$\mathrm{first}$,$\mathrm{second}$の特徴付けが必要です。
+        ある型からA,B型への関数も無数に存在し得ますので$\mathrm{first}$,$\mathrm{second}$の特徴付けが必要です。
         </p>
         <div align="center"> <img src="fig/product3.png"> </div>
         </section>
 
         <section>
         <div align="left" style="height:3em">
-        そこで，任意の型$X$と任意の関数$f: X\rightarrow A$，$g: X\rightarrow B$に対して以下のような図式を考えます。
+        そこで，任意の型$X$と任意の関数$f: X\rightarrow A$，$g: X\rightarrow B$に対して以下の図式を考えます。
         </div>
         <div align="center"> <img src="fig/product4.png"></div>
         </section>
 
         <section>
         <div align="left" style="height:3em">
-        $X$から$A$,$B$の値を作れるなら，それらの値の対を$X$から作る関数$u$が必ず存在するはずです。
+        $X$から$A$,$B$の値を作れるなら，それらの値を対にする関数$u$が存在するはずです。
         </div>
         <div align="center"> <img src="fig/product5.png"></div>
         </section>
 
         <section>
         <div align="left" style="height:3em">
-        このとき，$u$で対を作って$\mathrm{first}$で取り出す事は，$f$と等しく
+        このとき，$u$で対にして$\mathrm{first}$で取り出す事は，$f$と等しく
         </div>
         <div align="center"> <img src="fig/product6.png"> </div>
         </section>
@@ -312,7 +308,7 @@ double _Complex
         </p>
         <div align="center"> $\mathrm{first} \circ u = f \qquad \mathrm{second} \circ u = g$ </div>
         <p>
-        と表す事が出来ます。
+        と表す事ができます。
         </p>
 
         <div class="fragment">
@@ -326,12 +322,17 @@ double _Complex
         <section>
         <h3> $u$の唯一性 </h3>
         <p>
+        $P$が対でなくても図式は可換になり得ます。例えば$u$が余分なデータを付け足し$\mathrm{first}$,$\mathrm{second}$がそれを捨てる場合などです。
         $u$が$A$,$B$以外の余分なデータを生成する(つまり$P$が対じゃない)としても,$\mathrm{first}$,$\mathrm{second}$がそれを捨てれば,図式は可換になってしまいます。
         </p>
         <p class="fragment">
-        余分なデータがあれば,そのデータをどう生成するか選択肢があるので,$u$は唯一に定まりません。
-        つまり,<span style="color:red">$u$が$f$,$g$に対して唯一である</span>事を要請すれば,$P$は対だと言えそうです。
+        余分なデータがあれば,それをどう生成するか選択肢があるので$u$は唯一に定まりません。
+        従って,$f$,$g$に対して<span style="color:red">$u$が唯一である</span>事を要請する必要がありそうです。
         </p>
+        </section>
+
+        <section>
+        <p> 以上で「対」という概念が定義されます。この事は後ほどまた説明します。 </p>
         </section>
 
         <section>
@@ -392,10 +393,6 @@ double _Complex
         </p>
         <div align="center"> <img height="45%" src="fig/product8.png"> </div>
         </div>
-        </section>
-
-        <section>
-        <p> これで本当に「定義」と呼べるのか？疑問だと思いますが,後ほど説明します。 </p>
         </section>
 
         <section>
@@ -552,7 +549,7 @@ double _Complex
 
         <section>
         <p>
-        一見すると無関係な3つの概念が,同じ言葉で説明出来る事を見ました。
+        一見すると無関係な3つの概念が,同じ言葉で説明できる事を見ました。
         </p>
         <div align="center">
         <table border="3">
@@ -948,7 +945,7 @@ double _Complex
         <section>
         <h3> 函手は図式である </h3>
         <div align="left" style="height:5em">
-        函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすことも出来ます。
+        函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすこともできます。
         (注:函手と図式が一対一に対応するという意味ではありません。)
         </div>
 
@@ -958,7 +955,7 @@ double _Complex
         <section>
         <h3> 函手は図式である </h3>
         <div align="left" style="height:5em">
-        函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすことも出来ます。
+        函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすこともできます。
         </div>
         <div align="center"><img src="fig/functor_as_diagram2.png"> </div>
         </section>
@@ -966,7 +963,7 @@ double _Complex
         <section>
         <h3> 函手は図式である </h3>
         <div align="left" style="height:5em">
-        函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすことも出来ます。
+        函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすこともできます。
         </div>
         <div align="center"><img src="fig/functor_as_diagram3.png"> </div>
         </section>
@@ -974,7 +971,7 @@ double _Complex
         <section>
         <h3> 函手は図式である </h3>
         <div align="left" style="height:5em">
-        函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすことも出来ます。
+        函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすこともできます。
         </div>
         <div align="center"><img src="fig/functor_as_diagram4.png"> </div>
         </section>
@@ -982,7 +979,7 @@ double _Complex
         <section>
         <h3> 函手は図式である </h3>
         <div align="left" style="height:5em">
-        函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすことも出来ます。
+        函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすこともできます。
         </div>
         <div align="center"><img src="fig/functor_as_diagram5.png"> </div>
         </section>
@@ -990,7 +987,7 @@ double _Complex
         <section>
         <h3> 函手は図式である </h3>
         <div align="left" style="height:5em">
-        函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすことも出来ます。
+        函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすこともできます。
         </div>
         <div align="center"><img src="fig/functor_as_diagram6.png"> </div>
         </section>
@@ -998,7 +995,7 @@ double _Complex
         <section>
         <h3> 函手は図式である </h3>
         <div align="left" style="height:5em">
-        函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすことも出来ます。
+        函手$F: \mathbf{C} \rightarrow \mathbf{D}$を$\mathbf{D}$の中にある$\mathbf{C}$と同じ形の図式と見なすこともできます。
         </div>
         <div align="center"><img src="fig/functor_as_diagram7.png"> </div>
         </section>
@@ -1181,7 +1178,7 @@ data Shape = Circle { radius :: Double }
         <section>
         <h3> 積・余積の表記 </h3>
         <p>
-        積・余積は複数存在しても全て同型なので,それらを区別する言葉・記号は特に必要有りませんから以下の様に表記出来ます。
+        積・余積は複数存在しても全て同型なので,それらを区別する言葉・記号は特に必要有りませんから以下の様に表記できます。
         </p>
         <div class="definition">
         <ul>
@@ -1197,7 +1194,7 @@ data Shape = Circle { radius :: Double }
         <section>
         <h3> 積・余積の表記 </h3>
         <p>
-        積・余積は複数存在しても全て同型なので,それらを区別する言葉・記号は特に必要有りませんから以下の様に表記出来ます。
+        積・余積は複数存在しても全て同型なので,それらを区別する言葉・記号は特に必要有りませんから以下の様に表記できます。
         </p>
         <div class="definition">
         <ul>
@@ -1254,8 +1251,8 @@ data Shape = Circle { radius :: Double }
         </p>
 
         <p class="fragment">
-        一般化して,函手$F:\mathbf{C}\rightarrow\mathbf{D}$を<span style="color:red">$\mathbf{C}$の対象をパラメータに持つ概念</span>と思う事が出来ます。
-        すると,概念$F$と概念$G$の対応が自然であるというのは<span style="color:red">対応関係がパラメータの構造に依存していない事</span>だと考える事が出来ます。
+        一般化して,函手$F:\mathbf{C}\rightarrow\mathbf{D}$を<span style="color:red">$\mathbf{C}$の対象をパラメータに持つ概念</span>と思う事ができます。
+        すると,概念$F$と概念$G$の対応が自然であるというのは<span style="color:red">対応関係がパラメータの構造に依存していない事</span>だと考える事ができます。
         </p>
         </section>
 
@@ -1342,7 +1339,7 @@ data Shape = Circle { radius :: Double }
         随伴を通してしか見えてこないものもあり,とても重要です。
         </p>
         <p>
-        本日の知識では随伴の定義は出来ませんが,今後どんな事を学ぶのか感じてもらう為にその雰囲気だけ説明します。
+        本日の知識では随伴の定義はできませんが,今後どんな事を学ぶのか感じてもらう為にその雰囲気だけ説明します。
         </p>
         </section>
 
@@ -1365,7 +1362,7 @@ data Shape = Circle { radius :: Double }
         <section>
         <div align="left" style="height:8em">
         対象の対・射の対からできる積圏(product category)という圏を用いると,
-        この事は圏$\mathbf{C}$と積圏$\mathbf{C}\times\mathbf{C}$の射の対応関係として捉える事が出来ます。
+        この事は圏$\mathbf{C}$と積圏$\mathbf{C}\times\mathbf{C}$の射の対応関係として捉える事ができます。
         </div>
         <div align="center"> <img src="fig/product_as_adjoint2.png"> </div>
         </section>
