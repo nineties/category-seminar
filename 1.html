@@ -1236,13 +1236,13 @@ data Shape = Circle { radius :: Double }
         <section>
         <h3> 自然性とは </h3>
         <p>
-        リスト型$[A]$はリスト函手$[-]$で型$A$から作られるのでした。<br>
+        リスト型$[A]$はリスト函手$[-]$で型$A$から作られるのでした。
         つまり,リストとは要素の型というパラメータを持つ型(多相型)です。
         </p>
 
         <p class="fragment">
         一般化して,函手$F:\mathbf{C}\rightarrow\mathbf{D}$を<span style="color:red">$\mathbf{C}$の対象をパラメータに持つ概念</span>と思う事ができます。
-        すると,概念$F$と概念$G$の対応が自然であるというのは<span style="color:red">対応関係がパラメータの構造に依存していない事</span>だと考える事ができます。
+        すると,概念$F$と概念$G$の対応が自然であるというのは<span style="color:red">対応関係がパラメータの構造に依存しない事</span>だと考える事ができます。
         </p>
         </section>
 
@@ -1252,7 +1252,8 @@ data Shape = Circle { radius :: Double }
         <div align="left">
           函手$F, G: \mathbf{C}\rightarrow\mathbf{D}$間の<span style="color:red">自然変換(<span style="font-size:90%">natural transformation</span>)</span>
         $$ \vartheta: F \rightarrow G$$
-        とは,$\mathbf{D}$の射$\vartheta_X: F(X) \rightarrow G(X)$の集まりであり,任意の$\mathbf{C}$の射$f: A\rightarrow B$に対して以下の図式が可換であるもの。
+        とは,$\mathbf{D}$の射$\vartheta_X: F(X) \rightarrow G(X)$の集合であり,任意の$\mathbf{C}$の射$f: A\rightarrow B$に対して以下の図式が可換であるもの。
+        とは,$\mathbf{D}$の射$\vartheta_X: F(X) \rightarrow G(X)$の集合であり,任意の$\mathbf{C}$の射$f: A\rightarrow B$に対して下図が可換であるもの。
         </div>
         <div align="center"> <img height="50%" src="fig/natural_transformation.png"> </div>
         </div>
@@ -1261,7 +1262,7 @@ data Shape = Circle { radius :: Double }
         <section>
         <h3> 自然変換の例: $\mathrm{length}$ </h3>
         <div align="left">
-          多相関数$\mathrm{length}$はリスト函手$[-]$から定函手$\mathrm{Int}$(全ての型を$\mathrm{Int}$型,全ての関数を$\mathrm{Int}$上の恒等関数へ移す)への自然変換
+          $\mathrm{length}$はリスト函手$[-]$から定数函手$\mathrm{Int}$(全ての型を$\mathrm{Int}$型,全ての関数を$\mathrm{Int}$上の恒等関数へ移す)への自然変換
           $$ \mathrm{length} : [-] \rightarrow \mathrm{Int} $$
           となっています。
         </div>
@@ -1275,12 +1276,12 @@ data Shape = Circle { radius :: Double }
           <li> $\mathbf{N}$: 自然数と順序$\leqq$からなる圏
           <li> $\mathbf{R}$: 実数と順序$\leqq$からなる圏
         </ul><br>
-        とすると,函手$a: \mathbf{N}\rightarrow\mathbf{R}$とは(広義)単調増加数列
+        とすると,函手$a: \mathbf{N}\rightarrow\mathbf{R}$とは単調増加数列
         $$ a_0 \leqq a_1 \leqq a_2 \leqq \cdots $$
         の事です。<br>
-        すると2つの単調増加数列$a,b$について
+        この時,2つの単調増加数列$a,b$について
         $$ \text{全ての$i = 0,1,2,\cdots$について}\ a_i \leqq b_i$$
-        であるとき,この関係が自然変換となります。
+        ならば,この関係が自然変換となります。
         </div>
         </section>
 
@@ -1326,7 +1327,7 @@ data Shape = Circle { radius :: Double }
         <h3> 随伴とは </h3>
         <p>
         今後扱う抽象概念の様々な構成法は,最終的に<span style="color:red">随伴(adjunction)</span>という概念によって統一されます。
-        随伴を通してしか見えてこないものもあり,とても重要です。
+        随伴を通してしか見えてこないものもありとても重要です。
         </p>
         <p>
         本日の知識では随伴の定義はできませんが,今後どんな事を学ぶのか感じてもらう為にその雰囲気だけ説明します。
@@ -1344,7 +1345,7 @@ data Shape = Circle { radius :: Double }
         <section>
         <div align="left" style="height:8em">
           まず,$\langle f, g \rangle$の普遍性により$f, g$の対と$\langle f, g\rangle$が<span style="color:red">一対一に対応</span>する事が解ります。正確には<span style="color:red">全単射がある</span>と言います。<br>
-          これを下図の様に表して見ましょう。上下の図式間に全単射があります。
+          これを下図の様に表して見ましょう。
         </div>
         <div align="center"> <img src="fig/product_as_adjoint1.png"> </div>
         </section>
@@ -1352,7 +1353,7 @@ data Shape = Circle { radius :: Double }
         <section>
         <div align="left" style="height:8em">
         対象の対・射の対からできる積圏(product category)という圏を用いると,
-        この事は圏$\mathbf{C}$と積圏$\mathbf{C}\times\mathbf{C}$の射の対応関係として捉える事ができます。
+        この事は積圏$\mathbf{C}\times\mathbf{C}$と圏$\mathbf{C}$の射の対応関係として捉える事ができます。
         </div>
         <div align="center"> <img src="fig/product_as_adjoint2.png"> </div>
         </section>
