@@ -105,11 +105,11 @@
         <section>
         <h3> 参考書 </h3>
         <ul>
-          <li> 私はSteve Awodey著「Category Theory」から読み始めました。</li>
-          <li> 非数学専攻者向けに書かれています。</li>
-          <a href="http://www.andrew.cmu.edu/course/80-413-713/notes/">
+          <li> 私はSteve Awodey著「Category Theory」で学びました。</li>
+          <li> 数学を専攻していない人でも読めるように書かれています。</li>
+          <li> pdf: <a href="http://www.andrew.cmu.edu/course/80-413-713/notes/">
           http://www.andrew.cmu.edu/course/80-413-713/notes/
-          </a>
+          </a> </li>
         </ul>
         <div align="center"><img height="50%" src="http://images-jp.amazon.com/images/P/0199237182" alt="Category Theory"></div>
         </section>
@@ -130,7 +130,7 @@
         <section>
         <h3> 第1回の内容</h3>
         <p>
-        初回は「圏論とはどのような学問なのか？」がなんとなく解るように,一部の重要な題材をピックアップして紹介します。
+        初回は「圏論とはどのような学問なのか？」がなんとなく解るように,一部の重要な題材をピックアップしてざっと紹介します。
         </p>
         </section>
 
@@ -153,16 +153,6 @@ type P = (A, B)
 data P = Pair A B
 
 など。
-
-
-
-
-
-
-
-Lispならドット対そのもの
-
-(A型のデータ . B型のデータ)
 
 
 
@@ -224,7 +214,7 @@ double _Complex
 
 
 
-つまり対の具体例なんて"いくらでもある"のだけど, これらの共通点は何？
+このように対の具体例は"いくらでもある"のだけど結局対とは何？
 
 
 
@@ -251,7 +241,8 @@ double _Complex
 
         <section>
         <p>
-        まず$P$はそれから$A$,$B$型のデータを得る特定の関数($\mathrm{first}$と$\mathrm{second}$とします。)を備えているはずです。
+        まず$P$はそれから$A$,$B$型のデータを得る特定の関数を備えているはずです。
+        これらを$\mathrm{first}$と$\mathrm{second}$と呼ぶことにします。
         </p>
         <div class="fragment">
         <p>
@@ -520,7 +511,7 @@ double _Complex
         </section>
 
         <section>
-        <h3> 素朴な定義では共通性が見えない </h3>
+        <h3> 素朴な定義では共通性が見えないが </h3>
         <p style="height:5em; border:3px solid #C0C0C0; padding:1em">
         $A$,$B$の共通部分とは$A$,$B$の両方に含まれる要素全てからなる集合である。
         </p>
@@ -559,11 +550,11 @@ double _Complex
         <section>
         <h3> 抽象化の力 </h3>
         <p>
-        概念を「内的な構造」ではなく「外的な関係」によって特徴付ける事によって
+        概念を「内部の構造」ではなく「外部との関係」によって特徴付ける事によって
         </p>
         <ul>
-          <li> 概念の背後にある,本質的な構造が見えてくる。
-          <li> 概念から概念への,強力なアナロジーが可能になる。
+          <li> 概念の背後にある本質的な性質が見えてくる。 </li>
+          <li> 概念から概念への強力なアナロジーが可能になる。 </li>
         </ul>
         <p>
         という事が解ります。
@@ -904,7 +895,7 @@ double _Complex
         例えば,下図の上の図式が可換ならば下の図式も可換です。
         </p>
         <div align="center"><img height="50%" src="fig/inverse_is_preserved.png"> </div>
-        <p>
+        <p class="fragment">
           つまり,逆射も保たれますし同型性も保たれます。
           $$ F(f^{-1}) = F(f)^{-1} \qquad A\cong B \Rightarrow F(A) \cong F(B)$$
         </p>
@@ -1190,7 +1181,7 @@ data Shape = Circle { radius :: Double }
         <section>
         <h3> 余積の表記 </h3>
         <p style="font-size:90%">
-        余積は双対圏での積なので自動的に「余積も同型を除いて一意」である事が言えます。従って同様に下の表記を使う事が出来ます。
+        余積は双対圏での積なので自動的に「余積も同型を除いて一意」であると言えます。従って同様に下の表記を使う事が出来ます。
         </p>
         <div class="definition">
         <ul>
@@ -1252,7 +1243,6 @@ data Shape = Circle { radius :: Double }
         <div align="left">
           函手$F, G: \mathbf{C}\rightarrow\mathbf{D}$間の<span style="color:red">自然変換(<span style="font-size:90%">natural transformation</span>)</span>
         $$ \vartheta: F \rightarrow G$$
-        とは,$\mathbf{D}$の射$\vartheta_X: F(X) \rightarrow G(X)$の集合であり,任意の$\mathbf{C}$の射$f: A\rightarrow B$に対して以下の図式が可換であるもの。
         とは,$\mathbf{D}$の射$\vartheta_X: F(X) \rightarrow G(X)$の集合であり,任意の$\mathbf{C}$の射$f: A\rightarrow B$に対して下図が可換であるもの。
         </div>
         <div align="center"> <img height="50%" src="fig/natural_transformation.png"> </div>
@@ -1269,6 +1259,7 @@ data Shape = Circle { radius :: Double }
         <div align="center"> <img height="50%" src="fig/length.png"> </div>
         </section>
 
+        <!--
         <section>
         <h3> 自然変換の例:単調増加数列の順序 </h3>
         <div align="left">
@@ -1284,6 +1275,7 @@ data Shape = Circle { radius :: Double }
         ならば,この関係が自然変換となります。
         </div>
         </section>
+        -->
 
         <section>
         <h3> 函手圏 </h3>
@@ -1299,7 +1291,7 @@ data Shape = Circle { radius :: Double }
           <li> 射: 自然変換
         </ul>
         <p>
-        という圏を作る事ができます。これを<span style="color:red">函手圏(functor category)</span>と言います。詳しくは後の回に説明します。
+        という圏を作る事ができます。これを<span style="color:red">函手圏(functor category)</span>と言います。ちゃんとした定義は後の回にやります。
         </p>
         </div>
         <p class="fragment">
@@ -1308,7 +1300,7 @@ data Shape = Circle { radius :: Double }
         </section>
 
         <section>
-        <div style="font-size:150%">
+        <div align="left" style="font-size:150%">
           モナドは単なる<span style="color:red">自己関手の圏</span>における<br>
           モノイド対象だよ。何か問題でも？
         </div>
