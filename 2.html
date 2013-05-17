@@ -39,6 +39,17 @@
       });
     </script>
 
+    <style type="text/css">
+      <!--
+      div.definition {
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 4px solid #333333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      --> 
+    </style>
+
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -55,7 +66,7 @@
         <section>
         <h1>圏論勉強会<br>第2回</h1>
         <h3>@ワークスアプリケーションズ</h3>
-        <small> 中村晃一 <br> 2013年5月16日</small>
+        <small> 中村晃一 <br> 2013年5月23日</small>
         </section>
 
         <section>
@@ -71,16 +82,14 @@
         <h3> この会について </h3>
         <ul>
           <li> <span style="color:red">圏論(category theory)</span>を題材にいろんなことを学びます。</li>
-          <li> 計算機科学関係の話題が多めになると思います。分かり易さを重視して初歩的な例を多用します。</li>
-          <li> 毎週1回，全12週くらいの予定です。</li>
-          <li> 何らかの関数型言語に触れていた方が今後の授業をより楽しめると思います。資料中ではHaskellを使う事が多いです。</li>
-          <li> 他の聴衆の為にもなるので,質問・コメントを歓迎します。</li>
-          <li> この資料は<a href="http://github.com/nineties/category-seminar">http://github.com/nineties/category-seminar</a>に置いてあります。</li>
+          <li> 分かり易さを重視して初歩的な例を多用します。</li>
+          <li> 関数型言語の経験がある方がより楽しめると思います。資料中では主にHaskellを使います。 </li>
+          <li> この資料は<a href="http://nineties.github.com/category-seminar/">http://nineties.github.com/category-seminar</a>に置いてあります。</li>
         </ul>
         </section>
 
         <section>
-        <h2> 第２回:圏と函手</h2>
+        <h2> 第２回:様々な圏と函手</h2>
         </section>
 
         <section>
@@ -99,8 +108,9 @@
         <h2> 定義の復習 </h2>
         </section>
 
-        <section>
+        <section id="category">
         <h3> 圏の定義 </h3>
+        <div class="definition">
         <p>
         <span style="color:red">圏(category)</span>とは
         </p>
@@ -112,24 +122,28 @@
         <p>
         からなり,以後の条件を全て満たすものである。
         </p>
+        </div>
         </section>
 
         <section>
+        <div class="definition">
         <p>
         任意の射$f$には
         </p>
         <ul>
-          <li> 域(domain): $\mathrm{dom}(f)$ </li>
-          <li> 余域(codomain): $\mathrm{cod}(f)$ </li>
+          <li> ドメイン(domain): $\mathrm{dom}(f)$ </li>
+          <li> コドメイン(codomain): $\mathrm{cod}(f)$ </li>
         </ul>
         <p>
         という２つの対象が備わる。<br>
         $\mathrm{dom}(f) = A$,$\mathrm{cod}(f) = B$である事を $ f: A\rightarrow B$ と表す。
         </p>
         <div align="center"> <img src="fig/category1.png"> </div>
+        </div>
         </section>
 
         <section>
+        <div class="definition">
         <p> 射$f:A\rightarrow B$,$g:B\rightarrow C$が存在するならば, </p>
         <ul>
           <li> 合成射(composite)  $ g\circ f: A \rightarrow C $ </li>
@@ -138,24 +152,29 @@
         も存在する。
         </p>
         <div align="center"> <img src="fig/category2.png"> </div>
+        </div>
         </section>
 
         <section>
-        <p> 任意の射$f: A \rightarrow B$, $g: B \rightarrow C$, $h: C \rightarrow D$に対して<br> 結合律(associative law) </p>
+        <div class="definition">
+        <p> 任意の射$f: A \rightarrow B$, $g: B \rightarrow C$, $h: C \rightarrow D$に対して 結合律(associative law) </p>
         <div align="center"> $ (h\circ g)\circ f = h \circ (g\circ f)$ </div>
         <p> が成り立つ。すなわち,下図が可換である。</p>
         <div align="center"> <img height="55%" src="fig/category4.png"> </div>
+        </div>
         </section>
 
         <section>
+        <div class="definition">
         <p> 任意の対象$A$に対して </p>
         <ul>
           <li> 恒等射(identity) $ 1_A: A \rightarrow A $ </li>
         </ul>
-        <p> が存在し,任意の$f: A \rightarrow B$に対して単位元律(identity law) </p>
+        <p> が存在し,任意の$f: A \rightarrow B$に対して単位元律(<span style="font-size:80%">identity law</span>) </p>
         <div align="center"> $ f\circ 1_A = 1_B \circ f = f $ </div>
         <p> が成り立つ。すなわち,右下図が可換である。</p>
         <div align="center"> <img height="45%" src="fig/category3.png"> </div>
+        </div>
         </section>
 
         <section>
@@ -178,6 +197,7 @@
 
         <section id="isomorphism">
         <h3> 同型の定義 </h3>
+        <div class="definition">
         <p>
         $f: A\rightarrow B$に対して,$g: B\rightarrow A$が存在し,
         </p>
@@ -189,10 +209,12 @@
         と表す。
         </p>
         <div align="center"><img src="fig/inverse.png"> </div>
+        </div>
         </section>
 
         <section id="inverse">
         <h3> 逆射 </h3>
+        <div class="definition">
         <p>
         $f: A\rightarrow B$が同型射ならば
         </p>
@@ -200,6 +222,7 @@
         <p>
         となる$g$は一意に定まる。このような$g$を<span style="color:red">逆射(inverse)</span>と言い$f^{-1}$と表す。
         </p>
+        </div>
 
         <div class="fragment">
         <p style="font-size:80%">
@@ -215,14 +238,11 @@
 
         <section id="functor">
         <h3> 函手の定義 </h3>
-        <p> 圏$\mathbf{C}$から圏$\mathbf{D}$への函手$F: \mathbf{C}\rightarrow\mathbf{D}$とは</p>
-        <div align="left">
-        <ul>
-          <li> $\mathbf{C}$の各対象$A$に$\mathbf{D}$の対象$F(A)$を,</li>
-          <li> $\mathbf{C}$の各射$f: A\rightarrow B$に$\mathbf{D}$の射$ F(f): F(A) \rightarrow F(B) $を</li>
-        </ul>
-        </div>
-        <p> 対応付ける関数の組であり,以下の条件を満たすものである。 </p>
+        <div class="definition">
+        <p> 圏$\mathbf{C}$から圏$\mathbf{D}$への函手$F: \mathbf{C}\rightarrow\mathbf{D}$とは
+        $\mathbf{C}$の各対象$A$に$\mathbf{D}$の対象$F(A)$を対応付け,
+        $\mathbf{C}$の各射$f: A\rightarrow B$に$\mathbf{D}$の射$ F(f): F(A) \rightarrow F(B) $を
+        対応付ける2つの関数の組であり,以下の条件を満たすものである。 </p>
         <div align="left">
         <ul>
           <li> 任意の$\mathbf{C}$の射$f: A\rightarrow B$, $g: B\rightarrow C$に対して
@@ -232,6 +252,7 @@
           $$ F(1_A) = 1_{F(A)} $$
           </li>
         </ul>
+        </div>
         </div>
         </section>
 
@@ -243,11 +264,14 @@
           </p>
         </div>
         <div align="left" class="fragment" style="font-size:80%">
-          <p>
-          例えば,下図の上の図式が可換ならば下の図式も可換です。つまり,逆射も保たれますし,同型性も保たれます。
-          $$ F(f^{-1}) = F(f)^{-1} \qquad A\cong B \Rightarrow F(A) \cong F(B)$$
-          </p>
+        <p>
+        例えば,下図の上の図式が可換ならば下の図式も可換です。
+        </p>
         <div align="center"><img height="50%" src="fig/inverse_is_preserved.png"> </div>
+        <p class="fragment">
+          つまり,逆射も保たれますし同型性も保たれます。
+          $$ F(f^{-1}) = F(f)^{-1} \qquad A\cong B \Rightarrow F(A) \cong F(B)$$
+        </p>
         </div>
         </section>
 
@@ -258,7 +282,7 @@
         <section>
         <h3> $\mathbf{1}$ </h3>
         <p>
-        対象が1つ、射が恒等射のみの圏を<span style="color:red">$\mathbf{1}$</span>と表します。恒等射は必ず存在するので，下図では省略して描いています。
+        対象が1つ、射が恒等射のみの圏を<span style="color:red">$\mathbf{1}$</span>と表します。恒等射は必ず存在するので，図中では省略します。
         </p>
         <div align="center"><img height="50%" src="fig/category-1.png"> </div>
         </section>
@@ -266,7 +290,7 @@
         <section>
         <h3> $\mathbf{2}$ </h2>
         <p>
-        対象が２つ，恒等射以外の射が下図のよう1つある圏を<span style="color:red">$\mathbf{2}$</span>と表します。
+        対象が２つ，恒等射以外の射が下図のように1つだけ圏を<span style="color:red">$\mathbf{2}$</span>と表します。
         </p>
         <div align="center"><img height="50%" src="fig/category-2.png"> </div>
         </section>
@@ -274,7 +298,7 @@
         <section>
         <h3> $\mathbf{3}$ </h2>
         <p>
-        対象が３つ，恒等射以外の射が下図のようになっている圏を<span style="color:red">$\mathbf{3}$</span>と表します。もちろん，斜めの射は他の２つの射の合成です。
+        対象が３つ，恒等射以外の射が下図のように3つだけの圏を<span style="color:red">$\mathbf{3}$</span>と表します。もちろん，斜めの射は他の２つの射の合成です。
         </p>
         <div align="center"><img height="50%" src="fig/category-3.png"> </div>
         </section>
@@ -333,7 +357,7 @@
         <h3> 離散圏 </h3>
         <p>
         全ての射が恒等射である圏を<span style="color:red">離散圏(discrete category)</span>と言います。
-        恒等射は対象から決まるので，離散圏は対象の集合から一意に作れます。
+        離散圏は対象の集合から一意に作れます。
         </p>
         <p class="fragment">
         つまり，<span style="color:red">離散圏とは集合</span>です。
@@ -345,7 +369,7 @@
         <h3> モノイド </h3>
         <p>
         対象が1つである圏を<span style="color:red">モノイド(monoid)</span>と言います。<br>
-        プログラミングの様々な場面で現れる重要な圏です。
+        プログラミングの様々な場面で現れる重要な構造です。
         </p>
         <p class="fragment">
         「対象が1つ」$\Leftrightarrow$「全ての射が互いに合成可能」という事が重要で<span style="color:red">その対象が何なのかはどうでも良い</span>事が多いです。
@@ -353,21 +377,67 @@
         <div align="center"><img height="50%" src="fig/monoid.png"> </div>
         </section>
 
-        <section id="monoid">
-        <h3> 圏を用いないモノイドの定義 </h3>
+        <section>
         <p>
-        モノイドとは集合$M$，$M$上の二項演算$\circ$の組<span style="color:red">$(M, \circ)$</span>で，以下の条件を満たすものである。<br>
+        というように紹介しましたが,モノイド1つだけを考える際に圏論を持ち出すのはあまり意味がありません。
+        圏としてではない一般的な定義を次に説明します。
+        </p>
+        </section>
+
+        <section id="monoid">
+        <h3> モノイドの定義 </h3>
+        <p>
+        モノイドとは集合$S$，$S$上の二項演算$\cdot$の組<span style="color:red">$(S, \cdot)$</span>で，以下の条件を満たすものである。<br>
         <ul>
-          <li>結合律: 任意の$x,y,z \in M$について
-          $$ (x\circ y)\circ z = x\circ (y \circ z)$$
+          <li>結合律: 任意の$x,y,z \in S$について
+          $$ (x\cdot y)\cdot z = x\cdot (y \cdot z)$$
           </li>
-          <li> 単位元の存在: ある$e \in M$が存在し,任意の$x \in M$について
-          $$ e\circ x = x\circ e = x $$
+          <li> 単位元の存在: ある$e \in S$が存在し,任意の$x \in S$について
+          $$ e\cdot x = x\cdot e = x $$
           </li>
         </ul>
         </p>
         <p class="fragment">
-        圏として解釈すると，$M$が射の集合,$\circ$が射の合成,$e$が恒等射に対応します。
+        圏として解釈すると，$M$が射の集合,$\cdot$が射の合成,$e$が恒等射に対応します。
+        </p>
+        </section>
+
+        <section>
+        <h3> モノイドとは </h3>
+        <p>
+        ざっくり言うとモノイドとは
+        <ul>
+          <li> 何かの集合で </li>
+          <li> その上の演算があって(足すとか掛けるとか) </li>
+          <li> 単位元がある </li>
+        </ul>
+        もの。
+        </p>
+        </section>
+
+        <section>
+        <h3> モノイドの例:整数と加法 </h3>
+        <p>
+        $\mathbb{Z}$を$0$以上の整数の集合,$+$を足し算としたとき,
+        $$ (\mathbb{Z}, +) $$
+        はモノイドとなります。単位元は$0$です。
+        </p>
+        <div class="fragment">
+        <p>
+        <img align="right" height="50%" src="fig/monoid_nat_add.png">
+        圏として描くと右図のように<span style="color:red">個々の整数が射</span>になります。
+        (★は全部同じ対象です。)
+        このように「射」が「矢印」のイメージを持つものであるとは限りません。
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> 加法によるモノイド </h3>
+        <p>
+        $0$を含んでいて加法について閉じていればモノイドなので,他にも以下のような例があります。
+        <ul>
+        </ul>
         </p>
         </section>
 
