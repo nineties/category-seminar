@@ -89,18 +89,25 @@
         </section>
 
         <section>
-        <h2> 第２回:様々な圏と函手</h2>
+        <h2> 第２回:様々な圏,それとモノイド</h3>
+        </section>
+
+        <section>
+        <h3> 第2回の内容 </h3>
+        <div class="fragment" align="center"> <img src="fig/pie_chart.png"> </div>
+        </section>
+
+        <section>
+        <h1> 
+          <h1>モノイド勉強会</h1>
+        <h3>@ワークスアプリケーションズ</h3>
+        <small> 中村晃一 <br> 2013年5月23日</small>
         </section>
 
         <section>
         <h3> 第2回の内容 </h3>
         <p>
-        <ul>
-          <li> 圏・函手の定義 </li>
-          <li> 圏・函手の具体例 </li>
-          <li> 圏の構成方法 </li>
-        </ul><br>
-        などを学びます。
+        今回は様々な圏の例を紹介します。その後「モノイド」という概念について紹介した後,その内容の圏論による一般化を考えます。
         </p>
         </section>
 
@@ -545,77 +552,13 @@
         GHC(Haskellの処理系)の<code>foldMap</code>という関数を使う例です。<span style="color:red">具体的な処理内容を書かなくても</span>,値をモノイド型にマッピングするだけで様々な畳み込みが出来ます。
         </p>
         <pre><code data-trim class="haskell" contenteditable>
-% ghci
-Prelude> :set prompt "> "
-> :m +Data.Tree +Data.Monoid +Data.Foldable
-> let tree = unfoldTree (\x -> (x, [1..x-1])) 5
-> putStr . drawTree . fmap show $ tree
-5
-|
-+- 1
-|
-+- 2
-|  |
-|  `- 1
-|
-+- 3
-|  |
-|  +- 1
-|  |
-|  `- 2
-|     |
-|     `- 1
-|
-`- 4
-   |
-   +- 1
-   |
-   +- 2
-   |  |
-   |  `- 1
-   |
-   `- 3
-      |
-      +- 1
-      |
-      `- 2
-         |
-         `- 1
-> foldMap (\x -> [x]) tree
-[5,1,2,1,3,1,2,1,4,1,2,1,3,1,2,1]
-> foldMap show tree
-"5121312141213121"
-> foldMap Data.Set.singleton tree
-fromList [1,2,3,4,5]
-> foldMap Sum tree
-Sum {getSum = 31}
-> foldMap Product tree
-Product {getProduct = 2880}
-> foldMap (Sum . const 1) tree
-Sum {getSum = 16}
-> foldMap (All . (> 3)) tree
-All {getAll = False}
-> foldMap (Any . (> 3)) tree
-Any {getAny = True}
-> foldMap (Sum . fromEnum . (> 3)) tree
-Sum {getSum = 2}
-> foldMap (\x -> if even x then Just (Sum x) else Nothing) tree
-Just (Sum {getSum = 12})
-> foldMap (\x -> (Sum x, Product x)) tree
-(Sum {getSum = 31},Product {getProduct = 2880})
-> foldMap (First . (\x -> if even x then Just x else Nothing)) tree
-First {getFirst = Just 2}
-> foldMap (Last . (\x -> if even x then Just x else Nothing)) tree
-Last {getLast = Just 2}
-> foldMap (Last . (\x -> if odd x then Just x else Nothing)) tree
-Last {getLast = Just 1}
-> foldMap (First . (\x -> if odd x then Just x else Nothing)) tree
-First {getFirst = Just 5}
-> foldMap (fmap Sum . (\x -> if odd x then Just x else Nothing)) tree
-Just (Sum {getSum = 19})
-> foldMap (fmap Product . (\x -> if odd x then Just x else Nothing)) tree
-Just (Product {getProduct = 45})
+-- 当日Haskellでいくつか例を動かします。
+-- 使用したコードは後でここに反映させます。
         </code></pre>
+        </section>
+
+        <section>
+        <div align="center"> <img src="fig/monoid_endofunction_example.png"> </div>
         </section>
 
         <section id="monoid-homomorphism">
@@ -637,6 +580,9 @@ Just (Product {getProduct = 45})
         </p>
         </section>
 
+        <section>
+        もしかして全部endofunctionであらわせるんじゃね？
+        </section>
 			</div>
 		</div>
 
