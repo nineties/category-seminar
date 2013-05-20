@@ -107,16 +107,22 @@
         <section>
         <h3> 第2回の内容 </h3>
         <p>
-        今回は様々な圏の例を紹介します。その後「モノイド」という概念について紹介した後,その内容の圏論による一般化を考えます。
+        今回はまず圏論を離れて「モノイド」という概念についてプログラミングにおける応用も含めて紹介します。
+        その後様々な圏の例の紹介と,「モノイド」を通して見た事実の圏論による一般化を考えます。
         </p>
         </section>
+
+        <section>
+        <h2> モノイド </h2>
+        </section>
+
 
         <section>
         <h2> 定義の復習 </h2>
         </section>
 
         <section id="category">
-        <h3> 圏の定義 </h3>
+        <h3> 圏 </h3>
         <div class="definition">
         <p>
         <span style="color:red">圏(category)</span>とは
@@ -180,30 +186,13 @@
         <p> が存在し,任意の$f: A \rightarrow B$に対して単位元律(<span style="font-size:80%">identity law</span>) </p>
         <div align="center"> $ f\circ 1_A = 1_B \circ f = f $ </div>
         <p> が成り立つ。すなわち,右下図が可換である。</p>
+        <p> また,恒等射は一意に定まる(証明は第1回)。 </p>
         <div align="center"> <img height="45%" src="fig/category3.png"> </div>
         </div>
         </section>
 
-        <section>
-        <h3> 恒等射の一意性 </h3>
-        <p>
-        任意の対象$A$について，その恒等射は一意$1_A$に定まる。($1_A$と書く事ができるのはその為。)
-        </p>
-
-        <div class="fragment">
-        <p style="font-size:80%">
-        <img width="40%" src="fig/id_is_uniq.png" align="right" hspace="20">
-        【一意性の証明】<br>
-        $1_A,1'_A: A\rightarrow A$が共に恒等射だとする。<br>
-        恒等射の性質より右図の上半分,下半分はどちらも可換だから
-        $$ 1_A = 1'_A $$
-        となる。つまり恒等射は一意に定まる。<span style="float:right">□</span>
-        </p>
-        </div>
-        </section>
-
         <section id="isomorphism">
-        <h3> 同型の定義 </h3>
+        <h3> 同型 </h3>
         <div class="definition">
         <p>
         $f: A\rightarrow B$に対して,$g: B\rightarrow A$が存在し,
@@ -227,24 +216,14 @@
         </p>
         <div align="center"> $ g\circ f = 1_A\qquad f\circ g = 1_B$ </div>
         <p>
-        となる$g$は一意に定まる。このような$g$を<span style="color:red">逆射(inverse)</span>と言い$f^{-1}$と表す。
-        </p>
-        </div>
-
-        <div class="fragment">
-        <p style="font-size:80%">
-        <img width="50%" src="fig/inv_is_uniq5.png" align="right" hspace="20">
-        【一意性の証明】<br>
-        $g, h: B\rightarrow A$が$f$の逆射であるとすると右図が可換となるから,
-        $$ g = h $$
-        となる。つまり逆射は一意に定まる。
-        <span style="float:right">□</span>
+        となる$g$は一意に定まる(証明は第1回)。
+        このような$g$を<span style="color:red">逆射(inverse)</span>と言い$f^{-1}$と表す。
         </p>
         </div>
         </section>
 
         <section id="functor">
-        <h3> 函手の定義 </h3>
+        <h3> 函手 </h3>
         <div class="definition">
         <p> 圏$\mathbf{C}$から圏$\mathbf{D}$への函手$F: \mathbf{C}\rightarrow\mathbf{D}$とは
         $\mathbf{C}$の各対象$A$に$\mathbf{D}$の対象$F(A)$を対応付け,
@@ -260,30 +239,19 @@
           </li>
         </ul>
         </div>
-        </div>
-        </section>
-
-        <section>
-        <h3> 函手は可換図式を保つ </h3>
-        <div align="left">
-          <p>
-          函手は合成射と恒等射を保つので,可換図式も保ちます。
-          </p>
-        </div>
-        <div align="left" class="fragment" style="font-size:80%">
         <p>
-        例えば,下図の上の図式が可換ならば下の図式も可換です。
-        </p>
-        <div align="center"><img height="50%" src="fig/inverse_is_preserved.png"> </div>
-        <p class="fragment">
-          つまり,逆射も保たれますし同型性も保たれます。
+        函手は図式の可換性を保つので,それによって定義される逆射・同型性を保つ。
           $$ F(f^{-1}) = F(f)^{-1} \qquad A\cong B \Rightarrow F(A) \cong F(B)$$
         </p>
         </div>
         </section>
 
         <section>
-        <h2> 圏の例 </h2>
+        <h2> 様々な圏 </h2>
+        </section>
+
+        <section>
+        <h3> $\mathbf{Sets}$ </h3>
         </section>
 
         <section>
@@ -392,7 +360,7 @@
         </section>
 
         <section id="monoid">
-        <h3> モノイドの定義 </h3>
+        <h3> モノイド </h3>
         <p>
         モノイドとは集合$S$，$S$上の二項演算$\cdot$の組<span style="color:red">$(S, \cdot)$</span>で，以下の条件を満たすものである。<br>
         <ul>
