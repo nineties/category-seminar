@@ -408,14 +408,12 @@
         <h3> モノイド: endomorphism </h3>
         <img width="30%" src="fig/endomorphism.png" align="right" hspace="20">
         <p style="font-size:90%">
-        ドメインとコドメインが同じ集合である関数を,<span style="color:red">自己準同型(endomorphism)</span>と言います。
+        ドメインとコドメインが同じ集合である関数を,<span style="color:red">自己準同型写像(endomorphism)</span>と言います。
         </p>
         <div class="fragment">
         <p style="font-size:90%">
-        集合$A$上の自己準同型全ての集合を$\color{red}{\mathrm{End}(A)}$と表す事にすると,
-        $$ \left(\mathrm{End}(A),\circ\right) $$
-        は恒等関数$\mathrm{id}_A$を単位元とするモノイドです。これを同じく
-        $\mathrm{End}(A)$と表すことにします。
+        集合$A$上の自己準同型全ての集合は関数合成に関して,恒等関数$\mathrm{id}_A$を単位元とするモノイドです。
+        このモノイドを$\color{red}{\mathrm{End}(A)}$と表すことにします。
         </p><br clear="right">
         <div class="equation">
           $$ \begin{aligned}
@@ -454,7 +452,7 @@
         </section>
 
         <section>
-        <p style="font-size:150%">
+        <p style="font-size:120%">
         もしかして,任意のモノイドは台集合上の自己準同型のなすモノイドとして表せるのでは？
         </p>
         <div class="fragment" align="center"> <img src="fig/monoid_cayley.png"> </div>
@@ -624,7 +622,7 @@
         <section>
         <h3> $\mathrm{foldr},\,\mathrm{foldl}$とは</h3>
         <p>
-        $\mathrm{foldr}$は二項演算$\star : A\times B\rightarrow B$,$x \in B$を受け取り,$A$の要素の列$[A]$を以下のように$B$の値に畳み込みます。
+        $\mathrm{foldr}$は二項演算$\star : A\times B\rightarrow B$,$x \in B$を受け取り,$A$の要素の列を以下のように$B$の値に畳み込みます。
         </p>
         <p>
         同様に$\mathrm{foldl}$は二項演算$\diamond : B\times A\rightarrow B$,$x \in B$を受け取り,以下のように畳み込みます。
@@ -633,13 +631,13 @@
         </section>
 
         <section>
-        <p> ちょっと書きなおすと・・・</p>
+        <p> 書きなおすと・・・</p>
         <div class="fragment" align="center"> <img src="fig/foldr_foldl2.png"> </div>
         <p class="fragment">
         つまり$\mathrm{foldr},\,\mathrm{foldl}$は、自己準同型へのマッピングと値の代入を一挙に行なってくれる関数という見方が出来ます。
         </p>
         <p class="fragment">
-        全てのモノイドは自己準同型のなすモノイドとして表現出来るので,$\mathrm{foldMap}$で出来る事は全て$\mathrm{foldr},\,\mathrm{foldl}$でも出来るという事になります。
+        すると表現定理から$\mathrm{foldMap}$で出来る事は全て$\mathrm{foldr},\,\mathrm{foldl}$でも出来るという事が言えます。
         </p>
         <p class="fragment">
         さらに$\star$,$\diamond$は<span style="color:red">モノイドの演算でなくても良い</span>のでより汎用性が高いのです。
@@ -758,7 +756,7 @@
         -->
 
         <section>
-        <h3> 未完 </h3>
+        <h2> 未完 </h2>
         </section>
 
         <section>
