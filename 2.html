@@ -38,14 +38,33 @@
         }
       });
     </script>
+    $$ \newcommand\append{{+\hspace{-.7em}+}} $$
 
     <style type="text/css">
       <!--
       div.definition {
+        padding-top: 10px;
+        padding-bottom: 10px;
         padding-left: 10px;
         padding-right: 10px;
         border: 4px solid #333333;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      div.theorem {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 4px solid #333333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      div.equation {
+        margin: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 2px solid #C0C0C0;
       }
       --> 
     </style>
@@ -89,7 +108,7 @@
         </section>
 
         <section>
-        <h2> 第２回:様々な圏,それとモノイド</h3>
+        <h2> 第２回:モノイド・群,それと圏論 </h2>
         </section>
 
         <section>
@@ -98,8 +117,7 @@
         </section>
 
         <section>
-        <h1> 
-          <h1>モノイド勉強会</h1>
+        <h1>モノイド勉強会</h1>
         <h3>@ワークスアプリケーションズ</h3>
         <small> 中村晃一 <br> 2013年5月23日</small>
         </section>
@@ -107,15 +125,467 @@
         <section>
         <h3> 第2回の内容 </h3>
         <p>
-        今回はまず圏論を離れて「モノイド」という概念についてプログラミングにおける応用も含めて紹介します。
-        その後様々な圏の例の紹介と,「モノイド」を通して見た事実の圏論による一般化を考えます。
+        今回はまず圏論を離れてモノイド・群という概念について紹介します。
+        その後,様々な圏の例の紹介とモノイド・群を通して見た事実の圏論による一般化を考えます。
         </p>
+        </section>
+
+        <section>
+        <h3> 用語・記法について </h3>
+        <ul>
+          <li> 自然数$\mathbb{N}$とは$0$以上の整数の事とします。 </li>
+          <li> ２項演算子$\star$の左辺値,右辺値を定数に固定した関数を便宜的に以下の様に表す事にします。
+          $$ \color{red}{(a\ \star)} : x \mapsto a \star x $$
+          $$ \color{red}{(\star\ a)} : x \mapsto x \star a $$
+          例えば
+          $$ (2\ +)(3) = 2 + 3 \qquad (+\ 2)(3) = 3 + 2$$
+          という感じです。
+          </li>
+        </ul>
         </section>
 
         <section>
         <h2> モノイド </h2>
         </section>
 
+        <section id="monoid">
+        <h3> モノイド </h3>
+        <div class="definition">
+        <p>
+        <span style="color:red">モノイド(monoid)</span>とは集合$S$，$S$上の二項演算$\cdot$の組$(S, \cdot)$で，以下の条件を満たすものである。<br>
+        </p>
+        <ul>
+          <li>結合律: 任意の$x,y,z \in S$について
+          $$ (x\cdot y)\cdot z = x\cdot (y \cdot z)$$
+          </li>
+          <li> 単位元の存在: $e \in S$が存在し,任意の$x \in S$について
+          $$ e\cdot x = x\cdot e = x $$
+          </li>
+        </ul><br>
+        <p>
+        $S$をこのモノイドの<span style="color:red">台集合(underlying set)</span>と言う。
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> モノイド:自然数と加法 </h3>
+        <p>
+        $\mathbb{N}$を自然数の集合,$+$を整数の足し算としたとき,
+        $$ (\mathbb{N}, +) $$
+        はモノイドとなります。単位元は$0$です。
+        </p>
+        <p>
+        モノイドの条件を全て満たす事を確認しましょう。<br>
+        <div class="equation">
+        <ul>
+          <li> $x,y \in \mathbb{N}$ならば$x + y\in\mathbb{N}$ </li>
+          <li> $(x + y) + z = x + (y + z)$ </li>
+          <li> $0 + x = x + 0 = x$ </li>
+        </ul>
+        </div>
+        </p>
+        </section>
+
+        <section>
+        <h3> モノイド:自然数と乗法 </h3>
+        <p>
+        $\mathbb{N}$を自然数の集合,$\cdot $を整数の掛け算としたとき,
+        $$ (\mathbb{N}, \cdot) $$
+        はモノイドです。単位元は$1$です。
+        </p>
+        <div class="equation">
+        <ul>
+          <li> $x,y \in \mathbb{N}$ならば$x \cdot y\in\mathbb{N}$ </li>
+          <li> $(x \cdot y) \cdot z = x \cdot (y \cdot z)$ </li>
+          <li> $1 \cdot x = x \cdot 1 = x$ </li>
+        </ul>
+        </div>
+        </section>
+
+        <section>
+        <h3> 加法・乗法によるモノイド </h3>
+        <div align="left">
+        <p> 加法については </p>
+        <ul>
+          <li> 整数$\mathbb{Z}$,有理数$\mathbb{Q}$,実数$\mathbb{R}$,複素数$\mathbb{C}$,$\cdots$ </li>
+          <li> $2$の倍数,$3$の倍数,$\cdots$ </li>
+          <li> $\{a+b\sqrt{2} | a,b\in \mathbb{Q}\}$ </li>
+        </ul>
+        <p> など。乗法については </p>
+        <ul>
+          <li> 整数$\mathbb{Z}$,有理数$\mathbb{Q}$,実数$\mathbb{R}$,複素数$\mathbb{C}$,$\cdots$ </li>
+          <li> 正の自然数$\mathbb{N}^{+}$ </li>
+          <li> $\{1,2,4,8,16,32,\cdots\}$ </li>
+        </ul>
+        <p> など、様々な集合がモノイドの条件を満たします。 </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> モノイド:列と連結 </h3>
+        <p>
+        $[A]$を集合$A$を要素の有限列
+        $$ [a_0, a_1,\cdots,a_n] \qquad (a_i \in A) $$
+        とし,$\append$を列の結合
+        $$ [a_0,\cdots,a_m]\append[b_0,\cdots,b_n] = [a_0,\cdots,a_m,b_0,\cdots,b_n] $$
+        としたとき,$ ([A], \append) $はモノイドです。単位元は空列$[\,]$です。
+        </p>
+        <div class="equation">
+        <ul>
+          <li> $x,y \in [A]$ならば$x \append y\in [A]$ </li>
+          <li> $(x \append y) \append z = x \append (y \append z)$ </li>
+          <li> $[\,] \append x = x \append [\,] = x$ </li>
+        </ul>
+        </div>
+        </section>
+
+        <section>
+        <h3> モノイド:文字列と連結 </h3>
+        <p>
+        「列」の一例として,文字列も連結に関してモノイドとなります。単位元は空文字列$\text{""}$です。
+        </p>
+        $$ \text{"Hello"} \append \text{" "} \append \text{"World!"} = \text{"Hello World!"} $$
+        </section>
+
+        <section>
+        <h3> モノイド:論理積・論理和 </h3>
+        <p> $(\{\mathrm{true},\mathrm{false}\}, \mathrm{and})$ 単位元は$\mathrm{true}$。</p>
+        <div class="equation">
+          $$\begin{aligned}
+          &\mathrm{true}\ \mathrm{and}\ \mathrm{true}  = \mathrm{true} \\
+          &\mathrm{true}\ \mathrm{and}\ \mathrm{false} = \mathrm{false}\ \mathrm{and}\ \mathrm{true} = \mathrm{false}
+          \end{aligned}
+          $$
+        </div>
+        <br>
+
+        <p> $(\{\mathrm{true},\mathrm{false}\}, \mathrm{or})$  単位元は$\mathrm{false}$。</p>
+        <div class="equation">
+          $$\begin{aligned}
+          & \mathrm{false}\ \mathrm{or}\ \mathrm{false}  = \mathrm{false} \\
+          & \mathrm{false}\ \mathrm{or}\ \mathrm{true} = \mathrm{true}\ \mathrm{or}\ \mathrm{false} = \mathrm{true}
+          \end{aligned}
+          $$
+        </div>
+        </section>
+
+        <section>
+        <h3> モノイド:集合の$\mathrm{join}$,$\mathrm{meet}$ </h3>
+        <p> $(\mathcal{P}(A), \cup)$ 単位元は$\emptyset$。</p>
+        <div class="equation">
+          $ X\cup\emptyset = \emptyset\cup X = X$
+        </div>
+        <br>
+
+        <p> $(\mathcal{P}(A), \cap)$ 単位元は$A$。 </p>
+        <div class="equation">
+          $ X\cap A = A\cap X = X \quad (X\subseteq A) $
+        </div>
+        </ul>
+        <p style="font-size:80%">
+        $\mathcal{P}(A)$は$A$の部分集合全てからなる集合($A$のべき集合)です。例えば
+        $$ \mathcal{P}(\{1,2,3\}) = \{\emptyset,\{1\},\{2\},\{3\},\{1,2\},\{2,3\},\{1,3\},\{1,2,3\}\}$$
+        のような集合です。
+        </p>
+        </section>
+
+        <section>
+        <h3> モノイド:最大値・最小値</h3>
+        <p> $A$を最小値$m$を持つ数値の集合とすると,$(A, \max)$は$m$を単位元とするモノイドです。</p>
+        <div class="equation">
+          $\max\{m, x\} = \max\{x, m\} = x \quad (x \in A) $
+        </div>
+        <br>
+        <p> $A$を最大値$m$を持つ数値の集合とすると,$(A, \min)$は$M$を単位元とするモノイドです。</p>
+        <div class="equation">
+          $\min\{M, x\} = \min\{x, M\} = x \quad (x \in A) $
+        </div>
+        </section>
+
+        <section>
+        <p>
+        今の３つの例は「有界半束はモノイドである」という事実の具体例です。
+        「束」については後の回に説明しますので,本日は分からなくても大丈夫です。
+        </p>
+        </section>
+
+        <section>
+        <h3> プログラミングにおけるモノイド </h3>
+        </section>
+
+        <section>
+        <h3> 集約演算 </h3>
+        <p> データ列に対する集約・集積演算はモノイドと関係します。 </p>
+        <ul>
+          <li> 値の和・積を求める。 </li>
+          <li> 条件を満たす要素を集める。 </li>
+          <li> 最大値・最小値を計算する。 </li>
+          <li> 全て～であるか？～を満たす物があるか？ </li>
+        </ul>
+        <p> 関数型言語では<span style="color:red">畳み込み(folding)</span>と呼ぶ事が多いです。</p>
+        </section>
+
+        <section>
+        <p> 格納データを<span style="color:red">直列化</span>出来るコンテナに対して,モノイドによる畳込みを定義する事が出来ます。</p>
+        <div align="center"> <img height="70%" src="fig/fold1.png"> </div>
+        </section>
+
+        <section>
+        <p> モノイドの結合性は任意の部分列から畳み込む事を正当化しますので,効率のよいアルゴリズムを考える際に重要です。 </p>
+        <div align="center"> <img height="70%" src="fig/fold2.png"> </div>
+        </section>
+
+        <section>
+        <p> 都合良くモノイドな値を格納している事は少ないので,個々の値を適当なモノイドにマッピングする操作とセットで考えましょう。 </p>
+        <div align="center"> <img height="70%" src="fig/fold3.png"> </div>
+        </section>
+
+        <section>
+        <p> つまり,$\mathrm{map}$と$\mathrm{fold}$を合成した関数によって様々な畳み込みを行うことがはずです。 </p>
+        <div align="center"> <img height="70%" src="fig/fold4.png"> </div>
+        </section>
+
+        <section>
+        <h3> Haskellでの例 </h3>
+        <pre><code data-trim class="haskell" contenteditable>
+-- 当日Haskellでいくつか例をお見せします。
+-- 使用したコードは後でここに反映させます。
+
+
+
+
+
+
+
+
+
+
+
+        </code></pre>
+        </section>
+
+        <section>
+        <h3> とても便利ですね～</h3>
+        <p class="fragment">
+        いやいや,冷静に考えるとまだよく分からない。
+        <ul>
+          <li class="fragment"> 足すとか掛けるとか,一種類の計算しか出来ないのか？ </li>
+          <li class="fragment"> 何が出来て何が出来ないのか? </li>
+        </ul>
+        </p>
+        </section>
+
+        <section>
+        <h3> 例えば絵を描くという作業 </h3>
+        <img width="45%" src="fig/monoid_endofunction_example.png" align="right" hspace="20">
+        <ul>
+          <ol> 円を描いて </ol>
+          <ol> 線を引いて </ol>
+          <ol> 色を塗って </ol>
+          <ol> ･･･ </ol>
+        </ul><br clear="right">
+        <p> 絵とは一連の作業の<span style="color:red">集積結果</span>では？ </p>
+        </section>
+
+        <section>
+        <h3> 例えばロボットの操作 </h3>
+        <img width="45%" src="fig/monoid_endofunction_example2.png" align="right" hspace="20">
+        <ul>
+          <ol> 右を向け </ol>
+          <ol> 前へ進め </ol>
+          <ol> 止まれ </ol>
+          <ol> ・・・ </ol>
+        </ul><br clear="right">
+        <p> ロボットの動きとは一連の命令の<span style="color:red">集積</span>では？ </p>
+        </section>
+
+        <section>
+        <h3> モノイド: endomorphism </h3>
+        <img width="30%" src="fig/endomorphism.png" align="right" hspace="20">
+        <p style="font-size:90%">
+        ドメインとコドメインが同じ集合である関数を,<span style="color:red">自己準同型(endomorphism)</span>と言います。
+        </p>
+        <div class="fragment">
+        <p style="font-size:90%">
+        集合$A$上の自己準同型全ての集合を$\color{red}{\mathrm{End}(A)}$と表す事にすると,
+        $$ \left(\mathrm{End}(A),\circ\right) $$
+        は恒等関数$\mathrm{id}_A$を単位元とするモノイドです。
+        </p><br clear="right">
+        <div class="equation">
+          $$ \begin{aligned}
+          & h\circ(g\circ f) = (h\circ g)\circ f \\
+          & \mathrm{id}_A\circ f = f\circ \mathrm{id}_A = f
+          \end{aligned}$$
+        </div>
+        </div>
+
+        <div align="left" style="font-size:50%">
+          注: 集合は全く構造のない代数系と見なせるので,後の事も考えて準同型と呼ぶことにします。
+        </div>
+        </section>
+
+        <section>
+        <h3> Haskellでの例 </h3>
+        <pre><code data-trim class="haskell" contenteditable>
+-- 当日Haskellでいくつか例をお見せします。
+-- 使用したコードは後でここに反映させます。
+
+
+
+
+
+
+
+
+
+
+
+        </code></pre>
+        </section>
+
+        <section>
+        <h3> モノイドの表現 </h3>
+        </section>
+
+        <section>
+        <p style="font-size:150%">
+        もしかして,任意のモノイドは台集合上の自己準同型によって表せるのでは？
+        </p>
+        <div class="fragment" align="center"> <img src="fig/monoid_cayley.png"> </div>
+        </section>
+
+        <section>
+        <p> いくつか言葉を準備して,この現象について考えてみます。 </p>
+        <div align="center"> <img src="fig/monoid_cayley2.png"> </div>
+        </section>
+
+        <section>
+        <h3> 準備: モノイド準同型 </h3>
+        <p>
+        モノイドからモノイドへの構造を保ったマッピングを(モノイドの)<span style="color:red">準同型(homomorphism)</span>と言います。モノイドの構造とは結合的な２項演算と単位元の事でした。
+        </p>
+        <div class="fragment">
+        <div class="definition">
+          <p>
+          モノイド$(M,\star)$から$(N,\diamond)$への準同型$F: (M,\star) \rightarrow (N,\diamond)$とは,$M$から$N$への関数であり以下の条件を満たすもの。<br>
+          <ul>
+            <li> $ F(x\star y) = F(x)\diamond F(y)$ </li>
+            <li> $ F(e_{\star}) = e_{\diamond}\quad(\text{$e_{\star}$,$e_{\diamond}$は各モノイドの単位元}) $ </li>
+          </ul>
+          </p>
+        </div>
+        </div>
+        </section>
+
+        <section>
+        <h3> 準同型の例: $\mathrm{length}$ </h3>
+        <p>
+        有限列の長さを得る関数$\mathrm{length}$は準同型
+        $$ \mathrm{length} : ([A],\append) \rightarrow (\mathbb{N},+) $$
+        と見なせます。
+        <br>
+        <div class="equation">
+        $$ \begin{aligned}
+        &\mathrm{length}([a_0,\cdots,a_m]\append[b_0,\cdots,b_n]) \\
+        &\quad = \mathrm{length}([a_0,\cdots,a_m]) + \mathrm{length}([b_0,\cdots,b_n]) \\
+        &\mathrm{length}([\ ]) = 0
+        \end{aligned} $$
+        </div>
+        </p>
+        </section>
+
+        <section>
+        <h3> 準備: モノイドの同型 </h3>
+        <p> 同型とは２つのモノイドが「本質的に同じものである」という性質です。</p>
+        <div class="definition">
+          <p>
+          全単射(全体をカバーする一対一対応)である準同型を<span style="color:red">同型写像(isomorphism)</span>と言う。モノイド$M$と$N$の間に同型写像が存在する時,$M$と$N$は<span style="color:red">同型(isomorphic)</span>であると言い
+          $$ M \cong N $$
+          と表す。
+          </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> 同型の例: $x \mapsto a^x$ </h3>
+        <p>
+        例えば$f(x) = 2^x$という関数は準同型
+        $$ f: (\mathbb{N},+) \rightarrow (\{1,2,4,8,16,\cdots\},\cdot) $$
+        と見なせます。
+        </p>
+        <div class="equation">
+        $$ 2^{x+y} = 2^x\cdot 2^y \qquad 2^0 = 1 $$
+        </div>
+        <p>
+        さらにこれは全単射なので同型を与えます。
+        $$ (\mathbb{N},+) \cong (\{1,2,4,8,16,\cdots\},\cdot) $$
+        </p>
+        </section>
+
+        <section>
+        <h3> 準備: 部分モノイド </h3>
+        <div class="definition">
+          <p>
+        同じ演算からなるモノイド$(A, \cdot)$と$(B,\cdot)$について,$A \subseteq B$であるならば$A$は$B$の<span style="color:red">部分モノイド</span>であると言い
+        $$ (A,\cdot) \subseteq (B,\cdot) $$
+        と表す。
+        </p>
+        </div>
+        <p>
+        例えば,下のような例があります。
+        $$(\{0,2,4,6,8,\cdots\},+) \subseteq (\mathbb{N}, +) \subseteq (\mathbb{Z}, +) $$
+        </p>
+        </section>
+
+        <section>
+        <h3> 定理 </h3>
+        <div class="theorem">
+        任意のモノイド$(M, \cdot)$は$\mathbb{End}(M)$の適当な部分モノイドと同型である。
+        </div>
+        </section>
+
+        <section>
+        <p>
+        【証明】<br>
+        モノイド$(M=\{a,b,\cdots\},\cdot)$に対して,集合$\bar{M} = \{(a\ \cdot),(b\ \cdot),\cdots\}$を考える。$e$を単位元とする。すると,任意の$x,y,a\n M$に対して
+        <ul>
+          <li> $(x\ \cdot)\circ(y\ \cdot)(a) = (x\cdot y\ \cdot)(a) = x\cdot y\cdot a$ </li>
+          <li> $(e\ \cdot)(a) = e\cdot a = a$ </li>
+        </ul>
+        であるので,対応$\phi: a\mapsto (a\ \cdot)$は$\bar{M}\subseteq\mathrm{End}(M)$への準同型となっている。
+        </p>
+        <p>
+        ここで,$\phi$が全射($\bar{M}$全体を網羅)であるのは明らか。
+        </p>
+        <p>
+        また,$(a\ \cdot) = (b\ \cdot)$ならば$e$を代入して$a\cdot e = b\cdot e$すなわち$a = b$となるので$\phi$は単射。
+        </p>
+        <p> すなわち $(M, \cdot) \cong (\bar{M}, \circ)$ <span style="float:right">□</span></span>
+        </p>
+        </section>
+
+        <section>
+        </section>
+
+        <section>
+        <h3> $\mathrm{foldr}と\mathrm{foldl}$ </h3>
+        </section>
+
+        <section>
+        <p>
+        関数型言語を勉強するとそのうち$\mathrm{foldr},\mathrm{foldl}$という関数に出くわしますが,なかなか
+        </p>
+        </section>
+
+
+        <section>
+        <h3> モノイド: プログラム </h3>
+        <p>
+        プログラムを「文(statement)の列」と思うと,「何もしない文」を単位元とし「文を並べる事」を演算とするモノイドと見なせます。
+        </p>
+        <div align="center"><img height="50%" src="fig/monoid_program.png"></div>
+        </section>
 
         <section>
         <h2> 定義の復習 </h2>
@@ -378,36 +848,6 @@
         </section>
 
         <section>
-        <h3> モノイドとは </h3>
-        <p>
-        ざっくり言うとモノイドとは
-        <ul>
-          <li> 何かの集合で </li>
-          <li> その上の演算があって(足すとか掛けるとか) </li>
-          <li> 単位元がある </li>
-        </ul>
-        もの。
-        </p>
-        </section>
-
-        <section>
-        <h3> モノイドの例:整数と加法 </h3>
-        <p>
-        $\mathbb{Z}$を$0$以上の整数の集合,$+$を足し算としたとき,
-        $$ (\mathbb{Z}, +) $$
-        はモノイドとなります。単位元は$0$です。
-        </p>
-        <div class="fragment">
-        <p>
-        <img align="right" height="50%" src="fig/monoid_nat_add.png">
-        圏として描くと右図のように<span style="color:red">個々の整数が射</span>になります。
-        (★は全部同じ対象です。)
-        このように「射」が「矢印」のイメージを持つものであるとは限りません。
-        </p>
-        </div>
-        </section>
-
-        <section>
         <h3> 加法によるモノイド </h3>
         <p>
         $0$を含んでいて加法について閉じていればモノイドなので,他にも以下のような例があります。
@@ -465,26 +905,6 @@
         はモノイドとなります。単位元は空リスト$[\,]$です。
         </p>
         <div align="center"><img height="50%" src="fig/monoid_list_append.png"></div>
-        </section>
-
-        <section>
-        <h3> モノイドの例: endofunction </h3>
-        <p>
-        ドメインとコドメインが同じ集合の関数$f: A\rightarrow A$を<span style="color:red">endofunction</span>と言います。
-        </p>
-        <p class="fragment">
-        集合$A$上のendofunction全ての集合を$\mathrm{Endo}(A)$と表す事にすると,これと関数合成
-        $$ (\mathrm{Endo}(A), \circ) $$
-        はモノイドとなります。単位元は恒等関数$\mathrm{id}_A: A\rightarrow A$です。
-        </p>
-        </section>
-
-        <section>
-        <h3> モノイドの例: プログラム </h3>
-        <p>
-        プログラムを「文(statement)の列」と思うと,「何もしない文」を単位元とし「文を並べる事」を演算とするモノイドと見なせます。
-        </p>
-        <div align="center"><img height="50%" src="fig/monoid_program.png"></div>
         </section>
 
         <section>
