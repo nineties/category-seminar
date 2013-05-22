@@ -152,18 +152,18 @@
         <h3> モノイド </h3>
         <div class="definition">
         <p>
-        <span style="color:red">モノイド(monoid)</span>とは集合$S$，$S$上の二項演算$\cdot$の組$(S, \cdot)$で，以下の条件を満たすものである。<br>
+        <span style="color:red">モノイド(monoid)</span>とは集合$S$，$S$上の二項演算$\cdot$の組$(M, \cdot)$で，以下の条件を満たすものである。<br>
         </p>
         <ul>
-          <li>結合律: 任意の$x,y,z \in S$について
+          <li>結合律: 任意の$x,y,z \in M$について
           $$ (x\cdot y)\cdot z = x\cdot (y \cdot z)$$
           </li>
-          <li> 単位元の存在: $e \in S$が存在し,任意の$x \in S$について
+          <li> 単位元の存在: $e \in M$が存在し,任意の$x \in M$について
           $$ e\cdot x = x\cdot e = x $$
           </li>
         </ul><br>
         <p>
-        $S$をこのモノイドの<span style="color:red">台集合(underlying set)</span>と言う。
+        $M$をこのモノイドの<span style="color:red">台集合(underlying set)</span>と言う。誤解の恐れがない場合にはモノイドと台集合に同じ記号を用いる。
         </p>
         </div>
         </section>
@@ -368,7 +368,7 @@
         <section>
         <h3> とても便利ですね～</h3>
         <p class="fragment">
-        いやいや,冷静に考えるとまだよく分からない。
+        冷静に考えるとまだよく分からない。
         <ul>
           <li class="fragment"> 足すとか掛けるとか,一種類の計算しか出来ないのか？ </li>
           <li class="fragment"> 何が出来て何が出来ないのか? </li>
@@ -410,7 +410,8 @@
         <p style="font-size:90%">
         集合$A$上の自己準同型全ての集合を$\color{red}{\mathrm{End}(A)}$と表す事にすると,
         $$ \left(\mathrm{End}(A),\circ\right) $$
-        は恒等関数$\mathrm{id}_A$を単位元とするモノイドです。
+        は恒等関数$\mathrm{id}_A$を単位元とするモノイドです。これを同じく
+        $\mathrm{End}(A)$と表すことにします。
         </p><br clear="right">
         <div class="equation">
           $$ \begin{aligned}
@@ -541,43 +542,184 @@
         <section>
         <h3> 定理 </h3>
         <div class="theorem">
-        任意のモノイド$(M, \cdot)$は$\mathbb{End}(M)$の適当な部分モノイドと同型である。
+        <p>
+        任意のモノイド$(M, \cdot)$は$\mathrm{End}(M)$の適当な部分モノイドと同型である。
+        </p>
         </div>
         </section>
 
         <section>
-        <p>
+        <div align="left" style="font-size:80%">
         【証明】<br>
-        モノイド$(M=\{a,b,\cdots\},\cdot)$に対して,集合$\bar{M} = \{(a\ \cdot),(b\ \cdot),\cdots\}$を考える。$e$を単位元とする。すると,任意の$x,y,a\n M$に対して
+        <span class="fragment">モノイド$M=(\{a,b,\cdots\},\cdot)$に対して,$\overline{M} = \{(a\ \ \cdot),(b\ \ \cdot),\cdots\}$とする。$e\in M$を単位元とする。</span><span class="fragment">すると,任意の$a,b\in M$に対して</span>
         <ul>
-          <li> $(x\ \cdot)\circ(y\ \cdot)(a) = (x\cdot y\ \cdot)(a) = x\cdot y\cdot a$ </li>
-          <li> $(e\ \cdot)(a) = e\cdot a = a$ </li>
+          <li class="fragment"> 任意の$x\in M$について$((a\cdot b)\ \ \cdot)(x) = (a\ \ \cdot)\circ(b\ \ \cdot)(x) = a\cdot b\cdot x$ なので
+          $$ ((a\cdot b)\ \ \cdot) = (a\ \ \cdot)\circ(b\ \ \cdot) $$
+          </li>
+          <li class="fragment"> 任意の$x\in M$について$(e\ \ \cdot)(x) = e\cdot x = x$なので
+          $$ (e\ \ \cdot) = \mathrm{id}_{M} $$
+          </li>
         </ul>
-        であるので,対応$\phi: a\mapsto (a\ \cdot)$は$\bar{M}\subseteq\mathrm{End}(M)$への準同型となっている。
+        <p class="fragment">
+        すなわち$\phi: a\mapsto (a\ \ \cdot)$は$M$から$\overline{M}\subseteq\mathrm{End}(M)$への準同型を定める。
         </p>
+        </div>
+        </section>
+
+        <section>
+        <p> ここで$\overline{M}$から$M$への写像$\psi: f\mapsto f(e)$を考えると,</p>
+        <ul>
+          <li class="fragment"> 任意の$x \in M$について
+          $$ \psi\circ \phi(x) = \psi((x\ \ \cdot)) = (x\ \ \cdot)(e) = x\cdot e = x$$
+          </li>
+          <li class="fragment"> 任意の$(x\ \ \cdot) \in \overline{M}$について
+          $$ \phi\circ\psi(f) = \phi((x\ \ \cdot)(e)) = \phi(x) = (x\ \ \cdot)$$
+          </li>
+        </ul>
+        <p class="fragment">
+        すなわち
+        $$ \psi\circ\phi = \mathrm{id}_{M}\qquad\phi\circ\psi = \mathrm{id}_{\overline{M}}$$
+        となるから$\phi$は全単射である。
+        </p>
+        <p class="fragment"> 従って$(M, \cdot) \cong (\overline{M}, \circ)$ <span style="float:right">□</span> </p>
+        </section>
+
+        <section>
+        <p> 同様に$a\mapsto (\cdot\ \ a)$という同型写像を考える事も出来ます。ただし,畳み込みの順番を保つ為には関数合成の順番を逆にしたモノイド($\mathrm{End}(A)$の反モノイドと言います。)への写像を考える必要があります。
+        </p>
+        <div align="center"> <img src="fig/opposite_monoid_cayley.png"> </div>
+        </section>
+
+        <section>
+        <h2> $\mathrm{foldr}と\mathrm{foldl}$ </h2>
+        </section>
+
+        <section>
         <p>
-        ここで,$\phi$が全射($\bar{M}$全体を網羅)であるのは明らか。
+        関数型言語を勉強するとそのうち$\color{red}{\mathrm{foldr}}$,$\color{red}{\mathrm{foldl}}$という謎の関数に出くわします。この授業でも今後よく登場すると思います。
         </p>
-        <p>
-        また,$(a\ \cdot) = (b\ \cdot)$ならば$e$を代入して$a\cdot e = b\cdot e$すなわち$a = b$となるので$\phi$は単射。
-        </p>
-        <p> すなわち $(M, \cdot) \cong (\bar{M}, \circ)$ <span style="float:right">□</span></span>
+        <p class="fragment">
+        さて,名前から分かる様にこれも畳み込みを行う関数ですのでモノイドと関係があるはずです。
+        今回はそのような視点からこれらを眺めてみます。
         </p>
         </section>
 
         <section>
+        <h3> $\mathrm{foldr},\,\mathrm{foldl}$とは</h3>
+        <p>
+        $\mathrm{foldr}$は二項演算$\star : A\times B\rightarrow B$,$x \in B$を受け取り,$A$の要素の列$[A]$を以下のように$B$の値に畳み込みます。
+        </p>
+        <p>
+        同様に$\mathrm{foldl}$は二項演算$\diamond : B\times A\rightarrow B$,$x \in B$を受け取り,以下のように畳み込みます。
+        </p>
+        <div align="center"> <img src="fig/foldr_foldl.png"> </div>
         </section>
 
         <section>
-        <h3> $\mathrm{foldr}と\mathrm{foldl}$ </h3>
+        <p> ちょっと書きなおすと・・・</p>
+        <div class="fragment" align="center"> <img src="fig/foldr_foldl2.png"> </div>
+        <p class="fragment">
+        つまり$\mathrm{foldr},\,\mathrm{foldl}$は、自己準同型へのマッピングと値の代入を一挙に行なってくれる関数という見方が出来ます。
+        </p>
+        <p class="fragment">
+        全てのモノイドは自己準同型のなすモノイドとして表現出来るので,$\mathrm{foldMap}$で出来る事は全て$\mathrm{foldr},\,\mathrm{foldl}$でも出来るという事になります。
+        </p>
+        <p class="fragment">
+        さらに$\star$,$\diamond$は<span style="color:red">モノイドの演算でなくても良い</span>のでより汎用性が高いのです。
+        </p>
+        </section>
+
+        <section>
+        <h3> Haskellでの例 </h3>
+        <pre><code data-trim class="haskell" contenteditable>
+-- 当日Haskellでいくつか例をお見せします。
+-- 使用したコードは後でここに反映させます。
+
+
+
+
+
+
+
+
+
+
+
+        </code></pre>
+        </section>
+
+        <section>
+        <h3> 自由モノイド </h3>
         </section>
 
         <section>
         <p>
-        関数型言語を勉強するとそのうち$\mathrm{foldr},\mathrm{foldl}$という関数に出くわしますが,なかなか
+        $\mathrm{foldMap}\ f$という関数は列の各要素を$f$でマッピングしてから畳み込む関数でした。
+        </p>
+        <div align="center"> <img src="fig/foldMap_homomorphism.png"> </div>
+        <p class="fragment">
+        ところで連結演算によて<span style="color:red">列自体もモノイド</span>となります。すると$\mathrm{foldMap}\ f$はモノイド準同型となります。
         </p>
         </section>
 
+        <section>
+        <h3> 自由モノイド </h3>
+        <p>
+        「畳込み」を「列に縮約演算を入れる事」だと思えば,全ての畳み込みが「列と連結」からのモノイド準同型として作れる事になります。つまり,「列と連結」は特別なモノイドです。
+        </p>
+        <p class="fragment">
+        この事を$([A], \append)$は$A$上の<span style="color:red">自由モノイド(free monoid)</span>であると言います。
+        </p>
+        </section>
+
+        <section>
+        <h3> 抽象的な自由モノイドの定義が欲しい! </h3>
+        <p>
+        「列と連結」という自由モノイドの定義は非常に具体的です。<br>
+        「もの」と「矢印」と「矢印の連結」よって定義を与える事が出来れば,後に圏論に進んだ際にモノイド以外の概念に応用できるはずです。
+        </p>
+        </section>
+
+        <section>
+        <h3> 自由モノイドの本質とは </h3>
+        <p>
+        任意の空でない列は下図のように長さ$1$の列に分解出来ます。一切の縮約演算が行われていないから,このような分解が出来るわけです。
+        </p>
+        <p>
+        すると,自由モノイドからの準同型は「列の個々の要素のマッピング」のみによって完全に決定されます。
+        </p>
+        <div align="center"> <img src="fig/free_monoid2.png"> </div>
+        </section>
+
+        <section>
+        <p> これがまさに$\mathrm{foldMap}$という関数が行なっている事です。</p>
+        </p>
+        <div align="center"> <img src="fig/free_monoid1.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        集合$A$の要素を長さ$1$の列にする関数を$i$とすると,下の図式が長さ$1$の列に対する$\mathrm{foldMap}\ f$の効果を定めます。この図式によって$\mathrm{foldMap}\ f$が完全に決定されるというのが,自由モノイドの性質なのです。
+        </p>
+        <div align="center"> <img height="30%" src="fig/free_monoid3.png"> </div>
+        </section>
+
+        <section id="free_monoid">
+        <h3> 自由モノイドの定義 </h3>
+        <div class="definition">
+        <p>
+        モノイド$F(A)$が集合$A$上の自由モノイドであるとはそれがある関数$i: A\rightarrow F(A)$を備えており,任意の関数$f: A\rightarrow M$に対して下側の図式が可換となるようなモノイド準同型$\overline{f}: F(A)\rightarrow M$が唯一つ存在することである。
+        </p>
+        <div align="center"> <img src="fig/free_monoid4.png"> </div>
+        </div>
+        <div align="left" style="font-size:50%">
+          注: モノイドと台集合,準同型と台集合間の関数に同じ記号を使っています。記号の使い分けは圏論に入ってからにします。
+        </div>
+        </section>
+
+        <section>
+        <h3> 最後に </h3>
+        </section>
 
         <section>
         <h3> モノイド: プログラム </h3>
@@ -585,6 +727,12 @@
         プログラムを「文(statement)の列」と思うと,「何もしない文」を単位元とし「文を並べる事」を演算とするモノイドと見なせます。
         </p>
         <div align="center"><img height="50%" src="fig/monoid_program.png"></div>
+        </section>
+
+        <section>
+        <div align="left" style="font-size:150%">
+          モナドは(ry
+        </div>
         </section>
 
         <section>
