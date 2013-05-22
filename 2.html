@@ -136,7 +136,7 @@
         <h3> 用語・記法について </h3>
         <ul>
           <li> 自然数$\mathbb{N}$とは$0$以上の整数の事とします。 </li>
-          <li> ２項演算子$\star$の左辺値,右辺値を定数に固定した関数を便宜的に以下の様に表す事にします。
+          <li> ２項演算子$\star$の左辺,右辺を定数に固定した関数を便宜的に以下の様に表す事にします。
           $$ \color{red}{(a\ \star)} : x \mapsto a \star x $$
           $$ \color{red}{(\star\ a)} : x \mapsto x \star a $$
           例えば
@@ -455,7 +455,7 @@
 
         <section>
         <p style="font-size:150%">
-        もしかして,任意のモノイドは台集合上の自己準同型によって表せるのでは？
+        もしかして,任意のモノイドは台集合上の自己準同型のなすモノイドとして表せるのでは？
         </p>
         <div class="fragment" align="center"> <img src="fig/monoid_cayley.png"> </div>
         </section>
@@ -502,7 +502,7 @@
 
         <section>
         <h3> 準備: モノイドの同型 </h3>
-        <p> 同型とは２つのモノイドが「本質的に同じものである」という性質です。</p>
+        <p> 同型とは「本質的に同じ」という事です。</p>
         <div class="definition">
           <p>
           モノイド$M$から$N$への準同型$f: M\rightarrow N$に対して準同型$g: N\rightarrow M$が存在し,
@@ -516,6 +516,7 @@
 
         <section>
         <h3> 同型の例: $x \mapsto a^x$ </h3>
+        <div style="font-size:90%">
         <p>
         例えば$f(x) = 2^x$という関数は準同型
         $$ f: (\mathbb{N},+) \rightarrow (\{1,2,4,8,16,\cdots\},\cdot) $$
@@ -525,9 +526,12 @@
         $$ 2^{x+y} = 2^x\cdot 2^y \qquad 2^0 = 1 $$
         </div>
         <p>
-        さらにこれは全単射なので同型を与えます。
+        同様に$g(x) = \log_2 x$が逆方向の準同型を与え,
+        $$ \log_2 2^x = x \qquad 2^{\log_2 x} = x $$
+        なので$f$が同型写像である事が判ります。
         $$ (\mathbb{N},+) \cong (\{1,2,4,8,16,\cdots\},\cdot) $$
         </p>
+        </div>
         </section>
 
         <section>
@@ -664,7 +668,7 @@
         </p>
         <div align="center"> <img src="fig/foldMap_homomorphism.png"> </div>
         <p class="fragment">
-        ところで連結演算によて<span style="color:red">列自体もモノイド</span>となります。すると$\mathrm{foldMap}\ f$はモノイド準同型となります。
+        ところで連結演算によて<span style="color:red">列自体もモノイド</span>となります。すると$\mathrm{foldMap}\ f$はモノイド準同型と見なせます。
         </p>
         </section>
 
@@ -715,7 +719,7 @@
 
         <section id="free_monoid">
         <h3> 自由モノイドの定義 </h3>
-        <div class="definition" style="font-size:90%">
+        <div class="definition" style="font-size:80%">
         <p>
         モノイド$F(A)$が集合$A$上の自由モノイドであるとはそれがある関数$i: A\rightarrow F(A)$を備えており,任意の関数$f: A\rightarrow M$に対して下側の図式が可換となるようなモノイド準同型$\overline{f}: F(A)\rightarrow M$が唯一つ存在することである。
         </p>
