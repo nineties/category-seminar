@@ -405,7 +405,7 @@
         </section>
 
         <section>
-        <h3> モノイド: endomorphism </h3>
+        <h3> モノイド: endomorphismと合成 </h3>
         <img width="30%" src="fig/endomorphism.png" align="right" hspace="20">
         <p style="font-size:90%">
         ドメインとコドメインが同じ集合である関数を,<span style="color:red">自己準同型写像(endomorphism)</span>と言います。
@@ -424,7 +424,7 @@
         </div>
 
         <div align="left" style="font-size:50%">
-          注: 集合は全く構造のない代数系と見なせるので,後の事も考えて準同型と呼ぶことにします。
+          注: 集合は全く構造のない代数系と見なせるので,後の事も考えて準同型と呼ぶことにします。正確には$\mathrm{End}_{\mathbf{Sets}}(A)$と書きます。
         </div>
         </section>
 
@@ -732,6 +732,13 @@
         </div>
         </section>
 
+        <section>
+        <p>
+        <span style="color:red">自由モノイドは同型を除いて一意</span>なので自由モノイドとは「列・連結」と同一視出来るものです。時間がないので証明は省略します。(Awodey本のProposition 1.10参照)<br>
+        定理の内容を理解するのにはなかなか時間が掛かると思いますが,今後の為に是非復習を行なって下さい。<br>
+        </p>
+        </section>
+
         <!--
         <section>
         <h3> 最後に </h3>
@@ -756,12 +763,133 @@
         <h2> 群 </h2>
         </section>
 
+        <section id="group">
+        <h3> 群 </h3>
+        <div class="definition">
+        <p>
+        <span style="color:red">群(group)</span>とはモノイド$(M,\cdot)$であり,
+        任意の$x\in M$に対して
+        $$ x \cdot y = y \cdot x = e \qquad \text{($e$は単位元)} $$
+        となる$y$が存在するものである。<br>
+        $y$を$x$の<span style="color:red">逆元(inverse)</span>と言い,
+        $$ y = x^{-1} $$
+        と表す。
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> 群の例 </h3>
+        <div align="left" style="font-size:90%">
+          以下のようなモノイドは群です。<br>
+        <ul>
+          <li> $(\mathbb{Z}, +)$,$(\mathbb{Q}, +)$,$(\mathbb{R},+)$,$(\mathbb{C},+)$ </li>
+          <li> $(\mathbb{Q}^{*}, \cdot)$, $(\mathbb{R}^{*}, \cdot)$($A^{*}$は$A$から$0$を除いた集合)
+          </li>
+          <li> $(\{\cdots,-4,-2,0,2,4,\cdots\}, +)$ </li>
+          <li> $(\{\cdots,\frac{1}{4},\frac{1}{2},1,2,4,\cdots\},\cdot)$ </li>
+        </ul><br>
+        一方,以下のようなモノイドは群ではありません。
+        <ul>
+        </ul>
+          <li> $(\mathbb{N}, +)$ </li>
+          <li> $(\mathbb{N}, \cdot)$ </li>
+          <li> $([A], \append)$ </li>
+        </div>
+        </section>
+
+        <section>
+        <h3> 正二面体群 </h3>
+        <div style="font-size:80%">
+        <p>
+        正$n$角形を正二面体と言います。下図は正三角形です。<br>
+        正三角形の位置・形を変えない変換は「何もしない変換」「点線に関する対称移動($\alpha$)」「反時計回りに$120^\circ$回転($\beta$)」とこれらを組み合わせて出来る変換に限られます。そのような変換全体は群となります。
+        </p>
+        <p class="fragment"> このように群は何らかの<span style="color:red">対称性</span>を記述する為に使えます。</p>
+      </div>
+        <div align="center"> <img height="50%" src="fig/D3.png"> </div>
+        </section>
+
+        <section>
+        <h3> 暗号 </h3>
+        <div style="font-size:80%">
+        <p>
+        誤解を恐れずに言うと$\mathrm{Aut}(\text{文章の集合})$の中にありとあらゆる暗号化方法が入っています。その中で逆元の計算が困難な部分群を探すと強力な暗号化が出来ます。<br>
+        実際にはそんなに単純な話ではありませんが,暗号理論と群論が密接に関わっているという事はわかると思います。
+        </p>
+      </div>
+        <div align="center"> <img height="40%" src="fig/cipher.png"> </div>
+        </section>
+
+        <section>
+        <h3> automorphism </h3>
+        <img width="30%" src="fig/automorphism.png" align="right" hspace="20">
+        <p style="font-size:90%">
+        ドメインとコドメインが同じ<span style="color:red">全単射の関数</span>を,<span style="color:red">自己同型写像(automorphism)</span>と言います。
+        </p>
+        <p style="font-size:90%">
+        集合$A$上の自己同型全ての集合は関数合成に関して,恒等関数$\mathrm{id}_A$を単位元とする群となります。
+        この群を$\color{red}{\mathrm{Aut}(A)}$と表すことにします。
+        </p>
+        </section>
+
+        <section>
+        <h3> 定理 </h3>
+        <div class="theorem">
+        <p>
+        任意の群は適当な集合$A$について$\mathrm{Aut}(A)$の部分群と同型。
+        </p>
+        </div>
+        <div style="font-size:90%">
+        <p>
+        モノイドの場合と同じ形の表現定理が存在します。証明は省略します。<br>
+        </p>
+        <p class="fragment">
+        ところで(圏$\mathbf{Sets}$における)$\mathrm{Aut}(A)$には非常に有用な見方があります。
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> 対称群・置換群 </h3>
+        <p>
+        集合上の自己同型写像は<span style="color:red">置換(permutation)</span>と同一視出来ます。集合$A$上の置換全体のなす群を<span style="color:red">対称群(symmetry group)</span>と呼び$\mathrm{Sym}(A)$と表します。対称群の部分群を置換群と呼ぶことにします。
+        </p>
+        <div align="center"> <img height="50%" src="fig/permutation1.png"> </div>
+        </section>
+
+        <section>
+        <h3> 対称群・置換群 </h3>
+        <p>
+        集合上の自己同型写像は<span style="color:red">置換(permutation)</span>と同一視出来ます。集合$A$上の置換全体のなす群を<span style="color:red">対称群(symmetry group)</span>と呼び$\mathrm{Sym}(A)$と表します。対称群の部分群を置換群と呼ぶことにします。
+        </p>
+        <div align="center"> <img height="50%" src="fig/permutation2.png"> </div>
+        </section>
+
+        <section>
+        <h3> ケイリー(Cayley)の定理 </h3>
+        <div class="theorem">
+        <p>
+        任意の群は適当な置換群と同型。
+        </p>
+        </div>
+        <div style="font-size:90%">
+        <p>
+        先ほどの定理とほぼ同じ内容ですが「写像」と「置換」では大分印象が違います。
+        (要素の数が有限個の群の場合には)置換群による表現は計算機で扱う上で大変都合の良い形式であると言えます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 自由群 </h3>
+        <p class="fragment">省略</p>
+        </section>
+
         <section>
         <h3> 第2回はここで終わります </h3>
         <p>
         お疲れ様でした。<br>
-        圏論勉強会なのに圏論をやらずにすみませんでした。しかし,モノイドの理解があると圏論の学習もしやすくなります。
-        いよいよ,次回は最初に戻って圏の定義から一歩ずつ進めて行きます。
+        圏論勉強会なのに圏論をやらずにすみませんでした。しかし,本日やったモノイド・群の表現,自由モノイドの概念は圏論によってさらに一般化する事が出来ます。本日の内容を理解しておくと,今後の学習がしやすくなると思いますので頑張って復習をして下さい。
         </p>
         </section>
 
