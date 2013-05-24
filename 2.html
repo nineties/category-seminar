@@ -111,7 +111,6 @@
         <h2> 第２回:モノイド・群 </h2>
         </section>
 
-        <!--
         <section>
         <h3> 第2回の内容 </h3>
         <div class="fragment" align="center"> <img src="fig/pie_chart.png"> </div>
@@ -122,7 +121,6 @@
         <h3>@ワークスアプリケーションズ</h3>
         <small> 中村晃一 <br> 2013年5月23日</small>
         </section>
-        -->
 
         <section>
         <h3> 第2回の内容 </h3>
@@ -368,9 +366,7 @@
         </section>
 
         <section>
-        <!--
         <h3> とても便利ですね～</h3>
-        -->
         <p class="fragment">
         冷静に考えるとまだよく分からない。
         <ul>
@@ -588,7 +584,7 @@
           $$ \psi\circ \phi(x) = \psi((x\ \ \cdot)) = (x\ \ \cdot)(e) = x\cdot e = x$$
           </li>
           <li class="fragment"> 任意の$(x\ \ \cdot) \in \overline{M}$について
-          $$ \phi\circ\psi(f) = \phi((x\ \ \cdot)(e)) = \phi(x) = (x\ \ \cdot)$$
+          $$ \phi\circ\psi((x\ \ \cdot)) = \phi((x\ \ \cdot)(e)) = \phi(x) = (x\ \ \cdot)$$
           </li>
         </ul>
         <p class="fragment">
@@ -712,7 +708,7 @@
         <section>
         <p>
         集合$A$の要素を長さ$1$の列にする関数を$i$とすると,下の図式が可換である事は
-        $$ \mathrm{foldMap}\ f [a] = f(a) $$
+        $$ \mathrm{foldMap}\ f\ [a] = f(a) $$
         が任意の$a\in A$について成り立つという事です。<br>
         今説明したように,この可換図式が$\mathrm{foldMap}\ f$の機能を完全に決定します。(証明は後の回にやります。)
         </p>
@@ -739,7 +735,6 @@
         </p>
         </section>
 
-        <!--
         <section>
         <h3> 最後に </h3>
         </section>
@@ -757,7 +752,6 @@
           モナドは(ry
         </div>
         </section>
-        -->
 
         <section>
         <h2> 群 </h2>
@@ -799,6 +793,18 @@
         </section>
 
         <section>
+        <h3> automorphism </h3>
+        <img width="30%" src="fig/automorphism.png" align="right" hspace="20">
+        <p style="font-size:90%">
+        ドメインとコドメインが同じ<span style="color:red">全単射の関数</span>を,<span style="color:red">自己同型写像(automorphism)</span>と言います。
+        </p>
+        <p style="font-size:90%">
+        集合$A$上の自己同型全ての集合は関数合成に関して,恒等関数$\mathrm{id}_A$を単位元とする群となります。
+        この群を$\color{red}{\mathrm{Aut}(A)}$と表すことにします。
+        </p>
+        </section>
+
+        <section>
         <h3> 正二面体群 </h3>
         <div style="font-size:80%">
         <p>
@@ -819,18 +825,6 @@
         </p>
       </div>
         <div align="center"> <img height="40%" src="fig/cipher.png"> </div>
-        </section>
-
-        <section>
-        <h3> automorphism </h3>
-        <img width="30%" src="fig/automorphism.png" align="right" hspace="20">
-        <p style="font-size:90%">
-        ドメインとコドメインが同じ<span style="color:red">全単射の関数</span>を,<span style="color:red">自己同型写像(automorphism)</span>と言います。
-        </p>
-        <p style="font-size:90%">
-        集合$A$上の自己同型全ての集合は関数合成に関して,恒等関数$\mathrm{id}_A$を単位元とする群となります。
-        この群を$\color{red}{\mathrm{Aut}(A)}$と表すことにします。
-        </p>
         </section>
 
         <section>
