@@ -348,20 +348,166 @@
 
         <section>
         <h3> Haskellでの例 </h3>
+        GHCiをお持ちの方は<code>..... > </code>となっている部分のコードを動かしてみて下さい。
         <pre><code data-trim class="haskell" contenteditable>
--- 当日Haskellでいくつか例をお見せします。
--- 使用したコードは後でここに反映させます。
+-- モノイド,畳込み,木のライブラリを読み込みます
+Prelude> :m +Data.Monoid Data.Foldable Data.Tree
+Prelude Data.Monoid Data.Foldable Data.Tree> :set prompt "> "
+-- 木を作ってみます
+> let tree = unfoldTree (\x -> (x, [1..x-1])) 4
+> let showTree t = putStr . drawTree . fmap show $ t
+> showTree tree
+4
+|
++- 1
+|
++- 2
+|  |
+|  `- 1
+|
+`- 3
+   |
+   +- 1
+   |
+   `- 2
+      |
+      `- 1
 
+-- Monoidというライブラリには様々なモノイドが定義されています。
+> :info Monoid
+class Monoid a where
+  mempty :: a
+  mappend :: a -> a -> a
+  mconcat :: [a] -> a
+        -- Defined in `Data.Monoid'
+instance Monoid [a] -- Defined in `Data.Monoid'
+instance Num a => Monoid (Sum a) -- Defined in `Data.Monoid'
+instance Num a => Monoid (Product a) -- Defined in `Data.Monoid'
+instance Monoid Ordering -- Defined in `Data.Monoid'
+instance Monoid a => Monoid (Maybe a) -- Defined in `Data.Monoid'
+instance Monoid (Last a) -- Defined in `Data.Monoid'
+instance Monoid (First a) -- Defined in `Data.Monoid'
+instance Monoid (Endo a) -- Defined in `Data.Monoid'
+instance Monoid a => Monoid (Dual a) -- Defined in `Data.Monoid'
+instance Monoid Any -- Defined in `Data.Monoid'
+instance Monoid All -- Defined in `Data.Monoid'
+instance Monoid b => Monoid (a -> b) -- Defined in `Data.Monoid'
+instance (Monoid a, Monoid b, Monoid c, Monoid d, Monoid e) =>
+         Monoid (a, b, c, d, e)
+  -- Defined in `Data.Monoid'
+instance (Monoid a, Monoid b, Monoid c, Monoid d) =>
+         Monoid (a, b, c, d)
+  -- Defined in `Data.Monoid'
+instance (Monoid a, Monoid b, Monoid c) => Monoid (a, b, c)
+  -- Defined in `Data.Monoid'
+instance (Monoid a, Monoid b) => Monoid (a, b)
+  -- Defined in `Data.Monoid'
+instance Monoid () -- Defined in `Data.Monoid'
 
+-- fmapという関数は木の各ノードに関数を適用してくれます。
+-- 下の例では,各整数を足し算によるモノイドの値にマッピングしています。
+> showTree (fmap Sum tree)
+Sum {getSum = 4}
+|
++- Sum {getSum = 1}
+|
++- Sum {getSum = 2}
+|  |
+|  `- Sum {getSum = 1}
+|
+`- Sum {getSum = 3}
+   |
+   +- Sum {getSum = 1}
+   |
+   `- Sum {getSum = 2}
+      |
+      `- Sum {getSum = 1}
 
+-- 要素がモノイドである木に対し,foldを適用すると畳込みが行われます。
+> fold (fmap Sum tree)
+Sum {getSum = 15}
 
+-- fmapとfoldを続けて行なってくれる(もちろん,内部的にはより効率のよい実装になっている)関数が
+-- foldMapです。
+> foldMap Sum tree
+Sum {getSum = 15}
 
+-- foldMapの計算結果はモノイドとしての値です。getXXXXなどの関数で中身を取り出す事が出来ます。
+> getSum (foldMap Sum tree)
+15
 
+-- 積
+> foldMap Product tree
+Product {getProduct = 48}
 
+-- 列(Haskellでは \x -> f(x)という記法で引数がxの関数を表します。)
+> foldMap (\x -> [x]) tree
+[4,1,2,1,3,1,2,1]
 
+-- 文字列
+> foldMap show tree
+"41213121"
 
+-- 集合のjoin
+> foldMap (\x -> Data.Set.singleton x) tree
+fromList [1,2,3,4]
 
+-- 組(タプル)を使うと複数の畳み込みを同時に行えます。
+> foldMap (\x -> (Sum x, Product x)) tree
+(Sum {getSum = 15},Product {getProduct = 48})
 
+-- 木のノード数の計算
+> foldMap (\x -> Sum 1) tree
+Sum {getSum = 8}
+
+-- evenという関数は整数が偶数か否かを判定します。
+> showTree (fmap even tree)
+True
+|
++- False
+|
++- True
+|  |
+|  `- False
+|
+`- False
+   |
+   +- False
+   |
+   `- True
+      |
+      `- False
+
+-- evenにAllを合成してみます。
+> showTree (fmap (All . even) tree)
+All {getAll = True}
+|
++- All {getAll = False}
+|
++- All {getAll = True}
+|  |
+|  `- All {getAll = False}
+|
+`- All {getAll = False}
+   |
+   +- All {getAll = False}
+   |
+   `- All {getAll = True}
+      |
+      `- All {getAll = False}
+
+-- Allは論理積によるモノイドを表します。全てが偶数であるか => No
+> foldMap (All . even) tree
+All {getAll = False}
+
+-- Anyは論理和です。
+> foldMap (Any . even) tree
+Any {getAny = True}
+
+-- 条件分岐と組み合わせてみます。条件を満たさないものを単位元に移せば,
+-- 条件を満たす値だけでの畳込みとなります。
+> foldMap (\x -> if even x then Sum x else Sum 0) tree
+Sum {getSum = 8}
         </code></pre>
         </section>
 
@@ -427,20 +573,38 @@
         <section>
         <h3> Haskellでの例 </h3>
         <pre><code data-trim class="haskell" contenteditable>
--- 当日Haskellでいくつか例をお見せします。
--- 使用したコードは後でここに反映させます。
+-- Endomorphismの使用例です。
 
+-- 以下は1を足すという関数。整数から整数へのendomorphismです。
+> (+ 1) 2
+3
 
+-- 3を書けるという関数。これも整数上のendomorphismです。
+> (3 *) 3
+9
 
+-- このようなendomorphismをEndoというモノイドにして畳み込む事が出来ます。
+-- foldMap (\x -> if even x then Endo (x *) else Endo (+ x)) tree
+-- 正しこの畳込みの結果得られるのは
+-- Endo { appEndo = 関数(表示出来ない) }
+-- というモノイドですので,appEndoで関数を取り出して何か数値を代入する必要があります。
 
+-- 偶数なら掛けて,奇数なら足すという畳込みです。複数種類の演算を混ぜる事が出来ました。
+> appEndo( foldMap (\x -> if even x then Endo (x *) else Endo (+ x)) tree ) 0
+60
 
+-- 検算をしてみます。
+-- 要素の順番は以下のようになっています。
+> foldMap (\x -> [x]) tree
+[4,1,2,1,3,1,2,1]
 
+-- これが
+-- (4 *) . (+ 1) . (2 *) . (+ 1) . (+ 3) . (+ 1) . (2 *) . (+ 1)
+-- というendomorphismの合成に移ります。
+> ((4 *) . (+ 1) . (2 *) . (+ 1) . (+ 3) . (+ 1) . (2 *) . (+ 1)) 0
+60
 
-
-
-
-
-        </code></pre>
+          </code></pre>
         </section>
 
         <section>
@@ -640,19 +804,65 @@
         <section>
         <h3> Haskellでの例 </h3>
         <pre><code data-trim class="haskell" contenteditable>
--- 当日Haskellでいくつか例をお見せします。
--- 使用したコードは後でここに反映させます。
+-- (x :)という関数はリストの先頭にxを追加するリストからリストへのendomorphismです。
+> (1 :) [0,1,2]
+[1,0,1,2]
+
+-- [1,2,3,4,5]をこのendomorphismにして[2,3]に右から順番に適用してみます。
+-- 5,4,3,2,1の順番に追加が行われた事が判ります。
+> Data.Foldable.foldr (\x -> (x :)) [2,3] [1,2,3,4,5]
+[1,2,3,4,5,2,3]
+
+-- 今度は左から順番に適用してみます。foldrとfoldlは渡す関数の引数の順番が逆なので
+-- flipという関数を挟む必要があります。
+-- 1,2,3,4,5の順番に追加が行われた事が判ります。
+> Data.Foldable.foldl (flip (\x -> (x :))) [2,3] [1,2,3,4,5]
+[5,4,3,2,1,2,3]
 
 
+-- foldr,foldlには任意のendomorphismを食わす事が出来ますから、様々な複雑な処理を行えます。
+-- 例えばconst []という関数は引数を捨てて空リストを返す関数です。リストを引数に取れば
+-- リストからリストへのendomorphismとなります。  
+> (const []) [2,3]
+[]
+
+-- リストを順番に見ていって,3に出くわしたら入力を捨てて空にしてしまうという例です。
+> Data.Foldable.foldr (\x -> if x == 3 then const [] else (x :)) [2,3] [1,2,3,4,5]
+[1,2]
 
 
+-- foldrには任意のendomorphismを食わす事ができますが,有用なパターンは独立したモノイドとして
+-- 取り出す事が出来ます。先ほどの掛けたり足したりの例から取り出してみます。
+-- まず掛けたり,足したりする関数を合成すると全てf(x) = ax+bという形になります。
+-- f(x) = ax+bとg(x) = cx+dを合成してみると
+-- f(g(x)) = a(cx+d)+b = acx + ad+b
+-- となります。係数だけ取り出してみれば
+-- (a, b) と (c, d)の積が(ac, ad+b)になるという事です。こうして新しいモノイドを取り出す事が出来ました。
 
+-- AddMulというモノイドを定義してみます
+-- AddMulは２つのIntegerからなります。deriving (Show)というのはデータを表示出来るようにする為の指示です。
+> data AddMul = AddMul Integer Integer deriving (Show)
 
+-- モノイドである事を宣言します。
+-- 単位元(mempty)は恒等関数f(x) = x = 1x + 0に対応するAddMul 1 0です。
+-- 二項演算(mappend)は上で述べた通りです。
+> instance Monoid AddMul where mempty = AddMul 1 0; AddMul a b `mappend` AddMul c d = AddMul (a*c) (a*d + b)
 
+-- 先ほどの例をAddMulを使って計算してみます。
+> appEndo( foldMap (\x -> if even x then Endo (x *) else Endo (+ x)) tree ) 0
+60
 
+-- (a *)という関数はa x + 0なのでAddMul a 0
+-- (+ b)という関数は1 x + bなのでAddMul 1 bです。
+> foldMap (\x -> if even x then AddMul x 0 else AddMul 1 x) tree
+AddMul 16 60
 
-
-
+-- 畳み込まれた結果は実はf(x) = 16x + 60という関数だという事が判りました。
+-- 確認してみると確かに16x + 60となっている事が判ります。
+> appEndo( foldMap (\x -> if even x then Endo (x *) else Endo (+ x)) tree ) 1
+76
+> appEndo( foldMap (\x -> if even x then Endo (x *) else Endo (+ x)) tree ) 2
+92
         </code></pre>
         </section>
 
