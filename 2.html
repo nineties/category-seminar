@@ -423,7 +423,7 @@ Sum {getSum = 4}
       |
       `- Sum {getSum = 1}
 
--- 要素がモノイドである木に対し,foldを適用すると畳込みが行われます。
+-- 要素がモノイドの要素である木に対し,foldを適用すると畳込みが行われます。
 > fold (fmap Sum tree)
 Sum {getSum = 15}
 
@@ -432,7 +432,7 @@ Sum {getSum = 15}
 > foldMap Sum tree
 Sum {getSum = 15}
 
--- foldMapの計算結果はモノイドとしての値です。getXXXXなどの関数で中身を取り出す事が出来ます。
+-- foldMapの計算結果はモノイドの要素としての値です。getXXXXなどの関数で中身を取り出す事が出来ます。
 > getSum (foldMap Sum tree)
 15
 
@@ -587,7 +587,7 @@ Sum {getSum = 8}
 -- foldMap (\x -> if even x then Endo (x *) else Endo (+ x)) tree
 -- 正しこの畳込みの結果得られるのは
 -- Endo { appEndo = 関数(表示出来ない) }
--- というモノイドですので,appEndoで関数を取り出して何か数値を代入する必要があります。
+-- というモノイドとしての値ですので,appEndoで関数を取り出して何か数値を代入する必要があります。
 
 -- 偶数なら掛けて,奇数なら足すという畳込みです。複数種類の演算を混ぜる事が出来ました。
 > appEndo( foldMap (\x -> if even x then Endo (x *) else Endo (+ x)) tree ) 0
