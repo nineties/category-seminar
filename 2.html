@@ -423,7 +423,7 @@ Sum {getSum = 4}
       |
       `- Sum {getSum = 1}
 
--- 要素がモノイドの要素である木に対し,foldを適用すると畳込みが行われます。
+-- 要素がモノイドの値である木に対し,foldを適用すると畳込みが行われます。
 > fold (fmap Sum tree)
 Sum {getSum = 15}
 
@@ -579,7 +579,7 @@ Sum {getSum = 8}
 > (+ 1) 2
 3
 
--- 3を書けるという関数。これも整数上のendomorphismです。
+-- 3を掛けるという関数。これも整数上のendomorphismです。
 > (3 *) 3
 9
 
