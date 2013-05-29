@@ -200,7 +200,7 @@
         </section>
 
         <section data-state="blackout" style="color:white;font-size:90%">
-        <p> 永遠に続く。</p>
+        <p> こうして無限の階層は永遠に続きます。</p>
         <div align="center"><img width="80%" src="fig/universe11.png"></div>
         </section>
 
@@ -228,21 +228,32 @@
         </section>
 
         <section>
-        <h3> 帰納的定義 </h3>
+        <h3> 数学における宇宙 </h3>
         <p>
-        無限という概念を人間の手に負えるものにする為に,数学では<span style="color:red">帰納的定義</span>
-        </p>
-        </section>
-        <!--
-
-        <section>
-        <p>
-        今の話では「順序数」というものの雰囲気を説明しています。感じてもらいたい事は「<span style="color:red">無限にも階層がある</span>」という事です。
+        無制限に無限集合を利用するとおかしな事になるので,数学における作業は何らかの領域の内部で行われます。
         </p>
         <p class="fragment">
-        無限個存在する概念を人間の手に負えるものにする為に,数学では<span style="color:red">帰納的な定義</span>を利用します。最初にいくつかの種から始め,それを育てる手順を有限回繰り返す事によって次々と物を作り出すわけです。
+        例えば$2 + 3 = 5$の様な自然数に関する議論は,自然数の集合$\mathbb{N}$の中で行えます。<br>
         </p>
-        <p class="f
+        <p class="fragment">
+        自然数の集合($A=\{1,2,3\}$など)に関する議論を行うには,自然数の部分集合の集合である$\mathcal{P}(\mathbb{N})$の中で行えます。
+        </p>
+        <p class="fragment">
+        一般的な数学を行うには更に巨大な集合(もしくはもはや集合とみなせない領域)が必要になります。こうして数学の各状況に応じて<span style="color:red">宇宙(universe)</span>という概念が生じます。
+        </p>
+        </section>
+
+        <section>
+        <h3> グロタンディーク宇宙 </h3>
+        <p>
+        </p>
+        </section>
+
+        <section>
+        <h3> 小さな集合 </h3>
+        <p>
+        圏論の作業を行う場合には,常に何らかのグロタンディーク宇宙$U$を固定しておきます。<br>
+        そして任意のグロタンディーク宇宙の要素$x \in U$を<span style="color:red">小さな集合(small set)</span>と呼ぶことにします。
         </p>
         </section>
 
@@ -251,7 +262,333 @@
         </section>
 
         <section>
+        <h3> 定義の復習 </h3>
+        </section>
+
+        <section id="category">
+        <h3> 圏の定義 </h3>
+        <div class="definition">
+        <p>
+        <span style="color:red">圏(category)</span>とは
+        </p>
+        <ul>
+          <li> 対象(object):$A,B,C,\cdots$ </li>
+          <li> 射(arrow,morphism):$f,g,h,\cdots$ </li>
+          <li> 射の合成(composition): $\circ$ </li>
+        </ul>
+        <p>
+        からなり,以後の条件を全て満たすものである。
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <div class="definition">
+        <p>
+        任意の射$f$には
+        </p>
+        <ul>
+          <li> ドメイン(domain): $\mathrm{dom}(f)$ </li>
+          <li> コドメイン(codomain): $\mathrm{cod}(f)$ </li>
+        </ul>
+        <p>
+        という２つの対象が備わる。<br>
+        $\mathrm{dom}(f) = A$,$\mathrm{cod}(f) = B$である事を $ f: A\rightarrow B$ と表す。
+        </p>
+        <div align="center"> <img src="fig/category1.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <div class="definition">
+        <p> 射$f:A\rightarrow B$,$g:B\rightarrow C$が存在するならば, </p>
+        <ul>
+          <li> 合成射(composite)  $ g\circ f: A \rightarrow C $ </li>
+        </ul>
+        <p>
+        も存在する。
+        </p>
+        <div align="center"> <img src="fig/category2.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <div class="definition">
+        <p> 任意の射$f: A \rightarrow B$, $g: B \rightarrow C$, $h: C \rightarrow D$に対して 結合律(associative law) </p>
+        <div align="center"> $ (h\circ g)\circ f = h \circ (g\circ f)$ </div>
+        <p> が成り立つ。すなわち,下図が可換である。</p>
+        <div align="center"> <img height="55%" src="fig/category4.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <div class="definition">
+        <p> 任意の対象$A$に対して </p>
+        <ul>
+          <li> 恒等射(identity) $ 1_A: A \rightarrow A $ </li>
+        </ul>
+        <p> が存在し,任意の$f: A \rightarrow B$に対して単位元律(<span style="font-size:80%">identity law</span>) </p>
+        <div align="center"> $ f\circ 1_A = 1_B \circ f = f $ </div>
+        <p> が成り立つ。すなわち,右下図が可換である。</p>
+        <div align="center"> <img height="45%" src="fig/category3.png"> </div>
+        </div>
+        </section>
+
+        <section id="isomorphism">
+        <h3> 同型の定義 </h3>
+        <div class="definition">
+        <p>
+        $f: A\rightarrow B$に対して,$g: B\rightarrow A$が存在し,
+        </p>
+        <div align="center"> $ g\circ f = 1_A\qquad f\circ g = 1_B$ </div>
+        <p>
+        が成り立つならば$f$を<span style="color:red">同型射(isomorphism)</span>と呼ぶ。<br>
+        また,圏$\mathbf{C}$において$A$と$B$の間に同型射が存在するならば,$\mathbf{C}$において$A$は$B$と<span style="color:red">同型(isomorphic)</span>であると言い,
+        $$ A \cong B$$
+        と表す。
+        </p>
+        <div align="center"><img src="fig/inverse.png"> </div>
+        </div>
+        </section>
+
+        <section id="functor">
+        <h3> 函手の定義 </h3>
+        <div class="definition">
+        <p> 圏$\mathbf{C}$から圏$\mathbf{D}$への函手$F: \mathbf{C}\rightarrow\mathbf{D}$とは
+        $\mathbf{C}$の各対象$A$に$\mathbf{D}$の対象$F(A)$を対応付け,
+        $\mathbf{C}$の各射$f: A\rightarrow B$に$\mathbf{D}$の射$ F(f): F(A) \rightarrow F(B) $を
+        対応付ける2つの関数の組であり,以下の条件を満たすものである。 </p>
+        <div align="left">
+        <ul>
+          <li> 任意の$\mathbf{C}$の射$f: A\rightarrow B$, $g: B\rightarrow C$に対して
+          $$ F(g\circ f) = F(g) \circ F(f) $$
+          </li>
+          <li> 任意の$\mathbf{C}$の対象$A$に対して
+          $$ F(1_A) = 1_{F(A)} $$
+          </li>
+        </ul>
+        </div>
+        </div>
+        </section>
+
+        <section>
         <h3> $\mathbf{Sets}$ </h3>
+        <ul>
+          <li> 対象: 小さな集合 </li>
+          <li> 射: 関数 </li>
+          <li> 射の合成: 関数合成 </li>
+        </ul>
+        <p> からなる非常に巨大な圏です。 $\mathbf{Sets}$ではなく$\mathbf{Set}$と書いている本もあります。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\mathbf{Sets}$のバリエーション </h3>
+        <p> $\mathbf{Sets}$に幾つか制約を加えた圏が役に立つ場合もあるかもしれません。例えば </p>
+        <ul>
+          <li> 対象を有限集合のみに制限する。 </li>
+          <li> 関数を全射のみに制限する。(全射と全射の合成は全射) </li>
+          <li> 関数を単射のみに制限する。(単射と単射の合成は単射) </li>
+        </ul>
+        <p> などです。 </p>
+        </section>
+
+        <section>
+        <h3> $\mathbf{Mon},\mathbf{Grp}$ </h3>
+        <ul>
+          <li> 対象: 小さなモノイド(台集合が小さな集合) </li>
+          <li> 射: モノイドの準同型写像 </li>
+          <li> 射の合成: 準同型写像の合成 </li>
+        </ul>
+        <p>
+        からなる圏が$\mathbf{Mon}$です。同様に(小さな)群とその準同型写像からなる圏$\mathbf{Grp}$も考えられます。
+        </p>
+        <p>
+        モノイド・群全体について考える場合の舞台となります。
+        </p>
+        <div align="center"> <img src="fig/mon.png"> </div>
+        </section>
+
+        <section>
+        <h3> 構造と準同型からなる圏 </h3>
+        <p>
+        モノイドや群は構造を持つ集合であり,準同型は構造を保つ関数(写像)です。つまり$\mathbf{Mon}$や$\mathbf{Grp}$は<span style="color:red">構造と準同型からなる圏</span>と言えます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 構造と準同型からなる圏 </h3>
+        <p>
+        このような圏には多種多様なものが存在します。テキストから列挙しますが,全て理解しなければならないというものではありません。いくつかピックアプして簡単に説明します。
+        </p>
+        <ul>
+          <li> ベクトル空間と線形写像 </li>
+          <li> グラフとグラフ準同型 </li>
+          <li> 実数と連続関数 </li>
+          <li> 実数の集合とその上の連続関数 </li>
+          <li> 位相空間と連続写像 </li>
+          <li> 微分可能多様体と微分可能写像 </li>
+          <li> 自然数の集合と計算可能関数 </li>
+          <li> 半順序集合と単調写像 </li>
+        </ul>
+        </section>
+
+        <section>
+        <h3> グラフの圏 </h3>
+        <p>
+        グラフ(graph)とは頂点と辺からなる構造です。グラフ準同型とは頂点と辺の接続関係を保ったグラフ間のマッピングの事を言います。
+        </p>
+        <div align="center"> <img src="fig/graph_homomorphism.png"> </div>
+        </section>
+
+        <section>
+        <h3> 位相空間の圏$\mathbf{Top}$ </h3>
+        <p>
+        位相空間(topological space)とは点と点のつながりに関する情報を持つ図形です。
+        連続写像(continuous mapping)とは図形を破ったりしない穴を開けたりしない変形です。
+        </p>
+        <p>
+        下のアニメーションは連続写像の中でも位相同型写像という「行って返って来れる写像」を表しています。
+        </p>
+        <div align="center"> <img src="http://upload.wikimedia.org/wikipedia/commons/2/26/Mug_and_Torus_morph.gif"> </div>
+        <small>wikipedia/位相同型</small>
+        <div align="left" style="font-size:50%">
+          注: これはあくまでイメージです。実際には開集合系というものを用いて厳密に定義されます。
+        </div>
+        </section>
+
+        <section>
+        <h3> ちょっと脱線します </h3>
+        </section>
+
+        <section>
+        <p> 線分で出来た下の3つの図形を見て下さい。これらは線分を切る事なく行き来できるので位相同型です。($\approx$という記号で表します。</p>
+        </p>
+        <div align="center"> <img src="fig/triangulation3.png"> </div>
+        </section>
+
+        <section>
+        <p> ここで
+        $$ \text{(点の数)} - \text{(線分の数)} $$
+        を計算してみて下さい。 <span class="fragment"> 全て$0$になるはずです。 </span>
+        </p>
+        <div align="center"> <img src="fig/triangulation3.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        先ほどの図とは位相同型でない,下の3つの図ではどうなるでしょうか？
+        </p>
+        <div align="center"> <img src="fig/triangulation6.png"> </div>
+        </section>
+
+        <section>
+        <h3> オイラー標数 </h3>
+        <p>
+        図形$X$を下図のような図形(左から$0$単体,$1$単体,$2$単体$\cdots$と言います)に分割した際
+        $$ \chi(X) = \text{($0$単体の数)} - \text{($1$単体の数)} + \text{($2$単体の数)} - \text{($3$単体の数)} + \cdots $$
+        という数は分割の方法によらず<span style="color:red">位相同型な図形では等しくなる</span>という特徴があります。この不変量を$X$のオイラー標数と言います。
+        </p>
+        <div align="center"> <img src="fig/triangulation4.png"> </div>
+        </section>
+
+        <section>
+        <h3> 球面 </h3>
+        球面のオイラー標数はいくつになるでしょうか？
+        <div align="center"> <img src="fig/triangulation1.png"> </div>
+        </section>
+
+        <section>
+        <h3> トーラス </h3>
+        トーラス(ドーナツの表面)のオイラー標数はいくつになるでしょうか？適当に切って考えましょう。
+        <div align="center"> <img src="fig/triangulation2.png"> </div>
+        <div align="left" style="font-size:50%">
+          注: この切り方だと三角形の3頂点が1点にあつまるので単体分割になっておらず,胞体というものを考えることになるのですが,とりあえず値は等しくなるので資料中では分かりやすさを優先します。
+        </div>
+        </section>
+
+        <section>
+        <h3> 代数的位相幾何学 </h3>
+        <p>
+        オイラー標数は大雑把なので,実際には群などの代数構造を不変量として取り出します。
+        このように位相空間から不変量を取り出して代数学の手法を使って研究する分野を<span style="color:red">代数的位相幾何学(algebraic topology)</span>と言います。
+        </p>
+        <p class="fragment">
+        プログラミングに役に立つ事はないと思いますが、圏論は代数的トポロジーの分野で育った学問と言えるのでそうした背景は教養として知っておいて良いのではないかと思います。また計算機科学と全く関係無いわけではなく,ずっと深い所(論理の世界)で関連があります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 具体圏 </h3>
+        <p>
+        これまでに見てきた圏は構造を持った「集合」と構造を保つ「関数(写像)」からなる圏でしたので,
+        <span style="color:red">\mathbf{Sets}の一部と同一視可能</span>です。<br>
+        この事の定式化は後の回に行いますが,このような圏を<span style="color:red">具体圏(concrete category)</span>と言います。
+        </p>
+        </section>
+
+        <section>
+        <h3> 離散圏 </h3>
+        <p>
+        集合一つを取って,それを圏と見なす事も可能です。
+        </p>
+        <ul>
+          <li> 対象: 集合の要素 </li>
+          <li> 射: 恒等射のみ </li>
+        </ul>
+        <p>
+        とします。これを<span style="color:red">離散圏(discrete category)</span>と言います。
+        </p>
+        <div align="center"> <img src="fig/discrete_category.png"> </div>
+        </section>
+
+        <section>
+        <h3> モノイド・群 </h3>
+        <p>
+        モノイドは「対象が一つの圏」です。<br>
+        群は「対象が一つで,全ての射が同型射である圏」です。
+        </p>
+        <p>
+        特定のモノイドや群について考える際の舞台となります。
+        </p>
+        <div align="center"> <img src="fig/a_monoid.png"> </div>
+        </section>
+
+        <section>
+        <h3> 一般的なモノイド・群 </h3>
+        <p>
+        例えば「列と連結」からなるモノイドを思い出して下さい。これを一つの圏として解釈すると
+        <span style="color:red">射が個々の列</span>であり,<span style="color:red">射の合成が連結</span>であり,対象には特に意味がありません。
+        </p>
+        <p class="fragment">
+        射とは必ずしも関数ではないので注意して下さい。
+        </p>
+        <div align="center"> <img src="fig/a_monoid2.png"> </div>
+        </section>
+
+        <section>
+        <h3> 空圏$\mathbf{0}$ </h3>
+        <p>
+        対象も射も全く無い圏を空圏と言い,$\mathbf{0}$と表します。
+        </p>
+        <div align="center"> <img src="fig/category-0.png"> </div>
+        </section>
+
+        <section>
+        <h3> $\mathbf{1}$ </h3>
+        対象が$1$つ,射が恒等射のみの圏を$1$と表します。
+        <div align="center"> <img src="fig/category-1.png"> </div>
+        </section>
+
+        <section>
+        <h3> $\mathbf{2}$ </h3>
+        対象が$2$つで,恒等射以外の射が下図のように$1$つある圏を$2$と表します。
+        <div align="center"> <img src="fig/category-2.png"> </div>
+        </section>
+
+        <section>
+        <h3> $\mathbf{3} </h3>
+        <div align="center"> <img src="fig/category-3.png"> </div>
         </section>
 
         <section>
@@ -265,7 +602,6 @@
         <section>
         <h2> 自由圏 </h2>
         </section>
-        -->
 
 			</div>
 		</div>
