@@ -103,6 +103,7 @@
           <li> <span style="color:red">圏論(category theory)</span>を題材にいろんなことを学びます。</li>
           <li> 分かり易さを重視して初歩的な例を多用します。</li>
           <li> 関数型言語の経験がある方がより楽しめると思います。資料中では主にHaskellを使います。 </li>
+          <li> 中高生も数人見ているらしいのでプログラミングと関係の浅い内容も取り上げます。</li>
           <li> この資料は<a href="http://nineties.github.com/category-seminar/">http://nineties.github.com/category-seminar</a>に置いてあります。</li>
         </ul>
         </section>
@@ -123,8 +124,134 @@
         <h2> 宇宙 </h2>
         </section>
 
+        <section data-state="blackout">
+        <h2> 宇宙 </h2>
+        </section>
+
+        <section data-state="blackout" style="color:white;font-size:90%">
+        <p> 始め宇宙には<span style="color:transparent">空集合$\emptyset$のみが存在していました。</span> </p>
+        <div align="center"><img width="80%" src="fig/universe0.png"></div>
+        </section>
+
+        <section data-state="blackout" style="color:white;font-size:90%">
+        <p> 始め宇宙には空集合$\emptyset$のみが存在していました。 </p>
+        <div align="center"><img width="80%" src="fig/universe1.png"></div>
+        </section>
+
+        <section data-state="blackout" style="color:white;font-size:90%">
+        <p> この宇宙の神様はこれを$0$と呼ぶ事にしました。 </p>
+        <div align="center"><img width="80%" src="fig/universe2.png"></div>
+        </section>
+
+        <section data-state="blackout" style="color:white;font-size:90%">
+        <p> 次に神様は「$0$のみからなる集合」を作り,</p>
+        <div align="center"><img width="80%" src="fig/universe3.png"></div>
+        </section>
+
+        <section data-state="blackout" style="color:white;font-size:90%">
+        <p> それに$1$と名前を付けました。 </p>
+        
+        <div align="center"><img width="80%" src="fig/universe4.png"></div>
+        </section>
+
+        <section data-state="blackout" style="color:white;font-size:90%">
+        <p> 次には「$0$と$1$のみからなる集合」$2$を作りました。</p>
+        <div align="center"><img width="80%" src="fig/universe5.png"></div>
+        </section>
+
+        <section data-state="blackout" style="color:white;font-size:90%">
+        <p> その次は「$0$と$1$と$2$のみからなる集合」$3$を作りました。</p>
+        <div align="center"><img width="80%" src="fig/universe6.png"></div>
+        </section>
+
+        <section data-state="blackout" style="color:white;font-size:90%">
+        <p> このように「集合を集めて新しい集合を作る」事を繰り返しました。</p>
+        <div align="center"><img width="80%" src="fig/universe6.png"></div>
+        </section>
+
+        <section data-state="blackout" style="color:white;font-size:90%">
+        <p> こうして,宇宙は自然数と呼ばれる集合で満ちていきました。</p>
+        <div align="center"><img width="80%" src="fig/universe7.png"></div>
+        </section>
+
+        <section data-state="blackout" style="color:white;font-size:90%">
+        <p> ある時,神様は「この宇宙自体も集合の一つだ」と悟り,</p>
+        <div align="center"><img width="80%" src="fig/universe8.png"></div>
+        </section>
+
+        <section data-state="blackout" style="color:white;font-size:90%">
+        <p> この新しい集合に$\omega$と名前を付けました。</p>
+        <div align="center"><img width="80%" src="fig/universe9.png"></div>
+        </section>
+
+        <section data-state="blackout" style="color:white;font-size:90%">
+        <p> 無限集合を発見した瞬間です。 </p>
+        <div align="center"><img width="80%" src="fig/universe9.png"></div>
+        </section>
+
+        <section data-state="blackout" style="color:white;font-size:90%">
+        <p> すると「集合を集めて新しい集合を作る」事によって </p>
+        <div align="center"><img width="80%" src="fig/universe9.png"></div>
+        </section>
+
+        <section data-state="blackout" style="color:white;font-size:90%">
+        <p> 宇宙はさらに豊かになりました。 </p>
+        <div align="center"><img width="80%" src="fig/universe10.png"></div>
+        </section>
+
+        <section data-state="blackout" style="color:white;font-size:90%">
+        <p> 永遠に続く。</p>
+        <div align="center"><img width="80%" src="fig/universe11.png"></div>
+        </section>
+
+        <section>
+        <p>
+        「順序数」という概念を用いて数学における「宇宙」の雰囲気を説明しました。
+        </p>
+        <p>
+        圏論においても「宇宙」という概念が登場するのですが,プログラミングに関する文脈では考えても殆ど意味がありません。しかし,「無限」という概念に触れる良い機会ですので少し説明します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 全ての集合の集合 </h3>
+        <p> 圏論では「全ての集合の集合」の様な概念を考えなければならない場面があります。仮に「全ての集合の集合」が存在するとしてそれを$X$としましょう。
+        </p>
+        <p class="fragment">
+        すると$X$自体も集合なのですから
+        $$ X \in X $$
+        つまり,$X$の中に$X$が入っているという事になります。これは気持ちが悪い感じがします。
+        </p>
+        <p class="fragment">
+        実際$X$の存在は「カントールのパラドックス」という逆理を導いてしまいます。つまり$X$は集合としては存在し得ないということです。
+        </p>
+        </section>
+
+        <section>
+        <h3> 帰納的定義 </h3>
+        <p>
+        無限という概念を人間の手に負えるものにする為に,数学では<span style="color:red">帰納的定義</span>
+        </p>
+        </section>
+        <!--
+
+        <section>
+        <p>
+        今の話では「順序数」というものの雰囲気を説明しています。感じてもらいたい事は「<span style="color:red">無限にも階層がある</span>」という事です。
+        </p>
+        <p class="fragment">
+        無限個存在する概念を人間の手に負えるものにする為に,数学では<span style="color:red">帰納的な定義</span>を利用します。最初にいくつかの種から始め,それを育てる手順を有限回繰り返す事によって次々と物を作り出すわけです。
+        </p>
+        <p class="f
+        </p>
+        </section>
+
         <section>
         <h2> 様々な圏 </h2>
+        </section>
+
+        <section>
+        <h3> $\mathbf{Sets}$ </h3>
         </section>
 
         <section>
@@ -138,7 +265,7 @@
         <section>
         <h2> 自由圏 </h2>
         </section>
-
+        -->
 
 			</div>
 		</div>
