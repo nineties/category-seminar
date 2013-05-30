@@ -524,7 +524,7 @@
         </div>
         <img align="right" src="http://upload.wikimedia.org/wikipedia/commons/2/26/Mug_and_Torus_morph.gif">
         <p style="font-size:90%">
-        右のアニメーション(<a href="http://ja.wikipedia.org/wiki/%E4%BD%8D%E7%9B%B8%E5%90%8C%E5%9E%8B">wikipedia/位相同型</a>)は連続写像の中でも<span style="color:red">位相同型写像(homeomorphism)</span>という「元に戻せる連続写像」を表しています。
+        右のアニメーション(wikipedia/位相同型より)は連続写像の中でも<span style="color:red">位相同型写像(homeomorphism)</span>という「元に戻せる連続写像」を表しています。
         位相空間としてはコーヒーカップとドーナツは本質的に同じであるという事です。
         </p>
         </section>
@@ -919,7 +919,7 @@
         自由モノイドとは「列と連結」からなるモノイドと思ってよく,任意の他のモノイドへの準同型が「長さ$1$の列のマッピング」のみによって決定されるという良い性質を持っていました。
         </p>
         <p class="fragment">
-        今日はこれの一般化を考えたいのですが,具体例を作るのは簡単なのでいくつか見てみます。
+        今日はこれの一般化を考えたいのですが,その前に具体例をいくつか見てましょう。
         </p>
         </section>
 
@@ -942,163 +942,8 @@
         </section>
 
         <section>
-        <p> まず種になる集合(生成系)が必要です。仮に$A = \{a,b,c\}$とします。</p>
-        <p> これらに２項演算を$0$回以上適用して出来上がる項は </p>
-        $$ a,\,b,\,c,\,ab,\,bc,\,\cdots,\,(ab)c,\,a(bc)\cdots $$
-        <p> です。見やすさの為に$\cdot$は省略します。</p>
-        <div class="fragment">
-        <p>
-        結合律があるので$(ab)c=a(bc)$などが成り立ちますから括弧を外すと
-        </p>
-        $$ a,\,b,\,c,\,ab,\,bc,\,\cdots,\,abc,\,\cdots $$
-        <p>
-        となります。他に等式はありませんから,これらを別々の元として持つ構造が$A$上の自由半群となります。
-        </p>
-        </div>
-        <p class="fragment">
-        つまり自由半群とは「<span style="color:red">長さが$1$以上の列</span>(と連結)」です。
-        </p>
-        </section>
-
-        <section id="magma">
-        <h3> マグマ </h3>
-        <div class="definition">
-        <p>
-        <span style="color:red">マグマ(magma)</span>とは集合$M$，$M$上の二項演算$\cdot$の組$(M, \cdot)$をもつものである。
-        </p>
-        </div>
-        <p> マグマに結合律を加えたのが半群です。</p>
-        <p class="fragment">
-        では<span style="color:red">自由マグマ</span>を作ってみましょう。
-        </p>
-        </section>
-
-        <section>
-        <p> 生成系を$A = \{a,b,c\}$とします。</p>
-        <p> これらに２項演算を$0$回以上適用して出来上がる項は </p>
-        $$ a,\,b,\,c,\,ab,\,bc,\,\cdots,\,(ab)c,\,a(bc)\cdots $$
-        <p> です。</p>
-        <p class="fragment">
-        マグマには一切の等式がないので,これらを全て異なる元として持つ構造が自由マグマです。
-        </p>
-        <p class="fragment">
-        つまり自由マグマとは「葉にのみ値を持つ<span style="color:red">二分木</span>(とその連結)」です。
-        </p>
-        </section>
-
-        <section>
-        <h3> 自由マグマ </h3>
-        <div align="center"> <img width="90%" src="fig/free_magma.png"> </div>
-        </section>
-
-        <section>
-        <h3> 可換モノイド </h3>
-        <div class="definition">
-        <p>
-        <span style="color:red">可換モノイド(commutative monoid)</span>とはモノイド$(M,\cdot)$であって,以下の条件を満たすものである。
-        </p>
-        <ul>
-          <li>可換則: 任意の$x,y \in M$について
-          $$ x\cdot y = y\cdot x $$
-          </li>
-        </ul><br>
-        </div>
-        <p class="fragment">
-        では<span style="color:red">自由可換モノイド</span>とはどんな構造でしょうか？
-        </p>
-        </section>
-
-        <section>
-        <h3> 冪等モノイド </h3>
-        <div class="definition">
-        <p>
-        <span style="color:red">冪等モノイド(idempotent monoid)</span>とはモノイド$(M,\cdot)$であって,以下の条件を満たすものである。
-        </p>
-        <ul>
-          <li>冪等則: 任意の$x \in M$について
-          $$ x\cdot x = x$$
-          </li>
-        </ul><br>
-        </div>
-        <p>
-        では<span style="color:red">自由冪等モノイド</span>とはどんな構造でしょうか？
-        </p>
-        </section>
-
-        <section>
-        <h3> 冪等可換モノイド </h3>
-        <div class="definition">
-        <p>
-        <span style="color:red">冪等可換モノイド(idempotent commutative monoid)</span>とはモノイド$(M,\cdot)$であって冪等則と可換則を満たすものである。
-        </p>
-        </div>
-        <p>
-        では<span style="color:red">自由冪等可換モノイド</span>とはどんな構造でしょうか？
-        </p>
-        </section>
-
-        <section>
-        <p> 是非、何らかの代数の本を読むことをお薦めしますが、以下を眺めるだけでも楽しいと思います。</p>
-        <a href="http://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%B0%E3%83%9E_(%E6%95%B0%E5%AD%A6)">wikipedia/マグマ</a><br>
-        <a href="http://ja.wikipedia.org/wiki/%E5%8D%8A%E7%BE%A4">wikipedia/半群</a><br>
-        <a href="http://ja.wikipedia.org/wiki/%E3%83%A2%E3%83%8E%E3%82%A4%E3%83%89">wikipedia/モノイド</a><br>
-        <a href="http://ja.wikipedia.org/wiki/%E7%BE%A4_(%E6%95%B0%E5%AD%A6)">wikipedia/群</a><br>
-        </section>
-
-        <section>
-        <h3> プログラミングと代数 </h3>
-        <p> 
-        プログラミングで扱う様々なデータ構造は何らかの代数構造であるということに気づく事が大切です。
-        </p>
-        <p>
-        前回,$\mathbf{foldMap},\mathbf{fold[r|l]}$でモノイド準同型を作って様々な計算が行える事を見ましたが,同様の事が出来ることになります。その際,何が出来て何が出来ないかは代数の構造を調べれば良いという事になります。
-        </p>
-        </section>
-
-        <section>
-        <h3> 自由対象 </h3>
-        <ul>
-          <li> 自由モノイドは$\mathbf{Mon}$の自由対象 </li>
-          <li> 自由半群は「半群と準同型のなす圏」の自由対象 </li>
-          <li> 自由マグマは「マグマと準同型のなす圏」の自由対象 </li>
-        </ul>
-        <p>
-        などと言います。ということで圏$\mathbf{C}$の自由対象というものを考えます。
-        </p>
-        <p>
-        これらは全て「生成系(集合)と要素のマッピング(関数)」という下部の構造($\mathbf{Sets}$の中にある)から,上部の構造$\mathbf{C}$における射が一意的に決定されるという性質を持っています。
-        </p>
-        </section>
-
-        <section>
-        <h3> こんな感じ </h3>
-        <div align="center"> <img src="fig/free_object.png"> </div>
-        </section>
-
-        <section>
-        <h3> 忘却函手 </h3>
-        <p> $\mathbf{C}$(構造を持つ集合と構造を保つ関数の圏)の「構造」を捨てて$\mathbf{Sets}$(集合と関数の圏)そのまま移す函手
-        $$ |-| : \mathbf{C}\rightarrow \mathbf{Sets}$$
-        を<span style="color:red">忘却函手(forgetful functor)</span>と言います。
-        </p>
-        <div align="left" style="font-size:50%">
-          注: 一般には忠実函手というもので一般化しますが,今回は単に集合と関数をそのまま同じものに写す函手を考えます。
-        </div>
-        </section>
-
-        <section id="free_object">
-        <h3> 自由対象(狭義) </h3>
-        <div class="definition" style="font-size:80%">
-        <p>
-        $|-|:\mathbf{C}\rightarrow\mathbf{Sets}$を忘却函手とする。<br>
-        $\mathbf{C}$の対象$F(A)$が集合$A$上の自由対象であるとは,ある関数$i: A\rightarrow |F(A)|$を備えており,任意の$\mathbf{C}$の対象$X$と関数$f: A\rightarrow |X|$について,下図が可換となるような射$\overline{f}: F(A)\rightarrow X$が唯一に定まる事である。
-        </p>
-        <div align="center"> <img width="70%" src="fig/free_object2.png"> </div>
-        </div>
-        </section>
-
-        <section>
-        <p> 自由対象の話は次回も再び取り上げる予定(自由圏という$\mathbf{Cat}$の自由対象)です。 </p>
+        <p> まず種になる集合が必要です。仮に$A = \{a,b,c\}$としましょう。</p>
+        <p> これらに２項演算を$0$回以上適用して出来上がる集合は </p>
         </section>
 
         <section>
@@ -1138,16 +983,10 @@
         <section>
         <h3> オイラー標数 </h3>
         <p>
-        図形$X$を下図のような$n$次元での三角形($n$単体)に分割した際
-        </p>
-        <div class="fragment">
-        <p style="font-size:80%">
+        図形$X$を下図のような図形(左から$0$単体,$1$単体,$2$単体$\cdots$と言います)に分割した際
         $$ \chi(X) = \text{($0$単体の数)} - \text{($1$単体の数)} + \text{($2$単体の数)} - \text{($3$単体の数)} + \cdots $$
+        という数は分割の方法によらず<span style="color:red">位相同型な図形では等しくなる</span>という特徴があります。この不変量を$X$のオイラー標数と言います。
         </p>
-        <p>
-        という数は分割の方法によらず<span style="color:red">位相同型な図形では等しくなる</span>という性質があります。この不変量を$X$の<span style="color:red">オイラー標数</span>と言います。
-        </p>
-        </div>
         <div align="center"> <img src="fig/triangulation4.png"> </div>
         </section>
 
@@ -1159,11 +998,11 @@
 
         <section>
         <h3> トーラス </h3>
-        <p>トーラス(ドーナツの表面)のオイラー標数はいくつになるでしょうか？適当に切って考えましょう。</p>
+        トーラス(ドーナツの表面)のオイラー標数はいくつになるでしょうか？適当に切って考えましょう。
         <div align="center"> <img src="fig/triangulation2.png"> </div>
-          <p style="font-size:50%">
+        <div align="left" style="font-size:50%">
           注: この切り方だと三角形の3頂点が1点にあつまるので単体分割になっておらず,胞体というものを考えることになるのですが,とりあえず値は等しくなるので資料中では分かりやすさを優先します。
-          </p>
+        </div>
         </section>
 
         <section>
@@ -1174,15 +1013,6 @@
         </p>
         <p class="fragment">
         プログラミングに役に立つ事はないと思いますが、圏論は代数的トポロジーの分野で育った学問と言えるのでそうした背景は教養として知っておいて良いのではないかと思います。また計算機科学と全く関係無いわけではなく,ずっと深い所(論理の世界)で関連があります。
-        </p>
-        </section>
-
-        <section>
-        <h3> 第3回はここで終わります </h3>
-        <p>
-        お疲れ様でした。<br>
-        かなり多くの事を紹介しましたが,一度に全て理解しようとする必要はありません。
-        本日の内容と似た話が今後も出てきますので、徐々に理解を深めて行きましょう。
         </p>
         </section>
 
