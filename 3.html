@@ -1102,6 +1102,81 @@
         </section>
 
         <section>
+        <h3> Haskellでの実装例 </h3>
+        <p> マグマを例に取って実装してみます。コード:<a href="code/Magma.hs">Magma.hs</a>
+        </p>
+        <pre><code data-trim class="haskell" contenteditable>
+module Magma where
+
+-- モノイドはマグマの一種なのでimportしときます。
+import Data.Monoid
+import Data.Foldable
+
+-- マグマとは集合A(型aと対応)とA上の二項演算(magappendと対応)を
+-- 備えた代数構造です。
+class Magma a where
+    magappend :: a -> a -> a
+
+-- 自由マグマとは二分木です。
+-- Nodeが自由マグマの積。
+-- Leafが自由対象のスライドにあるiです。
+data FreeMagma a = Leaf a | Node (FreeMagma a) (FreeMagma a) deriving (Show, Eq)
+
+-- foldMapMagma fが自由対象のスライドにある「fバー」です。
+foldMapMagma :: Magma b => (a -> b) -> FreeMagma a -> b
+foldMapMagma f (Leaf x) = f x
+foldMapMagma f (Node l r) = foldMapMagma f l `magappend` foldMapMagma f r
+
+-- 実際にはData.Foldableのインスタンスにした方が良いでしょう。
+-- foldr, foldl, find, elem, notElem, concat, forM_, ....などなどの便利関数が
+-- 使える様になります。
+
+-- 自由マグマはもちろんマグマです。
+instance Magma (FreeMagma a) where
+    magappend = Node
+
+-- モノイドもマグマです。
+newtype WrappedMonoid a = WrapMonoid a deriving (Show, Eq)
+instance Monoid a => Magma (WrappedMonoid a) where
+    WrapMonoid x `magappend` WrapMonoid y = WrapMonoid (x `mappend` y)
+
+-- モノイドでないマグマ演算の例として
+-- "Hello" `magappend` "World" == "(Hello World)"
+-- みたいに括弧で囲むものを作ってみます。
+newtype Kakko = Kakko String deriving (Show)
+instance Magma Kakko where
+    Kakko x `magappend` Kakko y = Kakko ("(" ++ x ++ " " ++ y ++ ")")
+        </code></pre>
+        </section>
+
+        <section>
+        <h3> Haskellでの実装例 </h3>
+        <p> ghciで実行してみましょう。 </p>
+        </p>
+        <pre><code data-trim class="haskell" contenteditable>
+Prelude> :load "Magma.hs"
+[1 of 1] Compiling Magma            ( Magma.hs, interpreted )
+Ok, modules loaded: Magma.
+
+-- 二種類の木を作ります。
+*Magma> let tree1 = (Leaf 0 `magappend` Leaf 1) `magappend` Leaf 2
+*Magma> let tree2 = Leaf 0 `magappend` (Leaf 1 `magappend` Leaf 2)
+
+-- 自由マグマでは演算順序が区別されます。
+*Magma> foldMapMagma (Kakko . show) tree1
+Kakko "((0 1) 2)"
+*Magma> foldMapMagma (Kakko . show) tree2
+Kakko "(0 (1 2))"
+
+-- モノイドの演算をそのまま使うことも出来ます。
+*Magma> foldMapMagma (WrapMonoid . Sum) tree1
+WrapMonoid (Sum {getSum = 3})
+*Magma> foldMapMagma (WrapMonoid . All . even) tree1
+WrapMonoid (All {getAll = False})
+        </code></pre>
+        </section>
+
+        <section>
         <h3> おまけ </h3>
         </section>
 
