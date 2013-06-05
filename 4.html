@@ -292,7 +292,7 @@ h = f . g       -- point-free
         <div align="center"> <img src="fig/hom_functor.png"> </div>
         </section>
 
-        <section>
+        <section id="covariant_hom_functor">
         <h3> 共変Hom函手 </h3>
         <div class="definition" style="font-size:85%">
         <p>
@@ -364,7 +364,47 @@ h = f . g       -- point-free
 
         <section>
         <h3> 反変函手 </h3>
-        $f: A\rightarrow B$
+        <p> $f: A\rightarrow B$が$F(f): F(B)\rightarrow F(A)$に移り </p>
+        <ul>
+          <li> $F(f\circ g) = F(g)\circ F(f) $ </li>
+          <li> $F(1_A) = 1_{F(A)}$ </li>
+        </ul>
+        <p>
+        を満たす対象と射のマッピングを<span style="color:red">反変函手(contravariant functor)</span>と言います。
+        </p>
+        </section>
+
+        <section>
+        <h3> 反変函手 </h3>
+        <p>
+        $\mathbf{C}$から$\mathbf{D}$への反変函手は,$\mathbf{C}$の双対圏$\mathbf{C}^{\mathrm{op}}$から$D$への共変函手になっているので
+        $$ F: \mathbf{C}^{\mathrm{op}} \rightarrow \mathbf{D}$$
+        と表記することにします。
+        </p>
+        <div align="center"> <img width="50%" src="fig/contravariant_functor.png"> </div>
+        </section>
+
+        <section id="contravariant_hom_functor">
+        <h3> 反変Hom函手 </h3>
+        <div class="definition" style="font-size:85%">
+        <p>
+        $\mathbf{C}$の対象$X$を固定して
+        </p>
+        <ul>
+          <li> $\mathbf{C}$の対象$A$に集合$\mathrm{Hom}(A, X)$ </li>
+          <li> $\mathbf{C}$の射$f: A\rightarrow B$に,「右から$f$を合成する」という関数
+          $$ \mathrm{Hom}(f, X): \mathrm{Hom}(B,X) \ni b \mapsto b\circ f \in\mathrm{Hom}(X, A)$$
+          </li>
+        </ul>
+        <p>
+        を対応させる事は函手,$ \mathrm{Hom}(-, X): \mathbf{C}^{\mathrm{op}} \rightarrow \mathbf{Sets} $である。これを<span style="color:red">反変Hom函手(contravariant hom-functor)</span>と言う。
+        </p>
+        <div align="center"> <img width="70%" src="fig/hom_functor3.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <p> 反変Hom函手が実際に反変函手になっている事の証明は,共変Hom函手の場合と同様なので省略します。やってみて下さい。</p>
         </section>
 
         <section>
@@ -372,7 +412,185 @@ h = f . g       -- point-free
         </section>
 
         <section>
-        <h3> 積・余積 </h3>
+        <h3> 単集合の抽象化 </h3>
+        <p> generalized elementの所で要素が一つの集合(単集合)が登場しましたがこれの一般化を考えます。
+        まず$\mathbf{Sets}$の場合を考えましょう。
+        </p>
+        <div class="fragment">
+          <p>
+          任意の集合$A$から単集合$1$への関数を考えてみると,それは「$A$の全ての要素を$1$の一点に移す」という<span style="color:red">唯一つの関数</span>しかない事が判ります。これによって単集合を説明出来そうです。
+        </p>
+        <div align="center"> <img width="70%" src="fig/final_object.png"> </div>
+        </p>
+        </section>
+
+        <section id="final_object">
+        <h3> 終対象 </h3>
+        <div class="definition">
+        <p>
+        ある対象$1$が<span style="color:red">終対象(final object)</span>であるとは,
+        任意の対象$A$から$1$への射が唯一つ存在する事である。
+        </p>
+        <div align="center"> <img width="40%" src="fig/final_object2.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <h3> 終対象は同型を除いて一意 </h3>
+        <p style="font-size:90%">
+        【証明】<br>
+        終対象が2つ($1$と$1'$)存在すると仮定すると,終対象の条件より射$f: 1\rightarrow 1'$と$g:1'\rightarrow 1$が存在する。すると,$g\circ f$と$1_1$が共に$1$から$1$への射となるが,$1$は終対象なのだからこれらは等しい。すなわち
+        $$ g\circ f = 1_1$$
+        である。同様に$ f\circ g = 1_{1'}$であるので$f,g$は同型射である。従って
+        $$ 1 \cong 1' $$
+        であるから終対象は同型を除いて一意に定まる。<span style="float:right">□</span> </p>
+        </p>
+        <div align="center"> <img width="60%" src="fig/final_object_is_unique.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        「概念$X$とは条件$C$を満たすものである」という形で何かを定式化すると$X$の実体には複数の選択肢が存在し得る事になります。この時,具体的な実体は<span style="color:red">何を選んでも良い</span>という事でないと概念$X$を一意に定義したとは言えません。
+        </p>
+        <p class="fragment">
+        「同型を除いて一意」であるならば、具体的な実体を特定せずに矛盾なく圏論の議論を進める事が出来る事になります。
+        </p>
+        <p class="fragment">
+        プログラマ向けに分かりやすく言うと「具体的な実装方法に依存しない議論が可能」という事です。
+        </p>
+        </section>
+
+        <section id="initial_object">
+        <h3> 始対象 </h3>
+        <div class="definition">
+        <p>
+        ある対象$0$が<span style="color:red">始対象(initial object)</span>であるとは,
+        $0$から任意の対象$A$への射が唯一つ存在する事である。
+        </p>
+        <div align="center"> <img width="40%" src="fig/initial_object.png"> </div>
+        </div>
+        <p class="fragment">
+        始対象とは双対圏$\mathbf{C}^{\mathrm{op}}$における終対象です。始対象と終対象は「互いに双対である」などと表現します。
+        </p>
+        <p class="fragment">
+        すると終対象が同型を除いて一意であることから,自動的に始対象も同型を除いて一意である事が示されます。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\mathbf{Sets}$の始対象と終対象 </h3>
+        <p>
+        $\mathbf{Sets}$では
+        </p>
+        <img align="right" width="50%" src="fig/sets_initial_final.png">
+        <ul>
+          <li> 始対象: 空集合 </li>
+          <li> 終対象: 単集合 </li>
+        </ul>
+        <p>
+        となります。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\mathbf{Mon}$の始対象と終対象 </h3>
+        <p>
+        モノイドは必ず単位元を含みますので,空集合がモノイドとなる事はありません。そこで<span style="color:red">単位元のみのモノイド</span>$(\{e\},\cdot)$を考えるとこれが始対象でありかつ終対象です。
+        </p>
+        <ul>
+          <li> 始対象であること: 単位元を単位元に移す </li>
+          <li> 終対象であること: 全ての元を単位元に移す </li>
+        </ul>
+        <p>
+        始対象かつ終対象である対象を<span style="color:red">ヌル対象(null object)</span>とも呼びます。
+        </p>
+        </section>
+
+        <section>
+        <h3> $(\mathbb{N}, \leqq)$の始対象と終対象 </h3>
+        <p>
+        全順序集合$(\mathbb{N}, \leqq)$をそれ単体で圏とみなした場合は
+        </p>
+        <ul>
+          <li> 始対象: $0$ </li>
+          <li> 終対象: 存在しない </li>
+        </ul>
+        <p>
+        となります。
+        </p>
+        <div align="center"> <img src="fig/natural_ordering.png"> </div>
+        </section>
+
+        <section>
+        <h3> $\mathbf{Cat}$の始対象と終対象 </h3>
+        <p>
+        前回紹介した空圏$\mathbf{0}$と$\mathbf{1}$がそれぞれ始対象・終対象となります。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        他にも様々な例がありますが,時間の都合上割愛します。今後必要に応じて紹介します。
+        興味のある圏の始対象や終対象がもし存在するなら何であるのか考えてみると良いでしょう。
+        </p>
+        </section>
+
+        <section>
+        <h3> 極限 </h3>
+        </section>
+
+        <section>
+        <p>
+        第１回では積・余積という構成を紹介しました。ここではその構成方法の一般化を説明したいと思います。
+        </p>
+        </section>
+
+        <section id="product">
+        <h3> 積の定義</h3>
+        <div class="definition">
+        <p>
+        対象$A$,$B$の積とは対象$P$,射$p_1: P\rightarrow A$，$p_2: P\rightarrow B$からなり,
+        任意の対象$X$と任意の射$f: X\rightarrow A$, $g: X\rightarrow B$に対して，以下の図式が可換となるような
+        $u: X\rightarrow P$が唯一つ存在するものである。
+        </p>
+        <div align="center"> <img src="fig/product.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <p>
+        積の定義は「任意の～について～を満たす<span style="color:red">$P$へ向かう射</span>が唯一つ存在する」という,終対象の定義と同じ形式になっています。
+        </p>
+        <p>
+        上手く圏を構成すれば「積とは圏～の終対象である」と一言で述べる事が出来そうです。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        まず,$A$,$B$を固定して以下の<span style="color:red">図式が対象</span>である圏を考えます。
+        </p>
+        <div align="center"> <img src="fig/limit2.png"> </div>
+        <p>
+        この時の射は,
+        </p>
+        <div align="center"> <img src="fig/limit3.png"> </div>
+        </section>
+
+        <section id="coproduct">
+        <h3> 余積の定義</h3>
+        <div class="definition">
+        <p>
+        対象$A$,$B$の余積とは対象$Q$,射$q_1: A\rightarrow Q$，$q_2: B\rightarrow Q$からなり,
+        任意の対象$X$と任意の射$f: A\rightarrow X$, $g: B\rightarrow X$に対して，以下の図式が可換となるような
+        $u: Q\rightarrow X$が唯一つ存在するものである。
+        </p>
+        <div align="center"> <img src="fig/coproduct.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        積・余積
         </section>
 
         <section>
