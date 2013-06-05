@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+    <title>圏論勉強会 第4回 @ ワークスアプリケーションズ</title>
+
+		<meta name="description" content="Seminar of category theory">
+    <meta name="author" content="Koichi Nakamura">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+    <meta http-equiv="X-UA-Compatible" CONTENT="IE=EmulateIE7" />
+
+		<!-- For syntax highlighting -->
+    <link rel="stylesheet" href="plugin/highlight/styles/github.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+        }
+      });
+    </script>
+
+    <style type="text/css">
+      <!--
+      div.definition {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 4px solid #333333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      div.theorem {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 4px solid #333333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      div.equation {
+        margin: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 2px solid #C0C0C0;
+      }
+      --> 
+    </style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+        <section>
+        <h1>圏論勉強会<br>第4回</h1>
+        <h3>@ワークスアプリケーションズ</h3>
+        <small> 中村晃一 <br> 2013年6月6日</small>
+        $$ \newcommand\append{{+\hspace{-.7em}+}} $$
+        </section>
+
+        <section>
+        <h3>謝辞</h3>
+        <p>
+        この勉強会の企画，会場設備の提供をして頂きました<br>
+        &#12849; ワークスアプリケーションズ様<br>
+        にこの場をお借りして御礼申し上げます。
+        </p>
+        </section>
+
+        <section>
+        <h3> この会について </h3>
+        <ul>
+          <li> <span style="color:red">圏論(category theory)</span>を題材にいろんなことを学びます。</li>
+          <li> 分かり易さを重視して初歩的な例を多用します。</li>
+          <li> 関数型言語の経験がある方がより楽しめると思います。資料中では主にHaskellを使います。 </li>
+          <li> 中高生も数人見ているらしいのでプログラミングと関係が浅い内容も取り上げます。</li>
+          <li> この資料は<a href="http://nineties.github.com/category-seminar/">http://nineties.github.com/category-seminar</a>に置いてあります。</li>
+        </ul>
+        </section>
+
+        <section>
+        <h2> 第4回: 射で考える </h2>
+        </section>
+
+        <section>
+        <h3> 第4回の内容 </h3>
+        <p>
+        今回は様々な概念を「圏論の言葉のみで述べる」方法について見ていきます。
+        つまり,「対象」の具体的な内部構造ではなく「射」を用いて物事を説明するという事です。
+        </p>
+        </section>
+
+        <section>
+        <h3> generalized element </h3>
+        </section>
+
+        <section>
+        <h3> 集合の要素 </h3>
+        <p>
+        まず,圏$\mathbf{Sets}$を考えましょう。対象は集合、射は関数でした。
+        </p>
+        <p class="fragment">
+        ここで<span style="color:red">集合の要素</span>を関数によって表現する事を考えます。
+        </p>
+        <div align="center"> <img src="fig/generalized_element6.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        要素が一つの集合(singleton, unit set)を$1$と表す事にすると,<span style="color:red">$1$から集合$A$への関数</span>と$A$の要素が一対一に対応する事が判ります。
+        </p>
+        <p>
+        $a \in A$に対応する関数を$\overline{a}$と表す事にします。
+        </p>
+        <div align="center"> <img width="70%" src="fig/generalized_element1.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        この場合$f(a)$には$f\circ\overline{a} $が対応します。<br>
+        つまり関数適用が関数合成に置き換わります。
+        </p>
+        <div align="center"> <img src="fig/generalized_element7.png"> </div>
+        </section>
+
+        <section>
+        <h3> 射を要素と見なす </h3>
+        <p>
+        「要素が一つの集合」がまだ圏論的に定式化されていないですが,その前に<span style="color:red">射を対象の構成要素と見なす</span>考え方の例をいくつか見てみます。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        $2$点からなる集合($2$と表します)から集合$A$への関数は,$A$の要素の対と見なせます。<span style="font-size:80%">(前回紹介した$\mathbf{2}$という圏と混同しないように注意して下さい。)</span>
+        </p>
+        <div align="center"> <img src="fig/generalized_element2.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        自然数の集合$\mathbb{N}$から実数の集合$\mathbb{R}$への関数は実数列と見なせます。
+        </p>
+        <div align="center"> <img src="fig/generalized_element3.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        「半順序集合」と「単調関数」からなる圏における$\mathbb{N}$から$\mathbb{R}$への射は単調増加実数列と見なせます。
+        </p>
+        <div align="center"> <img src="fig/generalized_element9.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        モノイドの圏$\mathbf{Mon}$における射(モノイド準同型)は,モノイドを別のモノイドの一部(部分モノイド)に移します。
+        </p>
+        <div align="center"> <img width="70%" src="fig/generalized_element10.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        圏$\mathbf{1},\mathbf{2},\mathbf{3}$からの函手($\mathbf{Cat}$の射)が対象・射・合成可能対と見なせる事は前回見ました。
+        </p>
+        <div align="center"> <img width="70%" src="fig/functor_from_123.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        $f$を適当なシンボルとした時「$f(\text{変数})$という形の項」は「変数の集合」から「項の集合」への関数で表せます。
+        </p>
+        <div align="center"> <img src="fig/generalized_element4.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        自然数の集合は定数関数$\mathrm{zero}$と,後者関数$\mathrm{succ}$によって構成されていると考える事が出来ます。
+        </p>
+        <div align="center"> <img src="fig/generalized_element5.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        Haskellにおける$\mathrm{Maybe}\ A$型は$\mathrm{Nothing}$という定数関数と,$\mathrm{Just}$という関数によって構成されていると考える事が出来ます。
+        </p>
+        <div align="center"> <img src="fig/generalized_element11.png"> </div>
+        </section>
+
+        <section>
+        <h3> generalized element </h3>
+        <p>
+        このように,任意の対象$X$から対象$A$への任意の射$a: X\rightarrow A$は$A$の構成要素を表していると考える事が出来ます。この意味で射$a$の事を$A$の<span style="color:red">generalized element</span>と呼びます。
+        </p>
+        <div align="center"> <img src="fig/generalized_element8.png"> </div>
+        </section>
+
+        <section>
+        <h3> 射で考える </h3>
+        <p>
+        圏論においては「射」が主役です。様々な概念を「射」によって解釈し,逆に「射」を「モノ」として解釈する視点を養う事が大事になります。
+        </p>
+        </section>
+
+        <section>
+        <h3> point-free style </h3>
+        <p>
+        関数型言語ではpoint-free styleという<span style="color:red">関数と合成のみでプログラムを書く</span>スタイルがあります。この場合のpoint(点)とは集合の要素の事です。
+        </p>
+        <p>
+        人間が読むのには適していない場合もありますが,プログラムを圏論の枠組みで扱う場合に必要となります。
+        </p>
+        <pre><code data-trim class="haskell" contenteditable>
+h x = f (g x)   -- not point-free
+
+h = f . g       -- point-free
+        </code></pre>
+        </section>
+
+        <section>
+        <h3> Hom集合 </h3>
+        </section>
+
+        <section id="homset">
+        <h3> Hom集合の定義 </h3>
+        <div class="definition">
+        <p>
+        圏$\mathbf{C}$において,対象$A$から対象$B$への射全てからなる集合を
+        $$ \mathrm{Hom}_{\mathbf{C}}(A,B) $$
+        と表し,<span style="color:red">Hom集合(hom-set)</span>と言う。
+        文脈から圏が明らかな場合には単に$\mathrm{Hom}(A,B)$と表す。
+        </p>
+        <div align="center"> <img src="fig/hom_set.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <h3> Hom集合の考え方 </h3>
+        <p>
+        Hom集合は様々な用途に用いますが,$\mathrm{Hom}(A,B)$をgeneralized elementの集合と思う視点は理解を助けます。
+        </p>
+        <p class="fragment">
+        <img width="30%" align="right" src="fig/generalized_element1.png">
+        例えば
+        $$ \mathrm{Hom}_{\mathbf{Sets}}(1,A) $$
+        は$A$の要素の集合($A$そのもの)と解釈でき,
+        </p>
+        <br clear="right">
+        <p class="fragment">
+        <img width="30%" align="right" src="fig/generalized_element2.png">
+        $$ \mathrm{Hom}_{\mathbf{Sets}}(2,A) $$
+        は$A$の要素の対の集合と解釈できます。
+        </p>
+        </section>
+
+        <section>
+        <h3> Hom函手 </h3>
+        </section>
+
+        <section>
+        <p> 一般化して対象$X$を固定した時の<span style="color:red">対象$A$と$\mathrm{Hom}_{\mathbf{C}}(X,A)$の関係</span>について正確に述べる為の言葉を準備しておきます。
+        </p>
+        <div align="center"> <img src="fig/hom_functor.png"> </div>
+        </section>
+
+        <section>
+        <h3> 共変Hom函手 </h3>
+        <div class="definition" style="font-size:85%">
+        <p>
+        $\mathbf{C}$の対象$X$を固定して
+        </p>
+        <ul>
+          <li> $\mathbf{C}$の対象$A$に集合$\mathrm{Hom}(X, A)$ </li>
+          <li> $\mathbf{C}$の射$f: A\rightarrow B$に,「左から$f$を合成する」という関数
+          $$ \mathrm{Hom}(X, f): \mathrm{Hom}(X,A) \ni a \mapsto f\circ a \in\mathrm{Hom}(X, B)$$
+          </li>
+        </ul>
+        <p>
+        を対応させる事は函手,$ \mathrm{Hom}(X, -): \mathbf{C} \rightarrow \mathbf{Sets} $である。これを<span style="color:red">共変Hom函手(covariant hom-functor)</span>と言う。
+        </p>
+        <div align="center"> <img width="70%" src="fig/hom_functor1.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <p>
+        「左から$f$を合成する」
+        $$ a\longmapsto f\circ a$$
+        という事は「関数$f$を適用する」
+        $$ a\longmapsto f(a)$$
+        という事の一般化であると思う事が出来ます。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        また,$\mathbf{C}$の要素が$1$つのときを考えてみると,前々回やったモノイドを自己準同型のなすモノイドに変換する操作はまさに共変Hom函手に対応しています。
+        </p>
+        <div align="center"> <img width="70%" src="fig/monoid_cayley.png"> </div>
+        </section>
+
+        <section>
+        <h3> 函手である事の確認 </h3>
+        <p> 見にくいので$f_{*} = \mathrm{Hom}(X, f)$と略記します。</p>
+        <p class="fragment">
+        まず、
+        $$ \begin{aligned}
+        & (f\circ g)_{*}(h) = (f\circ g)\circ h = f\circ g\circ h \\
+        &f_{*}\circ g_{*}(h) = f_{*}(g\circ h) = f\circ (g\circ h) = f\circ g\circ h
+        \end{aligned} $$
+        なので<span style="color:red">$(f\circ g)_{*} = f_{*}\circ g_{*}$</span>です。
+        <p>
+        <p class="fragment">
+        続いて,$1$を恒等射とすると
+        $$ 1_{*}(f) = 1\circ f = f$$
+        なので<span style="color:red">$1_{*}$は恒等関数</span>($\mathbf{Sets}$の恒等射)です。
+        </p>
+        <p class="fragment">
+        という事で$\mathbf{Hom}(X, -)$は函手となります。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        今度は$\mathrm{Hom}(A,X)$の$X$の方を固定する事を考えて見ましょう。
+        この場合対象$A$は$\mathrm{Hom}(A,X)$に移り,射$f: A\rightarrow B$は「右から$f$を合成する」という関数
+        $$ \mathrm{Hom}(f, X): \mathrm{Hom}(B, X) \ni b \mapsto b\circ f \in \mathrm{Hom}(A,X)$$
+        に移ります。
+        </p>
+        <p>
+        この時,マッピングによって<span style="color:red">射の向きが逆になっている</span>事に注意しましょう。
+        </p>
+        <div align="center"> <img width="70%" src="fig/hom_functor2.png"> </div>
+        </section>
+
+        <section>
+        <h3> 反変函手 </h3>
+        $f: A\rightarrow B$
+        </section>
+
+        <section>
+        <h3> 終対象・始対象 </h3>
+        </section>
+
+        <section>
+        <h3> 積・余積 </h3>
+        </section>
+
+        <section>
+        <h3> イコライザ・コイコライザ </h3>
+        </section>
+
+        <section>
+        <h3> 引き戻し・押出し </h3>
+        </section>
+
+        <section>
+        <h3> 第4回はここで終わります </h3>
+        <p>
+        お疲れ様でした。<br>
+        </p>
+        </section>
+
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+        rollingLinks: false,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+      Reveal.addEventListener( 'slidechanged', function( event ) {
+        MathJax.Hub.Rerender(event.currentSlide);
+      });
+
+		</script>
+
+	</body>
+</html>
