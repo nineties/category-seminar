@@ -85,7 +85,6 @@
         <h1>圏論勉強会<br>第4回</h1>
         <h3>@ワークスアプリケーションズ</h3>
         <small> 中村晃一 <br> 2013年6月6日</small>
-        $$ \newcommand\append{{+\hspace{-.7em}+}} $$
         </section>
 
         <section>
@@ -115,143 +114,101 @@
         <section>
         <h3> 第4回の内容 </h3>
         <p>
-        今回は様々な概念を「圏論の言葉のみで述べる」方法について見ていきます。
-        つまり,「対象」の具体的な内部構造ではなく「射」を用いて物事を説明するという事です。
+        今回・次回は様々な概念を「圏論の言葉のみで述べる」方法について見ていきます。
         </p>
         </section>
 
         <section>
-        <h3> generalized element </h3>
-        </section>
-
-        <section>
-        <h3> 集合の要素 </h3>
-        <p>
-        まず,圏$\mathbf{Sets}$を考えましょう。対象は集合、射は関数でした。
-        </p>
-        <p class="fragment">
-        ここで<span style="color:red">集合の要素</span>を関数によって表現する事を考えます。
-        </p>
-        <div align="center"> <img src="fig/generalized_element6.png"> </div>
-        </section>
-
-        <section>
-        <p>
-        要素が一つの集合(singleton, unit set)を$1$と表す事にすると,<span style="color:red">$1$から集合$A$への関数</span>と$A$の要素が一対一に対応する事が判ります。
-        </p>
-        <p>
-        $a \in A$に対応する関数を$\overline{a}$と表す事にします。
-        </p>
-        <div align="center"> <img width="70%" src="fig/generalized_element1.png"> </div>
-        </section>
-
-        <section>
-        <p>
-        この場合$f(a)$には$f\circ\overline{a} $が対応します。<br>
-        つまり関数適用が関数合成に置き換わります。
-        </p>
-        <div align="center"> <img src="fig/generalized_element7.png"> </div>
-        </section>
-
-        <section>
-        <h3> 射を要素と見なす </h3>
-        <p>
-        「要素が一つの集合」がまだ圏論的に定式化されていないですが,その前に<span style="color:red">射を対象の構成要素と見なす</span>考え方の例をいくつか見てみます。
-        </p>
-        </section>
-
-        <section>
-        <p>
-        $2$点からなる集合($2$と表します)から集合$A$への関数は,$A$の要素の対と見なせます。<span style="font-size:80%">(前回紹介した$\mathbf{2}$という圏と混同しないように注意して下さい。)</span>
-        </p>
-        <div align="center"> <img src="fig/generalized_element2.png"> </div>
-        </section>
-
-        <section>
-        <p>
-        自然数の集合$\mathbb{N}$から実数の集合$\mathbb{R}$への関数は実数列と見なせます。
-        </p>
-        <div align="center"> <img src="fig/generalized_element3.png"> </div>
-        </section>
-
-        <section>
-        <p>
-        「半順序集合」と「単調関数」からなる圏における$\mathbb{N}$から$\mathbb{R}$への射は単調増加実数列と見なせます。
-        </p>
-        <div align="center"> <img src="fig/generalized_element9.png"> </div>
-        </section>
-
-        <section>
-        <p>
-        モノイドの圏$\mathbf{Mon}$における射(モノイド準同型)は,モノイドを別のモノイドの一部(部分モノイド)に移します。
-        </p>
-        <div align="center"> <img width="70%" src="fig/generalized_element10.png"> </div>
-        </section>
-
-        <section>
-        <p>
-        圏$\mathbf{1},\mathbf{2},\mathbf{3}$からの函手($\mathbf{Cat}$の射)が対象・射・合成可能対と見なせる事は前回見ました。
-        </p>
-        <div align="center"> <img width="70%" src="fig/functor_from_123.png"> </div>
-        </section>
-
-        <section>
-        <p>
-        $f$を適当なシンボルとした時「$f(\text{変数})$という形の項」は「変数の集合」から「項の集合」への関数で表せます。
-        </p>
-        <div align="center"> <img src="fig/generalized_element4.png"> </div>
-        </section>
-
-        <section>
-        <p>
-        自然数の集合は定数関数$\mathrm{zero}$と,後者関数$\mathrm{succ}$によって構成されていると考える事が出来ます。
-        </p>
-        <div align="center"> <img src="fig/generalized_element5.png"> </div>
-        </section>
-
-        <section>
-        <p>
-        Haskellにおける$\mathrm{Maybe}\ A$型は$\mathrm{Nothing}$という定数関数と,$\mathrm{Just}$という関数によって構成されていると考える事が出来ます。
-        </p>
-        <div align="center"> <img src="fig/generalized_element11.png"> </div>
-        </section>
-
-        <section>
-        <h3> generalized element </h3>
-        <p>
-        このように,任意の対象$X$から対象$A$への任意の射$a: X\rightarrow A$は$A$の構成要素を表していると考える事が出来ます。この意味で射$a$の事を$A$の<span style="color:red">generalized element</span>と呼びます。
-        </p>
-        <div align="center"> <img src="fig/generalized_element8.png"> </div>
-        </section>
-
-        <section>
-        <h3> 射で考える </h3>
-        <p>
-        圏論においては「射」が主役です。様々な概念を「射」によって解釈し,逆に「射」を「モノ」として解釈する視点を養う事が大事になります。
-        </p>
-        </section>
-
-        <section>
-        <h3> point-free style </h3>
-        <p>
-        関数型言語ではpoint-free styleという<span style="color:red">関数と合成のみでプログラムを書く</span>スタイルがあります。この場合のpoint(点)とは集合の要素の事です。
-        </p>
-        <p>
-        人間が読むのには適していない場合もありますが,プログラムを圏論の枠組みで扱う場合に必要となります。
-        </p>
-        <pre><code data-trim class="haskell" contenteditable>
-h x = f (g x)   -- not point-free
-
-h = f . g       -- point-free
-        </code></pre>
+        <h3> 記法について </h3>
+        <ul>
+          <li> 第2回と同じく,２項演算子$\star$の第1引数,第2引数を定数に固定した関数を便宜的に以下の様に表す事にします。
+          $$ \color{red}{(a\ \star)} : x \mapsto a \star x $$
+          $$ \color{red}{(\star\ a)} : x \mapsto x \star a $$
+          例えば
+          $$ (2\ +)(3) = 2 + 3 \qquad (+\ 2)(3) = 3 + 2$$
+          という感じです。
+          </li>
+        </ul>
         </section>
 
         <section>
         <h3> Hom集合 </h3>
         </section>
 
+        <section>
+        <h3> クイズ </h3>
+        <p> 要素が1つの集合を<span style="color:red">単集合(singleton, unit set)</span>と呼び$1$と表す事にします。</p>
+        <div class="fragment">
+        <p>さて,$1$から他の集合$A$への関数はいくつあるでしょうか？</p>
+        <div align="center"> <img width="60%" src="fig/function_space1.png"> </div>
+        </div>
+        <p> <span style="color:transparent">答え: $A$の要素と同じ数だけ存在する。</span> </p>
+        </section>
+
+        <section>
+        <h3> クイズ </h3>
+        <p> 要素が1つの集合を<span style="color:red">単集合(singleton, unit set)</span>と呼び$1$と表す事にします。</p>
+        <p>さて,$1$から他の集合$A$への関数はいくつあるでしょうか？</p>
+        <div align="center"> <img width="60%" src="fig/function_space2.png"> </div>
+        <p> 答え: $A$の要素と同じ数だけ存在する。</p>
+        </section>
+
+        <section>
+        <h3> クイズ </h3>
+        <p> では集合$A$から$1$への関数はいくつあるでしょうか？ </p>
+        <div align="center"> <img width="60%" src="fig/function_space3.png"> </div>
+        <p> <span style="color:transparent">答え: 全ての要素を一点に移す唯一つの関数しか存在しない。</span> </p>
+        </section>
+
+        <section>
+        <h3> クイズ </h3>
+        <p> では集合$A$から$1$への関数はいくつあるでしょうか？ </p>
+        <div align="center"> <img width="60%" src="fig/function_space4.png"> </div>
+        <p> 答え: 全ての要素を一点に移す唯一つの関数しか存在しない。 </p>
+        </section>
+
+        <section>
+        <h3> クイズ </h3>
+        <p> 要素が2つの集合$2$から他の集合$A$への関数はいくつあるでしょうか？ </p>
+        <div align="center"> <img width="60%" src="fig/function_space5.png"> </div>
+        <p> <span style="color:transparent">答え: $A$の要素の対(重複を許す)と同じ数だけ存在する。</span></p>
+        </section>
+
+        <section>
+        <h3> クイズ </h3>
+        <p> 要素が2つの集合$2$から他の集合$A$への関数はいくつあるでしょうか？ </p>
+        <div align="center"> <img width="60%" src="fig/function_space6.png"> </div>
+        <p> 答え: $A$の要素の対(重複を許す)と同じ数だけ存在する。</p>
+        </section>
+
+        <section>
+        <h3> クイズ </h3>
+        <p> 最後に,集合$A$から$2$への関数はいくつあるでしょうか？ </p>
+        <div align="center"> <img width="60%" src="fig/function_space7.png"> </div>
+        <p> <span style="color:transparent">答え: $A$の部分集合の数だけ存在する。</span></p>
+        </section>
+
+        <section>
+        <h3> クイズ </h3>
+        <p> 最後に,集合$A$から$2$への関数はいくつあるでしょうか？ </p>
+        <div align="center"> <img width="60%" src="fig/function_space8.png"> </div>
+        <p> 答え: $A$の部分集合の数だけ存在する。</p>
+        </section>
+
+        <section>
+        <h3> 関数空間 </h3>
+        <p>
+        集合$A$から$B$への全ての関数の集合を<span style="color:red">関数空間(function space)</span>と呼ぶ事にします。
+        </p>
+        <p class="fragment">
+        今見た様に,<span style="color:red">関数空間の構造は$A$,$B$の構造により定まる</span>ということが言えます。今の場合の構造とは「要素の数」(正確には濃度)です。
+        </p>
+        <div align="center"> <img width="60%" src="fig/function_space9.png"> </div>
+        </section>
+
         <section id="homset">
-        <h3> Hom集合の定義 </h3>
+        <h3> Hom集合 </h3>
+        <p> 関数空間の概念を任意の圏に一般化します。 </p>
         <div class="definition">
         <p>
         圏$\mathbf{C}$において,対象$A$から対象$B$への射全てからなる集合を
@@ -264,347 +221,499 @@ h = f . g       -- point-free
         </section>
 
         <section>
-        <h3> Hom集合の考え方 </h3>
+        <h3> 何故Hom集合が重要か </h3>
         <p>
-        Hom集合は様々な用途に用いますが,$\mathrm{Hom}(A,B)$をgeneralized elementの集合と思う視点は理解を助けます。
+        先ほど見たように$A$の要素と$\mathrm{Hom}_{\mathbf{Sets}}(1, A)$の要素を同一視出来ます。つまり,同型対応
+        $$ A \cong \mathrm{Hom}_{\mathbf{Sets}}(1, A) \quad \text{in $\mathbf{Sets}$}$$
+        があります。
+        </p>
+        <div align="center"> <img width="60%" src="fig/function_space2.png"> </div>
+        </section>
+
+        <section>
+        <h3> 何故Hom集合が重要か </h3>
+        <p>
+        ところで,圏論の基本語彙である「対象・射・合成」によって「$A$の要素(対象$A$の内部)」について述べる事はできません。
         </p>
         <p class="fragment">
-        <img width="30%" align="right" src="fig/generalized_element1.png">
-        例えば
-        $$ \mathrm{Hom}_{\mathbf{Sets}}(1,A) $$
-        は$A$の要素の集合($A$そのもの)と解釈でき,
+        一方,<span style="color:red">$\mathrm{Hom}_{\mathbf{Sets}}(1, A)$の要素は射</span>ですので,その中身については圏論の言葉で説明できます。つまり,仕組みによって「圏論の言葉」のみで「対象の内部」について述べる事が出来るようになるのです。
         </p>
-        <br clear="right">
+        <div align="center"> <img width="60%" src="fig/hom_set2.png"> </div>
+        </section>
+
+        <section>
+        <p> 対象の内部構造が,それを取り囲む射の集合の構造として圏の中に見える形で顕れます。
+        </p>
+        <p>
+        逆に言うと,圏が定まるとその中で観察可能な事象が決まります。
+        </p>
+        <div align="center"> <img width="60%" src="fig/hom_set3.png"> </div>
+        </section>
+
+        <section>
+        <h3> 何故Hom集合が重要か </h3>
+        <p>
+        このように$\mathrm{Hom}(A,B)$は「射」によって「$A$や$B$の内部構造」について述べる為の道具となります。
+        </p>
         <p class="fragment">
-        <img width="30%" align="right" src="fig/generalized_element2.png">
-        $$ \mathrm{Hom}_{\mathbf{Sets}}(2,A) $$
-        は$A$の要素の対の集合と解釈できます。
+        また一般に,$\mathrm{Hom}(A,B)$は$A$,$B$自体よりも豊かな構造を持ちますので,Hom集合自体が探求の対象となる事もあります。
+        </p>
+        <p class="fragment">
+        最後に,任意の圏$\mathbf{C}$の任意の対象$A$,$B$について<span style="color:red">$\mathrm{Hom}_{\mathbf{C}}(A,B)$は$\mathbf{Sets}$の対象</span>つまり集合である事に注意しましょう。$\mathbf{C}$に関する議論の舞台を$\mathbf{Sets}$に移すという役割にも使います。
         </p>
         </section>
+
+        <section>
+        <h3> Hom集合の例 </h3>
+        </section>
+
+        <section>
+        <h3> 例1 </h3>
+        <p>
+        $$ \mathrm{Hom}_{\mathbf{Sets}}(\mathbb{N},\mathbb{R}) $$
+        の要素は任意の無限長の実数列と一対一に対応(以後省略)します。
+        </p>
+        <div align="center"> <img src="fig/generalized_element3.png"> </div>
+        </section>
+
+        <section>
+        <h3> 例2 </h3>
+        <p>
+        半順序集合と単調関数からなる圏を$\mathbf{Pos}$(Category of partially ordered sets)と表す事にすると
+        $$ \mathrm{Hom}_{\mathbf{Pos}}(\mathbb{N},\mathbb{R}) $$
+        の要素は任意の単調増加実数列です。
+        </p>
+        <div align="center"> <img width="80%" src="fig/generalized_element9.png"> </div>
+        </section>
+
+        <section>
+        <h3> 例3 </h3>
+        <div style="font-size:90%">
+        <p>
+        <span style="font-size:80%">【線形代数既習者向けの例】</span><br>
+        ベクトル空間(とりあえず実数係数)と線形写像からなる圏を$\mathbf{Vct}$と表す事にします。
+        </p>
+        <p class="fragment">
+        すると任意のベクトル空間$V$について
+        $$ \mathrm{Hom}_{\mathbf{Vct}}(V, \mathbb{R})$$
+        は$V$の双対ベクトル空間$V^{*}$です。
+        </p>
+        </div>
+        <div align="center"> <img width="90%" src="fig/dual_vector_space.png"> </div>
+        </section>
+
+        <section>
+        <h3> 例4 </h3>
+        <p>
+        $\mathbb{N}_{+}$を自然数と加法からなるモノイド,
+        $\mathbb{Z}_{\times}$を整数と乗法からなるモノイドとして,
+        $$ \mathrm{Hom}_{\mathbf{Mon}}(\mathbb{N}_{+},\mathbb{Z}_{\times}) $$
+        つまり$\mathbb{N}_{+}$から$\mathbb{Z}_{\times}$への全ての準同型写像の集合を考えます。
+        </p>
+        <div class="fragment">
+        <p>
+        さて,$ \mathrm{Hom}_{\mathbf{Mon}}(\mathbb{N}_{+},\mathbb{Z}_{\times}) $は$\mathbb{N}_{+}$や$\mathbb{Z}_{\times}$の構造をどう反映しているでしょうか？
+        </p>
+        <div align="center"> <img width="80%" src="fig/hom_set_mon2.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <p>
+        例えばある準同型$f \in \mathrm{Hom}_{\mathbf{Mon}}(\mathbb{N}_{+},\mathbb{Z}_{\times})$が
+        $$ f(1) = 2 $$
+        を満たすとしましょう。
+        </p>
+        <p class="fragment">
+        このような準同型は
+        $$ f(n) = 2^n $$
+        しか有り得ません。(何故でしょうか？)
+        </p>
+        <div align="center"> <img width="80%" src="fig/hom_set_mon.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        詳しい証明は省略しますが,任意の整数$a \in \mathbb{Z}$に対して
+        $$ f(1) = a $$
+        を満たす$f \in\mathrm{Hom}_{\mathbf{Mon}}(\mathbb{N}_{+},\mathbb{Z}_{\times})$が唯一つ存在します。
+        </p>
+        <p class="fragment">
+        つまり,
+        $$\mathrm{Hom}_{\mathbf{Mon}}(\mathbb{N}_{+},\mathbb{Z}_{\times}) \cong \mathbb{Z} \qquad\text{in $\mathbf{Sets}$}$$
+        という事です。
+        </p>
+        <p class="fragment">
+        $\mathbb{N}_{+}$と$\mathbb{Z}_{\times}$の構造がHom集合の構造を決めている事がよくわかります。
+        </p>
+        <div align="center"> <img width="60%" src="fig/hom_set_mon3.png"> </div>
+        </section>
+
+        <section>
+        <h3> 例5 </h3>
+        <p>
+        $\mathbf{Hask}$圏におけるHom集合
+        $$ \mathrm{Hom}_{\mathbf{Hask}}(A,B) $$
+        は$A\rightarrow B$型の関数の集合となります。
+        </p>
+        <p>
+        関数型言語のHom集合を観察すると面白い事が解ります。
+        同時にプログラミング言語特有の厄介さにも触れておきます。
+        </p>
+        <pre><code data-trim class="haskell" contenteditable>
+
+-- 後で資料中に反映させます。
+
+
+
+
+
+
+        </code></pre>
+        </section>
+
+        <section>
+        <h3> Hom集合に構造を入れる </h3>
+        </section>
+
+        <section>
+        <h3> Hom集合に構造を入れる </h3>
+        <p>
+        $\mathrm{Hom}_{\mathbf{C}}(X,A)$はただの集合です。
+        </p>
+        <p class="fragment">
+        しかし,$A$がモノイドや群や順序などの構造を持っている場合
+        $\mathrm{Hom}_{\mathbf{C}}(X,A)$にも同じ構造を入れる事が出来ます。
+        </p>
+        <div align="center"> <img width="40%" src="fig/hom_set4.png"> </div>
+        </section>
+
+        <section>
+        <h3> $M$がモノイド$\Rightarrow$$\mathrm{Hom}(X,M)$もモノイド </h3>
+        <p>
+        例えば集合$M$が演算$\cdot$によってモノイドになるとしましょう。また集合$X$を固定します。
+        </p>
+        <p>
+        この時,任意の$f, g \in \mathrm{Hom}_{\mathbf{Sets}}(X,M)$に対して
+        $$ (f \cdot g)(x) = f(x)\cdot g(x) $$
+        によって各点ごとに(pointwiseに)演算$f\cdot g$を定義します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 例1 </h3>
+        <p>
+        例えば自然数の集合$\mathbb{N}$に加法によってモノイドの構造を入れると,$\mathrm{Hom}_{\mathbf{Sets}}(2,\mathbb{N})$の要素にも加法を定義出来ます。
+        </p>
+        <div align="center"> <img src="fig/pointwise_operation.png"> </div>
+        </section>
+
+        <section>
+        <h3> <span style="font-size:80%">$A$が半順序集合$\Rightarrow$$\mathrm{Hom}(X,A)$も半順序集合 </span></h3>
+        <p>
+        集合$A$が何らかの順序$\leqq$によって半順序集合になるとします。
+        </p>
+        <p>
+        この時,任意の$f, g \in \mathrm{Hom}_{\mathbf{Sets}}(X,A)$に対して
+        $$\text{任意の$x$について}f(x) \leqq g(x) \text{の時のみ} f\leqq g$$
+        と定義する事によって$\mathrm{Hom}_{\mathbf{Sets}}(X,A)$が半順序集合になります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 例2 </h3>
+        <p>
+        例えば下図において$\mathbb{N}$に自然数の通常の順序を入れると,$f(*)\leqq g(*)$かつ$f(\star)\leqq g(\star)$なので$f \leqq g$となります。
+        </p>
+        <div align="center"> <img width="50%" src="fig/pointwise_comparison.png"> </div>
+        </section>
+
+        <section>
+        <img align="right" width="60%" src="fig/functor_category.png">
+        <p style="font-size:90%">
+        前回やった函手圏$\mathbf{D}^{\mathbf{C}}$の構成は,$\mathrm{Hom}(A,B)$に$B$の構造を入れるという事の圏論的な一般化になっています。
+        </p>
+        <p style="font-size:90%">
+        今の2例を函手圏として説明する事は良い練習になると思います。時間があれば,当日確認してみます。
+        </p>
+        </section>
+
+        <section>
+        <h3> generalized element </h3>
+        <p>
+        様々なセッティングによって$\mathrm{Hom}(X,A)$を「$A$そのもの」「$A$の対の集合」「モノイド」「半順序集合」などと見なせる事を見ました。
+        <span class="fragment">もはや$\mathrm{Hom}(X,A)$の要素を「射」のイメージでは考えていません。</span>
+        </p>
+        <p class="fragment">
+        特に任意の射$a: X\rightarrow A$を$A$の構成要素と思う視点は重要で,この意味で射$a$の事を$A$の<span style="color:red">generalized element</span>と呼ぶ事があります。
+        </p>
+        <div align="center"> <img src="fig/generalized_element8.png"> </div>
+        </section>
+
+        <section>
+        <h3> point-free style </h3>
+        <p>
+        ところで関数型言語ではpoint-free styleという<span style="color:red">関数と合成でプログラムを書く</span>スタイルがあります。言い方を変えればpoint-free styleとは型の圏の<span style="color:red">「射」のみでプログラムを表現する</span>という事に他なりません。
+        </p>
+        <p>
+        人間が読むのには適していない場合もありますが,プログラムを圏論の枠組みで扱う場合に必要となります。
+        </p>
+        <pre><code data-trim class="haskell" contenteditable>
+h x = f (g x)   -- not point-free
+
+h = f . g       -- point-free
+        </code></pre>
+        </section>
+
 
         <section>
         <h3> Hom函手 </h3>
         </section>
 
         <section>
-        <p> 一般化して対象$X$を固定した時の<span style="color:red">対象$A$と$\mathrm{Hom}_{\mathbf{C}}(X,A)$の関係</span>について正確に述べる為の言葉を準備しておきます。
+        <p>
+        対象$X$を固定して,<span style="color:red">$A$を$\mathrm{Hom}_{\mathbf{C}}(X, A)$に移して考える</span>ということの重要性は何となく解ってもらえたのではないかと思います。
+        この$\mathbf{C}$の対象と$\mathbf{Sets}$の対象の対応を
+        $$ \mathrm{Hom}_{\mathbf{C}}(X, -): \mathbf{C}\rightarrow \mathbf{Sets} $$
+        と表す事にします。
         </p>
-        <div align="center"> <img src="fig/hom_functor.png"> </div>
+        <div align="center"> <img width="80%" src="fig/hom_functor5.png"> </div>
         </section>
 
-        <section id="covariant_hom_functor">
-        <h3> 共変Hom函手 </h3>
-        <div class="definition" style="font-size:85%">
+        <section>
+        <p>
+        次は$\mathbf{C}$の射と$\mathbf{Sets}$の射の上手い対応を考えましょう。
+        $\mathbf{C}$を$\mathbf{Sets}$に移す函手が得られるはずです。
+        </p>
+        <div align="center"> <img width="80%" src="fig/hom_functor4.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        まず,$\mathbf{C} = \mathbf{Sets}$,$X = 1$のケースを考えてみます。
+        </p>
+        <p>
+        $\mathrm{Hom}_{\mathbf{Sets}}(1, A)$の射は$A$の要素と一対一に対応するのでした。
+        そこで下図の関数$a$がどのような関数に移るべきか?を考えます。
+        </p>
+        <div align="center"> <img width="50%" src="fig/hom1_4.png"> </div>
+        </section>
+
+        <section>
+        <div align="left" style="height:3em">
+        $a$と$f(a)$の関係を自然にHom集合の世界に移すならば,下図の様に関数$a$は$f\circ a$に移るべきです。
+        </div>
+        <div align="center"> <img src="fig/hom1_1.png"> </div>
+        </section>
+
+        <section>
+        <div align="left" style="height:3em">
+        同様に関数$b$は$f\circ b$に移るべきであり
+        </div>
+        <div align="center"> <img src="fig/hom1_2.png"> </div>
+        </section>
+
+        <section>
+        <div align="left" style="height:3em">
+        関数$c$は$f\circ c$に移るべきです。
+        </div>
+        <div align="center"> <img src="fig/hom1_3.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        まとめると
+        $$ \begin {align}
+        & a \longmapsto f\circ a \\ 
+        & b \longmapsto f\circ b \\ 
+        & c \longmapsto f\circ c \\ 
+        \end{align} $$
+        などと移される事になります。
+        </p>
+        <p class="fragment">
+        つまり,射$f: A\rightarrow B$をHom集合の世界に自然に移すと<span style="color:red">左から$f$を合成する</span>という関数$(f\ \circ)$に移る事になります。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        $1$の代わりに任意の集合$X$を取った場合の状況を絵にしてみると,下のようになります。
+        </p>
+        <div align="center"> <img src="fig/homx_sets1.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        射$f$を「左から$f$を合成する関数」に移すという話は第２回にも登場しました。
+        </p>
+        <div class="fragment" align="center"> <img src="fig/monoid_cayley3.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        $\mathbf{C}$として対象が一つ($\bullet$とします)の圏,つまりモノイドを取った場合を考えます。対象が一つしかないのでドメインには$\bullet$を固定し
+        $$ \mathrm{Hom}_{\mathbf{C}}(\bullet, -): \mathbf{C} \rightarrow \mathbf{Sets} $$
+        を考えます。$\mathbf{C}$における射の合成演算子を$\cdot$と表す事にします。
+        </p>
+        <div align="center"> <img src="fig/monoid2.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        すると$\mathbf{C}$の対象$\bullet$は$\mathrm{Hom}_{\mathbf{C}}(\bullet, \bullet)$,つまり$\mathrm{End}_{\mathbf{C}}(\bullet)$に移り,$\mathbf{C}$の射$a$が関数$(a\ \ \cdot)$に移ることになります。
+        </p>
+        <div align="center"> <img src="fig/homfunctor_monoid.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        具体例を2つ見ましたが,まとめると$\mathbf{C}$に対象$X$を固定し
+        </p>
+        <ul>
+          <li> $\mathbf{C}$の対象$A$を集合$\mathrm{Hom}_{\mathbf{C}}(X,A)$に移し,
+          <li> $\mathbf{C}$の射$f$を関数$(f\ \ \circ)$に移す
+        </ul>
+        <p>
+        という対応は函手になりそうです。
+        </p>
+        <p>
+        定義を確認し,証明をしてみましょう。
+        </p>
+        </section>
+
+        <section id="covariant_homfunctor">
+        <h3> <span style="font-size:80%">共変Hom函手</span> </h3>
+        <div class="definition" style="font-size:80%">
         <p>
         $\mathbf{C}$の対象$X$を固定して
         </p>
         <ul>
-          <li> $\mathbf{C}$の対象$A$に集合$\mathrm{Hom}(X, A)$ </li>
+          <li> $\mathbf{C}$の対象$A$に集合$\mathrm{Hom}(X, A)$を対応させ </li>
           <li> $\mathbf{C}$の射$f: A\rightarrow B$に,「左から$f$を合成する」という関数
-          $$ \mathrm{Hom}(X, f): \mathrm{Hom}(X,A) \ni a \mapsto f\circ a \in\mathrm{Hom}(X, B)$$
+          $$ \mathrm{Hom}(X, f) = (f\ \ \circ): \mathrm{Hom}(X,A) \rightarrow \mathrm{Hom}(X, B)$$
+          を対応させる
           </li>
         </ul>
         <p>
-        を対応させる事は函手,$ \mathrm{Hom}(X, -): \mathbf{C} \rightarrow \mathbf{Sets} $である。これを<span style="color:red">共変Hom函手(covariant hom-functor)</span>と言う。
+        事は函手である。これを<span style="color:red">共変Hom函手(covariant hom-functor)</span>と言い,$ \mathrm{Hom}(X, -): \mathbf{C} \rightarrow \mathbf{Sets} $と表す。
         </p>
-        <div align="center"> <img width="70%" src="fig/hom_functor1.png"> </div>
+        <div align="center"> <img width="60%" src="fig/covariant_homfunctor.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <h3> 函手である事の証明 </h3>
+        <div style="font-size:80%">
+        <p>
+        $\mathbf{C}$での射の合成を$\cdot$,$\mathbf{Sets}$での合成を$\circ$と表す事にする。
+        </p>
+        <p class="fragment">
+        【射の合成関係を保つ事】<br>
+        任意の$\mathbf{C}$の射$g:A\rightarrow B$,$f:B\rightarrow C$と任意の射$h: X\rightarrow A$について
+        $$\begin{aligned}
+        & \mathrm{Hom}_{\mathbf{C}}(X, f\cdot g)(h) = ((f\cdot g)\ \ \cdot)(h) = f\cdot g\cdot h \\
+        & \mathrm{Hom}_{\mathbf{C}}(X, f)\circ \mathrm{Hom}_{\mathbf{C}}(g)(h) = (f\ \ \cdot)\circ(g\ \ \cdot)(h) = (f\ \ \cdot)(g\cdot h) = f\cdot g\cdot h
+        \end{aligned} $$
+        すなわち$\mathrm{Hom}_{\mathbf{C}}(X,f\cdot g)=\mathrm{Hom}_{\mathbf{C}}(X,f)\circ\mathrm{Hom}_{\mathbf{C}}(X,g)$
+        </p>
+        <p class="fragment">
+        【恒等射を保つ事】<br>
+        任意の$\mathbf{C}$の恒等射$1_A:A\rightarrow A$と任意の射$h:X\rightarrow A$について
+        $$ \mathrm{Hom}_{\mathbf{C}}(X,1_A)(h) = 1_A\cdot h = h$$
+        すなわち$\mathrm{Hom}_{\mathbf{C}}(X,1_A) = 1_{\mathrm{Hom}_{\mathbf{C}}(X,A)}$
+        </p>
+        <p class="fragment">
+        以上より$\mathrm{Hom}_{\mathbf{C}}(X,-)$は函手である。<span style="float:right">□</span> </p>
+        </p>
         </div>
         </section>
 
         <section>
         <p>
-        「左から$f$を合成する」
-        $$ a\longmapsto f\circ a$$
-        という事は「関数$f$を適用する」
-        $$ a\longmapsto f(a)$$
-        という事の一般化であると思う事が出来ます。
+        アナロジー的に
         </p>
-        </section>
-
-        <section>
-        <p>
-        また,$\mathbf{C}$の要素が$1$つのときを考えてみると,前々回やったモノイドを自己準同型のなすモノイドに変換する操作はまさに共変Hom函手に対応しています。
-        </p>
-        <div align="center"> <img width="70%" src="fig/monoid_cayley.png"> </div>
-        </section>
-
-        <section>
-        <h3> 函手である事の確認 </h3>
-        <p> 見にくいので$f_{*} = \mathrm{Hom}(X, f)$と略記します。</p>
-        <p class="fragment">
-        まず、
-        $$ \begin{aligned}
-        & (f\circ g)_{*}(h) = (f\circ g)\circ h = f\circ g\circ h \\
-        &f_{*}\circ g_{*}(h) = f_{*}(g\circ h) = f\circ (g\circ h) = f\circ g\circ h
-        \end{aligned} $$
-        なので<span style="color:red">$(f\circ g)_{*} = f_{*}\circ g_{*}$</span>です。
-        <p>
-        <p class="fragment">
-        続いて,$1$を恒等射とすると
-        $$ 1_{*}(f) = 1\circ f = f$$
-        なので<span style="color:red">$1_{*}$は恒等関数</span>($\mathbf{Sets}$の恒等射)です。
-        </p>
-        <p class="fragment">
-        という事で$\mathbf{Hom}(X, -)$は函手となります。
-        </p>
-        </section>
-
-        <section>
-        <p>
-        今度は$\mathrm{Hom}(A,X)$の$X$の方を固定する事を考えて見ましょう。
-        この場合対象$A$は$\mathrm{Hom}(A,X)$に移り,射$f: A\rightarrow B$は「右から$f$を合成する」という関数
-        $$ \mathrm{Hom}(f, X): \mathrm{Hom}(B, X) \ni b \mapsto b\circ f \in \mathrm{Hom}(A,X)$$
-        に移ります。
-        </p>
-        <p>
-        この時,マッピングによって<span style="color:red">射の向きが逆になっている</span>事に注意しましょう。
-        </p>
-        <div align="center"> <img width="70%" src="fig/hom_functor2.png"> </div>
-        </section>
-
-        <section>
-        <h3> 反変函手 </h3>
-        <p> $f: A\rightarrow B$が$F(f): F(B)\rightarrow F(A)$に移り </p>
         <ul>
-          <li> $F(f\circ g) = F(g)\circ F(f) $ </li>
-          <li> $F(1_A) = 1_{F(A)}$ </li>
+          <li> 対象$A$を$\mathrm{Hom}_{\mathbf{C}}(A, X)$に移し </li>
+          <li> 射$f$を「右から$f$を合成する」という関数に移す </li>
         </ul>
         <p>
-        を満たす対象と射のマッピングを<span style="color:red">反変函手(contravariant functor)</span>と言います。
+        という対応$\mathrm{Hom}_{\mathbf{C}}(-, X)$を考えて見ましょう。
         </p>
         </section>
 
         <section>
-        <h3> 反変函手 </h3>
         <p>
-        $\mathbf{C}$から$\mathbf{D}$への反変函手は,$\mathbf{C}$の双対圏$\mathbf{C}^{\mathrm{op}}$から$D$への共変函手になっているので
-        $$ F: \mathbf{C}^{\mathrm{op}} \rightarrow \mathbf{D}$$
-        と表記することにします。
+        第2回にも似た事をしました。モノイドの要素を右からの作用に移した時は<span style="color:red">関数合成の順番を逆にする</span>事によって演算の順序を保ったのでした。
         </p>
-        <div align="center"> <img width="50%" src="fig/contravariant_functor.png"> </div>
+        <div align="center"> <img src="fig/opposite_monoid_cayley.png"> </div>
         </section>
 
-        <section id="contravariant_hom_functor">
-        <h3> 反変Hom函手 </h3>
-        <div class="definition" style="font-size:85%">
+        <section>
+        <p>
+        射$f: A\rightarrow B$を右から合成するということは<span style="color:red">Bの側に繋げる</span>という事になります。
+        </p>
+        <div align="center"> <img src="fig/contravariant_homfunctor2.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        すると$\mathrm{Hom}_{\mathbf{C}}(-,X)$による対応付けの様子は下図の様になり,
+        $A$から$B$への射が$\mathrm{Hom}_{\mathbf{C}}(B,X)$から$\mathrm{Hom}_{\mathbf{C}}(A,X)$への射に移ります。
+        </p>
+        <p class="fragment">
+        ドメインとコドメインの順序を保っていないので,これは(今までの意味での)函手になっていません。
+        </p>
+        <div align="center"> <img src="fig/contravariant_homfunctor.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        ここで$\mathbf{C}$の射の向きを全て逆向きにした<span style="color:red">双対圏(dual category)</span>$\mathbf{C}^{\mathrm{op}}$を考えると,ドメインとコドメインの順序が保たれた対応関係になります。
+        </p>
+        <div align="center"> <img src="fig/contravariant_homfunctor3.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        このように一方を双対圏にすると函手$F:\mathbf{C}^{\mathrm{op}}\rightarrow \mathbf{D}$となる対応$F$を$\mathbf{C}\rightarrow\mathbf{D}$への<span style="color:red">反変函手(contravariant functor)</span>と言います。
+        </p>
+        <p>
+        今まで函手と呼んでいたものは正確には<span style="color:red">共変函手(covariant functor)</span>と呼ばれます。
+        </p>
+        </section>
+
+        <section id="contravariant_homfunctor">
+        <h3> <span style="font-size:80%">反変Hom函手</span> </h3>
+        <div class="definition" style="font-size:80%">
         <p>
         $\mathbf{C}$の対象$X$を固定して
         </p>
         <ul>
-          <li> $\mathbf{C}$の対象$A$に集合$\mathrm{Hom}(A, X)$ </li>
+          <li> $\mathbf{C}$の対象$A$に集合$\mathrm{Hom}(A, X)$を対応させ </li>
           <li> $\mathbf{C}$の射$f: A\rightarrow B$に,「右から$f$を合成する」という関数
-          $$ \mathrm{Hom}(f, X): \mathrm{Hom}(B,X) \ni b \mapsto b\circ f \in\mathrm{Hom}(X, A)$$
+          $$ \mathrm{Hom}(f, X) = (\circ\ \ f): \mathrm{Hom}(B,X) \rightarrow \mathrm{Hom}(A,X)$$
+          を対応させる
           </li>
         </ul>
         <p>
-        を対応させる事は函手,$ \mathrm{Hom}(-, X): \mathbf{C}^{\mathrm{op}} \rightarrow \mathbf{Sets} $である。これを<span style="color:red">反変Hom函手(contravariant hom-functor)</span>と言う。
+        事は反変函手である。これを<span style="color:red">反変Hom函手(contravariant hom-functor)</span>と言い,$ \mathrm{Hom}(-, X): \mathbf{C}^{\mathrm{op}} \rightarrow \mathbf{Sets} $と表す。
         </p>
-        <div align="center"> <img width="70%" src="fig/hom_functor3.png"> </div>
+        <div align="center"> <img width="60%" src="fig/contravariant_homfunctor4.png"> </div>
         </div>
         </section>
 
         <section>
-        <p> 反変Hom函手が実際に反変函手になっている事の証明は,共変Hom函手の場合と同様なので省略します。やってみて下さい。</p>
-        </section>
-
-        <section>
-        <h3> 終対象・始対象 </h3>
-        </section>
-
-        <section>
-        <h3> 単集合の抽象化 </h3>
-        <p> generalized elementの所で要素が一つの集合(単集合)が登場しましたがこれの一般化を考えます。
-        まず$\mathbf{Sets}$の場合を考えましょう。
-        </p>
-        <div class="fragment">
-          <p>
-          任意の集合$A$から単集合$1$への関数を考えてみると,それは「$A$の全ての要素を$1$の一点に移す」という<span style="color:red">唯一つの関数</span>しかない事が判ります。これによって単集合を説明出来そうです。
-        </p>
-        <div align="center"> <img width="70%" src="fig/final_object.png"> </div>
-        </p>
-        </section>
-
-        <section id="final_object">
-        <h3> 終対象 </h3>
-        <div class="definition">
-        <p>
-        ある対象$1$が<span style="color:red">終対象(final object)</span>であるとは,
-        任意の対象$A$から$1$への射が唯一つ存在する事である。
-        </p>
-        <div align="center"> <img width="40%" src="fig/final_object2.png"> </div>
-        </div>
-        </section>
-
-        <section>
-        <h3> 終対象は同型を除いて一意 </h3>
-        <p style="font-size:90%">
-        【証明】<br>
-        終対象が2つ($1$と$1'$)存在すると仮定すると,終対象の条件より射$f: 1\rightarrow 1'$と$g:1'\rightarrow 1$が存在する。すると,$g\circ f$と$1_1$が共に$1$から$1$への射となるが,$1$は終対象なのだからこれらは等しい。すなわち
-        $$ g\circ f = 1_1$$
-        である。同様に$ f\circ g = 1_{1'}$であるので$f,g$は同型射である。従って
-        $$ 1 \cong 1' $$
-        であるから終対象は同型を除いて一意に定まる。<span style="float:right">□</span> </p>
-        </p>
-        <div align="center"> <img width="60%" src="fig/final_object_is_unique.png"> </div>
-        </section>
-
-        <section>
-        <p>
-        「概念$X$とは条件$C$を満たすものである」という形で何かを定式化すると$X$の実体には複数の選択肢が存在し得る事になります。この時,具体的な実体は<span style="color:red">何を選んでも良い</span>という事でないと概念$X$を一意に定義したとは言えません。
-        </p>
-        <p class="fragment">
-        「同型を除いて一意」であるならば、具体的な実体を特定せずに矛盾なく圏論の議論を進める事が出来る事になります。
-        </p>
-        <p class="fragment">
-        プログラマ向けに分かりやすく言うと「具体的な実装方法に依存しない議論が可能」という事です。
-        </p>
-        </section>
-
-        <section id="initial_object">
-        <h3> 始対象 </h3>
-        <div class="definition">
-        <p>
-        ある対象$0$が<span style="color:red">始対象(initial object)</span>であるとは,
-        $0$から任意の対象$A$への射が唯一つ存在する事である。
-        </p>
-        <div align="center"> <img width="40%" src="fig/initial_object.png"> </div>
-        </div>
-        <p class="fragment">
-        始対象とは双対圏$\mathbf{C}^{\mathrm{op}}$における終対象です。始対象と終対象は「互いに双対である」などと表現します。
-        </p>
-        <p class="fragment">
-        すると終対象が同型を除いて一意であることから,自動的に始対象も同型を除いて一意である事が示されます。
-        </p>
-        </section>
-
-        <section>
-        <h3> $\mathbf{Sets}$の始対象と終対象 </h3>
-        <p>
-        $\mathbf{Sets}$では
-        </p>
-        <img align="right" width="50%" src="fig/sets_initial_final.png">
-        <ul>
-          <li> 始対象: 空集合 </li>
-          <li> 終対象: 単集合 </li>
-        </ul>
-        <p>
-        となります。
-        </p>
-        </section>
-
-        <section>
-        <h3> $\mathbf{Mon}$の始対象と終対象 </h3>
-        <p>
-        モノイドは必ず単位元を含みますので,空集合がモノイドとなる事はありません。そこで<span style="color:red">単位元のみのモノイド</span>$(\{e\},\cdot)$を考えるとこれが始対象でありかつ終対象です。
-        </p>
-        <ul>
-          <li> 始対象であること: 単位元を単位元に移す </li>
-          <li> 終対象であること: 全ての元を単位元に移す </li>
-        </ul>
-        <p>
-        始対象かつ終対象である対象を<span style="color:red">ヌル対象(null object)</span>とも呼びます。
-        </p>
-        </section>
-
-        <section>
-        <h3> $(\mathbb{N}, \leqq)$の始対象と終対象 </h3>
-        <p>
-        全順序集合$(\mathbb{N}, \leqq)$をそれ単体で圏とみなした場合は
-        </p>
-        <ul>
-          <li> 始対象: $0$ </li>
-          <li> 終対象: 存在しない </li>
-        </ul>
-        <p>
-        となります。
-        </p>
-        <div align="center"> <img src="fig/natural_ordering.png"> </div>
-        </section>
-
-        <section>
-        <h3> $\mathbf{Cat}$の始対象と終対象 </h3>
-        <p>
-        前回紹介した空圏$\mathbf{0}$と$\mathbf{1}$がそれぞれ始対象・終対象となります。
-        </p>
-        </section>
-
-        <section>
-        <p>
-        他にも様々な例がありますが,時間の都合上割愛します。今後必要に応じて紹介します。
-        興味のある圏の始対象や終対象がもし存在するなら何であるのか考えてみると良いでしょう。
-        </p>
-        </section>
-
-        <section>
-        <h3> 極限 </h3>
-        </section>
-
-        <section>
-        <p>
-        第１回では積・余積という構成を紹介しました。ここではその構成方法の一般化を説明したいと思います。
-        </p>
-        </section>
-
-        <section id="product">
-        <h3> 積の定義</h3>
-        <div class="definition">
-        <p>
-        対象$A$,$B$の積とは対象$P$,射$p_1: P\rightarrow A$，$p_2: P\rightarrow B$からなり,
-        任意の対象$X$と任意の射$f: X\rightarrow A$, $g: X\rightarrow B$に対して，以下の図式が可換となるような
-        $u: X\rightarrow P$が唯一つ存在するものである。
-        </p>
-        <div align="center"> <img src="fig/product.png"> </div>
-        </div>
-        </section>
-
-        <section>
-        <p>
-        積の定義は「任意の～について～を満たす<span style="color:red">$P$へ向かう射</span>が唯一つ存在する」という,終対象の定義と同じ形式になっています。
-        </p>
-        <p>
-        上手く圏を構成すれば「積とは圏～の終対象である」と一言で述べる事が出来そうです。
-        </p>
-        </section>
-
-        <section>
-        <p>
-        まず,$A$,$B$を固定して以下の<span style="color:red">図式が対象</span>である圏を考えます。
-        </p>
-        <div align="center"> <img src="fig/limit2.png"> </div>
-        <p>
-        この時の射は,
-        </p>
-        <div align="center"> <img src="fig/limit3.png"> </div>
-        </section>
-
-        <section id="coproduct">
-        <h3> 余積の定義</h3>
-        <div class="definition">
-        <p>
-        対象$A$,$B$の余積とは対象$Q$,射$q_1: A\rightarrow Q$，$q_2: B\rightarrow Q$からなり,
-        任意の対象$X$と任意の射$f: A\rightarrow X$, $g: B\rightarrow X$に対して，以下の図式が可換となるような
-        $u: Q\rightarrow X$が唯一つ存在するものである。
-        </p>
-        <div align="center"> <img src="fig/coproduct.png"> </div>
-        </div>
-        </section>
-
-        <section>
-        積・余積
-        </section>
-
-        <section>
-        <h3> イコライザ・コイコライザ </h3>
-        </section>
-
-        <section>
-        <h3> 引き戻し・押出し </h3>
+        <p> 反変Hom函手が実際に$\mathbf{C}^{\mathrm{op}}$から$\mathbf{Sets}$への函手になっている事の証明は,共変Hom函手の場合と殆ど同じなので省略します。良い練習になりますのでやってみて下さい。
         </section>
 
         <section>
         <h3> 第4回はここで終わります </h3>
         <p>
         お疲れ様でした。<br>
+        非常に難しい内容だったと思いますが,ここを乗り越えると今後の学習が大分楽になると思います。本資料では情報量が少ないですので、テキストを読み練習問題を解く事をお薦めします。
+        </p>
+        <p>
+        今回はHom集合という形で様々な射をひっくるめて考えましたが,射には同型射・モノ射・エピ射・(様々な)普遍射など特徴的なものが沢山あります。次回はそのような話をする予定です。
         </p>
         </section>
 
