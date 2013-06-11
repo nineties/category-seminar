@@ -612,7 +612,7 @@ h = f . g       -- point-free
         任意の$\mathbf{C}$の射$g:A\rightarrow B$,$f:B\rightarrow C$と任意の射$h: X\rightarrow A$について
         $$\begin{aligned}
         & \mathrm{Hom}_{\mathbf{C}}(X, f\cdot g)(h) = ((f\cdot g)\ \ \cdot)(h) = f\cdot g\cdot h \\
-        & \mathrm{Hom}_{\mathbf{C}}(X, f)\circ \mathrm{Hom}_{\mathbf{C}}(g)(h) = (f\ \ \cdot)\circ(g\ \ \cdot)(h) = (f\ \ \cdot)(g\cdot h) = f\cdot g\cdot h
+        & \mathrm{Hom}_{\mathbf{C}}(X, f)\circ \mathrm{Hom}_{\mathbf{C}}(X, g)(h) = (f\ \ \cdot)\circ(g\ \ \cdot)(h) = (f\ \ \cdot)(g\cdot h) = f\cdot g\cdot h
         \end{aligned} $$
         すなわち$\mathrm{Hom}_{\mathbf{C}}(X,f\cdot g)=\mathrm{Hom}_{\mathbf{C}}(X,f)\circ\mathrm{Hom}_{\mathbf{C}}(X,g)$
         </p>
