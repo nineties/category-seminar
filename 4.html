@@ -236,7 +236,7 @@
         ところで,圏論の基本語彙である「対象・射・合成」によって「$A$の要素(対象$A$の内部)」について述べる事はできません。
         </p>
         <p class="fragment">
-        一方,<span style="color:red">$\mathrm{Hom}_{\mathbf{Sets}}(1, A)$の要素は射</span>ですので,その中身については圏論の言葉で説明できます。つまり,仕組みによって「圏論の言葉」のみで「対象の内部」について述べる事が出来るようになるのです。
+        一方,<span style="color:red">$\mathrm{Hom}_{\mathbf{Sets}}(1, A)$の要素は射</span>ですので,その中身については圏論の言葉で説明できます。つまり,この仕組みによって「圏論の言葉」のみで「対象の内部」について述べる事が出来るようになるのです。
         </p>
         <div align="center"> <img width="60%" src="fig/hom_set2.png"> </div>
         </section>
@@ -258,9 +258,14 @@
         <p class="fragment">
         また一般に,$\mathrm{Hom}(A,B)$は$A$,$B$自体よりも豊かな構造を持ちますので,Hom集合自体が探求の対象となる事もあります。
         </p>
-        <p class="fragment">
+        <div class="fragment">
+        <p>
         最後に,任意の圏$\mathbf{C}$の任意の対象$A$,$B$について<span style="color:red">$\mathrm{Hom}_{\mathbf{C}}(A,B)$は$\mathbf{Sets}$の対象</span>つまり集合である事に注意しましょう。$\mathbf{C}$に関する議論の舞台を$\mathbf{Sets}$に移すという役割にも使います。
         </p>
+        <div align="left" style="font-size:50%">
+          注: 厳密には$\mathrm{Hom}_{\mathbf{C}}(A,B)$は前回説明した「小さい」集合とは限りませんので必ずしも$\mathbf{Sets}$の対象ではありません。主に使用する事になる圏では問題ありません。
+        </div>
+        </div>
         </section>
 
         <section>
@@ -362,13 +367,41 @@
         </p>
         <pre><code data-trim class="haskell" contenteditable>
 
--- 後で資料中に反映させます。
+-- 以下の説明では、有限時間で停止して値を返し副作用なども持たない関数のみを考えます。
 
 
+-- まず Integer -> () という型の関数を考えます。
+-- ()というのは同じ記号()で表される値を一つしか持たない型です。
 
+-- f :: Integer -> ()
+-- f x = ..... どんな実装が可能か？ ...
 
+-- 字面の違いはあれ、どのような実装も以下の実装と等価である事が判ると思います。
 
+f :: Integer -> ()
+f x = ()
 
+-- 同様に () -> Integerという型の関数は
+
+one :: () -> Integer
+one () = 1
+
+-- のように定数値を返す関数しか存在しません。
+-- 「全ての関数が～の形である」と述べられる事になります。
+
+-- これらの例から判る事は「型」が具体的な実装方法にまで、思いの外影響している
+-- という事です。
+-- 上手く型を設計する事によって実装の複雑性が増加するのを防ぐ事が出来ます。
+-- また,関数の性質について調べる事が容易になります。
+
+-- 有限時間で停止しない関数なども考えると
+
+g :: Integer -> ()
+g x = g x
+
+-- のような新たな関数を考える事が出来てしまいます。
+-- プログラミングにおける関数は「部分関数」といって,常に値を返すものばかりでは
+-- 無いためこのような事が起きます。詳しくは後の回に改めて説明します。
         </code></pre>
         </section>
 
@@ -612,7 +645,7 @@ h = f . g       -- point-free
         任意の$\mathbf{C}$の射$g:A\rightarrow B$,$f:B\rightarrow C$と任意の射$h: X\rightarrow A$について
         $$\begin{aligned}
         & \mathrm{Hom}_{\mathbf{C}}(X, f\cdot g)(h) = ((f\cdot g)\ \ \cdot)(h) = f\cdot g\cdot h \\
-        & \mathrm{Hom}_{\mathbf{C}}(X, f)\circ \mathrm{Hom}_{\mathbf{C}}(g)(h) = (f\ \ \cdot)\circ(g\ \ \cdot)(h) = (f\ \ \cdot)(g\cdot h) = f\cdot g\cdot h
+        & \mathrm{Hom}_{\mathbf{C}}(X, f)\circ \mathrm{Hom}_{\mathbf{C}}(X, g)(h) = (f\ \ \cdot)\circ(g\ \ \cdot)(h) = (f\ \ \cdot)(g\cdot h) = f\cdot g\cdot h
         \end{aligned} $$
         すなわち$\mathrm{Hom}_{\mathbf{C}}(X,f\cdot g)=\mathrm{Hom}_{\mathbf{C}}(X,f)\circ\mathrm{Hom}_{\mathbf{C}}(X,g)$
         </p>
