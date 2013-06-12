@@ -258,9 +258,14 @@
         <p class="fragment">
         また一般に,$\mathrm{Hom}(A,B)$は$A$,$B$自体よりも豊かな構造を持ちますので,Hom集合自体が探求の対象となる事もあります。
         </p>
-        <p class="fragment">
+        <div class="fragment">
+        <p>
         最後に,任意の圏$\mathbf{C}$の任意の対象$A$,$B$について<span style="color:red">$\mathrm{Hom}_{\mathbf{C}}(A,B)$は$\mathbf{Sets}$の対象</span>つまり集合である事に注意しましょう。$\mathbf{C}$に関する議論の舞台を$\mathbf{Sets}$に移すという役割にも使います。
         </p>
+        <div align="left" style="font-size:50%">
+          注: 厳密には$\mathrm{Hom}_{\mathbf{C}}(A,B)$は前回説明した「小さい」集合とは限りませんので必ずしも$\mathbf{Sets}$の対象ではありません。主に使用する事になる圏では問題ありません。
+        </div>
+        </div>
         </section>
 
         <section>
@@ -640,7 +645,7 @@ h = f . g       -- point-free
         任意の$\mathbf{C}$の射$g:A\rightarrow B$,$f:B\rightarrow C$と任意の射$h: X\rightarrow A$について
         $$\begin{aligned}
         & \mathrm{Hom}_{\mathbf{C}}(X, f\cdot g)(h) = ((f\cdot g)\ \ \cdot)(h) = f\cdot g\cdot h \\
-        & \mathrm{Hom}_{\mathbf{C}}(X, f)\circ \mathrm{Hom}_{\mathbf{C}}(g)(h) = (f\ \ \cdot)\circ(g\ \ \cdot)(h) = (f\ \ \cdot)(g\cdot h) = f\cdot g\cdot h
+        & \mathrm{Hom}_{\mathbf{C}}(X, f)\circ \mathrm{Hom}_{\mathbf{C}}(X, g)(h) = (f\ \ \cdot)\circ(g\ \ \cdot)(h) = (f\ \ \cdot)(g\cdot h) = f\cdot g\cdot h
         \end{aligned} $$
         すなわち$\mathrm{Hom}_{\mathbf{C}}(X,f\cdot g)=\mathrm{Hom}_{\mathbf{C}}(X,f)\circ\mathrm{Hom}_{\mathbf{C}}(X,g)$
         </p>
@@ -696,7 +701,7 @@ h = f . g       -- point-free
 
         <section>
         <p>
-        ここで$\mathbf{C}$の射の向きを全て逆向きにした<span style="color:red">双対圏(dual category)</span>$\mathbf{C}^{\mathrm{op}}$を考えると,ドメインとコドメインの順序が保たれた対応関係になります。
+        ここで$\mathbf{C}$の射の向きを全て逆向きにした<span style="color:red">双対圏(opposite category)</span>$\mathbf{C}^{\mathrm{op}}$を考えると,ドメインとコドメインの順序が保たれた対応関係になります。
         </p>
         <div align="center"> <img src="fig/contravariant_homfunctor3.png"> </div>
         </section>
