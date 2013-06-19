@@ -1,0 +1,1049 @@
+<!doctype html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+    <title>圏論勉強会 第6回 @ ワークスアプリケーションズ</title>
+
+		<meta name="description" content="Seminar of category theory">
+    <meta name="author" content="Koichi Nakamura">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+    <meta http-equiv="X-UA-Compatible" CONTENT="IE=EmulateIE7" />
+
+		<!-- For syntax highlighting -->
+    <link rel="stylesheet" href="plugin/highlight/styles/github.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+        }
+      });
+    </script>
+
+    <style type="text/css">
+      <!--
+      div.definition {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 4px solid #333333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      div.theorem {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 4px solid #333333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      div.equation {
+        margin: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 2px solid #C0C0C0;
+      }
+      --> 
+    </style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+        <section>
+        <h1>圏論勉強会<br>第6回</h1>
+        <h3>@ワークスアプリケーションズ</h3>
+        <small> 中村晃一 <br> 2013年6月20日</small>
+        </section>
+
+        <section>
+        <h3>謝辞</h3>
+        <p>
+        この勉強会の企画，会場設備の提供をして頂きました<br>
+        &#12849; ワークスアプリケーションズ様<br>
+        にこの場をお借りして御礼申し上げます。
+        </p>
+        </section>
+
+        <section>
+        <h3> この会について </h3>
+        <ul>
+          <li> <span style="color:red">圏論(category theory)</span>を題材にいろんなことを学びます。</li>
+          <li> 分かり易さを重視して初歩的な例を多用します。</li>
+          <li> 関数型言語の経験がある方がより楽しめると思います。資料中では主にHaskellを使います。 </li>
+          <li> 中高生も数人見ているらしいのでプログラミングと関係が浅い内容も取り上げます。</li>
+          <li> この資料は<a href="http://nineties.github.com/category-seminar/">http://nineties.github.com/category-seminar</a>に置いてあります。</li>
+        </ul>
+        </section>
+
+        <section>
+        <h2> 第6回: 普遍性 </h2>
+        </section>
+
+        <section>
+        <h3> 第6回の内容 </h3>
+        <p>
+        </p>
+        </section>
+
+        <section>
+        <h3> 単集合の抽象化 </h3>
+        <p> generalized elementの所で要素が一つの<span style="color:red">単集合</span>が登場しましたがこれの一般化を考えます。
+        まず$\mathbf{Sets}$の場合を考えましょう。
+        </p>
+        <div class="fragment">
+          <p>
+          任意の集合$A$から単集合$1$への関数を考えてみると,それは「$A$の全ての要素を$1$の一点に移す」という<span style="color:red">唯一つの関数</span>しかない事が判ります。これによって単集合を説明出来そうです。
+        </p>
+        <div align="center"> <img width="60%" src="fig/final_object.png"> </div>
+        </p>
+        </section>
+
+        <section id="final_object">
+        <h3> 終対象 </h3>
+        <div class="definition">
+        <p>
+        ある対象$1$が<span style="color:red">終対象(terminal object)</span>であるとは,
+        任意の対象$A$から$1$への射が唯一つ存在する事である。
+        </p>
+        <div align="center"> <img width="40%" src="fig/final_object2.png"> </div>
+        </div>
+        <p style="font-size:90%">
+        あまり意味はありませんが「任意の対象$A$について$|\mathrm{Hom}_{\mathbf{C}}(A,1)| = 1$である」と言っても良いでしょう。
+        </p>
+        </section>
+
+        <section>
+        <h3> 終対象は同型を除いて一意 </h3>
+        <p style="font-size:90%">
+        【証明】<br>
+        終対象が2つ($1$と$1'$)存在すると仮定すると,終対象の条件より射$f: 1\rightarrow 1'$と$g:1'\rightarrow 1$が存在する。すると,$g\circ f$と$1_1$が共に$1$から$1$への射となるが,$1$は終対象なのだからこれらは等しい。すなわち
+        $$ g\circ f = 1_1$$
+        である。同様に$ f\circ g = 1_{1'}$であるので$f,g$は同型射である。従って
+        $$ 1 \cong 1' $$
+        であるから終対象は同型を除いて一意に定まる。<span style="float:right">□</span> </p>
+        </p>
+        <div align="center"> <img width="50%" src="fig/final_object_is_unique.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        「概念$X$とは条件$C$を満たすものである」という形で何かを定式化すると$X$の実体には複数の選択肢が存在し得る事になります。この時,具体的な実体は<span style="color:red">何を選んでも良い</span>という事でないと概念$X$を一意に定義したとは言えません。
+        </p>
+        <p class="fragment">
+        「同型を除いて一意」であるならば、具体的な実体を特定せずに矛盾なく圏論の議論を進める事が出来る事になります。
+        </p>
+        <p class="fragment">
+        プログラマ向けに分かりやすく言うと「具体的な実装方法に依存しない議論が可能」という事です。
+        </p>
+        </section>
+
+        <section id="initial_object">
+        <h3> 始対象 </h3>
+        <div class="definition">
+        <p>
+        ある対象$0$が<span style="color:red">始対象(initial object)</span>であるとは,
+        $0$から任意の対象$A$への射が唯一つ存在する事である。
+        </p>
+        <div align="center"> <img width="40%" src="fig/initial_object.png"> </div>
+        </div>
+        <p class="fragment">
+        始対象とは双対圏$\mathbf{C}^{\mathrm{op}}$における終対象です。始対象と終対象は「互いに双対である」などと表現します。
+        </p>
+        <p class="fragment">
+        すると終対象が同型を除いて一意であることから,自動的に始対象も同型を除いて一意である事が示されます。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\mathbf{Sets}$の始対象と終対象 </h3>
+        <p>
+        $\mathbf{Sets}$では
+        </p>
+        <img align="right" width="50%" src="fig/sets_initial_final.png">
+        <ul>
+          <li> 始対象: 空集合 </li>
+          <li> 終対象: 単集合 </li>
+        </ul>
+        <p>
+        となります。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\mathbf{Mon}$の始対象と終対象 </h3>
+        <p>
+        モノイドは必ず単位元を含みますので,空集合がモノイドとなる事はありません。そこで<span style="color:red">単位元のみのモノイド</span>$(\{e\},\cdot)$を考えるとこれが始対象でありかつ終対象です。
+        </p>
+        <ul>
+          <li> 始対象であること: 単位元を単位元に移す </li>
+          <li> 終対象であること: 全ての元を単位元に移す </li>
+        </ul>
+        <p>
+        始対象かつ終対象である対象を<span style="color:red">ヌル対象(null object)</span>とも呼びます。
+        </p>
+        </section>
+
+        <section>
+        <h3> $(\mathbb{N}, \leqq)$の始対象と終対象 </h3>
+        <p>
+        全順序集合$(\mathbb{N}, \leqq)$をそれ単体で圏とみなした場合は
+        </p>
+        <ul>
+          <li> 始対象: $0$ </li>
+          <li> 終対象: 存在しない </li>
+        </ul>
+        <p>
+        となります。
+        </p>
+        <div align="center"> <img src="fig/natural_ordering.png"> </div>
+        </section>
+
+        <section>
+        <h3> $\mathbf{Cat}$の始対象と終対象 </h3>
+        <p>
+        前回紹介した空圏$\mathbf{0}$と$\mathbf{1}$がそれぞれ始対象・終対象となります。
+        </p>
+        </section>
+
+        <section id="product">
+        <h3> 積の定義</h3>
+        <div class="definition">
+        <p>
+        対象$A$,$B$の積とは対象$P$,射$p_1: P\rightarrow A$，$p_2: P\rightarrow B$からなり,
+        任意の対象$X$と任意の射$f: X\rightarrow A$, $g: X\rightarrow B$に対して，以下の図式が可換となるような
+        $u: X\rightarrow P$が唯一つ存在するものである。
+        </p>
+        <div align="center"> <img src="fig/product.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <p>
+        積の定義は「任意の～について～を満たす<span style="color:red">$P$へ向かう射</span>が唯一つ存在する」という,終対象の定義と同じ形式になっています。
+        </p>
+        <p>
+        上手く圏を構成すれば「積とは圏～の終対象である」と一言で述べる事が出来そうです。
+        </p>
+        <p class="fragment">
+        来週に続く。
+        </p>
+        </section>
+
+        <section>
+        <h3> 第5回の内容 </h3>
+        <p>
+        前回は射によって考える事の重要性を話しましたが,今回は射の持つ様々な性質について説明していきます。射は関数概念の一般化とも考えられるので,集合・関数に関係する話も紹介します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 同型射 </h3>
+        </section>
+
+        <section id="isomorphism">
+        <h3> 同型の定義 </h3>
+        <div class="definition">
+        <p>
+        $f: A\rightarrow B$に対して,$g: B\rightarrow A$が存在し,
+        </p>
+        <div align="center"> $ g\circ f = 1_A\qquad f\circ g = 1_B$ </div>
+        <p>
+        が成り立つならば$f$を<span style="color:red">同型射(isomorphism)</span>と呼ぶ。<br>
+        また,圏$\mathbf{C}$において$A$と$B$の間に同型射が存在するならば,$\mathbf{C}$において$A$は$B$と<span style="color:red">同型(isomorphic)</span>であると言い,
+        $$ A \cong B$$
+        と表す。
+        </p>
+        <div align="center"><img src="fig/inverse.png"> </div>
+        </div>
+        </section>
+
+        <section id="inverse">
+        <h3> 逆射 </h3>
+        <div class="definition">
+        <p>
+        $f: A\rightarrow B$が同型射ならば
+        </p>
+        <div align="center"> $ g\circ f = 1_A\qquad f\circ g = 1_B$ </div>
+        <p>
+        となる$g$は一意に定まる。このような$g$を<span style="color:red">逆射(inverse)</span>と言い$f^{-1}$と表す。
+        </p>
+        </div>
+
+        <div>
+        <p style="font-size:80%">
+        <img width="50%" src="fig/inv_is_uniq5.png" align="right" hspace="20">
+        【一意性の証明】<br>
+        $g, h: B\rightarrow A$が$f$の逆射であるとすると右図が可換となるから,
+        $$ g = h $$
+        となる。つまり逆射は一意に定まる。
+        <span style="float:right">□</span>
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> 同型射とは </h3>
+        <p>
+        同型射$f: A\rightarrow B$の存在,つまり
+        $$ A \cong B $$
+        である事はその圏に於いて<span style="color:red">$A$と$B$が本質的に同じ</span>ものである事を表していると解釈出来ます。
+        </p>
+        <p>
+        これまで何となく$\cong$を使いましたが,ちゃんと見ていく事にします。
+        </p>
+        </section>
+
+        <section>
+        <h3> 函手は同型性を保つ </h3>
+
+        <div align="left">
+          <p>
+          函手は合成射と恒等射を保つので下図の上の図式が可換ならば下の図式も可換となります。
+          </p>
+        </div>
+        <div align="center"><img width="90%" src="fig/inverse_is_preserved.png"> </div>
+        </section>
+
+        <section>
+        <h3> 函手は同型性を保つ </h3>
+        <p>
+        つまり,以下の様な事が言えます。
+        </p>
+        <div class="equation">
+          <p>
+          函手$F: \mathbf{C}\rightarrow\mathbf{D}$について
+          $$ \begin{aligned}
+          & f\text{が同型射}\ \Rightarrow\ F(f)\text{も同型射} \\
+          & f\text{が同型射}\ \Rightarrow\ F(f^{-1})=F(f)^{-1} \\
+          & A\cong B \Rightarrow F(A) \cong F(B)
+          \end{aligned} $$
+          </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> $\mathbf{C}$で同型$\Leftrightarrow\mathbf{C}^{\mathrm{op}}$で同型 </h3>
+        <p>
+        定義の対称性から明らかですが,$\mathbf{C}$での同型射は双対圏$\mathbf{C}^{\mathrm{op}}$における同型射に移ります。
+        </p>
+        <div align="center"><img width="90%" src="fig/inverse_is_preserved2.png"> </div>
+        <div align="left" style="font-size:50%">
+          注: $\mathbf{C}$と$\mathbf{C}^{\mathrm{op}}$の対象・射に同じ記号を使っています。
+        </div>
+        <p class="fragment">
+        よって反変函手$F:\mathbf{C}^{\mathrm{op}}\rightarrow \mathbf{D}$も同型性を保ちます。
+        $$A\cong B\Rightarrow F(A)\cong F(B)$$
+        </p>
+        </section>
+
+        <section>
+        <div style="font-size:90%">
+        <p>
+        特に$\mathrm{Hom}_{\mathbf{C}}(X, -)$は共変函手,$\mathrm{Hom}_{\mathbf{C}}(-, X)$は反変函手だったので,
+        </p>
+        <div class="equation">
+        <p>
+        $A\cong B$ならば,任意の$\mathbf{C}$の対象$X$について
+        $$ \begin{aligned}
+        & \mathrm{Hom}(X,A) \cong \mathrm{Hom}(X,B)\\
+        & \mathrm{Hom}(A,X) \cong \mathrm{Hom}(B,X)
+        \end{aligned} $$
+        </p>
+        </div>
+        <p>
+        となります。つまり同型な対象の周りの射一対一に対応しています。
+        </p>
+        <div align="center"><img width="40%" src="fig/hom_set6.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <p>
+        同型射$f: A\leftrightarrows B : f^{-1}$が存在する場合には,「$f$を左から合成する事」が同型射
+        $$\mathrm{Hom}(X,A) \rightarrow \mathrm{Hom}(X,B)$$
+        を与え,「$f^{-1}$を右から合成する事」が同型射
+        $$\mathrm{Hom}(A,Y) \rightarrow \mathrm{Hom}(B,Y)$$
+        を与えます。
+        </p>
+        <div align="center"><img width="80%" src="fig/hom_functor6.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        すると$A\cong B$の時,$A$の周りの射を$B$の周りに移しても図式の可換性がそのまま保たれます。
+        </p>
+        <p>
+        $A$,$B$の周りの射はただ一対一に対応するだけでなく,それらに成り立つ等式(可換図式)も一対一に対応している事になります。
+        </p>
+        <div align="center"><img width="80%" src="fig/move_diagram.png"> </div>
+        </section>
+
+        <section>
+        <h3> 同型ならば区別出来ない </h3>
+        <p>
+        直感的に言うと,圏論の言葉のみを用いた場合<br>
+        「$A\cong B$のとき$A$に関して成り立つ事は$B$に関しても成り立つ。逆も然り。」<br>
+        という事になります。
+        </p>
+        <p class="fragment">
+        逆に言うと同型である対象$A$と$B$をそれらが満たす性質のみによって区別する事は出来ないという事になります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 「同型ならば区別出来ない」の例 </h3>
+        <div style="font-size:90%">
+        <p>
+        $\mathbb{R}_{>0}$を正の実数の集合とすると同型写像
+        $$f(x) = a^x,\ f^{-1}(x) = \log_a(x)\quad (a > 0, a\neq 1)$$
+        によって
+        $$ (\mathbb{R}, +) \cong (\mathbb{R}_{>0}, \times) \qquad\text{in $\mathbf{Mon}$}$$
+        が得られます。
+        </p>
+        <p>
+        すると$(\mathbb{R},+)$と$(\mathbb{R}_{>0},\times)$で異なる性質は対象や射の中身を覗かない限り$\mathbf{Mon}$内部では観測出来ないという事になります。
+        </p>
+        </div>
+        </section>
+
+        <section id="equivarence">
+        <h3> 同値関係 </h3>
+        <div style="font-size:90%">
+        <div class="definition">
+        <p>
+        集合$A$上の二項関係$\sim$が
+        </p>
+        <ul>
+          <li> 反射律: 任意の$x\in A$について$$x \sim x$$ </li>
+          <li> 対称律: 任意の$x,y \in A$について$$x \sim y \ \Rightarrow\ y \sim x$$ </li>
+          <li> 推移律: 任意の$x,y,z \in A$について$$x \sim y \ \text{かつ}\ y \sim z \ \Rightarrow\ x \sim z$$ </li>
+        </ul>
+        <p>
+        を満たす時$\sim$を$A$上の<span style="color:red">同値関係(equivalence relation)</span>という。
+        </p>
+        </div>
+        <p>
+        厳密な定義とは異なりますが、「二項関係」とは「$x=y$」,「$x \leqq y$」, 「$x$が$y$の倍数」などの二引数の述語(真か偽を返す関数)の事だと思って良いです。
+        </p>
+        </div>
+        </section>
+
+        <!--
+        <section>
+        <h3> 同値類 </h3>
+        <div class="definition">
+        <p> $\sim$が$A$上の同値関係である時,任意の$a \in A$について
+        $$ [a] = \{x\in A | a \sim x\} $$
+        を$a$の<span style="color:red">同値類(equivarence class)</span>と言う。
+        </p>
+        </div>
+        <p class="fragment">
+        例えば$\mathbb{N}$上の同値関係$x \sim y$を「$x,y$を$3$で割った余りが等しい」と定義すると
+        $$ [5] = \{2,5,8,11,14,17,\cdots\} $$
+        となります。$[2],[5],[8],\cdots$は全て同じ集合です。
+        </p>
+        </section>
+
+        <section>
+        <h3> 商集合 </h3>
+        <div class="definition">
+        <p>
+        $\sim$が$A$上の同値関係である時,
+        $$ A/{\sim} \ =\ \{[a] | a\in A\}$$
+        を$A$の$\sim$による<span style="color:red">商集合(quotient set)</span>と言う。
+        </p>
+        </div>
+        <p class="fragment">
+        先ほどの例の場合は
+        $$\mathbb{N}/\sim\ =\ \{[0],[1],[2]\}$$
+        となります。これは自然数を$3$で割った余りで分類すると$3$種類あるという事を表しています。
+        </p>
+        </section>
+        -->
+
+        <section>
+        <h3> 同型は同値関係 </h3>
+        <p>
+        圏$\mathbf{C}$における同型$\cong$は$\mathbf{C}$の対象の集合上の同値関係になっています。つまり
+        </p>
+        <div class="equation">
+        $$ \begin{aligned}
+        & A\cong A \\
+        & A\cong B \ \Rightarrow\ B\cong A \\
+        & A\cong B\ \text{かつ}\ B\cong C\ \Rightarrow\ A\cong C
+        \end{aligned} $$
+        </div>
+        <p>
+        が成り立ちます。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        証明は練習問題としますが,ついでに以下の公式を得ます。
+        </p>
+        <div class="equation">
+          <p>
+          $f: A\rightarrow B$, $g:B\rightarrow C$が同型射ならば
+          $$ (g\circ f)^{-1} = f^{-1}\circ g^{-1} $$
+          </p>
+        </div>
+        <p style="font-size:80%">
+        【証明の概略】<br>
+        反射律は任意の$A$について$1_A$が同型射である事,対称律は$f$が同型射ならば逆射$f^{-1}$も同型射である事,推移律は$f,g$が下図のような同型射ならば$f^{-1}\circ g^{-1}$が逆射となる事を示せば良いです。そして<u>逆射の一意性より</u>上の公式が示されます。
+        </p>
+        <div align="center"><img width="50%" src="fig/inverse_of_composition.png" hspace="20"></div>
+        </section>
+
+        <section>
+        <h3> モノイドにおける同型 </h3>
+        <p>
+        モノイド$(M, \cdot)$を圏とみなした時の同型射は$e$を単位元として
+        $$ x\cdot y = y\cdot x = e $$
+        を満たす$x,y\in M$,つまり<span style="color:red">可逆元(invertivle element)</span>の事です。
+        </p>
+        <p class="fragment">
+        例えば$(\mathbb{R}, \times)$の同型射は$0$以外の全ての実数です。<br>
+        「関数」や「準同型」以外の同型射の例となります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 半順序集合における同型 </h3>
+        <p>
+        半順序集合$(A, \leqq)$においては
+        $$ x\leqq y,\ y\leqq x\ \Rightarrow\ x = y$$
+        だったので,$(A, \leqq)$を圏とみなした場合,任意の対象$x$についてそれと同型なのは$x$自身のみとなります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 証明の圏における同型 </h3>
+        <p>
+        $P$,$Q$を論理式とした時$P\cong Q$であるとは
+        $$ \begin{aligned}
+        & P\ \Rightarrow\ Q \\
+        & Q\ \Rightarrow\ P 
+        \end{aligned} $$
+        の証明が共に存在する事となります。つまり証明の圏における同型とは<span style="color:red">同値(equivalence)</span>の事です。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\mathbf{Sets}$における同型 </h3>
+        <p>
+        まず準備として単射・全射の定義の確認をします。
+        </p>
+        <div class="definition">
+        <p>
+        関数$f: A\rightarrow B$が<span style="color:red">単射(injection)</span>であるとは,任意の$x_1,x_2\in A$に対して
+        $$f(x_1) = f(x_2)\ \Rightarrow\ x_1=x_2$$
+        が成り立つ事である。<br>
+        <br>
+        一方<span style="color:red">全射(surjection)</span>であるとは,任意の$y \in B$に対して$f(x) = y$を満たす$x \in A$が存在する事である。<br>
+        <br>
+        単射であり全射である関数を<span style="color:red">全単射(bijection)</span>と呼ぶ。
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> 単射 </h3>
+        <p> 単射は異なる$A$の要素を異なる$B$の要素に移します。 </p>
+        <div align="center"><img width="60%" src="fig/injection.png"> </div>
+        </section>
+
+        <section>
+        <h3> 全射 </h3>
+        <p> 全射はその行き先(値域)が$B$全体を網羅します。 </p>
+        <div align="center"><img width="60%" src="fig/surjection.png"> </div>
+        </section>
+
+        <section>
+        <h3> 全単射 </h3>
+        <p> 全単射は要素の一対一対応を与えます。 </p>
+        <div align="center"><img width="60%" src="fig/bijection.png"> </div>
+        </section>
+
+        <section>
+        <p> $\mathbf{Sets}$における同型射とは全単射の事です。</p>
+        <p style="font-size:60%">
+        【同型射ならば全単射である事の証明】<br>
+        $f,f^{-1}$が同型射とその逆射$f: A\leftrightarrows B: f^{-1}$であるとすると
+        $$f(x_1) = f(x_2)\Rightarrow f^{-1}\circ f(x_1) = f^{-1}\circ f(x_2)\Rightarrow 1_A(x_1) = 1_A(x_2)\Rightarrow x_1 = x_2$$
+        なので$f$は単射。また任意の$y \in B$に対して$x = f^{-1}(y) \in A$が存在し,
+        $$ f(x) = f\circ f^{-1}(y) = 1_B(y) = y $$
+        を満たすので$f$は全射。従って$f$は全単射である。<br>
+        【全単射ならば同型射である事の証明】<br>
+        $f: A\rightarrow B$が全単射であるとすると,任意の$y\in B$について$f(x) = y$を満たす$x$が存在する。ここで$f(x_1) = y,\,f(x_2) = y$であるとすると$f(x_1)=f(x_2)$であるから$f$の単射性より$x_1 = x_2$となる。すなわち任意の$y\in B$について$f(x) = y$を満たす$x$が唯一つ存在するので,この対応$g: y=f(x)\mapsto x$は関数である。このとき任意の$x \in A$について$g(f(x)) = x$となるから$g\circ f = 1_A$。また任意の$y = f(x) \in B$について$f(g(y)) = f(x) = y$となるから$f\circ g = 1_B$。従って$f$は同型射である。 <span style="float:right">□</span>
+        </p>
+        </section>
+
+        <section>
+        <h3> 集合のサイズを測る </h3>
+        <p>
+        有限集合$A$,$B$の要素数が等しい事を「全単射$f: A\rightarrow B$が存在する事」として定義するのは自然です。
+        </p>
+        <div align="center"><img width="60%" src="fig/bijection.png"> </div>
+        </section>
+
+        <section>
+        <h3> 集合の濃度 </h3>
+        <img align="right" width="20%" src="http://upload.wikimedia.org/wikipedia/commons/5/5a/Matematiker_georg_cantor.jpg">
+        <p>
+        ゲオルグ・カントール(1845-1918)はこの考え方を無限集合にも一般化して「射で集合のサイズを測る」方法を確立しました。
+        </p>
+        <div class="fragment">
+        <p>
+        集合$A$のサイズを表す<span style="color:red">濃度(cardinal number)</span>$|A|$というものを
+        </p>
+        <div class="equation">
+        $$\text{$A$から$B$へ全単射が存在}\ \Leftrightarrow |A| = |B| $$
+        </div>
+        <p>
+        を満たす様に定義する事が出来ます。
+        </p>
+        </div>
+        <p class="fragment" style="font-size:90%">
+        例えば$f(x) = 2x$が自然数から$0$以上の偶数への全単射となるので
+        $$|\text{自然数の集合}|=|\text{$0$以上の偶数の集合}|$$
+        となります。
+        </p>
+        </section>
+
+        <section>
+        <h3> カントールの定理 </h3>
+        <div class="theorem">
+        <p>
+        任意の集合$A$について$A$からその冪集合$\mathcal{P}(A)$への全射は存在しない。従って全単射も存在しない。
+        </p>
+        </div>
+        <p class="fragment" style="font-size:90%">
+        $A$が無限集合の場合には$\mathcal{P}(A)$も無限集合となりますが,$A$と$\mathcal{P}(A)$の濃度が異なるという事をこの定理は言っています。今回濃度の大小の話はしていませんが,カントールは<span style="color:red">無限集合にもサイズの大小がある</span>という事を発見したわけです。
+        </p>
+        </section>
+
+        <section>
+        <h3> カントールの対角線論法 </h3>
+        <p>
+        【証明】<br>
+        全射$f: A\rightarrow\mathcal{P}(A)$が存在したと仮定して
+        $$ X = \{x\in A | x\not\in f(x)\} $$
+        とする。ここで$X$の要素は全て$A$の要素要素だから$X$は$A$の部分集合の一つであるから,$f$の全射性より
+        $$ X = f(x) $$
+        を満たす$x \in A$が存在する。すると$x \in X=f(x)$ならば$x \not\in X$,$x \not\in X=f(x)$ならば$x \in X$であるから$x\in X\Leftrightarrow x\not\in X$となり矛盾。従ってこのような全射$f$は存在しない。<span style="float:right">□</span>
+        </p>
+        </section>
+
+        <section>
+        <p>
+        単純に面白いということもありますが,「集合論」は数学の土台ですのでこういった基本的な事実は知っておきましょう。
+        </p>
+        <p class="fragment">
+        また,対角線論法は計算機科学の重要な定理の証明にも使用されます。
+        圏論による一般化と併せて後の回に扱う予定です。
+        </p>
+        </section>
+
+        <section>
+        <h3> レトラクト </h3>
+        </section>
+
+        <section>
+        <p>
+        $$ g\circ f = 1_A,\ f\circ g= 1_B$$
+        が「共に」成り立つ事が同型の定義でした。この条件を弱めるとセクション・レトラクションが定義されます。
+        </p>
+        </section>
+
+        <section id="section_retraction">
+        <h3> レトラクト </h3>
+        <div class="definition">
+        <p>
+        射$s: A\rightarrow B$,$r: B\rightarrow A$について
+        $$ r\circ s = 1_A $$
+        が成り立つ時$s$を$r$の<span style="color:red">セクション(section)</span>,$r$を$s$の<span style="color:red">レトラクション(retraction)</span>と言う。また$A$を$B$の<span style="color:red">レトラクト(retract)</span>と言う。
+        </p>
+        </div>
+        <div align="center"><img width="40%" src="fig/section_retraction.png"> </div>
+        </section>
+
+        <section>
+        <h3> レトラクトとは </h3>
+        <p>
+        直感的に説明すると$A$が$B$のレトラクトであるということは<span style="color:red">$B$が$A$を取り出せる形で含んでいる</span>という事を表しています。これによって様々な状況が説明されます。
+        </p>
+        <div align="center"><img width="40%" src="fig/section_retraction.png"> </div>
+        </section>
+
+        <section>
+        <h3> 函手はレトラクトを保つ </h3>
+        <p>
+        レトラクトは等式(可換図式)によって定義される事に注意しましょう。従って任意の函手$F: \mathbf{C}\rightarrow\mathbf{D}$はレトラクトを保ちます。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\mathbf{Sets}$におけるレトラクト </h3>
+        <p>
+        $\mathbf{Sets}$において,$r\circ s=1_A$であるならば$s$は単射,$r$は全射となります。この事実は後で一般化された形で見ます。
+        </p>
+        <div align="center"><img width="60%" src="fig/section_retraction_in_sets.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        全射$r: B\rightarrow A$によって$B$の要素は($A$の要素と同じ数だけの)空でない互いに素な集合に<span style="color:red">類別(classify)</span>されます。
+        </p>
+        <div align="center"><img width="60%" src="fig/section_retraction_in_sets2.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        全射$r$のセクションが$s$が存在するならば,$s$は$r$によって類別された各集合から一つずつ元を選択する事に相当します。
+        </p>
+        <div align="center"><img width="60%" src="fig/section_retraction_in_sets3.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        ここで$e = s\circ r : B\rightarrow B$とおくと$e$は$r$によって類別された各集合の元を,$s$によって選択された元に移す関数となります。
+        </p>
+        <p class="fragment">
+        この操作は一度やれば何度やっても変わりませんから
+        $$e\circ e = e$$
+        が成り立ちます。この性質については後で説明します。
+        </p>
+        <div align="center"><img width="20%" src="fig/section_retraction_in_sets4.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        射$r: B\rightarrow A$のセクションが存在する事は以下と同値。
+        </p>
+        <div class="theorem">
+          <p>
+          任意の対象$X$と射$f: X\rightarrow A$について下図が可換となるような射$g: X\rightarrow B$が存在する。
+          </p>
+        <div align="center"><img width="40%" src="fig/section_retraction2.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <p>
+        【前者$\Rightarrow$後者の証明】<br>
+        $r:B\rightarrow A$のセクション$s:A\rightarrow B$が存在するならば$g = s\circ f$とおくと
+        $$r\circ g = r\circ s\circ f = 1_A\circ f = f$$
+        が成り立つ。<br>
+        【後者$\Rightarrow$前者の証明】<br>
+        $X = A$,$f=1_A$の場合を考えると$g$が$r$のセクションである。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        同様に射$s: A\rightarrow B$のレトラクションが存在する事は以下と同値。
+        </p>
+        <div class="theorem">
+          <p>
+          任意の対象$X$と射$f: A\rightarrow X$について下図が可換となるような射$g: B\rightarrow X$が存在する。
+          </p>
+        <div align="center"><img width="40%" src="fig/section_retraction3.png"> </div>
+        </div>
+        <p>
+        証明は練習問題とします。
+        </p>
+        </section>
+
+        <!--
+        <section>
+        <h3> プログラミングの観点でのレトラクト </h3>
+        <p>
+        例えば$A$を型,$B$を$A$型+エラー状態
+        </p>
+        <div align="center"><img width="40%" src="fig/section_retraction4.png"> </div>
+        </section>
+        -->
+
+        <section>
+        <h3> モノ射・エピ射 </h3>
+        </section>
+
+        <section>
+        <p>
+        $A$が$B$のレトラクトであるということは$B$が$A$を<span style="color:red">取り出せる形で</span>含んでいる事を表していると説明しました。
+        </p>
+        <p class="fragment">
+        しかし,次に説明するように取り出せないけど$B$が$A$を含んでいるという状況があります。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        位相空間と連続写像からなる圏を考えます。$D^2$を円板,$S^1$をその縁とすると確かに$D^2$は$S^1$を含んでいます。
+        </p>
+        <p class="fragment">
+        しかし<span style="color:red">$D^2$に穴を開けずに$S^1$に変形する事は出来ない</span>ので,$S^1$は$D^2$のレトラクトになっていません。
+        </p>
+        <div align="center"><img width="50%" src="fig/d2_s1.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        (直感的な意味での)「$A$が$B$の一部であるという事」ををレトラクトによって定義するのは条件が強すぎるという事が判ります。
+        </p>
+        <p>
+        セクション・レトラクションの条件を緩めて,単射・全射の圏論による一般化を考えます。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        $f: A\rightarrow B$がレトラクション$r: B\rightarrow A$を持つという事は
+        $$ r\circ f = 1_A$$
+        が成り立つ事でした。この事は$f$を<span style="color:red">左から消す事が出来る</span>事を表しています。セクションについても同様です。
+        </p>
+        <p>
+        $A\rightarrow B$へのモノ射・エピ射とはセクション・レトラクションと同様の性質を$B\rightarrow A$の向きの射の存在に依らずに定義したものと言えます。
+        </p>
+        </section>
+
+        <section id="monomorphism">
+        <h3> モノ射 </h3>
+        <div class="definition">
+        <p>
+        射$m: A\rightarrow B$が<span style="color:red">モノ射(monomorphism)</span>であるとは,任意の対象$X$と射$f,g: X\rightarrow A$について
+        $$ m\circ f = m\circ g \ \Rightarrow\ f = g $$
+        が成り立つ事である。<br>
+        $m$がモノ射である事をモニックであるとも言い,記号では$m: A\rightarrowtail B$と表す。
+        </p>
+        <div align="center"><img width="50%" src="fig/monomorphism.png"> </div>
+        </div>
+        <div align="left" style="font-size:50%">
+          注:書籍「圏論の基礎」ではモニック射と呼んでいます。
+        </div>
+        </section>
+
+        <section>
+        <p> $\mathbf{Sets}$におけるモノ射とは単射の事です。 </p>
+        <p style="font-size:60%">
+        【モノ射ならば単射である事の証明】<br>
+        $f: A\rightarrow B$がモノ射であるとする。$x_1,x_2 \in A$が$x_1\neq x_2$であるとする。$x_1,x_2$に対応する定数関数$\overline{x_1},\overline{x_2}: 1\rightarrow A$を考えると,$\overline{x_1}\neq \overline{x_2}$となり$f$がモノ射であるから$f\circ \overline{x_1} \neq f\circ \overline{x_2}$となる。すなわち,これに$1$の元を代入すれば$f(x_1)\neq f(x_2)$となる。
+        対偶を取れば任意の$x_1,x_2\in A$について
+        $f(x_1) = f(x_2) \ \Rightarrow\ x_1 = x_2$
+        となるので$f$は単射である。<br>
+        【単射ならばモノ射である事の証明】<br>
+        $f: A\rightarrow B$が単射であるとする。関数$g,h:X\rightarrow A$が$g \neq h$ならばある$x\in X$が存在して$g(x)\neq h(x)$となる。すると$f$が単射であることより$f(g(x)) \neq f(h(x))$であるから$f\circ g \neq f\circ h$となる。対偶を取れば
+        $f\circ g = f\circ h \ \Rightarrow\ g = h$
+        となるので$f$はモノ射である。<span style="float:right">□</span>
+        </p>
+        </section>
+
+        <section id="epimorphism">
+        <h3> エピ射 </h3>
+        <div class="definition">
+        <p>
+        射$e: A\rightarrow B$が<span style="color:red">エピ射(epimorphism)</span>であるとは,任意の対象$X$と射$f,g: B\rightarrow X$について
+        $$ f\circ e = g\circ e \ \Rightarrow\ f = g $$
+        が成り立つ事である。<br>
+        $e$がエピ射である事をエピックであるとも言い,$e: A\twoheadrightarrow B$と表す。
+        </p>
+        <div align="center"><img width="50%" src="fig/epimorphism.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <p> $\mathbf{Sets}$におけるエピ射とは全射の事です。 </p>
+        <p style="font-size:60%">
+        【エピ射なら全射である事の証明】<br>
+        $f: A\rightarrow B$がエピ射でありかつ全射でないとすると,ある$b \in B$について$b = f(x)$を満たす$x \in A$が存在しない。ここで関数$g,h: B\rightarrow \{0,1\}$を$g(x) = 0$ 
+        $$ h(x) = \left\{\begin{array}{cl}
+        0 & (x \neq b) \\
+        1 & (x = b)
+        \end{array}\right. $$
+        によって定義すると,$g \neq h$であるのに$g\circ f = h\circ f$となる。これは$f$がエピ射である事に矛盾するので,$f$は全射である。<br>
+        【全射ならばエピ射である事の証明】<br>
+        $f: A\rightarrow B$が全射であるとする。関数$g,h:B\rightarrow X$が$g \neq h$であるとするとある$y \in B$が存在し$g(y) \neq h(y)$である。ここで$f$は全射であるから$y = f(x)$を満たす$x$が存在し$g(f(x)) \neq h(f(x))$となる。従って$g\circ f \neq h\circ f$であるから対偶をとって
+        $$ g\circ f = h\circ f \ \Rightarrow\ g = h$$
+        すなわち$f$はエピ射である。<span style="float:right">□</span>
+        </p>
+        </section>
+
+        <section>
+        <h3> 同型射・セクション・レトラクションとの関係 </h3>
+        <p>
+        以下の事実が言えます。証明は簡単なので練習問題とします。
+        </p>
+        <ul>
+          <li> 同型射はモニックかつエピック </li>
+          <li> $f$がレトラクションを持つならば$f$はモニック </li>
+          <li> $f$がセクションを持つならば$f$はエピック </li>
+        </ul>
+        </section>
+
+        <section>
+        <h3> モニックかつエピック $\not\Rightarrow$ 同型射 </h3>
+        <p>
+        今見たように<span style="color:red">モノ射は単射の一般化</span>,<span style="color:red">エピ射は全射の一般化</span>と言えます。
+        </p>
+        <p>
+        しかし,射$f$がモニックかつエピックであっても同型射であるとは限りません。
+        </p>
+        </section>
+
+        <section>
+        <h3> モニックかつエピックだが同型射でない例 </h3>
+        <p>
+        $\mathbf{Mon}$における準同型
+        $$ f: (\mathbb{N}, +) \rightarrow (\mathbb{Z}, +)$$
+        を$f(x) = x$によって定義します。これは明らかに同型射ではありませんが,モニックかつエピックです。$g: (\mathbb{Z},+)\rightarrow (M,\cdot )$があったとすると,$g(-n)$は必ず$g(n)$の逆源に移ります。従って$\mathbb{Z}$の$n \geqq 0$の部分のみによって$g$全体が定まるという事になります。
+        </p>
+        <p>
+        証明はAwodeyのテキストのExample 2.5にあります。時間があれば,当日説明します。
+        </p>
+        </section>
+
+        <section>
+        <h3> モノ射とエピ射は双対 </h3>
+        <p>
+        $f$が$\mathbf{C}$におけるモノ射ならば,$\mathbf{C}^{\mathrm{op}}$においてはエピ射となります。逆も然りです。すると一方の性質から他方の性質を自動的に得る事が出来ます。
+        </p>
+        <p style="font-size:90%">
+        例えば$f: A\rightarrowtail B$, $g: B\rightarrowtail C$ならば$g\circ f: A\rightarrowtail C$となる事が示せます(練習問題)。<br>
+        すると双対性により$f: A\twoheadrightarrow B$, $g: B\twoheadrightarrow C$ならば$g\circ f: A\twoheadrightarrow C$事も自動的に言えます。
+        </p>
+        <div align="center"><img width="50%" src="fig/triangle.png"> </div>
+        </section>
+
+        <section>
+        <h3> 冪等射 </h3>
+        </section>
+
+        <section id="idempotent">
+        <h3> 冪等射 </h3>
+        <div class="definition">
+        <p>
+        射$e: A\rightarrow A$が<span style="color:red">冪等射(idempotent)</span>であるとは,
+        $$ e\circ e = e$$
+        が成り立つ事である。
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> 分裂冪等射 </h3>
+        <p>
+        先ほど述べた様にセクションとレトラクション$s: A\rightarrow B: r,\ r\circ s=1_A$を用いて
+        $$ e = s\circ r $$
+        と定義すると
+        $$ e\circ e = s\circ r\circ s\circ r = s\circ 1_A\circ r = s\circ r = e$$
+        なので$e$は冪等射となります。
+        </p>
+        <p class="fragment">
+        このようにセクションとレトラクションで表される冪等射を<span style="color:red">分裂冪等射(split idempotent)</span>と言います。
+        </p>
+        </section>
+
+        <section>
+        <h3> プログラミングの文脈での冪等性 </h3>
+        <p>
+        列と連結からなるモノイドにおいて$[e]$が冪等射であるとします。すると,
+        $$ \begin{aligned}
+          & [a,b,\cdots,x,e,e,e,e,e,y,\cdots]  \\
+          = &[a,b,\cdots,x,e,y,\cdots]
+          \end{aligned}
+          $$
+        です。これをプログラムの命令の列だと思うと,$e$は<span style="color:red">連続して実行しても一回だけ実行しても同じ命令</span>を表します。
+        </p>
+        <p class="fragment">
+        例えば「ボタンを連打しても一回押しても同じ処理」、「同じ変数への同じ値の書き込み」などです。
+        </p>
+        <p class="fragment">
+        この様にある種の<span style="color:red">冗長性(redundancy)</span>を扱う場面で冪等性が登場する事があります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 第5回はここで終わります </h3>
+        <p>
+        お疲れ様でした。<br>
+        関数によって類別や選択,包含関係などの２つの集合の関係が表現される事を見ました。
+        圏論では全てを射で考えるので,このような射の解釈に親しむ事がとても大切です。
+        <p>
+        次回は積・余積などを始めとする普遍的な対象について,その構成方法について説明をします。
+        </p>
+        </section>
+
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+        rollingLinks: false,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+      Reveal.addEventListener( 'slidechanged', function( event ) {
+        MathJax.Hub.Rerender(event.currentSlide);
+      });
+
+		</script>
+
+	</body>
+</html>
