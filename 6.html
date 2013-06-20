@@ -324,7 +324,7 @@ p1 (Product a b) = a
 p2 (Product a b) = b
 u f g x = Product (f x) (g x)
 
-data Sum a b = L a | R b
+data Coproduct a b = L a | R b
 q1 a = L a
 q2 b = R b
 u' f g x = case x of L a -> f a; R b -> g b
@@ -338,7 +338,7 @@ u' f g x = case x of L a -> f a; R b -> g b
         証明の圏において$A$,$B$を命題とすると$A,B$の積は$A\wedge B$($A$かつ$B$),余積は$A\vee B$($A$または$B$)に対応します。
         </p>
         <p>
-        下の図式を見て,$p_i$や$q_i$どのような推論規則に対応するのか考えてみて下さい。
+        下の図式を見て,$p_i$や$q_i$がどのような推論規則に対応するのか考えてみて下さい。
         </p>
         <div align="center"> <img width="45%" src="fig/product.png"> <img width="45%" src="fig/coproduct.png"> </div>
         </section>
@@ -360,7 +360,7 @@ u' f g x = case x of L a -> f a; R b -> g b
         を対象とする圏を考えます。
         </p>
         <p>
-        図式$A\leftarrow X\rightarrow B$から図式$A\leftarrow Y\rightarrow B$への射は,<span style="color:red">下の図式が可換となる様な</span>射$f: X\rightarrow B$によって定義します。
+        図式$A\leftarrow X\rightarrow B$から図式$A\leftarrow Y\rightarrow B$への射は,<span style="color:red">下の図式が可換となる様な</span>射$f: X\rightarrow Y$によって定義します。
         </p>
         <div align="center"> <img src="fig/arrow_of_cone.png"> </div>
         </section>
@@ -463,7 +463,7 @@ u' f g x = case x of L a -> f a; R b -> g b
         <div class="definition">
         <img align="right" width="25%" src="fig/limit.png">
           <p>
-          函手$D:\mathbf{J}\rightarrow\mathbf{C}$に対して「底$D$への錐」のなす圏の終対象を$D$の<span style="color:red">極限(limit)</span>もしくは<span style="color:red">射影的極限(projective limit)</span>と言い
+          函手$D:\mathbf{J}\rightarrow\mathbf{C}$に対して「底$D$への錐」のなす圏の終対象を$D$の<span style="color:red">極限(limit)</span>もしくは<span style="color:red">射影的極限(projective limit)</span>と言い,その頂点を
           $$ \lim_{\leftarrow}D $$
           と表す。$\mathbf{J}$の対象が有限個の場合には有限極限(finite limit)とも言う。
           </p>
@@ -478,7 +478,7 @@ u' f g x = case x of L a -> f a; R b -> g b
         <div class="definition">
         <img align="right" width="25%" src="fig/colimit.png"> 
           <p>
-          函手$D:\mathbf{J}\rightarrow\mathbf{C}$に対して「底$D$からの錐」のなす圏の始対象を$D$の<span style="color:red">余極限(colimit)</span>もしくは<span style="color:red">帰納的極限(inductive limit)</span>と言い
+          函手$D:\mathbf{J}\rightarrow\mathbf{C}$に対して「底$D$からの錐」のなす圏の始対象を$D$の<span style="color:red">余極限(colimit)</span>もしくは<span style="color:red">帰納的極限(inductive limit)</span>と言い,その頂点を
           $$ \lim_{\rightarrow}D $$
           と表す。$\mathbf{J}$の対象が有限個の場合には有限余極限(finite colimit)とも言う。
           </p>
@@ -534,7 +534,7 @@ u' f g x = case x of L a -> f a; R b -> g b
         <section>
         <h3> 積から積への射 </h3>
         <p>
-        $(A\times B,p_1,p_2)$,$(C\times D,p_3,p_4)$を積とした時,下図が可換になるような$A\times B$から$C\times D$への射は$f,g$に対して唯一つに定まります。(積の定義の図式と見比べて下さい。)
+        $(A\times B,p_1,p_2)$,$(C\times D,p_3,p_4)$を積とした時,下図が可換になるような$A\times B$から$C\times D$への射は$f,g$に対して唯一つ$\langle f\circ p_1, g\circ p_2\rangle$に定まります。積の図式とよく見比べて下さい。
         この射を$f \times g$と表します。
         </p>
         <div align="center"> <img width="60%" src="fig/category_of_products.png"> </div>
@@ -542,8 +542,7 @@ u' f g x = case x of L a -> f a; R b -> g b
         <section>
         <h3> 余積から余積への射 </h3>
         <p>
-        同様に$(A+B,q_1,q_2)$,$(C+D,q_3,q_4)$を余積とした時,下図が可換になるような$A+B$から$C+D$への射も$f,g$に対して唯一つに定まります。この射を$f + g$と表します。
-        この射を$f \times g$と表します。
+        同様に$(A+B,q_1,q_2)$,$(C+D,q_3,q_4)$を余積とした時,下図が可換になるような$A+B$から$C+D$への射も$f,g$に対して唯一つ$[q_3\circ f, q_4\circ g]$に定まります。この射を$f + g$と表します。
         </p>
         <div align="center"> <img width="60%" src="fig/category_of_coproducts.png"> </div>
         </section>
@@ -571,7 +570,9 @@ u' f g x = case x of L a -> f a; R b -> g b
         $$ (A_0\times A_1)\times A_2\ \text{と}\ A_0\times(A_1\times A_2) $$
         も考えられますがこれらは全て同型になります。
         $$ A_0\times A_1\times A_2 \cong (A_0\times A_1)\times A_2 \cong A_0\times (A_1\times A_2) $$
-        証明は実際に同型射を構成する事により行います。
+        </p>
+        <p style="font-size:80%">
+        証明は$(A_0\times A_1)\times A_2$などが$A_0\times A_1\times A_2$と同じ条件を満たす事を示す事によって行います。すると極限は同型を除いて一意なので上の等式が得られます。
         </p>
         </section>
 
@@ -587,8 +588,8 @@ u' f g x = case x of L a -> f a; R b -> g b
         <section>
         <h3> $1$個の対象の積 </h3>
         <p>
-        ところで,対象が$A$$1$つの場合の積は$A$自身(もしくは$A$と同型な任意の対象)となります。
-        図式を描いて考えて見て下さい。
+        ところで,$1$つの対象$A$のみの積は$A$自身(もしくは$A$と同型な任意の対象)となります。
+        図式を描いて考えてみて下さい。
         </p>
         </section>
 
@@ -596,7 +597,7 @@ u' f g x = case x of L a -> f a; R b -> g b
         <h3> $0$個の対象の積 </h3>
         <p>
         さらに空圏(空集合に対応する離散圏)がインデックスの時の極限は終対象$1$でしたので,
-        「終対象$1$は対象$0$個の積」です。
+        「終対象$1$は対象が$0$個の時の積」です。
         </p>
         </section>
 
@@ -622,7 +623,7 @@ u' f g x = case x of L a -> f a; R b -> g b
         <span style="color:red">双対性</span>より,圏$\mathbf{C}$に
         </p>
         <ul>
-          <li> 始対象$1$が存在し </li>
+          <li> 始対象$0$が存在し </li>
           <li> 任意の$A,B$に対して$A+ B$が存在する
         </ul>
         <p>
@@ -649,7 +650,7 @@ u' f g x = case x of L a -> f a; R b -> g b
         <section>
         <h3> $\mathrm{Hom}$集合に成り立つ等式 </h3>
         <p>
-        積の定義により$f,g$の対$(f,g)$と,$u$が一対一に対応するのでした。これから任意の対象$X$について
+        積の定義により$f,g$の対$(f,g)$と,$\langle f,g \rangle$が一対一に対応するのでした。これから任意の対象$X$について
         $$ \mathrm{Hom}_{\mathbf{C}}(X, A\times B) \cong \mathrm{Hom}_{\mathbf{C}}(X,A)\times \mathrm{Hom}_{\mathbf{C}}(X,B)$$
         が成り立つという事が判ります。
         </p>
@@ -664,6 +665,7 @@ u' f g x = case x of L a -> f a; R b -> g b
         $$ \mathrm{Hom}_{\mathbf{C}}(A+B, X) \cong \mathrm{Hom}_{\mathbf{C}}(A,X)\times \mathrm{Hom}_{\mathbf{C}}(B,X)$$
         また
         $$ \mathrm{Hom}_{\mathbf{C}}(X, 1) \cong 1,\quad\mathrm{Hom}_{\mathbf{C}}(0, X) \cong 1$$
+        なども成り立ちます。
         </p>
         <p>
         このような等式は来週,より一般的な形で紹介します。
