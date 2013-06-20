@@ -108,40 +108,29 @@
         </section>
 
         <section>
-        <h2> 第6回: 普遍性 </h2>
+        <h2> 第6回:積・余積・極限 </h2>
         </section>
 
         <section>
         <h3> 第6回の内容 </h3>
         <p>
+        今回は「普遍性」という性質によって定義される様々な対象について見ていきます。また,それらの構成法の一つである「極限」という概念について紹介します。
         </p>
         </section>
 
         <section>
-        <h3> 単集合の抽象化 </h3>
-        <p> generalized elementの所で要素が一つの<span style="color:red">単集合</span>が登場しましたがこれの一般化を考えます。
-        まず$\mathbf{Sets}$の場合を考えましょう。
-        </p>
-        <div class="fragment">
-          <p>
-          任意の集合$A$から単集合$1$への関数を考えてみると,それは「$A$の全ての要素を$1$の一点に移す」という<span style="color:red">唯一つの関数</span>しかない事が判ります。これによって単集合を説明出来そうです。
-        </p>
-        <div align="center"> <img width="60%" src="fig/final_object.png"> </div>
-        </p>
+        <h3> 終対象・始対象 </h3>
         </section>
 
-        <section id="final_object">
+        <section id="terminal_object">
         <h3> 終対象 </h3>
         <div class="definition">
         <p>
         ある対象$1$が<span style="color:red">終対象(terminal object)</span>であるとは,
         任意の対象$A$から$1$への射が唯一つ存在する事である。
         </p>
-        <div align="center"> <img width="40%" src="fig/final_object2.png"> </div>
+        <div align="center"> <img width="40%" src="fig/terminal_object2.png"> </div>
         </div>
-        <p style="font-size:90%">
-        あまり意味はありませんが「任意の対象$A$について$|\mathrm{Hom}_{\mathbf{C}}(A,1)| = 1$である」と言っても良いでしょう。
-        </p>
         </section>
 
         <section>
@@ -154,18 +143,14 @@
         $$ 1 \cong 1' $$
         であるから終対象は同型を除いて一意に定まる。<span style="float:right">□</span> </p>
         </p>
-        <div align="center"> <img width="50%" src="fig/final_object_is_unique.png"> </div>
+        <div align="center"> <img width="50%" src="fig/terminal_object_is_unique.png"> </div>
         </section>
 
         <section>
+        <h3> Well-defined性 </h3>
         <p>
-        「概念$X$とは条件$C$を満たすものである」という形で何かを定式化すると$X$の実体には複数の選択肢が存在し得る事になります。この時,具体的な実体は<span style="color:red">何を選んでも良い</span>という事でないと概念$X$を一意に定義したとは言えません。
-        </p>
-        <p class="fragment">
-        「同型を除いて一意」であるならば、具体的な実体を特定せずに矛盾なく圏論の議論を進める事が出来る事になります。
-        </p>
-        <p class="fragment">
-        プログラマ向けに分かりやすく言うと「具体的な実装方法に依存しない議論が可能」という事です。
+        終対象の条件を満たす対象は複数存在し得ますが,全て同型なので具体的な対象として何を選んでも
+        矛盾無く圏論の議論を進める事が出来ます。このような定義の性質を<span style="color:red">well-defined性</span>と言います。
         </p>
         </section>
 
@@ -178,45 +163,54 @@
         </p>
         <div align="center"> <img width="40%" src="fig/initial_object.png"> </div>
         </div>
-        <p class="fragment">
-        始対象とは双対圏$\mathbf{C}^{\mathrm{op}}$における終対象です。始対象と終対象は「互いに双対である」などと表現します。
+        </section>
+
+        <section>
+        <h3> 始対象も同型を除いて一意 </h3>
+        <p>
+        $\mathbf{C}$における始対象は双対圏$\mathbf{C}^{\mathrm{op}}$における終対象となります。
         </p>
         <p class="fragment">
-        すると終対象が同型を除いて一意であることから,自動的に始対象も同型を除いて一意である事が示されます。
+        すると終対象が同型を除いて一意であることから,自動的に始対象も同型を除いて一意と言えます。
         </p>
         </section>
 
         <section>
-        <h3> $\mathbf{Sets}$の始対象と終対象 </h3>
+        <h3> 双対性原理 </h3>
+        <p>
+        一般に任意の圏における正しい文は双対圏においても正しい文となります。この原理を<span style="color:red">双対性原理(duaplity principle)</span>と言います。(詳しくはAwodey本の第3章)
+        </p>
+        </section>
+
+        <section>
+        <h3> 例:$\mathbf{Sets}$の始対象と終対象 </h3>
         <p>
         $\mathbf{Sets}$では
         </p>
-        <img align="right" width="50%" src="fig/sets_initial_final.png">
+        <img align="right" width="50%" src="fig/sets_initial_terminal.png">
         <ul>
           <li> 始対象: 空集合 </li>
           <li> 終対象: 単集合 </li>
         </ul>
         <p>
-        となります。
+        となります。空集合から任意の集合へは<span style="color:red">空関数(empty function)</span>という関数が唯一つ存在するのでした。
         </p>
         </section>
 
         <section>
-        <h3> $\mathbf{Mon}$の始対象と終対象 </h3>
+        <h3> 例:$\mathbf{Mon}$の始対象と終対象 </h3>
         <p>
-        モノイドは必ず単位元を含みますので,空集合がモノイドとなる事はありません。そこで<span style="color:red">単位元のみのモノイド</span>$(\{e\},\cdot)$を考えるとこれが始対象でありかつ終対象です。
+        モノイドと準同型のなす圏$\mathbf{Mon}$では<span style="color:red">単位元のみのモノイド</span>$(\{e\},\cdot)$が始対象かつ終対象となります。
+        単位元は単位元に移されなければならない事に注意しましょう。
         </p>
-        <ul>
-          <li> 始対象であること: 単位元を単位元に移す </li>
-          <li> 終対象であること: 全ての元を単位元に移す </li>
-        </ul>
         <p>
         始対象かつ終対象である対象を<span style="color:red">ヌル対象(null object)</span>とも呼びます。
         </p>
+        <img width="50%" src="fig/mon_initial_terminal.png">
         </section>
 
         <section>
-        <h3> $(\mathbb{N}, \leqq)$の始対象と終対象 </h3>
+        <h3> 例:$(\mathbb{N}, \leqq)$の始対象と終対象 </h3>
         <p>
         全順序集合$(\mathbb{N}, \leqq)$をそれ単体で圏とみなした場合は
         </p>
@@ -225,7 +219,7 @@
           <li> 終対象: 存在しない </li>
         </ul>
         <p>
-        となります。
+        となります。順序集合では最小値・最大値に対応します。
         </p>
         <div align="center"> <img src="fig/natural_ordering.png"> </div>
         </section>
@@ -233,8 +227,25 @@
         <section>
         <h3> $\mathbf{Cat}$の始対象と終対象 </h3>
         <p>
-        前回紹介した空圏$\mathbf{0}$と$\mathbf{1}$がそれぞれ始対象・終対象となります。
+        圏と函手からなる圏$\mathbf{Cat}$では空圏$\mathbf{0}$と$\mathbf{1}$がそれぞれ始対象・終対象となります。
         </p>
+        <div align="center"> <img src="fig/category_0_and_1.png"> </div>
+        </section>
+
+        <section>
+        <h3> global element </h3>
+        <p>
+        前々回説明したように,$\mathbf{Sets}$において$\mathrm{Hom}_{\mathbf{Sets}}(1,A)$は$A$の要素と一対一に対応します。
+        $$ \mathrm{Hom}_{\mathbf{Sets}}(1,A) \cong A $$
+        この「要素」の概念を圏論に持ち込んで終対象$1$から対象$A$への射$f: 1\rightarrow A $を$A$の<span style="color:red">global element</span>と呼ぶ場合があります。
+        </p>
+        <p class="fragment">
+        $\mathbf{Mon}$の例で見たように終対象からの射は,私達が一般に「要素」と呼ぶものと対応している訳ではないので注意して下さい。
+        </p>
+        </section>
+
+        <section>
+        <h3> 極限 </h3>
         </section>
 
         <section id="product">
@@ -245,764 +256,425 @@
         任意の対象$X$と任意の射$f: X\rightarrow A$, $g: X\rightarrow B$に対して，以下の図式が可換となるような
         $u: X\rightarrow P$が唯一つ存在するものである。
         </p>
-        <div align="center"> <img src="fig/product.png"> </div>
+        <div align="center"> <img width="60%" src="fig/product.png"> </div>
         </div>
         </section>
 
-        <section>
-        <p>
-        積の定義は「任意の～について～を満たす<span style="color:red">$P$へ向かう射</span>が唯一つ存在する」という,終対象の定義と同じ形式になっています。
-        </p>
-        <p>
-        上手く圏を構成すれば「積とは圏～の終対象である」と一言で述べる事が出来そうです。
-        </p>
-        <p class="fragment">
-        来週に続く。
-        </p>
-        </section>
-
-        <section>
-        <h3> 第5回の内容 </h3>
-        <p>
-        前回は射によって考える事の重要性を話しましたが,今回は射の持つ様々な性質について説明していきます。射は関数概念の一般化とも考えられるので,集合・関数に関係する話も紹介します。
-        </p>
-        </section>
-
-        <section>
-        <h3> 同型射 </h3>
-        </section>
-
-        <section id="isomorphism">
-        <h3> 同型の定義 </h3>
+        <section id="coproduct">
+        <h3> 余積の定義</h3>
         <div class="definition">
         <p>
-        $f: A\rightarrow B$に対して,$g: B\rightarrow A$が存在し,
+        対象$A$,$B$の余積とは対象$Q$,射$q_1: A\rightarrow Q$，$q_2: B\rightarrow Q$からなり,
+        任意の対象$X$と任意の射$f: A\rightarrow X$, $g: B\rightarrow X$に対して，以下の図式が可換となるような
+        $u: Q\rightarrow X$が唯一つ存在するものである。
         </p>
-        <div align="center"> $ g\circ f = 1_A\qquad f\circ g = 1_B$ </div>
-        <p>
-        が成り立つならば$f$を<span style="color:red">同型射(isomorphism)</span>と呼ぶ。<br>
-        また,圏$\mathbf{C}$において$A$と$B$の間に同型射が存在するならば,$\mathbf{C}$において$A$は$B$と<span style="color:red">同型(isomorphic)</span>であると言い,
-        $$ A \cong B$$
-        と表す。
-        </p>
-        <div align="center"><img src="fig/inverse.png"> </div>
+        <div align="center"> <img width="60%" src="fig/coproduct.png"> </div>
         </div>
         </section>
 
-        <section id="inverse">
-        <h3> 逆射 </h3>
-        <div class="definition">
+        <section>
+        <h3> 積・余積は同型を除いて一意 </h3>
         <p>
-        $f: A\rightarrow B$が同型射ならば
+        積・余積は同型を除いて一意となります。証明は第1回資料にありますが,後でより一般的な形でも証明します。
         </p>
-        <div align="center"> $ g\circ f = 1_A\qquad f\circ g = 1_B$ </div>
-        <p>
-        となる$g$は一意に定まる。このような$g$を<span style="color:red">逆射(inverse)</span>と言い$f^{-1}$と表す。
-        </p>
-        </div>
+        </section>
 
-        <div>
+        <section>
+        <h3> 例:$\mathbf{Sets}$における積・余積 </h3>
+        <p>
+        $\mathbf{Sets}$における積は<span style="color:red">直積(direct product)</span>
+        $$A\times B = \{(a,b) | a\in A, b\in B\}$$
+        と<span style="color:red">射影(projection)</span>
+        $$p_1((a,b)) = a,\ p_2((a,b)) = b$$
+        に対応します。この時$f,g$に対して$u(x) = (s, t)$とおくと図式の可換性より
+        $s = f(x), t = g(x)$
+        となりますから
+        $$u(x) = (f(x), g(x))$$
+        が$f=p_1\circ u, g=p_2\circ u$を満たす唯一の関数となります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 例:$\mathbf{Sets}$における積・余積 </h3>
+        <p>
+        $\mathbf{Sets}$における余積は<span style="color:red">直和(direct sum)</span>
+        $$A + B = \{(0,a)|a\in A\}\cup\{(1,b)|b\in B\} $$
+        と<span style="color:red">埋め込み(embedding)</span>
+        $$q_1(a) = (0, a)\ q_2(b)=(1, b)$$
+        に対応します。この時任意の$f,g$に対して
+        $$
+        u(x) = \left\{
+        \begin{array}{cc}
+        f(a) & (\text{$x = (0, a)$の時}) \\
+        g(a) & (\text{$x = (1, a)$の時})
+        \end{array}
+        \right.
+        $$
+        が$f=u\circ q_1,g = u\circ q_2$を満たす唯一の関数となります。証明は省略します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 例:代数的データ型 </h3>
+        <p>
+        次回詳しい定義をしますが,型の圏においては<span style="color:red">直積型(product type)</span>と<span style="color:red">直和型(sum type)</span>が積と余積に対応します。
+        <pre><code data-trim class="haskell" contenteditable>
+data Product a b = Product a b
+p1 (Product a b) = a
+p2 (Product a b) = b
+u f g x = Product (f x) (g x)
+
+data Sum a b = L a | R b
+q1 a = L a
+q2 b = R b
+u' f g x = case x of L a -> f a; R b -> g b
+        </code></pre>
+        </p>
+        </section>
+
+        <section>
+        <h3> 例:「かつ」と「または」 </h3>
+        <p>
+        証明の圏において$A$,$B$を命題とすると$A,B$の積は$A\wedge B$($A$かつ$B$),余積は$A\vee B$($A$または$B$)に対応します。
+        </p>
+        <p>
+        下の図式を見て,$p_i$や$q_i$どのような推論規則に対応するのか考えてみて下さい。
+        </p>
+        <div align="center"> <img width="45%" src="fig/product.png"> <img width="45%" src="fig/coproduct.png"> </div>
+        </section>
+
+        <section>
+        <h3> 積・余積の構成 </h3>
+        <p>
+        積の定義は「任意の～について～を満たす<span style="color:red">$P$へ向かう射</span>が唯一つ存在する」という終対象の定義と似たものです。余積は始対象と似ています。
+        </p>
+        <p>
+        上手く圏を構成すれば「積とは～という圏の終対象である」「余積とは～という圏の始対象である」と統一的に述べる事が出来そうです。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        対象$A$,$B$を固定して任意の$X$と$A$,$B$への射を備えた図式
+        $$ A\leftarrow X\rightarrow B $$
+        を対象とする圏を考えます。
+        </p>
+        <p>
+        図式$A\leftarrow X\rightarrow B$から図式$A\leftarrow Y\rightarrow B$への射は,<span style="color:red">下の図式が可換となる様な</span>射$f: X\rightarrow B$によって定義します。
+        </p>
+        <div align="center"> <img src="fig/arrow_of_cone.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        絵に描いてみるとこんな様子の圏です。この圏における終対象が$A,B$の積を与えます。
+        </p>
+        <p style="font-size:80%" class="fragment">
+        これが実際に圏となること(結合則・恒等射の確認)と,この圏の終対象の条件が$A,B$の積の条件と一致する事を確かめるのは練習問題とします。
+        </p>
+        <div align="center"> <img src="fig/cone_of_product.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        同様に$A\rightarrow X\leftarrow B$という形の図式を対象とする圏における始対象が$A,B$の余積となります。
+        </p>
+        <div align="center"> <img src="fig/cone_of_coproduct.png"> </div>
+        </section>
+
+        <section>
+        <h3> 積・余積は同型を除いて一意 </h3>
+        <p>
+        積・余積は終対象・始対象として解釈出来ますから同型を除いて一意である事も自動的に言えます。
+        他にも様々な性質を統一的に議論する事が可能になります。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        今用いた$2$種類の圏は<span style="color:red">底面の形</span>(今の場合は$A$と$B$)によって定まっています。
+        この考え方を使って積・余積に限らない一般化が出来そうです。
+        </p>
+        <div align="center"> <img width="45%" src="fig/cone_of_product.png"> <img width="45%" src="fig/cone_of_coproduct.png"> </div>
+        </section>
+
+        <section>
+        <h3> 図式としての函手 </h3>
+        <p>
+        圏$\mathbf{C}$の中の特定の対象の対$A,B$は,2点集合(離散圏)からの函手と同一視出来るのでした。
+        </p>
+        <div align="center"> <img width="60%" src="fig/functor_as_pair.png"> </div>
+        </section>
+
+        <section>
+        <h3> 図式としての函手 </h3>
+        <p>
+        一般化して圏$\mathbf{J}$と函手$D: \mathbf{J} \rightarrow \mathbf{C}$
+        が与えれれば,先ほどと同様の圏を構成出来そうです。このように函手を図式とみなした場合の$\mathbf{J}$の事を<span style="color:red">インデックス(index)</span>と呼ぶ事にします。
+        </p>
+        <div align="center"> <img width="60%" src="fig/functor_as_base.png"> </div>
+        </section>
+
+        <section>
+        <h3> 底への錐 </h3>
+        <p>
+        函手$D:\mathbf{J}\rightarrow\mathbf{C}$が与えられた時,下図の様に$D$の示す図式内の全ての対象$D_i$について射$x_i: X\rightarrow D_i$が存在し<span style="color:red">側面の三角形が全て可換</span>となる様な図式を<span style="color:red">$X$から底$D$への錐(cone)</span>と呼び$(X,x_i)$と表す事にします。
+        </p>
+        <div align="center"> <img width="70%" src="fig/cone_to_j.png"> </div>
+        </section>
+
+        <section>
+        <h3> 錐から錐への射 </h3>
+        <p>錐$(X,x_i)$から錐$(Y,y_i)$への射は,射$f:X\rightarrow Y$であって,$f$と$D_i$によって出来る全ての三角形が可換であるものとします。
+        </p>
+        <div align="center"> <img width="80%" src="fig/morphism_of_cones.png"> </div>
+        </section>
+
+        <section>
+        <h3> どういう状況か？ </h3>
         <p style="font-size:80%">
-        <img width="50%" src="fig/inv_is_uniq5.png" align="right" hspace="20">
-        【一意性の証明】<br>
-        $g, h: B\rightarrow A$が$f$の逆射であるとすると右図が可換となるから,
-        $$ g = h $$
-        となる。つまり逆射は一意に定まる。
-        <span style="float:right">□</span>
+        錐$(X,x_i)$ から錐$(Y,y_i)$へ射$f$があるというのは,$(Y,y_i)$の側面にある全ての射(各$y_i$)に$f$を合成すると$(X,x_i)$になるという状況です。
         </p>
-        </div>
+        <p class="fragment" style="font-size:80%">
+        表現を変えると「$(X,x_i)$が$(Y,y_i)$と$f$に分解される」という事を表しています。
+        </p>
+        <div align="center"> <img width="60%" src="fig/morphism_of_cones2.png"> </div>
         </section>
 
         <section>
-        <h3> 同型射とは </h3>
+        <h3> 底からの錐 </h3>
         <p>
-        同型射$f: A\rightarrow B$の存在,つまり
-        $$ A \cong B $$
-        である事はその圏に於いて<span style="color:red">$A$と$B$が本質的に同じ</span>ものである事を表していると解釈出来ます。
+        全く同様にして「底$D$からの錐」のなす圏も構成する事が出来ます。
+        </p>
+        <div align="center"> <img width="70%" src="fig/cone_from_j.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        以上により「底への錐」のなす圏と「底からの錐」のなす圏が作れるようになりました。フォーマルな定義はAwodey本の第5章を参照して下さい。
         </p>
         <p>
-        これまで何となく$\cong$を使いましたが,ちゃんと見ていく事にします。
+        さて,これらの圏における終対象・始対象を考えると積・余積を一般化した概念が得られるのでした。
         </p>
         </section>
 
         <section>
-        <h3> 函手は同型性を保つ </h3>
-
-        <div align="left">
+        <h3> 極限 </h3>
+        <div class="definition">
+        <img align="right" width="25%" src="fig/limit.png">
           <p>
-          函手は合成射と恒等射を保つので下図の上の図式が可換ならば下の図式も可換となります。
+          函手$D:\mathbf{J}\rightarrow\mathbf{C}$に対して「底$D$への錐」のなす圏の終対象を$D$の<span style="color:red">極限(limit)</span>もしくは<span style="color:red">射影的極限(projective limit)</span>と言い
+          $$ \lim_{\leftarrow}D $$
+          と表す。$\mathbf{J}$の対象が有限個の場合には有限極限(finite limit)とも言う。
           </p>
-        </div>
-        <div align="center"><img width="90%" src="fig/inverse_is_preserved.png"> </div>
-        </section>
-
-        <section>
-        <h3> 函手は同型性を保つ </h3>
-        <p>
-        つまり,以下の様な事が言えます。
-        </p>
-        <div class="equation">
-          <p>
-          函手$F: \mathbf{C}\rightarrow\mathbf{D}$について
-          $$ \begin{aligned}
-          & f\text{が同型射}\ \Rightarrow\ F(f)\text{も同型射} \\
-          & f\text{が同型射}\ \Rightarrow\ F(f^{-1})=F(f)^{-1} \\
-          & A\cong B \Rightarrow F(A) \cong F(B)
-          \end{aligned} $$
-          </p>
-        </div>
-        </section>
-
-        <section>
-        <h3> $\mathbf{C}$で同型$\Leftrightarrow\mathbf{C}^{\mathrm{op}}$で同型 </h3>
-        <p>
-        定義の対称性から明らかですが,$\mathbf{C}$での同型射は双対圏$\mathbf{C}^{\mathrm{op}}$における同型射に移ります。
-        </p>
-        <div align="center"><img width="90%" src="fig/inverse_is_preserved2.png"> </div>
-        <div align="left" style="font-size:50%">
-          注: $\mathbf{C}$と$\mathbf{C}^{\mathrm{op}}$の対象・射に同じ記号を使っています。
-        </div>
-        <p class="fragment">
-        よって反変函手$F:\mathbf{C}^{\mathrm{op}}\rightarrow \mathbf{D}$も同型性を保ちます。
-        $$A\cong B\Rightarrow F(A)\cong F(B)$$
-        </p>
-        </section>
-
-        <section>
-        <div style="font-size:90%">
-        <p>
-        特に$\mathrm{Hom}_{\mathbf{C}}(X, -)$は共変函手,$\mathrm{Hom}_{\mathbf{C}}(-, X)$は反変函手だったので,
-        </p>
-        <div class="equation">
-        <p>
-        $A\cong B$ならば,任意の$\mathbf{C}$の対象$X$について
-        $$ \begin{aligned}
-        & \mathrm{Hom}(X,A) \cong \mathrm{Hom}(X,B)\\
-        & \mathrm{Hom}(A,X) \cong \mathrm{Hom}(B,X)
-        \end{aligned} $$
-        </p>
-        </div>
-        <p>
-        となります。つまり同型な対象の周りの射一対一に対応しています。
-        </p>
-        <div align="center"><img width="40%" src="fig/hom_set6.png"> </div>
-        </div>
-        </section>
-
-        <section>
-        <p>
-        同型射$f: A\leftrightarrows B : f^{-1}$が存在する場合には,「$f$を左から合成する事」が同型射
-        $$\mathrm{Hom}(X,A) \rightarrow \mathrm{Hom}(X,B)$$
-        を与え,「$f^{-1}$を右から合成する事」が同型射
-        $$\mathrm{Hom}(A,Y) \rightarrow \mathrm{Hom}(B,Y)$$
-        を与えます。
-        </p>
-        <div align="center"><img width="80%" src="fig/hom_functor6.png"> </div>
-        </section>
-
-        <section>
-        <p>
-        すると$A\cong B$の時,$A$の周りの射を$B$の周りに移しても図式の可換性がそのまま保たれます。
-        </p>
-        <p>
-        $A$,$B$の周りの射はただ一対一に対応するだけでなく,それらに成り立つ等式(可換図式)も一対一に対応している事になります。
-        </p>
-        <div align="center"><img width="80%" src="fig/move_diagram.png"> </div>
-        </section>
-
-        <section>
-        <h3> 同型ならば区別出来ない </h3>
-        <p>
-        直感的に言うと,圏論の言葉のみを用いた場合<br>
-        「$A\cong B$のとき$A$に関して成り立つ事は$B$に関しても成り立つ。逆も然り。」<br>
-        という事になります。
-        </p>
-        <p class="fragment">
-        逆に言うと同型である対象$A$と$B$をそれらが満たす性質のみによって区別する事は出来ないという事になります。
-        </p>
-        </section>
-
-        <section>
-        <h3> 「同型ならば区別出来ない」の例 </h3>
-        <div style="font-size:90%">
-        <p>
-        $\mathbb{R}_{>0}$を正の実数の集合とすると同型写像
-        $$f(x) = a^x,\ f^{-1}(x) = \log_a(x)\quad (a > 0, a\neq 1)$$
-        によって
-        $$ (\mathbb{R}, +) \cong (\mathbb{R}_{>0}, \times) \qquad\text{in $\mathbf{Mon}$}$$
-        が得られます。
-        </p>
-        <p>
-        すると$(\mathbb{R},+)$と$(\mathbb{R}_{>0},\times)$で異なる性質は対象や射の中身を覗かない限り$\mathbf{Mon}$内部では観測出来ないという事になります。
-        </p>
-        </div>
-        </section>
-
-        <section id="equivarence">
-        <h3> 同値関係 </h3>
-        <div style="font-size:90%">
-        <div class="definition">
-        <p>
-        集合$A$上の二項関係$\sim$が
-        </p>
-        <ul>
-          <li> 反射律: 任意の$x\in A$について$$x \sim x$$ </li>
-          <li> 対称律: 任意の$x,y \in A$について$$x \sim y \ \Rightarrow\ y \sim x$$ </li>
-          <li> 推移律: 任意の$x,y,z \in A$について$$x \sim y \ \text{かつ}\ y \sim z \ \Rightarrow\ x \sim z$$ </li>
-        </ul>
-        <p>
-        を満たす時$\sim$を$A$上の<span style="color:red">同値関係(equivalence relation)</span>という。
-        </p>
-        </div>
-        <p>
-        厳密な定義とは異なりますが、「二項関係」とは「$x=y$」,「$x \leqq y$」, 「$x$が$y$の倍数」などの二引数の述語(真か偽を返す関数)の事だと思って良いです。
-        </p>
-        </div>
-        </section>
-
-        <!--
-        <section>
-        <h3> 同値類 </h3>
-        <div class="definition">
-        <p> $\sim$が$A$上の同値関係である時,任意の$a \in A$について
-        $$ [a] = \{x\in A | a \sim x\} $$
-        を$a$の<span style="color:red">同値類(equivarence class)</span>と言う。
-        </p>
-        </div>
-        <p class="fragment">
-        例えば$\mathbb{N}$上の同値関係$x \sim y$を「$x,y$を$3$で割った余りが等しい」と定義すると
-        $$ [5] = \{2,5,8,11,14,17,\cdots\} $$
-        となります。$[2],[5],[8],\cdots$は全て同じ集合です。
-        </p>
-        </section>
-
-        <section>
-        <h3> 商集合 </h3>
-        <div class="definition">
-        <p>
-        $\sim$が$A$上の同値関係である時,
-        $$ A/{\sim} \ =\ \{[a] | a\in A\}$$
-        を$A$の$\sim$による<span style="color:red">商集合(quotient set)</span>と言う。
-        </p>
-        </div>
-        <p class="fragment">
-        先ほどの例の場合は
-        $$\mathbb{N}/\sim\ =\ \{[0],[1],[2]\}$$
-        となります。これは自然数を$3$で割った余りで分類すると$3$種類あるという事を表しています。
-        </p>
-        </section>
-        -->
-
-        <section>
-        <h3> 同型は同値関係 </h3>
-        <p>
-        圏$\mathbf{C}$における同型$\cong$は$\mathbf{C}$の対象の集合上の同値関係になっています。つまり
-        </p>
-        <div class="equation">
-        $$ \begin{aligned}
-        & A\cong A \\
-        & A\cong B \ \Rightarrow\ B\cong A \\
-        & A\cong B\ \text{かつ}\ B\cong C\ \Rightarrow\ A\cong C
-        \end{aligned} $$
-        </div>
-        <p>
-        が成り立ちます。
-        </p>
-        </section>
-
-        <section>
-        <p>
-        証明は練習問題としますが,ついでに以下の公式を得ます。
-        </p>
-        <div class="equation">
-          <p>
-          $f: A\rightarrow B$, $g:B\rightarrow C$が同型射ならば
-          $$ (g\circ f)^{-1} = f^{-1}\circ g^{-1} $$
-          </p>
-        </div>
-        <p style="font-size:80%">
-        【証明の概略】<br>
-        反射律は任意の$A$について$1_A$が同型射である事,対称律は$f$が同型射ならば逆射$f^{-1}$も同型射である事,推移律は$f,g$が下図のような同型射ならば$f^{-1}\circ g^{-1}$が逆射となる事を示せば良いです。そして<u>逆射の一意性より</u>上の公式が示されます。
-        </p>
-        <div align="center"><img width="50%" src="fig/inverse_of_composition.png" hspace="20"></div>
-        </section>
-
-        <section>
-        <h3> モノイドにおける同型 </h3>
-        <p>
-        モノイド$(M, \cdot)$を圏とみなした時の同型射は$e$を単位元として
-        $$ x\cdot y = y\cdot x = e $$
-        を満たす$x,y\in M$,つまり<span style="color:red">可逆元(invertivle element)</span>の事です。
-        </p>
-        <p class="fragment">
-        例えば$(\mathbb{R}, \times)$の同型射は$0$以外の全ての実数です。<br>
-        「関数」や「準同型」以外の同型射の例となります。
-        </p>
-        </section>
-
-        <section>
-        <h3> 半順序集合における同型 </h3>
-        <p>
-        半順序集合$(A, \leqq)$においては
-        $$ x\leqq y,\ y\leqq x\ \Rightarrow\ x = y$$
-        だったので,$(A, \leqq)$を圏とみなした場合,任意の対象$x$についてそれと同型なのは$x$自身のみとなります。
-        </p>
-        </section>
-
-        <section>
-        <h3> 証明の圏における同型 </h3>
-        <p>
-        $P$,$Q$を論理式とした時$P\cong Q$であるとは
-        $$ \begin{aligned}
-        & P\ \Rightarrow\ Q \\
-        & Q\ \Rightarrow\ P 
-        \end{aligned} $$
-        の証明が共に存在する事となります。つまり証明の圏における同型とは<span style="color:red">同値(equivalence)</span>の事です。
-        </p>
-        </section>
-
-        <section>
-        <h3> $\mathbf{Sets}$における同型 </h3>
-        <p>
-        まず準備として単射・全射の定義の確認をします。
-        </p>
-        <div class="definition">
-        <p>
-        関数$f: A\rightarrow B$が<span style="color:red">単射(injection)</span>であるとは,任意の$x_1,x_2\in A$に対して
-        $$f(x_1) = f(x_2)\ \Rightarrow\ x_1=x_2$$
-        が成り立つ事である。<br>
-        <br>
-        一方<span style="color:red">全射(surjection)</span>であるとは,任意の$y \in B$に対して$f(x) = y$を満たす$x \in A$が存在する事である。<br>
-        <br>
-        単射であり全射である関数を<span style="color:red">全単射(bijection)</span>と呼ぶ。
-        </p>
-        </div>
-        </section>
-
-        <section>
-        <h3> 単射 </h3>
-        <p> 単射は異なる$A$の要素を異なる$B$の要素に移します。 </p>
-        <div align="center"><img width="60%" src="fig/injection.png"> </div>
-        </section>
-
-        <section>
-        <h3> 全射 </h3>
-        <p> 全射はその行き先(値域)が$B$全体を網羅します。 </p>
-        <div align="center"><img width="60%" src="fig/surjection.png"> </div>
-        </section>
-
-        <section>
-        <h3> 全単射 </h3>
-        <p> 全単射は要素の一対一対応を与えます。 </p>
-        <div align="center"><img width="60%" src="fig/bijection.png"> </div>
-        </section>
-
-        <section>
-        <p> $\mathbf{Sets}$における同型射とは全単射の事です。</p>
-        <p style="font-size:60%">
-        【同型射ならば全単射である事の証明】<br>
-        $f,f^{-1}$が同型射とその逆射$f: A\leftrightarrows B: f^{-1}$であるとすると
-        $$f(x_1) = f(x_2)\Rightarrow f^{-1}\circ f(x_1) = f^{-1}\circ f(x_2)\Rightarrow 1_A(x_1) = 1_A(x_2)\Rightarrow x_1 = x_2$$
-        なので$f$は単射。また任意の$y \in B$に対して$x = f^{-1}(y) \in A$が存在し,
-        $$ f(x) = f\circ f^{-1}(y) = 1_B(y) = y $$
-        を満たすので$f$は全射。従って$f$は全単射である。<br>
-        【全単射ならば同型射である事の証明】<br>
-        $f: A\rightarrow B$が全単射であるとすると,任意の$y\in B$について$f(x) = y$を満たす$x$が存在する。ここで$f(x_1) = y,\,f(x_2) = y$であるとすると$f(x_1)=f(x_2)$であるから$f$の単射性より$x_1 = x_2$となる。すなわち任意の$y\in B$について$f(x) = y$を満たす$x$が唯一つ存在するので,この対応$g: y=f(x)\mapsto x$は関数である。このとき任意の$x \in A$について$g(f(x)) = x$となるから$g\circ f = 1_A$。また任意の$y = f(x) \in B$について$f(g(y)) = f(x) = y$となるから$f\circ g = 1_B$。従って$f$は同型射である。 <span style="float:right">□</span>
-        </p>
-        </section>
-
-        <section>
-        <h3> 集合のサイズを測る </h3>
-        <p>
-        有限集合$A$,$B$の要素数が等しい事を「全単射$f: A\rightarrow B$が存在する事」として定義するのは自然です。
-        </p>
-        <div align="center"><img width="60%" src="fig/bijection.png"> </div>
-        </section>
-
-        <section>
-        <h3> 集合の濃度 </h3>
-        <img align="right" width="20%" src="http://upload.wikimedia.org/wikipedia/commons/5/5a/Matematiker_georg_cantor.jpg">
-        <p>
-        ゲオルグ・カントール(1845-1918)はこの考え方を無限集合にも一般化して「射で集合のサイズを測る」方法を確立しました。
-        </p>
-        <div class="fragment">
-        <p>
-        集合$A$のサイズを表す<span style="color:red">濃度(cardinal number)</span>$|A|$というものを
-        </p>
-        <div class="equation">
-        $$\text{$A$から$B$へ全単射が存在}\ \Leftrightarrow |A| = |B| $$
-        </div>
-        <p>
-        を満たす様に定義する事が出来ます。
-        </p>
-        </div>
-        <p class="fragment" style="font-size:90%">
-        例えば$f(x) = 2x$が自然数から$0$以上の偶数への全単射となるので
-        $$|\text{自然数の集合}|=|\text{$0$以上の偶数の集合}|$$
-        となります。
-        </p>
-        </section>
-
-        <section>
-        <h3> カントールの定理 </h3>
-        <div class="theorem">
-        <p>
-        任意の集合$A$について$A$からその冪集合$\mathcal{P}(A)$への全射は存在しない。従って全単射も存在しない。
-        </p>
-        </div>
-        <p class="fragment" style="font-size:90%">
-        $A$が無限集合の場合には$\mathcal{P}(A)$も無限集合となりますが,$A$と$\mathcal{P}(A)$の濃度が異なるという事をこの定理は言っています。今回濃度の大小の話はしていませんが,カントールは<span style="color:red">無限集合にもサイズの大小がある</span>という事を発見したわけです。
-        </p>
-        </section>
-
-        <section>
-        <h3> カントールの対角線論法 </h3>
-        <p>
-        【証明】<br>
-        全射$f: A\rightarrow\mathcal{P}(A)$が存在したと仮定して
-        $$ X = \{x\in A | x\not\in f(x)\} $$
-        とする。ここで$X$の要素は全て$A$の要素要素だから$X$は$A$の部分集合の一つであるから,$f$の全射性より
-        $$ X = f(x) $$
-        を満たす$x \in A$が存在する。すると$x \in X=f(x)$ならば$x \not\in X$,$x \not\in X=f(x)$ならば$x \in X$であるから$x\in X\Leftrightarrow x\not\in X$となり矛盾。従ってこのような全射$f$は存在しない。<span style="float:right">□</span>
-        </p>
-        </section>
-
-        <section>
-        <p>
-        単純に面白いということもありますが,「集合論」は数学の土台ですのでこういった基本的な事実は知っておきましょう。
-        </p>
-        <p class="fragment">
-        また,対角線論法は計算機科学の重要な定理の証明にも使用されます。
-        圏論による一般化と併せて後の回に扱う予定です。
-        </p>
-        </section>
-
-        <section>
-        <h3> レトラクト </h3>
-        </section>
-
-        <section>
-        <p>
-        $$ g\circ f = 1_A,\ f\circ g= 1_B$$
-        が「共に」成り立つ事が同型の定義でした。この条件を弱めるとセクション・レトラクションが定義されます。
-        </p>
-        </section>
-
-        <section id="section_retraction">
-        <h3> レトラクト </h3>
-        <div class="definition">
-        <p>
-        射$s: A\rightarrow B$,$r: B\rightarrow A$について
-        $$ r\circ s = 1_A $$
-        が成り立つ時$s$を$r$の<span style="color:red">セクション(section)</span>,$r$を$s$の<span style="color:red">レトラクション(retraction)</span>と言う。また$A$を$B$の<span style="color:red">レトラクト(retract)</span>と言う。
-        </p>
-        </div>
-        <div align="center"><img width="40%" src="fig/section_retraction.png"> </div>
-        </section>
-
-        <section>
-        <h3> レトラクトとは </h3>
-        <p>
-        直感的に説明すると$A$が$B$のレトラクトであるということは<span style="color:red">$B$が$A$を取り出せる形で含んでいる</span>という事を表しています。これによって様々な状況が説明されます。
-        </p>
-        <div align="center"><img width="40%" src="fig/section_retraction.png"> </div>
-        </section>
-
-        <section>
-        <h3> 函手はレトラクトを保つ </h3>
-        <p>
-        レトラクトは等式(可換図式)によって定義される事に注意しましょう。従って任意の函手$F: \mathbf{C}\rightarrow\mathbf{D}$はレトラクトを保ちます。
-        </p>
-        </section>
-
-        <section>
-        <h3> $\mathbf{Sets}$におけるレトラクト </h3>
-        <p>
-        $\mathbf{Sets}$において,$r\circ s=1_A$であるならば$s$は単射,$r$は全射となります。この事実は後で一般化された形で見ます。
-        </p>
-        <div align="center"><img width="60%" src="fig/section_retraction_in_sets.png"> </div>
-        </section>
-
-        <section>
-        <p>
-        全射$r: B\rightarrow A$によって$B$の要素は($A$の要素と同じ数だけの)空でない互いに素な集合に<span style="color:red">類別(classify)</span>されます。
-        </p>
-        <div align="center"><img width="60%" src="fig/section_retraction_in_sets2.png"> </div>
-        </section>
-
-        <section>
-        <p>
-        全射$r$のセクションが$s$が存在するならば,$s$は$r$によって類別された各集合から一つずつ元を選択する事に相当します。
-        </p>
-        <div align="center"><img width="60%" src="fig/section_retraction_in_sets3.png"> </div>
-        </section>
-
-        <section>
-        <p>
-        ここで$e = s\circ r : B\rightarrow B$とおくと$e$は$r$によって類別された各集合の元を,$s$によって選択された元に移す関数となります。
-        </p>
-        <p class="fragment">
-        この操作は一度やれば何度やっても変わりませんから
-        $$e\circ e = e$$
-        が成り立ちます。この性質については後で説明します。
-        </p>
-        <div align="center"><img width="20%" src="fig/section_retraction_in_sets4.png"> </div>
-        </section>
-
-        <section>
-        <p>
-        射$r: B\rightarrow A$のセクションが存在する事は以下と同値。
-        </p>
-        <div class="theorem">
-          <p>
-          任意の対象$X$と射$f: X\rightarrow A$について下図が可換となるような射$g: X\rightarrow B$が存在する。
-          </p>
-        <div align="center"><img width="40%" src="fig/section_retraction2.png"> </div>
-        </div>
-        </section>
-
-        <section>
-        <p>
-        【前者$\Rightarrow$後者の証明】<br>
-        $r:B\rightarrow A$のセクション$s:A\rightarrow B$が存在するならば$g = s\circ f$とおくと
-        $$r\circ g = r\circ s\circ f = 1_A\circ f = f$$
-        が成り立つ。<br>
-        【後者$\Rightarrow$前者の証明】<br>
-        $X = A$,$f=1_A$の場合を考えると$g$が$r$のセクションである。
-        </p>
-        </section>
-
-        <section>
-        <p>
-        同様に射$s: A\rightarrow B$のレトラクションが存在する事は以下と同値。
-        </p>
-        <div class="theorem">
-          <p>
-          任意の対象$X$と射$f: A\rightarrow X$について下図が可換となるような射$g: B\rightarrow X$が存在する。
-          </p>
-        <div align="center"><img width="40%" src="fig/section_retraction3.png"> </div>
-        </div>
-        <p>
-        証明は練習問題とします。
-        </p>
-        </section>
-
-        <!--
-        <section>
-        <h3> プログラミングの観点でのレトラクト </h3>
-        <p>
-        例えば$A$を型,$B$を$A$型+エラー状態
-        </p>
-        <div align="center"><img width="40%" src="fig/section_retraction4.png"> </div>
-        </section>
-        -->
-
-        <section>
-        <h3> モノ射・エピ射 </h3>
-        </section>
-
-        <section>
-        <p>
-        $A$が$B$のレトラクトであるということは$B$が$A$を<span style="color:red">取り出せる形で</span>含んでいる事を表していると説明しました。
-        </p>
-        <p class="fragment">
-        しかし,次に説明するように取り出せないけど$B$が$A$を含んでいるという状況があります。
-        </p>
-        </section>
-
-        <section>
-        <p>
-        位相空間と連続写像からなる圏を考えます。$D^2$を円板,$S^1$をその縁とすると確かに$D^2$は$S^1$を含んでいます。
-        </p>
-        <p class="fragment">
-        しかし<span style="color:red">$D^2$に穴を開けずに$S^1$に変形する事は出来ない</span>ので,$S^1$は$D^2$のレトラクトになっていません。
-        </p>
-        <div align="center"><img width="50%" src="fig/d2_s1.png"> </div>
-        </section>
-
-        <section>
-        <p>
-        (直感的な意味での)「$A$が$B$の一部であるという事」ををレトラクトによって定義するのは条件が強すぎるという事が判ります。
-        </p>
-        <p>
-        セクション・レトラクションの条件を緩めて,単射・全射の圏論による一般化を考えます。
-        </p>
-        </section>
-
-        <section>
-        <p>
-        $f: A\rightarrow B$がレトラクション$r: B\rightarrow A$を持つという事は
-        $$ r\circ f = 1_A$$
-        が成り立つ事でした。この事は$f$を<span style="color:red">左から消す事が出来る</span>事を表しています。セクションについても同様です。
-        </p>
-        <p>
-        $A\rightarrow B$へのモノ射・エピ射とはセクション・レトラクションと同様の性質を$B\rightarrow A$の向きの射の存在に依らずに定義したものと言えます。
-        </p>
-        </section>
-
-        <section id="monomorphism">
-        <h3> モノ射 </h3>
-        <div class="definition">
-        <p>
-        射$m: A\rightarrow B$が<span style="color:red">モノ射(monomorphism)</span>であるとは,任意の対象$X$と射$f,g: X\rightarrow A$について
-        $$ m\circ f = m\circ g \ \Rightarrow\ f = g $$
-        が成り立つ事である。<br>
-        $m$がモノ射である事をモニックであるとも言い,記号では$m: A\rightarrowtail B$と表す。
-        </p>
-        <div align="center"><img width="50%" src="fig/monomorphism.png"> </div>
         </div>
         <div align="left" style="font-size:50%">
-          注:書籍「圏論の基礎」ではモニック射と呼んでいます。
+          注: 本当は終対象である「錐」を極限と呼び「錐の頂点」は極限対象と呼ぶなど用語は使い分けた方が良いです。
         </div>
         </section>
 
         <section>
-        <p> $\mathbf{Sets}$におけるモノ射とは単射の事です。 </p>
-        <p style="font-size:60%">
-        【モノ射ならば単射である事の証明】<br>
-        $f: A\rightarrow B$がモノ射であるとする。$x_1,x_2 \in A$が$x_1\neq x_2$であるとする。$x_1,x_2$に対応する定数関数$\overline{x_1},\overline{x_2}: 1\rightarrow A$を考えると,$\overline{x_1}\neq \overline{x_2}$となり$f$がモノ射であるから$f\circ \overline{x_1} \neq f\circ \overline{x_2}$となる。すなわち,これに$1$の元を代入すれば$f(x_1)\neq f(x_2)$となる。
-        対偶を取れば任意の$x_1,x_2\in A$について
-        $f(x_1) = f(x_2) \ \Rightarrow\ x_1 = x_2$
-        となるので$f$は単射である。<br>
-        【単射ならばモノ射である事の証明】<br>
-        $f: A\rightarrow B$が単射であるとする。関数$g,h:X\rightarrow A$が$g \neq h$ならばある$x\in X$が存在して$g(x)\neq h(x)$となる。すると$f$が単射であることより$f(g(x)) \neq f(h(x))$であるから$f\circ g \neq f\circ h$となる。対偶を取れば
-        $f\circ g = f\circ h \ \Rightarrow\ g = h$
-        となるので$f$はモノ射である。<span style="float:right">□</span>
-        </p>
-        </section>
-
-        <section id="epimorphism">
-        <h3> エピ射 </h3>
+        <h3> 余極限 </h3>
         <div class="definition">
-        <p>
-        射$e: A\rightarrow B$が<span style="color:red">エピ射(epimorphism)</span>であるとは,任意の対象$X$と射$f,g: B\rightarrow X$について
-        $$ f\circ e = g\circ e \ \Rightarrow\ f = g $$
-        が成り立つ事である。<br>
-        $e$がエピ射である事をエピックであるとも言い,$e: A\twoheadrightarrow B$と表す。
-        </p>
-        <div align="center"><img width="50%" src="fig/epimorphism.png"> </div>
+        <img align="right" width="25%" src="fig/colimit.png"> 
+          <p>
+          函手$D:\mathbf{J}\rightarrow\mathbf{C}$に対して「底$D$からの錐」のなす圏の始対象を$D$の<span style="color:red">余極限(colimit)</span>もしくは<span style="color:red">帰納的極限(inductive limit)</span>と言い
+          $$ \lim_{\rightarrow}D $$
+          と表す。$\mathbf{J}$の対象が有限個の場合には有限余極限(finite colimit)とも言う。
+          </p>
         </div>
         </section>
 
         <section>
-        <p> $\mathbf{Sets}$におけるエピ射とは全射の事です。 </p>
-        <p style="font-size:60%">
-        【エピ射なら全射である事の証明】<br>
-        $f: A\rightarrow B$がエピ射でありかつ全射でないとすると,ある$b \in B$について$b = f(x)$を満たす$x \in A$が存在しない。ここで関数$g,h: B\rightarrow \{0,1\}$を$g(x) = 0$ 
-        $$ h(x) = \left\{\begin{array}{cl}
-        0 & (x \neq b) \\
-        1 & (x = b)
-        \end{array}\right. $$
-        によって定義すると,$g \neq h$であるのに$g\circ f = h\circ f$となる。これは$f$がエピ射である事に矛盾するので,$f$は全射である。<br>
-        【全射ならばエピ射である事の証明】<br>
-        $f: A\rightarrow B$が全射であるとする。関数$g,h:B\rightarrow X$が$g \neq h$であるとするとある$y \in B$が存在し$g(y) \neq h(y)$である。ここで$f$は全射であるから$y = f(x)$を満たす$x$が存在し$g(f(x)) \neq h(f(x))$となる。従って$g\circ f \neq h\circ f$であるから対偶をとって
-        $$ g\circ f = h\circ f \ \Rightarrow\ g = h$$
-        すなわち$f$はエピ射である。<span style="float:right">□</span>
+        <h3> 極限の普遍性 </h3>
+        <p>
+        ある錐が極限(余極限)であるとは「任意の錐が,極限(余極限)と一本の射に一意的に分解される」という状況を表しています。
+        </p>
+        <p class="fragment">
+        この様に<span style="color:red">一意的に分解出来る</span>という性質を指して<span style="color:red">普遍性</span>と言います。
+        極限・余極限は普遍性を持つ構成の一つであり,もっと一般的な述べ方は後の回にやります。
         </p>
         </section>
 
         <section>
-        <h3> 同型射・セクション・レトラクションとの関係 </h3>
+        <h3> 極限は一旦終了 </h3>
         <p>
-        以下の事実が言えます。証明は簡単なので練習問題とします。
+        積・余積とは2点集合(離散圏)をインデックスに取った時の極限・余極限と述べられます。
+        </p>
+        <p class="fragment">
+        また,終対象・始対象とは空圏をインデックスに取った時の極限・余極限となります。
+        </p>
+        <p class="fragment">
+        この他にイコライザ・コイコライザ,引き戻し・押し出しなどの極限概念が定義されますが復習が必要だと思いますので次回に回します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 積・余積 </h3>
+        </section>
+
+        <section>
+        <p>
+        積・余積は最も基本的な概念ですので,その性質や様々な表記法などを整理しておきます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 積・余積の表記 </h3>
+        <p>
+        $A$,$B$の積・余積は同型を除いて一意ですので以下のような表記を利用します。
         </p>
         <ul>
-          <li> 同型射はモニックかつエピック </li>
-          <li> $f$がレトラクションを持つならば$f$はモニック </li>
-          <li> $f$がセクションを持つならば$f$はエピック </li>
+          <li> $A\times B$,$\langle f, g\rangle$ </li>
+          <li> $A+ B$,$[f, g]$ </li>
         </ul>
+        <div align="center"> <img width="45%" src="fig/product16.png"> <img width="45%" src="fig/coproduct2.png"> </div>
         </section>
 
         <section>
-        <h3> モニックかつエピック $\not\Rightarrow$ 同型射 </h3>
+        <h3> 積から積への射 </h3>
         <p>
-        今見たように<span style="color:red">モノ射は単射の一般化</span>,<span style="color:red">エピ射は全射の一般化</span>と言えます。
+        $(A\times B,p_1,p_2)$,$(C\times D,p_3,p_4)$を積とした時,下図が可換になるような$A\times B$から$C\times D$への射は$f,g$に対して唯一つに定まります。(積の定義の図式と見比べて下さい。)
+        この射を$f \times g$と表します。
+        </p>
+        <div align="center"> <img width="60%" src="fig/category_of_products.png"> </div>
+        </section>
+        <section>
+        <h3> 余積から余積への射 </h3>
+        <p>
+        同様に$(A+B,q_1,q_2)$,$(C+D,q_3,q_4)$を余積とした時,下図が可換になるような$A+B$から$C+D$への射も$f,g$に対して唯一つに定まります。この射を$f + g$と表します。
+        この射を$f \times g$と表します。
+        </p>
+        <div align="center"> <img width="60%" src="fig/category_of_coproducts.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        $A\times B$は2点集合(離散圏)をインデックスに取った時の極限でした。
+        これを一般化して任意の離散圏$\mathbf{J}$をインデックスに取れば任意個の要素の積を定義する事が出来ます。これを
+        $$ \prod_{j\in\mathbf{J}}A_{j} = A_0\times A_1\times \cdots$$
+        と表します。
         </p>
         <p>
-        しかし,射$f$がモニックかつエピックであっても同型射であるとは限りません。
+        同様にして離散圏$\mathbf{J}$をインデックスに取った時の余極限を
+        $$ \coprod_{j\in\mathbf{J}}A_{j} = A_0 + A_1 + \cdots$$
+        と表します。
         </p>
         </section>
 
         <section>
-        <h3> モニックかつエピックだが同型射でない例 </h3>
+        <h3> 3つの対象の積 </h3>
         <p>
-        $\mathbf{Mon}$における準同型
-        $$ f: (\mathbb{N}, +) \rightarrow (\mathbb{Z}, +)$$
-        を$f(x) = x$によって定義します。これは明らかに同型射ではありませんが,モニックかつエピックです。$g: (\mathbb{Z},+)\rightarrow (M,\cdot )$があったとすると,$g(-n)$は必ず$g(n)$の逆源に移ります。従って$\mathbb{Z}$の$n \geqq 0$の部分のみによって$g$全体が定まるという事になります。
-        </p>
-        <p>
-        証明はAwodeyのテキストのExample 2.5にあります。時間があれば,当日説明します。
+        $3$つの対象$A_0$,$A_1$,$A_2$の積の考え方として,今述べた様に３点集合$\mathbf{J}$をインデックスにして定義される
+        $$ \prod_{j\in \mathbf{J}} A_j = A_0\times A_1\times A_2 $$
+        の他に,$2$つの対象の積を作る事を繰り返した
+        $$ (A_0\times A_1)\times A_2\ \text{と}\ A_0\times(A_1\times A_2) $$
+        も考えられますがこれらは全て同型になります。
+        $$ A_0\times A_1\times A_2 \cong (A_0\times A_1)\times A_2 \cong A_0\times (A_1\times A_2) $$
+        証明は実際に同型射を構成する事により行います。
         </p>
         </section>
 
         <section>
-        <h3> モノ射とエピ射は双対 </h3>
+        <h3> $2$個以上の対象の積 </h3>
         <p>
-        $f$が$\mathbf{C}$におけるモノ射ならば,$\mathbf{C}^{\mathrm{op}}$においてはエピ射となります。逆も然りです。すると一方の性質から他方の性質を自動的に得る事が出来ます。
+        一般に,ある圏において「任意の$A$,$B$に対して$A\times B$」が存在するならば,任意の$2$点以上の有限集合$\mathbf{J}$に対して
+        $$ \prod_{j\in \mathbf{J}}A_j $$
+        が存在します。
         </p>
-        <p style="font-size:90%">
-        例えば$f: A\rightarrowtail B$, $g: B\rightarrowtail C$ならば$g\circ f: A\rightarrowtail C$となる事が示せます(練習問題)。<br>
-        すると双対性により$f: A\twoheadrightarrow B$, $g: B\twoheadrightarrow C$ならば$g\circ f: A\twoheadrightarrow C$事も自動的に言えます。
-        </p>
-        <div align="center"><img width="50%" src="fig/triangle.png"> </div>
         </section>
 
         <section>
-        <h3> 冪等射 </h3>
-        </section>
-
-        <section id="idempotent">
-        <h3> 冪等射 </h3>
-        <div class="definition">
+        <h3> $1$個の対象の積 </h3>
         <p>
-        射$e: A\rightarrow A$が<span style="color:red">冪等射(idempotent)</span>であるとは,
-        $$ e\circ e = e$$
-        が成り立つ事である。
+        ところで,対象が$A$$1$つの場合の積は$A$自身(もしくは$A$と同型な任意の対象)となります。
+        図式を描いて考えて見て下さい。
         </p>
-        </div>
         </section>
 
         <section>
-        <h3> 分裂冪等射 </h3>
+        <h3> $0$個の対象の積 </h3>
         <p>
-        先ほど述べた様にセクションとレトラクション$s: A\rightarrow B: r,\ r\circ s=1_A$を用いて
-        $$ e = s\circ r $$
-        と定義すると
-        $$ e\circ e = s\circ r\circ s\circ r = s\circ 1_A\circ r = s\circ r = e$$
-        なので$e$は冪等射となります。
+        さらに空圏(空集合に対応する離散圏)がインデックスの時の極限は終対象$1$でしたので,
+        「終対象$1$は対象$0$個の積」です。
+        </p>
+        </section>
+
+        <section>
+        <h3> 有限積の存在 </h3>
+        <p>
+        以上より,圏$\mathbf{C}$に
+        </p>
+        <ul>
+          <li> 終対象$1$が存在し </li>
+          <li> 任意の$A,B$に対して$A\times B$が存在する
+        </ul>
+        <p>
+        ならば,任意の有限個の対象$A_0,A_1,\cdots,A_n$について,その積
+        $$ A_0\times A_1\times \cdots A_n$$
+        が存在する事が示されます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 有限余積の存在 </h3>
+        <p>
+        <span style="color:red">双対性</span>より,圏$\mathbf{C}$に
+        </p>
+        <ul>
+          <li> 始対象$1$が存在し </li>
+          <li> 任意の$A,B$に対して$A+ B$が存在する
+        </ul>
+        <p>
+        ならば,任意の有限個の対象$A_0,A_1,\cdots,A_n$について,その余積
+        $$ A_0+ A_1+ \cdots A_n$$
+        が存在する事が示されます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 積・余積について成り立つ等式 </h3>
+        <p>
+        また,
+        $$ A\times B \cong B\times A,\quad A + B \cong B + A$$
+        や
+        $$ 1\times A\cong A\times 1 \cong A,\quad 0 + A \cong A + 0 \cong A $$
+        などが一般に成り立ちます。
         </p>
         <p class="fragment">
-        このようにセクションとレトラクションで表される冪等射を<span style="color:red">分裂冪等射(split idempotent)</span>と言います。
+        これらの様に「圏の上での代数計算」というものを考える事が出来ます。これも後の回のテーマです。
         </p>
         </section>
 
         <section>
-        <h3> プログラミングの文脈での冪等性 </h3>
+        <h3> $\mathrm{Hom}$集合に成り立つ等式 </h3>
         <p>
-        列と連結からなるモノイドにおいて$[e]$が冪等射であるとします。すると,
-        $$ \begin{aligned}
-          & [a,b,\cdots,x,e,e,e,e,e,y,\cdots]  \\
-          = &[a,b,\cdots,x,e,y,\cdots]
-          \end{aligned}
-          $$
-        です。これをプログラムの命令の列だと思うと,$e$は<span style="color:red">連続して実行しても一回だけ実行しても同じ命令</span>を表します。
+        積の定義により$f,g$の対$(f,g)$と,$u$が一対一に対応するのでした。これから任意の対象$X$について
+        $$ \mathrm{Hom}_{\mathbf{C}}(X, A\times B) \cong \mathrm{Hom}_{\mathbf{C}}(X,A)\times \mathrm{Hom}_{\mathbf{C}}(X,B)$$
+        が成り立つという事が判ります。
         </p>
-        <p class="fragment">
-        例えば「ボタンを連打しても一回押しても同じ処理」、「同じ変数への同じ値の書き込み」などです。
+        <div align="center"> <img width="80%" src="fig/product16.png"> </div>
+        </section>
+
+        <section>
+        <h3> $\mathrm{Hom}$集合に成り立つ等式 </h3>
+        <p>
+        余積についても同様に考えると以下の等式が成立します。
+        $$ \mathrm{Hom}_{\mathbf{C}}(X, A\times B) \cong \mathrm{Hom}_{\mathbf{C}}(X,A)\times \mathrm{Hom}_{\mathbf{C}}(X,B)$$
+        $$ \mathrm{Hom}_{\mathbf{C}}(A+B, X) \cong \mathrm{Hom}_{\mathbf{C}}(A,X)\times \mathrm{Hom}_{\mathbf{C}}(B,X)$$
+        また
+        $$ \mathrm{Hom}_{\mathbf{C}}(X, 1) \cong 1,\quad\mathrm{Hom}_{\mathbf{C}}(0, X) \cong 1$$
         </p>
-        <p class="fragment">
-        この様にある種の<span style="color:red">冗長性(redundancy)</span>を扱う場面で冪等性が登場する事があります。
+        <p>
+        このような等式は来週,より一般的な形で紹介します。
         </p>
         </section>
 
         <section>
-        <h3> 第5回はここで終わります </h3>
+        <h3> 第6回はここで終わります </h3>
         <p>
         お疲れ様でした。<br>
-        関数によって類別や選択,包含関係などの２つの集合の関係が表現される事を見ました。
-        圏論では全てを射で考えるので,このような射の解釈に親しむ事がとても大切です。
-        <p>
-        次回は積・余積などを始めとする普遍的な対象について,その構成方法について説明をします。
+        来週からは前半は圏論,後半は応用という進め方にしたいと思います。前半は極限の性質について,後半は代数的データ型の圏論的な定式化とプログラム運算について説明します。
         </p>
         </section>
 
