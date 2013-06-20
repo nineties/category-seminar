@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+    <title>圏論勉強会 第6回 @ ワークスアプリケーションズ</title>
+
+		<meta name="description" content="Seminar of category theory">
+    <meta name="author" content="Koichi Nakamura">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+    <meta http-equiv="X-UA-Compatible" CONTENT="IE=EmulateIE7" />
+
+		<!-- For syntax highlighting -->
+    <link rel="stylesheet" href="plugin/highlight/styles/github.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+        }
+      });
+    </script>
+
+    <style type="text/css">
+      <!--
+      div.definition {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 4px solid #333333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      div.theorem {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 4px solid #333333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      div.equation {
+        margin: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 2px solid #C0C0C0;
+      }
+      --> 
+    </style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+        <section>
+        <h1>圏論勉強会<br>第6回</h1>
+        <h3>@ワークスアプリケーションズ</h3>
+        <small> 中村晃一 <br> 2013年6月20日</small>
+        </section>
+
+        <section>
+        <h3>謝辞</h3>
+        <p>
+        この勉強会の企画，会場設備の提供をして頂きました<br>
+        &#12849; ワークスアプリケーションズ様<br>
+        にこの場をお借りして御礼申し上げます。
+        </p>
+        </section>
+
+        <section>
+        <h3> この会について </h3>
+        <ul>
+          <li> <span style="color:red">圏論(category theory)</span>を題材にいろんなことを学びます。</li>
+          <li> 分かり易さを重視して初歩的な例を多用します。</li>
+          <li> 関数型言語の経験がある方がより楽しめると思います。資料中では主にHaskellを使います。 </li>
+          <li> 中高生も数人見ているらしいのでプログラミングと関係が浅い内容も取り上げます。</li>
+          <li> この資料は<a href="http://nineties.github.com/category-seminar/">http://nineties.github.com/category-seminar</a>に置いてあります。</li>
+        </ul>
+        </section>
+
+        <section>
+        <h2> 第6回:積・余積・極限 </h2>
+        </section>
+
+        <section>
+        <h3> 第6回の内容 </h3>
+        <p>
+        今回は「普遍性」という性質によって定義される様々な対象について見ていきます。また,それらの構成法の一つである「極限」という概念について紹介します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 終対象・始対象 </h3>
+        </section>
+
+        <section id="terminal_object">
+        <h3> 終対象 </h3>
+        <div class="definition">
+        <p>
+        ある対象$1$が<span style="color:red">終対象(terminal object)</span>であるとは,
+        任意の対象$A$から$1$への射が唯一つ存在する事である。
+        </p>
+        <div align="center"> <img width="40%" src="fig/terminal_object2.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <h3> 終対象は同型を除いて一意 </h3>
+        <p style="font-size:90%">
+        【証明】<br>
+        終対象が2つ($1$と$1'$)存在すると仮定すると,終対象の条件より射$f: 1\rightarrow 1'$と$g:1'\rightarrow 1$が存在する。すると,$g\circ f$と$1_1$が共に$1$から$1$への射となるが,$1$は終対象なのだからこれらは等しい。すなわち
+        $$ g\circ f = 1_1$$
+        である。同様に$ f\circ g = 1_{1'}$であるので$f,g$は同型射である。従って
+        $$ 1 \cong 1' $$
+        であるから終対象は同型を除いて一意に定まる。<span style="float:right">□</span> </p>
+        </p>
+        <div align="center"> <img width="50%" src="fig/terminal_object_is_unique.png"> </div>
+        </section>
+
+        <section>
+        <h3> Well-defined性 </h3>
+        <p>
+        終対象の条件を満たす対象は複数存在し得ますが,全て同型なので具体的な対象として何を選んでも
+        矛盾無く圏論の議論を進める事が出来ます。このような定義の性質を<span style="color:red">well-defined性</span>と言います。
+        </p>
+        </section>
+
+        <section id="initial_object">
+        <h3> 始対象 </h3>
+        <div class="definition">
+        <p>
+        ある対象$0$が<span style="color:red">始対象(initial object)</span>であるとは,
+        $0$から任意の対象$A$への射が唯一つ存在する事である。
+        </p>
+        <div align="center"> <img width="40%" src="fig/initial_object.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <h3> 始対象も同型を除いて一意 </h3>
+        <p>
+        $\mathbf{C}$における始対象は双対圏$\mathbf{C}^{\mathrm{op}}$における終対象となります。
+        </p>
+        <p class="fragment">
+        すると終対象が同型を除いて一意であることから,自動的に始対象も同型を除いて一意と言えます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 双対性原理 </h3>
+        <p>
+        一般に任意の圏における正しい文は双対圏においても正しい文となります。この原理を<span style="color:red">双対性原理(duaplity principle)</span>と言います。(詳しくはAwodey本の第3章)
+        </p>
+        </section>
+
+        <section>
+        <h3> 例:$\mathbf{Sets}$の始対象と終対象 </h3>
+        <p>
+        $\mathbf{Sets}$では
+        </p>
+        <img align="right" width="50%" src="fig/sets_initial_terminal.png">
+        <ul>
+          <li> 始対象: 空集合 </li>
+          <li> 終対象: 単集合 </li>
+        </ul>
+        <p>
+        となります。空集合から任意の集合へは<span style="color:red">空関数(empty function)</span>という関数が唯一つ存在するのでした。
+        </p>
+        </section>
+
+        <section>
+        <h3> 例:$\mathbf{Mon}$の始対象と終対象 </h3>
+        <p>
+        モノイドと準同型のなす圏$\mathbf{Mon}$では<span style="color:red">単位元のみのモノイド</span>$(\{e\},\cdot)$が始対象かつ終対象となります。
+        単位元は単位元に移されなければならない事に注意しましょう。
+        </p>
+        <p>
+        始対象かつ終対象である対象を<span style="color:red">ヌル対象(null object)</span>とも呼びます。
+        </p>
+        <img width="50%" src="fig/mon_initial_terminal.png">
+        </section>
+
+        <section>
+        <h3> 例:$(\mathbb{N}, \leqq)$の始対象と終対象 </h3>
+        <p>
+        全順序集合$(\mathbb{N}, \leqq)$をそれ単体で圏とみなした場合は
+        </p>
+        <ul>
+          <li> 始対象: $0$ </li>
+          <li> 終対象: 存在しない </li>
+        </ul>
+        <p>
+        となります。順序集合では最小値・最大値に対応します。
+        </p>
+        <div align="center"> <img src="fig/natural_ordering.png"> </div>
+        </section>
+
+        <section>
+        <h3> $\mathbf{Cat}$の始対象と終対象 </h3>
+        <p>
+        圏と函手からなる圏$\mathbf{Cat}$では空圏$\mathbf{0}$と$\mathbf{1}$がそれぞれ始対象・終対象となります。
+        </p>
+        <div align="center"> <img src="fig/category_0_and_1.png"> </div>
+        </section>
+
+        <section>
+        <h3> global element </h3>
+        <p>
+        前々回説明したように,$\mathbf{Sets}$において$\mathrm{Hom}_{\mathbf{Sets}}(1,A)$は$A$の要素と一対一に対応します。
+        $$ \mathrm{Hom}_{\mathbf{Sets}}(1,A) \cong A $$
+        この「要素」の概念を圏論に持ち込んで終対象$1$から対象$A$への射$f: 1\rightarrow A $を$A$の<span style="color:red">global element</span>と呼ぶ場合があります。
+        </p>
+        <p class="fragment">
+        $\mathbf{Mon}$の例で見たように終対象からの射は,私達が一般に「要素」と呼ぶものと対応している訳ではないので注意して下さい。
+        </p>
+        </section>
+
+        <section>
+        <h3> 極限 </h3>
+        </section>
+
+        <section id="product">
+        <h3> 積の定義</h3>
+        <div class="definition">
+        <p>
+        対象$A$,$B$の積とは対象$P$,射$p_1: P\rightarrow A$，$p_2: P\rightarrow B$からなり,
+        任意の対象$X$と任意の射$f: X\rightarrow A$, $g: X\rightarrow B$に対して，以下の図式が可換となるような
+        $u: X\rightarrow P$が唯一つ存在するものである。
+        </p>
+        <div align="center"> <img width="60%" src="fig/product.png"> </div>
+        </div>
+        </section>
+
+        <section id="coproduct">
+        <h3> 余積の定義</h3>
+        <div class="definition">
+        <p>
+        対象$A$,$B$の余積とは対象$Q$,射$q_1: A\rightarrow Q$，$q_2: B\rightarrow Q$からなり,
+        任意の対象$X$と任意の射$f: A\rightarrow X$, $g: B\rightarrow X$に対して，以下の図式が可換となるような
+        $u: Q\rightarrow X$が唯一つ存在するものである。
+        </p>
+        <div align="center"> <img width="60%" src="fig/coproduct.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <h3> 積・余積は同型を除いて一意 </h3>
+        <p>
+        積・余積は同型を除いて一意となります。証明は第1回資料にありますが,後でより一般的な形でも証明します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 例:$\mathbf{Sets}$における積・余積 </h3>
+        <p>
+        $\mathbf{Sets}$における積は<span style="color:red">直積(direct product)</span>
+        $$A\times B = \{(a,b) | a\in A, b\in B\}$$
+        と<span style="color:red">射影(projection)</span>
+        $$p_1((a,b)) = a,\ p_2((a,b)) = b$$
+        に対応します。この時$f,g$に対して$u(x) = (s, t)$とおくと図式の可換性より
+        $s = f(x), t = g(x)$
+        となりますから
+        $$u(x) = (f(x), g(x))$$
+        が$f=p_1\circ u, g=p_2\circ u$を満たす唯一の関数となります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 例:$\mathbf{Sets}$における積・余積 </h3>
+        <p>
+        $\mathbf{Sets}$における余積は<span style="color:red">直和(direct sum)</span>
+        $$A + B = \{(0,a)|a\in A\}\cup\{(1,b)|b\in B\} $$
+        と<span style="color:red">埋め込み(embedding)</span>
+        $$q_1(a) = (0, a)\ q_2(b)=(1, b)$$
+        に対応します。この時任意の$f,g$に対して
+        $$
+        u(x) = \left\{
+        \begin{array}{cc}
+        f(a) & (\text{$x = (0, a)$の時}) \\
+        g(a) & (\text{$x = (1, a)$の時})
+        \end{array}
+        \right.
+        $$
+        が$f=u\circ q_1,g = u\circ q_2$を満たす唯一の関数となります。証明は省略します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 例:代数的データ型 </h3>
+        <p>
+        次回詳しい定義をしますが,型の圏においては<span style="color:red">直積型(product type)</span>と<span style="color:red">直和型(sum type)</span>が積と余積に対応します。
+        <pre><code data-trim class="haskell" contenteditable>
+data Product a b = Product a b
+p1 (Product a b) = a
+p2 (Product a b) = b
+u f g x = Product (f x) (g x)
+
+data Sum a b = L a | R b
+q1 a = L a
+q2 b = R b
+u' f g x = case x of L a -> f a; R b -> g b
+        </code></pre>
+        </p>
+        </section>
+
+        <section>
+        <h3> 例:「かつ」と「または」 </h3>
+        <p>
+        証明の圏において$A$,$B$を命題とすると$A,B$の積は$A\wedge B$($A$かつ$B$),余積は$A\vee B$($A$または$B$)に対応します。
+        </p>
+        <p>
+        下の図式を見て,$p_i$や$q_i$どのような推論規則に対応するのか考えてみて下さい。
+        </p>
+        <div align="center"> <img width="45%" src="fig/product.png"> <img width="45%" src="fig/coproduct.png"> </div>
+        </section>
+
+        <section>
+        <h3> 積・余積の構成 </h3>
+        <p>
+        積の定義は「任意の～について～を満たす<span style="color:red">$P$へ向かう射</span>が唯一つ存在する」という終対象の定義と似たものです。余積は始対象と似ています。
+        </p>
+        <p>
+        上手く圏を構成すれば「積とは～という圏の終対象である」「余積とは～という圏の始対象である」と統一的に述べる事が出来そうです。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        対象$A$,$B$を固定して任意の$X$と$A$,$B$への射を備えた図式
+        $$ A\leftarrow X\rightarrow B $$
+        を対象とする圏を考えます。
+        </p>
+        <p>
+        図式$A\leftarrow X\rightarrow B$から図式$A\leftarrow Y\rightarrow B$への射は,<span style="color:red">下の図式が可換となる様な</span>射$f: X\rightarrow B$によって定義します。
+        </p>
+        <div align="center"> <img src="fig/arrow_of_cone.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        絵に描いてみるとこんな様子の圏です。この圏における終対象が$A,B$の積を与えます。
+        </p>
+        <p style="font-size:80%" class="fragment">
+        これが実際に圏となること(結合則・恒等射の確認)と,この圏の終対象の条件が$A,B$の積の条件と一致する事を確かめるのは練習問題とします。
+        </p>
+        <div align="center"> <img src="fig/cone_of_product.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        同様に$A\rightarrow X\leftarrow B$という形の図式を対象とする圏における始対象が$A,B$の余積となります。
+        </p>
+        <div align="center"> <img src="fig/cone_of_coproduct.png"> </div>
+        </section>
+
+        <section>
+        <h3> 積・余積は同型を除いて一意 </h3>
+        <p>
+        積・余積は終対象・始対象として解釈出来ますから同型を除いて一意である事も自動的に言えます。
+        他にも様々な性質を統一的に議論する事が可能になります。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        今用いた$2$種類の圏は<span style="color:red">底面の形</span>(今の場合は$A$と$B$)によって定まっています。
+        この考え方を使って積・余積に限らない一般化が出来そうです。
+        </p>
+        <div align="center"> <img width="45%" src="fig/cone_of_product.png"> <img width="45%" src="fig/cone_of_coproduct.png"> </div>
+        </section>
+
+        <section>
+        <h3> 図式としての函手 </h3>
+        <p>
+        圏$\mathbf{C}$の中の特定の対象の対$A,B$は,2点集合(離散圏)からの函手と同一視出来るのでした。
+        </p>
+        <div align="center"> <img width="60%" src="fig/functor_as_pair.png"> </div>
+        </section>
+
+        <section>
+        <h3> 図式としての函手 </h3>
+        <p>
+        一般化して圏$\mathbf{J}$と函手$D: \mathbf{J} \rightarrow \mathbf{C}$
+        が与えれれば,先ほどと同様の圏を構成出来そうです。このように函手を図式とみなした場合の$\mathbf{J}$の事を<span style="color:red">インデックス(index)</span>と呼ぶ事にします。
+        </p>
+        <div align="center"> <img width="60%" src="fig/functor_as_base.png"> </div>
+        </section>
+
+        <section>
+        <h3> 底への錐 </h3>
+        <p>
+        函手$D:\mathbf{J}\rightarrow\mathbf{C}$が与えられた時,下図の様に$D$の示す図式内の全ての対象$D_i$について射$x_i: X\rightarrow D_i$が存在し<span style="color:red">側面の三角形が全て可換</span>となる様な図式を<span style="color:red">$X$から底$D$への錐(cone)</span>と呼び$(X,x_i)$と表す事にします。
+        </p>
+        <div align="center"> <img width="70%" src="fig/cone_to_j.png"> </div>
+        </section>
+
+        <section>
+        <h3> 錐から錐への射 </h3>
+        <p>錐$(X,x_i)$から錐$(Y,y_i)$への射は,射$f:X\rightarrow Y$であって,$f$と$D_i$によって出来る全ての三角形が可換であるものとします。
+        </p>
+        <div align="center"> <img width="80%" src="fig/morphism_of_cones.png"> </div>
+        </section>
+
+        <section>
+        <h3> どういう状況か？ </h3>
+        <p style="font-size:80%">
+        錐$(X,x_i)$ から錐$(Y,y_i)$へ射$f$があるというのは,$(Y,y_i)$の側面にある全ての射(各$y_i$)に$f$を合成すると$(X,x_i)$になるという状況です。
+        </p>
+        <p class="fragment" style="font-size:80%">
+        表現を変えると「$(X,x_i)$が$(Y,y_i)$と$f$に分解される」という事を表しています。
+        </p>
+        <div align="center"> <img width="60%" src="fig/morphism_of_cones2.png"> </div>
+        </section>
+
+        <section>
+        <h3> 底からの錐 </h3>
+        <p>
+        全く同様にして「底$D$からの錐」のなす圏も構成する事が出来ます。
+        </p>
+        <div align="center"> <img width="70%" src="fig/cone_from_j.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        以上により「底への錐」のなす圏と「底からの錐」のなす圏が作れるようになりました。フォーマルな定義はAwodey本の第5章を参照して下さい。
+        </p>
+        <p>
+        さて,これらの圏における終対象・始対象を考えると積・余積を一般化した概念が得られるのでした。
+        </p>
+        </section>
+
+        <section>
+        <h3> 極限 </h3>
+        <div class="definition">
+        <img align="right" width="25%" src="fig/limit.png">
+          <p>
+          函手$D:\mathbf{J}\rightarrow\mathbf{C}$に対して「底$D$への錐」のなす圏の終対象を$D$の<span style="color:red">極限(limit)</span>もしくは<span style="color:red">射影的極限(projective limit)</span>と言い
+          $$ \lim_{\leftarrow}D $$
+          と表す。$\mathbf{J}$の対象が有限個の場合には有限極限(finite limit)とも言う。
+          </p>
+        </div>
+        <div align="left" style="font-size:50%">
+          注: 本当は終対象である「錐」を極限と呼び「錐の頂点」は極限対象と呼ぶなど用語は使い分けた方が良いです。
+        </div>
+        </section>
+
+        <section>
+        <h3> 余極限 </h3>
+        <div class="definition">
+        <img align="right" width="25%" src="fig/colimit.png"> 
+          <p>
+          函手$D:\mathbf{J}\rightarrow\mathbf{C}$に対して「底$D$からの錐」のなす圏の始対象を$D$の<span style="color:red">余極限(colimit)</span>もしくは<span style="color:red">帰納的極限(inductive limit)</span>と言い
+          $$ \lim_{\rightarrow}D $$
+          と表す。$\mathbf{J}$の対象が有限個の場合には有限余極限(finite colimit)とも言う。
+          </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> 極限の普遍性 </h3>
+        <p>
+        ある錐が極限(余極限)であるとは「任意の錐が,極限(余極限)と一本の射に一意的に分解される」という状況を表しています。
+        </p>
+        <p class="fragment">
+        この様に<span style="color:red">一意的に分解出来る</span>という性質を指して<span style="color:red">普遍性</span>と言います。
+        極限・余極限は普遍性を持つ構成の一つであり,もっと一般的な述べ方は後の回にやります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 極限は一旦終了 </h3>
+        <p>
+        積・余積とは2点集合(離散圏)をインデックスに取った時の極限・余極限と述べられます。
+        </p>
+        <p class="fragment">
+        また,終対象・始対象とは空圏をインデックスに取った時の極限・余極限となります。
+        </p>
+        <p class="fragment">
+        この他にイコライザ・コイコライザ,引き戻し・押し出しなどの極限概念が定義されますが復習が必要だと思いますので次回に回します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 積・余積 </h3>
+        </section>
+
+        <section>
+        <p>
+        積・余積は最も基本的な概念ですので,その性質や様々な表記法などを整理しておきます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 積・余積の表記 </h3>
+        <p>
+        $A$,$B$の積・余積は同型を除いて一意ですので以下のような表記を利用します。
+        </p>
+        <ul>
+          <li> $A\times B$,$\langle f, g\rangle$ </li>
+          <li> $A+ B$,$[f, g]$ </li>
+        </ul>
+        <div align="center"> <img width="45%" src="fig/product16.png"> <img width="45%" src="fig/coproduct2.png"> </div>
+        </section>
+
+        <section>
+        <h3> 積から積への射 </h3>
+        <p>
+        $(A\times B,p_1,p_2)$,$(C\times D,p_3,p_4)$を積とした時,下図が可換になるような$A\times B$から$C\times D$への射は$f,g$に対して唯一つに定まります。(積の定義の図式と見比べて下さい。)
+        この射を$f \times g$と表します。
+        </p>
+        <div align="center"> <img width="60%" src="fig/category_of_products.png"> </div>
+        </section>
+        <section>
+        <h3> 余積から余積への射 </h3>
+        <p>
+        同様に$(A+B,q_1,q_2)$,$(C+D,q_3,q_4)$を余積とした時,下図が可換になるような$A+B$から$C+D$への射も$f,g$に対して唯一つに定まります。この射を$f + g$と表します。
+        この射を$f \times g$と表します。
+        </p>
+        <div align="center"> <img width="60%" src="fig/category_of_coproducts.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        $A\times B$は2点集合(離散圏)をインデックスに取った時の極限でした。
+        これを一般化して任意の離散圏$\mathbf{J}$をインデックスに取れば任意個の要素の積を定義する事が出来ます。これを
+        $$ \prod_{j\in\mathbf{J}}A_{j} = A_0\times A_1\times \cdots$$
+        と表します。
+        </p>
+        <p>
+        同様にして離散圏$\mathbf{J}$をインデックスに取った時の余極限を
+        $$ \coprod_{j\in\mathbf{J}}A_{j} = A_0 + A_1 + \cdots$$
+        と表します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 3つの対象の積 </h3>
+        <p>
+        $3$つの対象$A_0$,$A_1$,$A_2$の積の考え方として,今述べた様に３点集合$\mathbf{J}$をインデックスにして定義される
+        $$ \prod_{j\in \mathbf{J}} A_j = A_0\times A_1\times A_2 $$
+        の他に,$2$つの対象の積を作る事を繰り返した
+        $$ (A_0\times A_1)\times A_2\ \text{と}\ A_0\times(A_1\times A_2) $$
+        も考えられますがこれらは全て同型になります。
+        $$ A_0\times A_1\times A_2 \cong (A_0\times A_1)\times A_2 \cong A_0\times (A_1\times A_2) $$
+        証明は実際に同型射を構成する事により行います。
+        </p>
+        </section>
+
+        <section>
+        <h3> $2$個以上の対象の積 </h3>
+        <p>
+        一般に,ある圏において「任意の$A$,$B$に対して$A\times B$」が存在するならば,任意の$2$点以上の有限集合$\mathbf{J}$に対して
+        $$ \prod_{j\in \mathbf{J}}A_j $$
+        が存在します。
+        </p>
+        </section>
+
+        <section>
+        <h3> $1$個の対象の積 </h3>
+        <p>
+        ところで,対象が$A$$1$つの場合の積は$A$自身(もしくは$A$と同型な任意の対象)となります。
+        図式を描いて考えて見て下さい。
+        </p>
+        </section>
+
+        <section>
+        <h3> $0$個の対象の積 </h3>
+        <p>
+        さらに空圏(空集合に対応する離散圏)がインデックスの時の極限は終対象$1$でしたので,
+        「終対象$1$は対象$0$個の積」です。
+        </p>
+        </section>
+
+        <section>
+        <h3> 有限積の存在 </h3>
+        <p>
+        以上より,圏$\mathbf{C}$に
+        </p>
+        <ul>
+          <li> 終対象$1$が存在し </li>
+          <li> 任意の$A,B$に対して$A\times B$が存在する
+        </ul>
+        <p>
+        ならば,任意の有限個の対象$A_0,A_1,\cdots,A_n$について,その積
+        $$ A_0\times A_1\times \cdots A_n$$
+        が存在する事が示されます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 有限余積の存在 </h3>
+        <p>
+        <span style="color:red">双対性</span>より,圏$\mathbf{C}$に
+        </p>
+        <ul>
+          <li> 始対象$1$が存在し </li>
+          <li> 任意の$A,B$に対して$A+ B$が存在する
+        </ul>
+        <p>
+        ならば,任意の有限個の対象$A_0,A_1,\cdots,A_n$について,その余積
+        $$ A_0+ A_1+ \cdots A_n$$
+        が存在する事が示されます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 積・余積について成り立つ等式 </h3>
+        <p>
+        また,
+        $$ A\times B \cong B\times A,\quad A + B \cong B + A$$
+        や
+        $$ 1\times A\cong A\times 1 \cong A,\quad 0 + A \cong A + 0 \cong A $$
+        などが一般に成り立ちます。
+        </p>
+        <p class="fragment">
+        これらの様に「圏の上での代数計算」というものを考える事が出来ます。これも後の回のテーマです。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\mathrm{Hom}$集合に成り立つ等式 </h3>
+        <p>
+        積の定義により$f,g$の対$(f,g)$と,$u$が一対一に対応するのでした。これから任意の対象$X$について
+        $$ \mathrm{Hom}_{\mathbf{C}}(X, A\times B) \cong \mathrm{Hom}_{\mathbf{C}}(X,A)\times \mathrm{Hom}_{\mathbf{C}}(X,B)$$
+        が成り立つという事が判ります。
+        </p>
+        <div align="center"> <img width="80%" src="fig/product16.png"> </div>
+        </section>
+
+        <section>
+        <h3> $\mathrm{Hom}$集合に成り立つ等式 </h3>
+        <p>
+        余積についても同様に考えると以下の等式が成立します。
+        $$ \mathrm{Hom}_{\mathbf{C}}(X, A\times B) \cong \mathrm{Hom}_{\mathbf{C}}(X,A)\times \mathrm{Hom}_{\mathbf{C}}(X,B)$$
+        $$ \mathrm{Hom}_{\mathbf{C}}(A+B, X) \cong \mathrm{Hom}_{\mathbf{C}}(A,X)\times \mathrm{Hom}_{\mathbf{C}}(B,X)$$
+        また
+        $$ \mathrm{Hom}_{\mathbf{C}}(X, 1) \cong 1,\quad\mathrm{Hom}_{\mathbf{C}}(0, X) \cong 1$$
+        </p>
+        <p>
+        このような等式は来週,より一般的な形で紹介します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 第6回はここで終わります </h3>
+        <p>
+        お疲れ様でした。<br>
+        来週からは前半は圏論,後半は応用という進め方にしたいと思います。前半は極限の性質について,後半は代数的データ型の圏論的な定式化とプログラム運算について説明します。
+        </p>
+        </section>
+
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+        rollingLinks: false,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+      Reveal.addEventListener( 'slidechanged', function( event ) {
+        MathJax.Hub.Rerender(event.currentSlide);
+      });
+
+		</script>
+
+	</body>
+</html>
