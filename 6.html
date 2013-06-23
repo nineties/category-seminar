@@ -563,9 +563,9 @@ u' f g x = case x of L a -> f a; R b -> g b
         <section>
         <h3> 3つの対象の積 </h3>
         <p>
-        $3$つの対象$A_0$,$A_1$,$A_2$の積の考え方として,今述べた様に３点集合$\mathbf{J}$をインデックスにして定義される
+        3つの対象$A_0$,$A_1$,$A_2$の積の考え方として,今述べた様に３点集合$\mathbf{J}$をインデックスにして定義される
         $$ \prod_{j\in \mathbf{J}} A_j = A_0\times A_1\times A_2 $$
-        の他に,$2$つの対象の積を作る事を繰り返した
+        の他に,2つの対象の積を作る事を繰り返した
         $$ (A_0\times A_1)\times A_2\ \text{と}\ A_0\times(A_1\times A_2) $$
         も考えられますがこれらは全て同型になります。
         $$ A_0\times A_1\times A_2 \cong (A_0\times A_1)\times A_2 \cong A_0\times (A_1\times A_2) $$
@@ -576,7 +576,7 @@ u' f g x = case x of L a -> f a; R b -> g b
         </section>
 
         <section>
-        <h3> $2$個以上の対象の積 </h3>
+        <h3> 2個以上の対象の積 </h3>
         <p>
         一般に,ある圏において「任意の$A$,$B$に対して$A\times B$」が存在するならば,任意の$2$点以上の有限集合$\mathbf{J}$に対して
         $$ \prod_{j\in \mathbf{J}}A_j $$
@@ -585,15 +585,15 @@ u' f g x = case x of L a -> f a; R b -> g b
         </section>
 
         <section>
-        <h3> $1$個の対象の積 </h3>
+        <h3> 1個の対象の積 </h3>
         <p>
-        ところで,$1$つの対象$A$のみの積は$A$自身(もしくは$A$と同型な任意の対象)となります。
+        ところで,1つの対象$A$のみの積は$A$自身(もしくは$A$と同型な任意の対象)となります。
         図式を描いて考えてみて下さい。
         </p>
         </section>
 
         <section>
-        <h3> $0$個の対象の積 </h3>
+        <h3> 0個の対象の積 </h3>
         <p>
         さらに空圏(空集合に対応する離散圏)がインデックスの時の極限は終対象$1$でしたので,
         「終対象$1$は対象が$0$個の時の積」です。
@@ -679,6 +679,72 @@ u' f g x = case x of L a -> f a; R b -> g b
         </p>
         </section>
 
+        <section>
+        <h3> 付録:有限積を持つ圏における同型 </h3>
+        <p>
+        以下の証明においては任意の有限積が存在する圏(つまり終対象と任意の2つの対象の積が存在する圏)を考えます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 「$A$1つの積$\cong$A」の証明 </h3>
+        <p style="font-size:90%">
+        【証明】<br>
+        下の図式において$A$,$1_A$を固定すると,任意の$X$と$f: X\rightarrow A$について図式が可換となるような$u: X\rightarrow A$は
+        $$ 1_A\circ u = f\ \Leftrightarrow\ u = f$$
+        より唯一に定まるので$(A,1_A)$は$A$1つの積である。従って積は同型を除いて一意である事から
+        $$ \text{$A$1つの積} \cong A$$
+<span style="float:right">□</span>
+        </p>
+        <div align="center"> <img width="20%" src="fig/product_iso_proof_1.png"> </div>
+        </section>
+
+        <section>
+        <h3> 「$A\times B\cong B\times A$」の証明 </h3>
+        <p style="font-size:80%">
+        【証明】<br>
+        左下の図式と右下の図式は描き方が異なるだけで同じ図式である。すなわち$(B\times A,p_1,p_2)$が$B$と$A$の積であるならば$(B\times A,p_2,p_1)$は$A$と$B$の積である。
+        すなわち
+        $$ A\times B \cong B\times A $$
+<span style="float:right">□</span>
+        </p>
+        <div align="center"> <img width="70%" src="fig/product_iso_proof_3.png"> </div>
+        </section>
+
+        <section>
+        <h3> 「$1\times A\cong A$」の証明 </h3>
+        <p style="font-size:80%">
+        【証明】<br>
+        任意の対象$X$から終対象$1$への射を$!_X:X\rightarrow 1$と表す。下図において$A,!_A,1_A$を固定し,$X$と$f: X\rightarrow A$,$!_X:X\rightarrow 1$を取る。ここで$u:X\rightarrow A$が下図を可換にするとすると$1$が終対象であることより,$!_A\circ u = 1_X$は常に成立(そうでなければ,$X$から$1$へ2つ射が存在してしまう)し,$1_A\circ u = f$より$u = f$は$f$に対して一意に定まる。すなわち$(A,!_A,1_A)$は$1$と$A$の積であるので
+        $$ 1\times A \cong A $$
+<span style="float:right">□</span>
+        </p>
+        <div align="center"> <img width="35%" src="fig/product_iso_proof_2.png"> </div>
+        </section>
+
+        <section>
+        <h3> 「$(A\times B)\times C\cong A\times B\times C$」の証明 </h3>
+        <p style="font-size:80%">
+        【証明】<br>
+        積$(A\times B,p_1,p_2)$,$((A\times B)\times C,p_3,p_4)$を固定する。積の普遍性より任意の$f:X\rightarrow A$,$g:X\rightarrow B$,$h:X\rightarrow C$に対して下の両図式が可換となる$u,v$が唯一つ存在する。すなわち各$f$,$g$に対して
+        $$ p_1\circ u = f,\ p_2\circ u = g$$
+        を満たすのは$u$のみ,各$h$に対して
+        $$ p_3\circ v = u,\ p_4\circ v = h$$
+        を満たすのは$v$のみである。
+        </p>
+        <div align="center"> <img width="80%" src="fig/product_iso_proof_4.png"> </div>
+        </section>
+
+        <section>
+        <p style="font-size:80%">
+        ここで$w:X\rightarrow (A\times B)\times C$が下の図式を可換にすると仮定すると,まず
+        $$ p_1\circ(p_3\circ w) = f,\ p_2\circ(p_3\circ w) = g$$
+        を満たすから$p_3\circ w = u$である。さらに$p_4\circ w = h$であるから$w=v$となる。すなわち$w$は一意に定まる。従って$((A\times B)\times C,p_1\circ p_3,p_2\circ p_3, p_4)$は$A$,$B$,$C$の積である条件を満たすので,そのような対象が同型を除いて一意であることより
+        $$ (A\times B)\times C \cong A\times B\times C $$
+<span style="float:right">□</span>
+        </p>
+        <div align="center"> <img width="60%" src="fig/product_iso_proof_5.png"> </div>
+        </section>
 
 			</div>
 		</div>
