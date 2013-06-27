@@ -1,0 +1,995 @@
+<!doctype html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+    <title>圏論勉強会 第7回 @ ワークスアプリケーションズ</title>
+
+		<meta name="description" content="Seminar of category theory">
+    <meta name="author" content="Koichi Nakamura">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+    <meta http-equiv="X-UA-Compatible" CONTENT="IE=EmulateIE7" />
+
+		<!-- For syntax highlighting -->
+    <link rel="stylesheet" href="plugin/highlight/styles/github.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+        }
+      });
+    </script>
+
+    <style type="text/css">
+      <!--
+      div.definition {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 4px solid #333333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      div.theorem {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 4px solid #333333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      div.equation {
+        margin: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 2px solid #C0C0C0;
+      }
+      --> 
+    </style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+        <section>
+        <h1>圏論勉強会<br>第7回</h1>
+        <h3>@ワークスアプリケーションズ</h3>
+        <small> 中村晃一 <br> 2013年6月27日</small>
+        $$ \newcommand\banana[1]{{(\hspace{-.2em}|#1|\hspace{-.2em})}} $$
+        </section>
+
+        <section>
+        <h3>謝辞</h3>
+        <p>
+        この勉強会の企画，会場設備の提供をして頂きました<br>
+        &#12849; ワークスアプリケーションズ様<br>
+        にこの場をお借りして御礼申し上げます。
+        </p>
+        </section>
+
+        <section>
+        <h3> この会について </h3>
+        <ul>
+          <li> <span style="color:red">圏論(category theory)</span>を題材にいろんなことを学びます。</li>
+          <li> 分かり易さを重視して初歩的な例を多用します。</li>
+          <li> 関数型言語の経験がある方がより楽しめると思います。資料中では主にHaskellを使います。 </li>
+          <li> 中高生も数人見ているらしいのでプログラミングと関係が浅い内容も取り上げます。</li>
+          <li> この資料は<a href="http://nineties.github.com/category-seminar/">http://nineties.github.com/category-seminar</a>に置いてあります。</li>
+        </ul>
+        </section>
+
+        <section>
+        <h2> 第7回 </h2>
+        <h3> 様々な極限<br> 代数的データ型 </h3>
+        </section>
+
+        <section>
+        <h3> 第7回の内容 </h3>
+        <p>
+        前半は前回定義した「極限・余極限」の続き,後半は代数的データ型の圏論的な定式化とプログラム運算について紹介します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 復習 </h3>
+        <p>
+        インデックス圏$\mathbf{J}$からの函手$D$を底とする二種類の「錐のなす圏」における,終対象と始対象を極限$\displaystyle\lim_{\leftarrow}D$・余極限$\displaystyle\lim_{\rightarrow}D$と呼ぶのでした。
+        </p>
+        <div align="center">
+        <img width="30%" src="fig/limit.png">
+        <img width="30%" src="fig/colimit.png"> 
+        </div>
+        </section>
+
+        <section>
+        <h3> $\mathbf{J}$が空圏の時 </h3>
+        <p>
+        底$D:\mathbf{J}\rightarrow \mathbf{C}$は唯一つ存在して
+        $$ \lim_{\leftarrow}D \cong 1,\ \lim_{\rightarrow}D\cong 0$$
+        </p>
+        <div align="center">
+        <img width="75%" src="fig/limits_initial_terminal.png"> 
+        </div>
+        </section>
+
+        <section>
+        <h3> $\mathbf{J}$が二点集合の時 </h3>
+        <p>
+        底$D:\mathbf{J}\rightarrow \mathbf{C}$が$A$,$B$の対だとすると
+        $$ \lim_{\leftarrow}D \cong A\times B,\ \lim_{\rightarrow}D\cong A+B$$
+        </p>
+        <div align="center">
+        <img width="75%" src="fig/limits_product_coproduct.png"> 
+        </div>
+        </section>
+
+        <section>
+        <h3> $\mathbf{J}$が三点集合の時 </h3>
+        <p>
+        底$D:\mathbf{J}\rightarrow \mathbf{C}$が$A$,$B$,$C$の組だとすると
+        $$ \lim_{\leftarrow}D \cong A\times B\times C,\ \lim_{\rightarrow}D\cong A+B+C$$
+        </p>
+        <div align="center">
+        <img width="75%" src="fig/limits_ternary_product_coproduct.png"> 
+        </div>
+        </section>
+
+        <section>
+        <h3> イコライザ・コイコライザ </h3>
+        </section>
+
+        <section>
+        <h3> イコライザ・コイコライザとは </h3>
+        <p>
+        インデックス圏$\mathbf{J}$を下図の様な平行射からなる圏
+        </p>
+        <div align="center"> <img width="20%" src="fig/parallel_arrow.png"> </div>
+        <p>
+        とした時の極限を<span style="color:red">イコライザ</span>,余極限を<span style="color:red">コイコライザ</span>と言います。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        簡単な絵を描いて見ると下図の様な状況です。$E$が頂点の錐がイコライザ,$Q$が頂点の錐がコイコライザです。
+        </p>
+        <div align="center"> <img width="80%" src="fig/cone_equaliser_coequaliser.png"> </div>
+        </section>
+
+        <section>
+        <h3> 錐の様子 </h3>
+        <p>
+        底への錐の様子を詳しく見ます。底からの錐も同様です。
+        </p>
+        <p>
+        底$D:\mathbf{J}\rightarrow\mathbf{C}$は二本の射$f,g: A\rightarrow B$で定まります。この時,射$x: X\rightarrow A$が与えられると<span style="color:red">錐の側面の三角形は全て可換</span>でなければいけなかったので$X$から$B$への射は自動的に決まります。
+        </p>
+        <div align="center"> <img width="60%" src="fig/cone_equaliser.png"> </div>
+        </section>
+
+        <section id="equaliser">
+        <h3> イコライザ </h3>
+        <div class="definition">
+        <p>
+        $f,g:A\rightarrow B$の<span style="color:red">イコライザ(equaliser)</span>とは対象$\mathrm{eq}(f,g)$と$f\circ e=g\circ e$を満たす$e:\mathrm{eq}(f,g)\rightarrow A$からなり,任意の$f\circ x=g\circ x$を満たす$x:X\rightarrow A$に対して$x=e\circ u$を満たす$u:X\rightarrow \mathrm{eq}(f,g)$が唯一つ存在するものである。
+        </p>
+        <p>
+        $e$の事を単にイコライザと言うこともある。
+        </p>
+        <div align="center"> <img width="60%" src="fig/equaliser.png"> </div>
+        </div>
+        </section>
+
+        <section id="coequaliser">
+        <h3> コイコライザ </h3>
+        <div class="definition">
+        <p>
+        $f,g:A\rightarrow B$の<span style="color:red">コイコライザ(coequaliser)</span>とは対象$\mathrm{coeq}(f,g)$と$q\circ f=q\circ g$を満たす$q:B\rightarrow \mathrm{coeq}(f,g)$からなり,任意の$x\circ f=x\circ g$を満たす$x:B\rightarrow X$に対して$x=u\circ q$を満たす$u:\mathrm{coeq}(f,g)\rightarrow X$が唯一つ存在するものである。
+        </p>
+        <p>
+        $q$の事を単にコイコライザという事もある。
+        </p>
+        <div align="center"> <img width="50%" src="fig/coequaliser.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <h3> $\mathbf{Sets}$でのイコライザ </h3>
+        <p>
+        $f,g:A\rightarrow B$とすると
+        $$ \mathrm{eq}(f,g) = \{ x \in A | f(x) = g(x) \} $$
+        及び包含写像$e(x) = x$がイコライザとなります。
+        </p>
+        <div align="center"> <img width="70%" src="fig/equaliser_in_sets1.png"> </div>
+        </section>
+
+        <section>
+        <h3> $\mathbf{Sets}$でのイコライザ </h3>
+        <p>
+        $f,g:A\rightarrow B$とすると
+        $$ \mathrm{eq}(f,g) = \{ x \in A | f(x) = g(x) \} $$
+        及び包含写像$e(x) = x$がイコライザとなります。
+        </p>
+        <div align="center"> <img width="70%" src="fig/equaliser_in_sets2.png"> </div>
+        </section>
+
+        <section>
+        <h3> 具体例 </h3>
+        <p>
+        $f,g: \mathbb{R}\times \mathbb{R}\rightarrow \mathbb{R}$を
+        $$ f(x,y) = x^2+y^2,\ g(x,y) = 1 $$
+        とすると
+        $$ \mathrm{eq}(f,g) = \{ (x,y) | x^2 + y^2 = 1 \}$$
+        すなわち単位円周となります。
+        </p>
+        <div align="center"> <img width="40%" src="fig/equaliser_example.png"> </div>
+        </section>
+
+        <!--
+        <section>
+        <p>
+        $$ E = \{ x \in A | f(x) = g(x) \} $$
+        と包含写像$e(x) = x$がイコライザである事の証明をします。
+        </p>
+        <p style="font-size:80%">
+        【証明】<br>
+        $h: X\rightarrow A$が$f\circ h = g\circ h$を満たすと仮定すると任意の$x \in X$に対して
+        $$ f\circ h(x) = g\circ h(x) \ \Leftrightarrow\ f(h(x)) = g(h(x))$$
+        であるから$h(x) \in E$である。<br>
+        また$u: X\rightarrow E$が$h = e\circ u$を満たすと仮定すると$e$の定義より任意の$x \in A$に対して
+        $$ h(x) = e\circ u(x) \Leftrightarrow u(x) = h(x) \in E$$
+        となるので$u$は一意に定まる。<span style="float:right">□</span>
+        </p>
+        </section>
+        -->
+
+        <section>
+        <h3> $\mathbf{Sets}$でのコイコライザ </h3>
+        <p>
+        $f,g: A\rightarrow B$に対して,各$a\in A$について$f(a)$と$g(a)$が同一の類に入るように
+        $B$を類別する操作がコイコライザに対応します。
+        </p>
+        <div align="center"> <img width="70%" src="fig/coequaliser_in_sets1.png"> </div>
+        <div align="left" style="font-size:50%">
+          ちゃんと言うとB上の二項関係$R=\{(f(a),g(a))|a\in A\}$が生成する同値関係($R$の反射推移対称閉包)で$B$を割ったものが$\mathrm{coeq}(f,g)$です。
+        </div>
+        </section>
+
+        <section>
+        <h3> $\mathbf{Sets}$でのコイコライザ </h3>
+        <p>
+        $f,g: A\rightarrow B$に対して,各$a\in A$について$f(a)$と$g(a)$が同一の類に入るように
+        $B$を類別する操作がコイコライザに対応します。
+        </p>
+        <div align="center"> <img width="70%" src="fig/coequaliser_in_sets2.png"> </div>
+        <div align="left" style="font-size:50%">
+          ちゃんと言うとB上の二項関係$R=\{(f(a),g(a))|a\in A\}$が生成する同値関係($R$の反射推移対称閉包)で$B$を割ったものが$\mathrm{coeq}(f,g)$です。
+        </div>
+        </section>
+
+        <section>
+        <h3> 具体例 </h3>
+        <p style="font-size:90%">
+        $f,g: \mathbb{N}\rightarrow\mathbb{N}$を
+        $$ f(n) = n,\ g(n) = n + 3$$
+        とします。すると任意の$n$について$n$と$n+3$が同じ類に入るように$\mathbb{N}$を類別するので例えば,
+        $$ \begin{aligned}
+        & \mathrm{coeq}(f,g) = \{0,1,2\} \\
+        & e(n) = n \bmod 3 \ (\text{$n$を$3$で割った余り}) 
+        \end{aligned}
+        $$
+        がコイコライザとなります。
+        </p>
+        <div align="center"> <img width="40%" src="fig/coequaliser_example.png"> </div>
+        </section>
+
+
+
+        <section>
+        <h3> 定理: イコライザはモノ,コイコライザはエピ </h3>
+        <div class="theorem">
+        <p>
+        イコライザ$e:\mathrm{eq}(f,g)\rightarrow A$はモノ射,<br>
+        コイコライザ$q:B\rightarrow\mathrm{coeq}(f,g)$はエピ射である。
+        </p>
+        </div>
+        <p>
+        $\mathbf{Sets}$の場合はモノ射は単射,エピ射は全射でした。
+        </p>
+        </section>
+
+        <section>
+        <h3> モノ射の復習 </h3>
+        <div class="definition">
+        <p>
+        射$m: A\rightarrow B$が<span style="color:red">モノ射(monomorphism)</span>であるとは,任意の対象$X$と射$f,g: X\rightarrow A$について
+        $$ m\circ f = m\circ g \ \Rightarrow\ f = g $$
+        が成り立つ事である。<br>
+        $m$がモノ射である事をモニックであるとも言い,記号では$m: A\rightarrowtail B$と表す。
+        </p>
+        <div align="center"><img width="50%" src="fig/monomorphism.png"> </div>
+        </div>
+        <p> また,エピ射はこの双対でした。</p>
+        </section>
+
+        <section>
+        <h3> イコライザはモノ </h3>
+        <p style="font-size:80%">
+        任意の$x,y:X\rightarrow\mathrm{eq}(f,g)$について
+        $$ e\circ x = e\circ y\ \Rightarrow\ x = y$$
+        である事を示せば良いです。
+        </p>
+        <p style="font-size:70%">
+        【証明】<br>
+        任意の$x,y:X\rightarrow\mathrm{eq}(f,g)$について$ e\circ x = e\circ y$であると仮定し,$z = e\circ x = e\circ y$とおく。$e$はイコライザなので$f\circ e=g\circ e$であるから
+        $$ f\circ z = f\circ e\circ x = g\circ e\circ x = g\circ z$$
+        となる。従って$(X,z)$は錐になっており$z = e\circ u$を満たす$u$は唯一に定まることから$x = y$となる。
+        すなわち$e$はモノ射である。 <span style="float:right">□</span>
+        </p>
+        <div align="center"><img width="70%" src="fig/equaliser_mono.png"> </div>
+        </section>
+
+        <section>
+        <h3> コイコライザはエピ </h3>
+        <p style="font-size:80%">
+        【証明】<br>
+        双対性□
+        </p>
+        </section>
+
+        <section>
+        <p>
+        イコライザ・コイコライザは重要な用途が多くありますので是非Awodey本の第3章を読んでみて下さい。
+        </p>
+        </section>
+
+        <section>
+        <h3> 引き戻し・押し出し </h3>
+        </section>
+
+        <section>
+        <h3> 引き戻し・押し出しとは </h3>
+        <p>
+        インデックス圏$\mathbf{J}$を下図の様な圏
+        </p>
+        <div align="center"> <img width="20%" src="fig/index_of_pullback.png"> </div>
+        <p>
+        とした時の極限を<span style="color:red">引き戻し</span>と言います。<br>
+        引き戻しの双対,つまり$\mathbf{J}$を下図の様な圏
+        </p>
+        <div align="center"> <img width="20%" src="fig/index_of_pushout.png"> </div>
+        <p>
+        とした時の余極限を<span style="color:red">押し出し</span>と言います。
+        </p>
+        </section>
+
+        <section id="pullback">
+        <h3> 引き戻し </h3>
+        <div class="definition" style="font-size:80%">
+        <p>
+        $f:A\rightarrow C$,$g:B\rightarrow C$の<span style="color:red">引き戻し(pullback)</span>とは対象$A\times_{C} B$と$f\circ p_1 = g\circ p_2$を満たす$p_1:A\times_{C}B\rightarrow A$,$p_2: A\times_{C} B\rightarrow B$からなり,任意の$f\circ x=g\circ y$を満たす$x:X\rightarrow A$,$y:X\rightarrow B$に対して$x = p_1\circ u$,$y = p_2\circ u$を満たす$u: X\rightarrow A\times_{C}B$が唯一つ存在するものである。
+        </p>
+        <div align="center"> <img width="40%" src="fig/pullback.png"> </div>
+        </div>
+        </section>
+
+        <section id="pushout">
+        <h3> 押し出し </h3>
+        <div class="definition" style="font-size:80%">
+        <p>
+        $f:C\rightarrow A$,$g:C\rightarrow B$の<span style="color:red">押し出し(pushout)</span>とは対象$A+_{C} B$と$q_1\circ f = q_2\circ g$を満たす$q_1:A\rightarrow A+_{C}B$,$q_2: B\rightarrow A+_{C} B$からなり,任意の$x\circ f=y\circ g$を満たす$x:A\rightarrow X$,$y:B\rightarrow X$に対して$x = u\circ q_1$,$y = u\circ q_2$を満たす$u: A+_{C}B\rightarrow X$が唯一つ存在するものである。
+        </p>
+        <div align="center"> <img width="40%" src="fig/pushout.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <h3> $\mathbf{Sets}$での引き戻し </h3>
+        <p>
+        $f:A\rightarrow C$,$g:B\rightarrow C$に対して
+        $$ A\times_C B = \{(a,b) \in A\times B | f(a) = g(b) \}$$
+        となります。直積$A\times B$の$f(a)=g(b)$を満たす部分集合です。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\mathbf{Sets}$での引き戻し:具体例 </h3>
+        <p style="font-size:90%">
+        関数$\chi:A\rightarrow\{\mathrm{true},\mathrm{false}\}$と定数$\mathrm{true}:1\rightarrow\{\mathrm{true},\mathrm{false}\}$の引き戻しは
+        $$ U = \{a \in A | \chi(a) = \mathrm{true}\}$$
+        です。$A\times 1 \cong A$であった事に注意しましょう。<br>
+        つまり,条件$\chi$を満たす要素からなる集合$U$を構成する事を表現できます。この$\chi$の事を$U$の<span style="color:red">特性関数(characteristic function)</span>などと言います。
+        </p>
+        <img align="right" width="40%" src="fig/characteristic_function.png"> 
+        <p style="font-size:80%">
+        この場合の$p_1$は包含写像$i(x) = x$,$p_2$は$U$から$1$への唯一の写像($!_U$と表す)です。
+        </p>
+        </section>
+
+        <section>
+        <h3> 積+等式 = 引き戻し? </h3>
+        <p>
+        $\mathbf{Sets}$では積$A\times B$の$f(a) = g(b)$を満たす部分集合が引き戻し$A\times_C B$となっていました。そして,ある等式を満たす部分集合はイコライザで表せました。
+        </p>
+        <p>
+        実は任意の圏においても,引き戻しは積とイコライザで表せます。
+        </p>
+        <div align="center"> <img width="40%" src="fig/pullback.png"> </div>
+        </section>
+
+        <section>
+        <h3> 定理 </h3>
+        <div class="theorem">
+        <p>
+        $A\times B$からの$A$,$B$への射影を$\pi_1,\pi_2$とすると
+        $$ A\times_C B \cong \mathrm{eq}(f\circ\pi_1, g\circ\pi_2) $$
+        が成り立つ。
+        $A\times_C B$から$A$,$B$への射影$p_1,p_2$は
+        $$ p_1 = \pi_1\circ e,\ p_2 = \pi_2\circ e$$
+        で与えられる。
+        </p>
+        <div align="center"> <img width="80%" src="fig/pullback_product_equaliser1.png"> </div>
+        </div>
+        <p>
+        </p>
+        </section>
+
+        <section>
+        <p style="font-size:80; height:8em">
+        【証明】<br>
+        $x: X\rightarrow A, y:X\rightarrow B$を$f\circ x = g\circ y$を満たす任意の射とする。
+        </p>
+        <div align="center"> <img width="50%" src="fig/pullback_product_equaliser2.png"> </div>
+        </section>
+
+        <section>
+        <p style="font-size:80; height:8em">
+        これは
+        $$ f\circ\pi_1\circ\langle x,y \rangle = g\circ\pi_2\circ\langle x,y\rangle $$
+        が成り立つ事と同値である。
+        </p>
+        <div align="center"> <img width="50%" src="fig/pullback_product_equaliser3.png"> </div>
+        </section>
+
+        <section>
+        <p style="font-size:80; height:8em">
+        従って$(X,\langle x,y\rangle)$は平行射$f\circ\pi_1,g\circ\pi_2: A\times B\rightarrow C$を底とする錐になっている。
+        </p>
+        <div align="center"> <img width="50%" src="fig/pullback_product_equaliser4.png"> </div>
+        </section>
+
+        <section>
+        <p style="font-size:80; height:8em">
+        よってイコライザ$(E, e)$が存在する。すなわち$e$は$f\circ\pi_1\circ e = g\circ\pi_2\circ e$を満たし,
+        $$ \langle x,y \rangle = e\circ u$$
+        を満たす$u:X\rightarrow E$が唯一つ存在する。積の普遍性より,この等式は
+        $$ x = \pi_1\circ e\circ u,\ y = \pi_2\circ e\circ u$$
+        と同値である。
+        </p>
+        <div align="center"> <img width="50%" src="fig/pullback_product_equaliser5.png"> </div>
+        </section>
+
+        <section>
+        <p style="font-size:80; height:8em">
+        ここで$p_1 = \pi_1\circ e, p_2 = \pi_2\circ e$とおいて等式を書き直すと,$ f\circ p_1 = g\circ p_2$
+        を満たし,
+        $$ x = p_1\circ u,\ y = p_2\circ u$$
+        を満たす$u$が唯一つ存在する事が示される。すなわち
+        $$ A\times_C B \cong E = \mathrm{eq}(f\circ\pi_1,g\circ\pi_2)$$
+        である。<span style="float:right">□</span>
+        </p>
+        <div align="center"> <img width="50%" src="fig/pullback_product_equaliser6.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        双対性より押し出しも余積,コイコライザで表せます。
+        </p>
+        <p>
+        $\mathbf{Sets}$の場合は$A+_C B$は直和$A + B$を$f(c)$,$g(c)$を同一視する事によって類別した集合に対応します。
+        </p>
+        <p>
+        時間の関係上具体例の説明は省略します。
+        </p>
+        </section>
+
+        <section>
+        <p style="font-size:120%">
+        実は引き戻しに限らず,任意の極限は積とイコライザで表せます。
+        </p>
+        <div align="center"> <img width="80%" src="fig/limit_as_product_and_equaliser.png"> </div>
+        </section>
+
+        <section>
+        <h3> 定理 </h3>
+        <div class="theorem">
+          <p> 圏$\mathbf{C}$において </p>
+          <ul>
+            <li> 任意の対象の集合の積 </li>
+            <li> 任意の平行射のイコライザ </li>
+          </ul>
+          <p>
+          が存在するならば任意の極限が存在する。<br>
+          また,そのような圏$\mathbf{C}$は<span style="color:red">完備(complete)</span>であるという。
+          </p>
+        </div>
+        <p>
+        双対性より,任意の余積とコイコライザを持つ圏は任意の余極限を持ち,そのような圏は<span style="color:red">余完備(cocomplete)</span>であると言います。
+        </p>
+        </section>
+
+        <section>
+        <h3> 一旦ここまで </h3>
+        <p>
+        今の定理の証明は是非やりたい所なのですが時間がありません。Awodey本のProposition 5.21を参照して下さい。引き戻しを積とイコライザに分解する例を良く理解すると,この定理の証明も読めると思います。
+        </p>
+        <p class="fragment">
+        ある種の余完備な圏がプログラムの意味論を構築する上で必要になりますので,次回も引き続き極限の話題を取り上げる予定です。
+        </p>
+        </section>
+
+        <section>
+        <h3> 代数的データ型 </h3>
+        </section>
+
+        <section>
+        <h3> 代数的データ型 </h3>
+        <p>
+        第3回に半群やマグマのなす圏において自由対象という普遍的な対象を考えるとデータ構造が出てくるという話をしました。
+        </p>
+        <p>
+        これらの特別な場合として,<span style="color:red">$F$代数</span>,<span style="color:red">$F$余代数</span>というもののなす圏において関数型言語の代数的データ型が説明されます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 自然数 </h3>
+        <div style="font-size:90%">
+        <p>
+        一旦「型」から離れて，自然数の集合を考えます。
+        </p>
+        <div class="definition">
+        <p>
+        自然数の集合$N$は以下の条件を満たす集合である。
+        </p>
+        <ul style="font-size:80">
+          <li> ある定数$\mathrm{zero}\in N$が存在。 </li>
+          <li> 関数$\mathrm{succ}: N\rightarrow N$が存在。</li>
+          <li> 任意の$n$について$\mathrm{zero} \neq \mathrm{succ}(n)$である。</li>
+          <li> $n\neq m$ならば$\mathrm{succ}(n) \neq \mathrm{succ}(m)$である。</li>
+          <li> 以上の他に$N$の要素は存在しない。</li>
+        </ul>
+        </div>
+        <p>
+        $\mathrm{zero}=0$，$\mathrm{succ}(n)=n + 1$とすると$N$が通常の自然数の集合$\mathbb{N}$になります。
+        </p>
+        <p class="fragment">
+        他にも，$\mathrm{zero}=1$, $\mathrm{succ}(n)=2n$などとすると定義を満たす別の集合ができますが，全て同型になります。
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> 自然数を射で表す </h3>
+        <p>
+        今の定義を圏論の言葉で述べる方法を考えます。
+        </p>
+        <p class="fragment">
+        定数$\mathrm{zero}$は$N$の要素なので終対象$1$から$N$への射で表せ,$\mathrm{succ}$は$N$から$N$への関数で表せます。
+        </p>
+        <div class="fragment">
+        <p> 
+        この状況を下の様な図式で表しましょう。
+        </p>
+        <div align="center"> <img width="50%" src="fig/nat_as_arrows.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <p>
+        実際には対象・射の中身を覗く事は出来ないので以下の図式が自然を表しているか否かを直接知ることはできません。
+        </p>
+        <div align="center"> <img width="50%" src="fig/nat_as_arrows2.png"> </div>
+        <p>
+        この図式と<span style="color:red">外部との関係性</span>によって自然数を特定する必要があります。
+        </p>
+        <p class="fragment">
+        その為にこの形の図式を対象とする圏を考える必要があります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 自然数の属す圏 </h3>
+        <p>
+        下図の様な図式(射$c,f$で定まる)を対象とし
+        </p>
+        <div align="center"> <img width="50%" src="fig/nat_as_arrows2.png"> </div>
+        <p>
+        <span style="color:red">下図を可換とする</span>射$h: X\rightarrow Y$を図式間の射とすると,これらは圏をなします。(恒等射の存在・結合律を確かめてみて下さい)。
+        </p>
+        <div align="center"> <img width="60%" src="fig/nat_as_arrows3.png"> </div>
+        </section>
+
+        <section>
+        <h3> $h$は準同型 </h3>
+        <p>
+        今の可換図式を等式で表すと
+        $$ h\circ c = d,\ h\circ f = g\circ h$$
+        となります。
+        </p>
+        <p class="fragment">
+        これをpointwiseに書き表すと($c,d$は対応する定数に直して)
+        $$ h(c) = d,\ h(f(x)) = g(h(x)) $$
+        となります。これは$h$が準同型である事を表しています。
+        </p>
+        <div align="center"> <img width="50%" src="fig/nat_as_arrows3.png"> </div>
+        </section>
+
+        <section id="nat_type">
+        <h3> 自然数 </h3>
+        <p style="font-size:90%">
+        今の圏における始対象が自然数を与えます。$\mathbf{Sets}$以外の任意の圏$\mathbf{C}$に一般化して定義を書き下します。
+        </p>
+        <div class="definition" style="font-size:90%">
+        <p>
+        $\mathbf{C}$を任意の有限積を持つ圏とする。<br>
+        対象$N$,射$\mathrm{zero}:1\rightarrow N,\mathrm{succ}:N\rightarrow N$が$\mathbf{C}$における自然数であるとは,
+        任意の対象$X$,射$c:1\rightarrow X,f:X\rightarrow X$に対して
+        $$ u\circ\mathrm{zero}=c,\ u\circ\mathrm{succ} = f\circ u$$
+        を満たす$u:N\rightarrow X$が唯一つ存在する事である。
+        </p>
+        <div align="center"> <img width="40%" src="fig/nat_type.png"> </div>
+        </section>
+
+        <section>
+        <h3> $\mathbf{Sets}$における自然数 </h3>
+        <p>
+        $\mathbf{Sets}$で解釈すると$N$はまさしく自然数の集合となっています。
+        </p>
+        <p style="font-size:90%">
+        【証明】<br>
+        $$ N = \{0,1,2,3,\cdots\},\ \mathrm{zero} = 0,\ \mathrm{succ}(n) = n+1$$
+        とする。任意の集合$X$,$c\in X$,$f:X\rightarrow X$に対して
+        $$ u(\mathrm{zero}) = c,\ u\circ\mathrm{succ} = f\circ u$$
+        を満たすとする。すなわち，任意の$n\in N$について
+        $$ \color{red}{u(0) = c,\ u(n+1) = f(u(n))} $$
+        を満たすとすると帰納的に
+        $$ u(n) = f^{n}(c) = f\circ f\circ\cdots\circ f(c)$$
+        となる。すなわち$u$が一意に定まるので$N$は(圏論的な)自然数の定義を満たす。
+        <span style="float:right">□</span>
+        </p>
+        </section>
+
+        <section>
+        <p>
+        関数型言語における自然数型には$\bot$という未定義値を表す特殊な値が存在する事から，<span style="color:red">擬数</span>や<span style="color:red">無限数</span>と呼ばれる値が発生し複雑です。
+        </p>
+        <p>
+        その為に他の圏が必要になりますが難しい話は後に回します。
+        </p>
+        <div align="left" style="font-size:50%">
+          Haskellなどの実際の言語には例外的な状況($\mathrm{seq}$という関数の存在など)があり，そもそも数学的に綺麗に定式化するのは難しいです。
+          いずれにせよ何らかの近似(言語のサブセットだけ考える)が行われる事が多いです。
+        </div>
+        </section>
+
+        <section>
+        <h3> 自然数の例を一般化 </h3>
+        <p>
+        自然数の定義を圏論的に一般化していきます。
+        </p>
+        <p>
+        圏$\mathbf{C}$が余積を持つならば,先ほどの左下の可換図式を折り畳んで等価な右下の可換図式に変換出来ます。
+        </p>
+        <div align="center"> <img width="80%" src="fig/nat_as_arrows4.png"> </div>
+        <p style="font-size:80%">
+        (左右の図式で成り立つ等式を書きだして,それらが一致する事を確かめてみて下さい。)
+        </p>
+        </section>
+
+        <!--
+        <section>
+        <p style="font-size:80%">
+        折り畳むと簡単に行っていますが,以下の等式が成り立つ事と,
+        $$ \begin{aligned}
+        &h\circ[c,f] = [h\circ c,h\circ f]\\
+        &[d,g]\circ(1_1+h) = [d,g\circ h]
+        \end{aligned}$$
+        以下の同値関係によって($f,g$の対と$[f,g]$が一対一に対応)
+        $$[h\circ c,h\circ f] = [d,g\circ h]\Leftrightarrow h\circ c=d,h\circ f=g\circ h$$
+        畳んだ図式と開いた図式が可換である事が同値になる事から出来ます。
+        </p>
+        <div align="center"> <img width="80%" src="fig/folding_diagram_of_nat.png"> </div>
+        </section>
+        -->
+
+        <section>
+        <p>
+        余積からの任意の射$f: A+B\rightarrow X$は$f = [a,b]$の形に表す事ができますから,先ほどの図式の$[c,f],[d,g]$は任意の射$x,y$としてしまって良いです。
+        </p>
+        <div align="center"> <img width="80%" src="fig/nat_as_arrows5.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        結局,下図の赤線で囲った部分のパターンを一般化できれば良さそうです。
+        </p>
+        <div align="center"> <img width="40%" src="fig/nat_as_arrows6.png"> </div>
+        <p class="fragment">
+        これは対象$X$を$F(X) = 1+X$に移し,射$f$を$F(f) = 1+f$に移す函手$F$で表現できます。(この$F$が函手である事の確認は練習問題。)
+        </p>
+        </section>
+
+        <section>
+        <h3> $F$代数</h3>
+        <div class="definition">
+        <p>
+        函手$F:\mathbf{C}\rightarrow\mathbf{C}$に対して射$x: F(X)\rightarrow X$を<span style="color:red">$F$代数($F$-algebra)</span>という。
+        この$F$代数を$(X,x)$とも表す。
+        </p>
+        <div align="center"> <img width="30%" src="fig/falgebra2.png"> </div>
+        <p>
+        $F$代数は,下の図式を可換とする射$h:X\rightarrow Y$を$(X,x)$から$(Y,y)$への射として圏をなす。
+        </p>
+        <div align="center"> <img width="40%" src="fig/falgebra.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <h3> $F$始代数, catamorphism</h3>
+        <div class="definition">
+        <p>
+        $F$代数の圏に始対象が存在するならばそれを<span style="color:red">$F$始代数(initial $F$-algebra)</span>という。
+        </p>
+        <p>
+        $F$始代数$(T, \mathrm{in})$から任意の$F$代数$(X,\varphi)$への射は$\varphi$に対して唯一つに定まるのでこれを$\banana{\varphi}$と表し,
+        <span style="color:red">catamorphism</span>と呼ぶ。
+        </p>
+        <div align="center"> <img width="40%" src="fig/initial_falgebra.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <h3> 多項式函手 </h3>
+        <p>
+        積・余積で構成される函手を<span style="color:red">多項式函手(polynomial functor)</span>と言います。これは
+        $$ F(X) = 1 + A\times X\times X $$
+        などと表され任意の対象$X$を
+        $$ X\longmapsto 1 + A\times X\times X$$
+        任意の射$f: X\rightarrow Y$を
+        $$ f\longmapsto 1_1 + 1_A\times f \times f$$
+        のように移します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 様々な$F$始代数 </h3>
+        <p>
+        以下の様な多項式関手による$F$始代数が各データ型に対応します。
+        </p>
+        <ul>
+          <li> 自然数
+          $$F(X) = 1 + X$$
+          </li>
+          <li> $A$型のリスト
+          $$F(X) = 1 + A\times X$$
+          </li>
+          <li> 長さが$1$以上の$A$型のリスト
+          $$F(X) = A + A\times X$$
+          </li>
+          <li> 葉に$A$型の値を持つ二分木
+          $$F(X) = A + X\times X$$
+          </li>
+        </ul>
+        </section>
+
+        <section>
+        <h3> リストに対するcatamorphism </h3>
+        <p style="font-size:90%">
+        $F(X) = 1 + A\times X$として$F$始代数の図式を右下の様に展開します。
+        するとcatamorphismを$u$とすると等式
+        $$ \begin{aligned}
+        & u(\mathrm{nil}) = c \\
+        & u(\mathrm{cons}(a,as)) = f(a,u(as)) \\
+        \end{aligned} $$
+        が得られます。これは所謂$\mathrm{foldr}(f,c)$の定義になっています。
+        $$ \color{red}{\banana{[c,f]} = \mathrm{foldr}(f,c)} $$
+        </p>
+        <div align="center"> <img width="100%" src="fig/list_catamorphism.png"> </div>
+        </section>
+
+        <section>
+        <h3> catamorphism=畳み込み </h3>
+        <p>
+        今みたようにcatamorphismは$\mathrm{foldr}$に代表される<span style="color:red">畳み込み</span>系の再帰関数を統一するものです。catamorphismの様なある種の再帰関数を表す射を<span style="color:red">再帰スキーム</span>と言います。
+        </p>
+        </section>
+
+        <section>
+        <h3> プログラム運算の初歩 </h3>
+        </section>
+
+        <section>
+        <h3> 反射則,融合則 </h3>
+        <p>
+        $0$を始対象,$0$から対象$A$への唯一の射を$!_A:0\rightarrow A$と表す事にすると,以下が成り立つ。
+        </p>
+        <ul>
+          <li> <span style="color:red">反射則(reflection law)</span>
+          $$ !_0 = 1_0 $$
+          </li>
+          <li> <span style="color:red">融合則(fusion law)</span><br>
+          任意の$f: A\rightarrow B$に対して
+          $$ f\circ !_A = !_B $$
+        </ul>
+        <div align="center"> <img width="70%" src="fig/reflection_fusion_law.png"> </div>
+        </section>
+
+        <section>
+        <h3> catamorphismの反射則,融合則 </h3>
+        <p style="font-size:80%">
+        catamorphismは始対象からの射ですので,今の法則がそのまま成り立ちます。
+        <div class="theorem">
+        <p>
+        $(T,\mathrm{in})$が$F$始代数ならば
+        $$ \banana{\mathrm{in}} = 1_T \quad\text{(反射則)}$$
+        また$h\circ f=g\circ F(h)$が成り立つならば
+        $$h\circ\banana{f}=\banana{g} \quad\text{(融合則)}$$
+        </p>
+        </div>
+        <div align="center"> <img width="70%" src="fig/cata_reflection_fusion.png"> </div>
+        </section>
+
+        <section>
+        <h3> 例題 </h3>
+        <div class="equation">
+        <p>
+        $\mathrm{sum}\circ\mathrm{filter}(\mathrm{even})$を一つの$\mathrm{foldr}$で表せ。
+        </p>
+        </div>
+        <p style="font-size:70%">
+        まず
+        $$ \begin{aligned}
+        &p(\mathrm{cons}(a,as)) = \mathrm{cons}(a,as)&(\mathrm{even}(a) = \mathrm{true}\text{の時}) \\
+        &p(\mathrm{cons}(a,as)) = as&(\text{それ以外})
+        \end{aligned} $$
+        とすると$\mathrm{filter}(\mathrm{even}) = \banana{[\mathrm{nil},p]}$となります。$\mathrm{sum}\circ [\mathrm{nil},p] = [c,g]\circ(1_1+1_A\times\mathrm{sum})$を満たす$c,g$を探せば良くpointwiseに等式を書き直すと$c = \mathrm{sum}(\mathrm{nil}) = 0$であり,
+        $$ \begin{aligned}
+        & g(a,\mathrm{sum}(as)) = \mathrm{sum}(\mathrm{cons}(a, (as))) & (\mathrm{even}(a) = \mathrm{true}\text{の時}) \\
+        & g(a,\mathrm{sum}(as)) = \mathrm{sum}(as) & (\text{それ以外})
+        \end{aligned} $$
+        より
+        $$ \begin{aligned}
+        & g(a,x) = a+x & (\mathrm{even}(a) = \mathrm{true}\text{の時}) \\
+        & g(a,x) = x & (\text{それ以外})
+        \end{aligned} $$
+        とすれば良いです。すなわち$\banana{[0,g]}=\mathrm{foldr}(g, 0)$が求める関数です。
+        </p>
+        </section>
+
+        <section>
+        <h3> Lambekの補題 </h3>
+        <div class="theorem">
+        <p>
+        $(T,\mathrm{in})$が$F$始代数ならば$\mathrm{in}$は同型射
+        </p>
+        </div>
+        <img align="right" width="40%" src="fig/lambek_lemma.png">
+        <p style="font-size:70%">
+        【証明】<br>
+        下の図式において$\mathrm{in}\circ F(\mathrm{in}) = \mathrm{in}\circ F(\mathrm{in})$が成り立つから融合則より
+        $$ \mathrm{in}\circ \banana{F(\mathrm{in})} = \banana{\mathrm{in}} $$
+        である。さらに反射則より$$\mathrm{in}\circ\banana{F(\mathrm{in})} = 1_T$$
+        また,上の四角形の可換性より
+        $$ \banana{F(\mathrm{in})}\circ\mathrm{in} = F(\mathrm{in})\circ F\banana{F(\mathrm{in})} $$
+        $F$は函手なので
+        $$ \banana{F(\mathrm{in})}\circ\mathrm{in} = F(\mathrm{in}\circ \banana{F(\mathrm{in})}) = F(1_T) = 1_{F(T)} $$
+        となる。従って$\mathrm{in}$は同型射であり$\mathrm{in}^{-1} = \banana{F(\mathrm{in})}$
+        <span style="float:right">□</span>
+        </p>
+        </section>
+
+        <section>
+        <h3> 練習問題 </h3>
+        <p>
+        練習として以下の様な事をやってみると良いと思います。
+        </p>
+        <ul style="font-size:70%">
+          <li> 自然数・リスト以外のcatamorphismの導出 </li>
+          <li> 様々な再帰関数をcatamorphismで表す練習(全てが単純なcatamorphismで表せる訳ではありません。) </li>
+          <li>
+          適当な関数を選んで以下の事実(証明は来週)を確認してみて下さい。$\pi_1$は積からの射影($\mathrm{fst}$)です。
+          <ul>
+          <li>
+          任意の$f: N \rightarrow X$という型の関数($N$は自然数)は,適当な$g$によって
+          $$ f = \pi_1\circ\banana{g} $$
+          と表せる。
+          </li>
+          <li>
+          任意の$f: [A] \rightarrow X$という型の関数は,適当な$g$によって
+          $$ f = \pi_1\circ\banana{g} $$
+          と表せる。
+          </li>
+          </ul>
+          </li>
+        </ul>
+        </section>
+
+        <section>
+        <h3> 第7回はここで終わります </h3>
+        <p>
+        お疲れ様でした。<br>
+        来週の前半はプログラム意味論を目指して極限の続きをやります。
+        後半はより発展的・実用的なプログラム運算に関する各種定理について紹介します。
+        </p>
+        </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+        rollingLinks: false,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+      Reveal.addEventListener( 'slidechanged', function( event ) {
+        MathJax.Hub.Rerender(event.currentSlide);
+      });
+
+		</script>
+
+	</body>
+</html>
