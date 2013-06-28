@@ -841,6 +841,7 @@
 
         <section>
         <h3> 反射則,融合則 </h3>
+        <div class="theorem">
         <p>
         $0$を始対象,$0$から対象$A$への唯一の射を$!_A:0\rightarrow A$と表す事にすると,以下が成り立つ。
         </p>
@@ -853,6 +854,7 @@
           $$ f\circ !_A = !_B $$
         </ul>
         <div align="center"> <img width="70%" src="fig/reflection_fusion_law.png"> </div>
+        </div>
         </section>
 
         <section>
@@ -887,10 +889,10 @@
         とすると$\mathrm{filter}(\mathrm{even}) = \banana{[\mathrm{nil},p]}$となります。
         よって$\mathrm{sum}\circ [\mathrm{nil},p] = [c,g]\circ(1_1+1_A\times\mathrm{sum})$を満たす$c,g$を見つければ融合則が使えます。これをpointwiseな等式に書き直すとまず$c = \mathrm{sum}(\mathrm{nil}) = 0$であり,
         $$ g(a, \mathrm{sum}(as)) = \left\{\begin{array}{ll}
-        \mathrm{sum}(\mathrm{cons}(a, as)) & (\mathrm{even}(a) = \mathrm{true}\text{の時}) \\
+        \mathrm{sum}(\mathrm{cons}(a, as)) = a + \mathrm{sum}(as) & (\mathrm{even}(a) = \mathrm{true}\text{の時}) \\
         \mathrm{sum}(as) & (\text{それ以外})
         \end{array}\right. $$
-        と$\mathrm{sum}(\mathrm{cons}(a,as)) = a+\mathrm{sum}(as)$から
+        が成り立てば良いので,
         $$ g(a,x) = \left\{\begin{array}{ll}
         a+x & (\mathrm{even}(a) = \mathrm{true}\text{の時}) \\
         x & (\text{それ以外})
