@@ -877,22 +877,24 @@
         $\mathrm{sum}\circ\mathrm{filter}(\mathrm{even})$を一つの$\mathrm{foldr}$で表せ。
         </p>
         </div>
-        <p style="font-size:70%">
+        <p style="font-size:60%">
         まず
-        $$ \begin{aligned}
-        &p(\mathrm{cons}(a,as)) = \mathrm{cons}(a,as)&(\mathrm{even}(a) = \mathrm{true}\text{の時}) \\
-        &p(\mathrm{cons}(a,as)) = as&(\text{それ以外})
-        \end{aligned} $$
-        とすると$\mathrm{filter}(\mathrm{even}) = \banana{[\mathrm{nil},p]}$となります。$\mathrm{sum}\circ [\mathrm{nil},p] = [c,g]\circ(1_1+1_A\times\mathrm{sum})$を満たす$c,g$を探せば良くpointwiseに等式を書き直すと$c = \mathrm{sum}(\mathrm{nil}) = 0$であり,
-        $$ \begin{aligned}
-        & g(a,\mathrm{sum}(as)) = \mathrm{sum}(\mathrm{cons}(a, (as))) & (\mathrm{even}(a) = \mathrm{true}\text{の時}) \\
-        & g(a,\mathrm{sum}(as)) = \mathrm{sum}(as) & (\text{それ以外})
-        \end{aligned} $$
-        より
-        $$ \begin{aligned}
-        & g(a,x) = a+x & (\mathrm{even}(a) = \mathrm{true}\text{の時}) \\
-        & g(a,x) = x & (\text{それ以外})
-        \end{aligned} $$
+        $$ p(\mathrm{cons}(a,as)) = \left\{\begin{array}{ll}
+        \mathrm{cons}(a,as)&(\mathrm{even}(a) = \mathrm{true}\text{の時}) \\
+        as&(\text{それ以外})
+        \end{array}\right.
+        $$
+        とすると$\mathrm{filter}(\mathrm{even}) = \banana{[\mathrm{nil},p]}$となります。
+        よって$\mathrm{sum}\circ [\mathrm{nil},p] = [c,g]\circ(1_1+1_A\times\mathrm{sum})$を満たす$c,g$を見つければ融合則が使えます。これをpointwiseな等式に書き直すとまず$c = \mathrm{sum}(\mathrm{nil}) = 0$であり,
+        $$ g(a, \mathrm{sum}(as)) = \left\{\begin{array}{ll}
+        \mathrm{sum}(\mathrm{cons}(a, as)) & (\mathrm{even}(a) = \mathrm{true}\text{の時}) \\
+        \mathrm{sum}(as) & (\text{それ以外})
+        \end{array}\right. $$
+        と$\mathrm{sum}(\mathrm{cons}(a,as)) = a+\mathrm{sum}(as)$から
+        $$ g(a,x) = \left\{\begin{array}{ll}
+        a+x & (\mathrm{even}(a) = \mathrm{true}\text{の時}) \\
+        x & (\text{それ以外})
+        \end{array}\right.$$
         とすれば良いです。すなわち$\banana{[0,g]}=\mathrm{foldr}(g, 0)$が求める関数です。
         </p>
         </section>
@@ -907,7 +909,7 @@
         <img align="right" width="40%" src="fig/lambek_lemma.png">
         <p style="font-size:70%">
         【証明】<br>
-        下の図式において$\mathrm{in}\circ F(\mathrm{in}) = \mathrm{in}\circ F(\mathrm{in})$が成り立つから融合則より
+        下の四角形において$\mathrm{in}\circ F(\mathrm{in}) = \mathrm{in}\circ F(\mathrm{in})$が成り立つから融合則より
         $$ \mathrm{in}\circ \banana{F(\mathrm{in})} = \banana{\mathrm{in}} $$
         である。さらに反射則より$$\mathrm{in}\circ\banana{F(\mathrm{in})} = 1_T$$
         また,上の四角形の可換性より
