@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+    <title>圏論勉強会 第8回 @ ワークスアプリケーションズ</title>
+
+		<meta name="description" content="Seminar of category theory">
+    <meta name="author" content="Koichi Nakamura">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+    <meta http-equiv="X-UA-Compatible" CONTENT="IE=EmulateIE7" />
+
+		<!-- For syntax highlighting -->
+    <link rel="stylesheet" href="plugin/highlight/styles/github.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+        }
+      });
+    </script>
+
+    <style type="text/css">
+      <!--
+      div.definition {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 4px solid #333333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      div.theorem {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 4px solid #333333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      div.equation {
+        margin: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 2px solid #C0C0C0;
+      }
+      --> 
+    </style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+        <section>
+        <h1>圏論勉強会<br>第8回</h1>
+        <h3>@ワークスアプリケーションズ</h3>
+        <small> 中村晃一 <br> 2013年7月4日</small>
+        $$ \newcommand\banana[1]{{(\hspace{-.2em}|#1|\hspace{-.2em})}} $$
+        $$ \newcommand\lens[1]{{[\hspace{-.2em}(#1)\hspace{-.17em}]}} $$
+        $$ \newcommand\para[1]{{\langle \hspace{-.2em}|#1|\hspace{-.2em}\rangle}} $$
+        $$ \newcommand\hylo[1]{{[ \hspace{-.2em}|#1|\hspace{-.2em}]}} $$
+        </section>
+
+        <section>
+        <h3>謝辞</h3>
+        <p>
+        この勉強会の企画，会場設備の提供をして頂きました<br>
+        &#12849; ワークスアプリケーションズ様<br>
+        にこの場をお借りして御礼申し上げます。
+        </p>
+        </section>
+
+        <section>
+        <h3> この会について </h3>
+        <ul>
+          <li> <span style="color:red">圏論(category theory)</span>を題材にいろんなことを学びます。</li>
+          <li> 分かり易さを重視して初歩的な例を多用します。</li>
+          <li> 関数型言語の経験がある方がより楽しめると思います。資料中では主にHaskellを使います。 </li>
+          <li> 中高生も数人見ているらしいのでプログラミングと関係が浅い内容も取り上げます。</li>
+          <li> この資料は<a href="http://nineties.github.com/category-seminar/">http://nineties.github.com/category-seminar</a>に置いてあります。</li>
+        </ul>
+        </section>
+
+        <section>
+        <h2> 第8回 </h2>
+        <h3> $\omega$余極限,連続性<br> プログラム運算 </h3>
+        </section>
+
+        <section>
+        <h3> 第8回の内容 </h3>
+        <p>
+        前半は極限と函手の連続性について,後半は代数的データ型・プログラム運算の続きをやります。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\omega$余極限 </h3>
+        </section>
+
+        <section>
+        <h3> $\omega$極限・余極限 </h3>
+        <p> 順序集合$(\mathbb{N}, \leqq)$を圏と見なしたものを<span style="color:red">$\omega$</span>と表し,
+        $\omega$から他の圏への函手を<span style="color:red">$\omega$-chain</span>などと言います。
+        </p>
+        <div align="center"> <img width="48%" src="fig/omega_chain.png"> <img width="48%" src="fig/omegaop_chain.png"> </div>
+        <p> そして$\omega$-chainの極限・余極限を<span style="color:red">$\omega$極限($\omega$-limit)</span>,
+        <span style="color:red">$\omega$余極限($\omega$-colimit)</span>と言います。
+        $\omega^{\mathrm{op}}$極限,余極限も同様に定義されます。
+        </p>
+        <p>
+        これらは前回までにやった極限・余極限の一種である事に注意して下さい。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\omega$余極限 </h3>
+        <p>
+        $\omega$-chainというのは対象と射の列
+        $$ A_0\rightarrow A_1\rightarrow A_2\rightarrow \cdots$$
+        の事です。
+        </p>
+        <p>
+        よく使われるのは下図で表した$\omega$余極限ではないかと思いますので,ピックアップして具体例を紹介します。
+        </p>
+        <div align="center"> <img width="80%" src="fig/omega_colimit.png"> </div>
+        </section>
+
+        <section>
+        <h3> $\omega$-余極限の具体例 </h3>
+        <p>
+        $\mathbf{C}$を順序集合$(\mathbb{R},\leqq)$とすると函手$a: \omega\rightarrow\mathbf{C}$は単調増加列
+        $$ a_0 \leqq a_1 \leqq a_2 \leqq \cdots $$
+        を定めます。 すると「底$a$からの錐」は
+        $$ \text{全ての$i\in\mathbb{N}$について}\ a_i \leqq x $$
+        を満たす実数$x$により定まります。<span style="font-size:80%">(対象間に射は一本しかないので可換性は考えなくて良いです。)</span>
+        </p>
+        <div align="center"> <img width="60%" src="fig/omega_colimit_example.png"> </div>
+        </section>
+
+        <section>
+        <h3> $\omega$-余極限の具体例(続き) </h3>
+        <p>
+        そのような$x$のうち,最小の実数が存在するならばそれが$a$の$\omega$余極限$\displaystyle\lim_{\rightarrow}a_i$となります。
+        </p>
+        <div align="center"> <img width="95%" src="fig/limit_of_sequence.png"> </div>
+        <p style="font-size:80%">
+        定義通りに述べれば,先ほどの条件を満たす任意の$x$に対して$\displaystyle\lim_{\rightarrow}a_i \leqq x$を満たすという事です。
+
+        対象間に射は一本しかないので,$\displaystyle\lim_{\rightarrow}a_i$からの射の唯一性は考えなくて良いです。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\omega$-余極限の具体例の具体例 </h3>
+        <p style="font-size:90%">
+        函手$a: \omega\rightarrow(\mathbb{R},\leqq)$を
+        $$ a_i: 0, \frac{1}{2}, \frac{2}{3}, \frac{3}{4}, \cdots, \frac{i}{i+1},\cdots $$
+        によって定めると「底$a$からの錐」は
+        $$ \text{全ての$i\in\mathbb{N}$について} \frac{i}{i+1}\leqq x$$
+        を満たす実数$x$,つまり「$1$以上の実数」となります。
+        </p>
+        <p style="font-size:90%">
+        従って
+        $$ \lim_{\stackrel{\longrightarrow}{i \in\omega}} a_i = 1 $$
+        となります。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\omega$完備・余完備 </h3>
+        <div class="definition">
+        <p>
+        圏$\mathbf{C}$において,任意の$\omega$極限が存在するならば$\mathbf{C}$は<span style="color:red">$\omega$完備($\omega$-complete)</span>であると言い, 任意の$\omega$余極限が存在するならば<span style="color:red">$\omega$余完備($\omega$-cocomplete)</span>であると言う。
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> $\omega$余完備な圏の具体例 </h3>
+        <p>
+        半順序集合$(\mathcal{P}(\mathbb{N}),\subseteq)$は,任意の$\omega$-chain
+        $$ A_0\subseteq A_1\subseteq A_2\subseteq A_3\subseteq\cdots $$
+        に対して
+        $$ \lim_{\stackrel{\longrightarrow}{i\in\omega}} A_i = \bigcup_{i\in\mathbb{N}}A_i = A_0\cup A_1\cup A_2\cup A_3\cup \cdots$$
+        という余極限が存在するので$\omega$余完備となります。
+        </p>
+        <p style="font-size:70%">
+        【説明】<br>
+        任意の$i\in\mathbb{N}$について$A_i \subseteq \bigcup_{i\in\mathbb{N}}A_i$であり,
+        $X\subseteq\mathbb{N}$が「任意の$i\in\mathbb{N}$について$A_i\subseteq X$」を満たすならば$\bigcup_{i\in\mathbb{N}}A_i\subseteq X$が成立するという事から余極限となっています。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\omega$CPO </h3>
+        <p>
+        $\omega$余完備な半順序集合の事を<span style="color:red">$\omega$完備半順序集合($\omega$-complete partial order)</span>略して<span style="color:red">$\omega$CPO</span>などと呼びます。
+        </p>
+        <p>
+        $\omega$CPOなど半順序集合に基づく構造はプログラムの意味論に於いて中心的な役割を果たします。
+        </p>
+        </section>
+
+        <section>
+        <h3> 函手の連続性 </h3>
+        </section>
+
+        <section>
+        <h3> 極限の保存 </h3>
+        <p>
+        $D$を底とする極限錐を函手$F$で他の圏に移しても,やはり$F\circ D$を底とする極限錐になるならば
+        $F$はその<span style="color:red">極限を保存する</span>と言います。
+        </p>
+        <img width="100%" src="fig/preservation_of_limit.png"> 
+        </section>
+
+        <section>
+        <h3> 極限の保存 </h3>
+        <p>
+        $F$が$D$の極限・余極限を保存する事を単純に
+        $$ F(\lim_{\leftarrow}D)\cong \lim_{\leftarrow}(F\circ D),\quad F(\lim_{\rightarrow}D)\cong \lim_{\rightarrow}(F\circ D)$$
+        や
+        $$ F(\lim_{\leftarrow}D_i)\cong \lim_{\leftarrow}F(D_i),\quad F(\lim_{\rightarrow}D_i)\cong \lim_{\rightarrow}F(D_i)$$
+        などと書き表します。
+        </p>
+        <p style="font-size:90%">
+        これらの式は錐の頂点だけでなく錐全体が保たれる事も表しているので、注意して下さい。
+        </p>
+        </section>
+
+        <section>
+        <h3> 函手の連続性 </h3>
+        <div style="font-size:90%">
+        <div class="definition">
+        <p>
+        函手$F$が任意のインデックス圏$\mathbf{J}$と極限(余極限)を持つ函手$D:\mathbf{J}\rightarrow \mathbf{C}$について
+
+        $$ F(\lim_{\leftarrow}D_i) \cong \lim_{\leftarrow}F(D_i) $$
+        を満たす時,$F$は<span style="color:red">連続(continuous)</span>であると言い,
+        $$ F(\lim_{\rightarrow}D_i) \cong \lim_{\rightarrow}F(D_i) $$
+        を満たす時,$F$は<span style="color:red">余連続(cocontinuous)</span>であると言う。
+        </p>
+        </div>
+        <p> 上の定義において$\mathbf{J} = \omega$と固定した時の連続性を<span style="color:red">$\omega$連続($\omega$-continuous)</span>及び<span style="color:red">$\omega$余連続($\omega$-cocontinuous)</span>と言います。
+        </div>
+        </section>
+
+        <section>
+        <h3> $\mathrm{Hom}$函手の連続性 </h3>
+        <p style="font-size:90%">
+        共変$\mathrm{Hom}$函手
+        $$ \mathrm{Hom}_{\mathbf{C}}(X, -): \mathbf{C}\rightarrow \mathbf{Sets}$$
+        は
+        $$ \begin{aligned}
+        & A \longmapsto \mathrm{Hom}_{\mathbf{C}}(X, A) \\
+        & f \longmapsto (f\ \circ)
+        \end{aligned}$$
+        の様に対象を$\mathrm{Hom}$集合へ,射$f$を$f$を左から合成する関数へ移すという函手でした。
+        </p>
+        <p style="font-size:90%">
+        反変$\mathrm{Hom}$函手
+        $$ \mathrm{Hom}_{\mathbf{C}}(-, X): \mathbf{C}^{\mathrm{op}}\rightarrow \mathbf{Sets}$$
+        はこの双対でした。
+        </p>
+        </section>
+
+        <section>
+        <h3> 定理 </h3>
+        <div class="theorem">
+          <p>
+          共変$\mathrm{Hom}$函手は連続である。すなわち$\mathbf{C}$の極限を$\mathbf{Sets}$の極限に移す。
+          $$ \mathrm{Hom}_{\mathbf{C}}(X, \lim_{\leftarrow}D_i) \cong \lim_{\leftarrow}\mathrm{Hom}_{\mathbf{C}}(X, D_i) $$
+          また,反変$\mathrm{hom}$函手は$\mathbf{C}^{\mathrm{op}}$から$\mathbf{Sets}$への連続な函手である。すなわち,$\mathbf{C}$の余極限を$\mathbf{Sets}$の極限に移す。
+          $$ \mathrm{Hom}_{\mathbf{C}}(\lim_{\rightarrow}D_i, X) \cong \lim_{\leftarrow}\mathrm{Hom}_{\mathbf{C}}(D_i,X) $$
+          </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> 具体例 </h3>
+        <p>
+        証明の前に今の定理から得られる公式を列挙してみると
+        $$ \begin{aligned}
+        & \mathrm{Hom}_{\mathbf{C}}(X, 1) \cong 1\\
+        & \mathrm{Hom}_{\mathbf{C}}(0,X)\cong 1 \\
+        & \mathrm{Hom}_{\mathbf{C}}(X, A\times B)\cong \mathrm{Hom}_{\mathbf{C}}(X,A)\times\mathrm{Hom}_{\mathbf{C}}(X,B)\\
+        & \mathrm{Hom}_{\mathbf{C}}(A+B,X)\cong \mathrm{Hom}_{\mathbf{C}}(A,X)\times\mathrm{Hom}_{\mathbf{C}}(B,X) \\
+        \end{aligned} $$
+        などが成り立ちます。イコライザ・コイコライザ・引き戻し・押し出しなどでも同様です。
+        </p>
+        <div align="left" style="font-size:50%">
+          $\mathrm{Hom}(A,B)$を形式的に$B^A$と書き表してみると指数の法則との類似性が見えます。ただし,$B^A$という表記は今後他の意味で使いますので,注意して下さい。
+        </div>
+        </section>
+
+        <section>
+        <h3> 連続性の証明 </h3>
+        <img align="right" width="50%" src="fig/homfunctor_preserves_limit.png"> 
+        <p>
+        極限錐が$\mathrm{Hom}_{\mathbf{C}}(X, -)$でどう移るかイメージを持っておきましょう。
+        </p>
+        <p>
+        点線矢印の集合が錐の頂点,赤線矢印の集合が底の対象,$(\pi_i\ \circ)$が錐の母線になります。
+        </p>
+        <p>
+        函手は図式の可換性を保つので錐の側面の可換性は自動的に保たれます。
+        </p>
+        </section>
+
+        <section>
+        <p style="font-size:70%">
+        【証明】<br>
+        $\displaystyle (\lim_{\leftarrow}D,\pi_i)$を$\mathbf{C}$での極限錐とする。
+        集合$A$を頂点とする底$\mathrm{Hom}_{\mathbf{C}}(X,D(-))$への錐を$(A,a_i)$とする。
+        ここで関数$u$が$a_i=(\pi_i\ \circ)\circ u$を満たすと仮定すると,$x\in A$を両辺に代入する事によって
+        右下の可換図式が得られる。この時$(X, a_i(x))$は底$D$への錐になっているので$u(x)$は一意に定まる。<br>
+        従って<span style="color:red">任意の$x\in A$に対して$u(x)$が一意に定まるので$u$が一意に定まる</span>。すなわち
+        錐$\displaystyle(\mathrm{Hom}_{\mathbf{C}}(X,\lim_{\leftarrow}D), (\pi_i\ \circ))$が底$\mathrm{Hom}_{\mathbf{C}}(X,D(-))$への極限錐となっている事が示された。
+        また,反変$\mathrm{Hom}$函手の連続性は双対性による。
+        <span style="float:right">□</span>
+        </p>
+        <div align="center"><img width="70%" src="fig/homfunctor_preserves_limit2.png"> </div>
+        <div align="left" style="font-size:50%">
+          注: Awodey本では任意の極限が積とイコライザに分解できるという事を用いた証明を行なっています(Proposition 5.25)。
+        </div>
+        </section>
+
+        <section>
+        <h3> 一旦ここまで </h3>
+        <p>
+        何らかの完備性を持った圏や,連続な函手はやはり重要な役割を持つことが多いですので、圏論の基礎的な知識として知っておきましょう。
+        </p>
+        </section>
+
+        <section>
+        <h3> プログラム運算 </h3>
+        </section>
+
+        <section>
+        <p>
+        前回の続きをやっていきます。まずはcatamorphismに関するいくつかの定理を確認します。
+        </p>
+        <p>
+        例題・練習問題の出典は以下の書籍です。
+        </p>
+        <ul>
+          <li> Richard Bird, Oege De Moor: "Algebra of Programming" </li>
+        </ul>
+        </section>
+
+        <section>
+        <div class="theorem">
+        <span style="color:red">バナナスプリット則(banana-split law)</span>
+        <p>
+        $$ \langle \banana{f}, \banana{g}\rangle = \banana{\langle f\circ F(\pi_1), g\circ F(\pi_2)\rangle} $$
+        </p>
+        </div>
+        <p>
+        複数のcatamorphismを1つのcatamorphismに変換する事が出来ます。証明は,左下の二図式が可換である時に右下の図式が可換であることを示せば良いです(練習問題)。
+        </p>
+        <div align="center"><img width="100%" src="fig/banana_split.png"> </div>
+        </section>
+
+        <section>
+        <h3> 練習問題 </h3>
+        <p>
+        数値リストの平均値を求める関数$\mathrm{average}$は
+        $$ \mathrm{average}(ls) = \mathrm{sum}(ls)/\mathrm{length}(ls) $$
+        と書けますが,1回の走査で求められるように関数を書き直して下さい。
+        </p>
+        <p>
+        二分木などの他のデータ構造でも同様の問題を考えて見て下さい。
+        </p>
+        </section>
+
+        <section>
+        <div class="theorem">
+        <span style="color:red">Fokkingaの相互再帰定理(mutual recursion theorem)</span>
+        <p>
+        $f\circ \mathrm{in} = h\circ F\langle f,g\rangle,\ g\circ \mathrm{in} = k\circ F\langle f,g \rangle$ならば
+        $$ \langle f,g \rangle = \banana{ \langle h,k\rangle } $$
+        </p>
+        </div>
+        <p>
+        バナナスプリット則を更に一般化した定理になっています。
+        </p>
+        <p style="font-size:80%">
+        証明は,左下の二図式が可換であるならば右下の図式が可換である事を示せば良いです。具体的に書いてみると
+        $$\langle f,g\rangle\circ \mathrm{in} = \langle f\circ \mathrm{in},g\circ\mathrm{in}\rangle = \langle h\circ F\langle f,g\rangle, k\circ F\langle f,g\rangle\rangle = \langle h,k\rangle \circ F\langle f,g\rangle $$
+        </p>
+        <div align="center"><img width="100%" src="fig/fokkinga_mutual_recursion_law.png"> </div>
+        </section>
+
+        <section>
+        <h3> 例題 </h3>
+        <p>
+        Fokkingaの相互再帰定理を用いて,以下の関数をより効率的な関数に書き直しましょう。
+        </p>
+        <div class="equation">
+        $$ \begin{aligned}
+        & \mathrm{steep}(\mathrm{nil}) = \mathrm{true} \\
+        & \mathrm{steep}(\mathrm{cons}(a,as)) = a > \mathrm{sum}(as)\ \mathrm{and}\ \mathrm{steep}(as)
+        \end{aligned} $$
+        </div>
+        </section>
+
+        <section>
+        <p>
+        $F(X) = 1 + \mathrm{Int}\times X$として,$\mathrm{steep}$の定義を図式にすると下の様になります。
+        </p>
+        <div align="center"><img width="60%" src="fig/steep_example1.png"> </div>
+        <p>
+        但し
+        $$ c = \mathrm{true},\quad f(a, (b, s)) = a > s \ \mathrm{and}\ b $$
+        です。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        続いて$\mathrm{sum}$の図式は下の様になります。
+        </p>
+        <div align="center"><img width="60%" src="fig/steep_example2.png"> </div>
+        <p>
+        但し
+        $$ d = 0,\quad g(a, s) = a + s$$
+        です。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        相互再帰定理に当てはめる為に$\mathrm{sum}$の方をちょっと変形します。
+        </p>
+        <div align="center"><img width="60%" src="fig/steep_example3.png"> </div>
+        <p>
+        但し
+        $$ d = 0,\quad g'(a, (b, s)) = a + s$$
+        です。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        以上で相互再帰定理の前提が満たされましたので
+        $$ \langle \mathrm{steep},\mathrm{sum}\rangle = \banana{\langle [c,f],[d,g'] \rangle}$$
+        つまり
+        $$ \color{red}{\mathrm{steep} = \pi_1\circ\banana{\langle [c,f],[d,g']\rangle}}$$
+        である事が導かれました。
+        </p>
+        <div align="center"><img width="100%" src="fig/steep_example4.png"> </div>
+        </section>
+
+        <section>
+        <h3> 練習問題 </h3>
+        <ul>
+          <li> $\mathrm{steep}$の例を適当な言語で実装して見て下さい </li>
+          <li>
+          二分木が<span style="color:red">平衡状態</span>であるという事を,各節点で
+          $$ \frac{1}{3} \leqq \frac{n}{n+m+1}\leqq \frac{2}{3} $$
+          が成り立つ事とします。($n,m$は左右の部分木の節点数)<br>
+          二分木が平衡状態か否かを判定する関数を相互再帰定理に基いて導出して下さい。
+          </li>
+          <div align="center"><img width="30%" src="fig/balanced_example.png"> </div>
+        </ul>
+        </section>
+
+        <section>
+        <h3> 定理: セクションはcatamorphism </h3>
+        <div class="theorem">
+          <p>
+          $(T,\mathrm{in})$が始代数であるならば,任意の<span style="color:red">セクション</span>$ s: T\rightarrow A $
+          は適当な$f: F(A)\rightarrow A$によって
+          $$ s = \banana{f} $$
+          と表せる。
+          </p>
+        </div>
+        <img align="right" width="30%" src="fig/section_is_cata.png">
+        <p style="font-size:90%">
+        【証明】<br>
+        $s$はセクションなのでレトラクション$r: A\rightarrow T$が存在して$r\circ s = 1_T$を満たす。すると下図が可換となるので
+        $$ \color{red}{s = \banana{s\circ\mathrm{in}\circ F(r)}} $$
+        である。 <span style="float:right">□</span>
+        </p>
+        </section>
+
+        <section>
+        <h3> 定理 </h3>
+        <div class="theorem">
+          <p>
+          $(T,\mathrm{in})$が始代数であるならば,任意の$ f: T\rightarrow A $
+          は適当な$g: F(A)\rightarrow A$によって
+          $$ f = \pi_1\circ \banana{g} $$
+          と表せる。
+          </p>
+        </div>
+        <p style="font-size:90%">
+        【証明】<br>
+        $\langle f, 1_T\rangle: T\rightarrow A\times T$は$\pi_2\circ \langle f,1_T\rangle = 1_T$を満たすのでセクションである。
+        従って
+        $$ \langle f,1_T \rangle = \banana{\langle f,1_T\rangle\circ\mathrm{in}\circ F(\pi_2)} $$
+        であるから
+        $$ \color{red}{f = \pi_1\circ \banana{\langle f,1_T\rangle\circ\mathrm{in}\circ F(\pi_2)}} $$
+        である。 <span style="float:right">□</span>
+        </p>
+        </section>
+
+        <section>
+        <h3> 練習問題 </h3>
+        <p>
+        階乗関数
+        $$ \mathrm{fact}(n) = n! $$
+        を自然数型についてのcatamorphismを用いて
+        $$ \mathrm{fact} = \pi_1\circ \banana{f} $$
+        の形に書いて下さい。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        先ほどの定理で得られた式を書き直すと
+        $$ \begin{aligned}
+        f & = \pi_1\circ \banana{\langle f,1_T\rangle\circ\mathrm{in}\circ F(\pi_2)} \\
+        & = \pi_1\circ \banana{\langle f\circ\mathrm{in}\circ F(\pi_2),\mathrm{in}\circ F(\pi_2)\rangle} 
+        \end{aligned}$$
+        となります。$g = f\circ\mathrm{in}\circ F(\pi_2)$と置いて綺麗にすると
+        $$ f = \pi_1\circ\banana{\langle g, \mathrm{in}\circ F(\pi_2)\rangle} $$
+        となります。
+        </p>
+        </section>
+
+        <section>
+        <h3> paramorphism </h3>
+        <div class="definition">
+        <p>
+        $(T,\mathrm{in})$が始代数の時
+        $$ \pi_1\circ\banana{\langle \varphi, \mathrm{in}\circ F(\pi_2)\rangle} $$
+        と表される射を<span style="color:red">paramorphism</span>と言い
+        $$\para{\varphi} = \pi_1\circ\banana{\langle \varphi, \mathrm{in}\circ F(\pi_2)\rangle} $$
+        と表す。
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> paramorphism=原始再帰法 </h3>
+        <p style="font-size:90%">
+        $\mathrm{in}\circ F(\pi_2)$の部分は一度分解した入力を組み立て直すという事を表しています。
+        例えば整数型についてのparamorphismは
+        </p>
+        <div class="equation">
+        $$ \begin{aligned}
+        & f(0) = c \\
+        & f(n+1) = g(\color{red}{n}, f(n))
+        \end{aligned} $$
+        </div>
+        <p>
+        という形式になります。paramorphismは入力を再帰呼び出しで消費する他に,それ自体も引数として使える形の再帰スキームと言う事が出来ます。
+        また,この形式の再帰を<span style="color:red">原始再帰法</span>とも呼びます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 余代数 </h3>
+        </section>
+
+        <section>
+        <p>
+        $F$代数の双対概念を$F$余代数と言います。
+        </p>
+        </section>
+
+        <section>
+        <h3> $F$余代数</h3>
+        <div class="definition">
+        <p>
+        函手$F:\mathbf{C}\rightarrow\mathbf{C}$に対して射$x: X\rightarrow F(X)$を<span style="color:red">$F$余代数($F$-coalgebra)</span>という。
+        この$F$余代数を$(X,x)$とも表す。
+        </p>
+        <div align="center"> <img width="30%" src="fig/fcoalgebra2.png"> </div>
+        <p>
+        $F$代数は,下の図式を可換とする射$h:X\rightarrow Y$を$(X,x)$から$(Y,y)$への射として圏をなす。
+        </p>
+        <div align="center"> <img width="40%" src="fig/fcoalgebra.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <h3> $F$終余代数, anamorphism</h3>
+        <div class="definition">
+        <p>
+        $F$余代数の圏に終対象が存在するならばそれを<span style="color:red">$F$終余代数(final $F$-coalgebra)</span>という。
+        </p>
+        <p>
+        任意の$F$余代数$(X,\psi)$から$F$終余代数$(T,\mathrm{out})$への射は$\psi$に対して唯一つに定まるのでこれを$\lens{\psi}$と表し,
+        <span style="color:red">anamorphism</span>と呼ぶ。
+        </p>
+        <div align="center"> <img width="40%" src="fig/final_fcoalgebra.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <h3> 余代数とはどのような代数か？ </h3>
+        <p>
+        例として函手$F(X) = 1 + X$を考えます。この時の$F$余代数は
+        $$ f: X \rightarrow 1 + X $$
+        という射になります。
+        </p>
+        <p class="fragment">
+        関数として説明すると,この$f$は<span style="color:red">$1$の値か$X$の値のどちらか</span>を返す関数となります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 余帰納的自然数 </h3>
+        <p>
+        $F(X) = 1 + X$で定まる終余代数を<span style="color:red">余帰納的自然数</span>と呼ぶ事にします。
+        </p>
+        <p class="fragment">
+        $\mathbf{Sets}$における余帰納的自然数は自然数に無限大を追加した
+        $$ \mathbb{N}\cup\{\infty\} $$
+        となります。またこの時の$\mathrm{out}$は$1$の要素を$\mathrm{nil}$と書くことにすると
+        $$ \begin{aligned}
+        & \mathrm{out}(0) = \mathrm{nil} \\
+        & \mathrm{out}(n+1) = n \\
+        & \mathrm{out}(\infty) = \infty
+        \end{aligned} $$
+        となります。
+        </p>
+        </section>
+
+        <section>
+        <p style="font-size:90%">
+        【証明】<br>
+        $1$の要素を$\mathrm{nil}$と書く事にする。
+        任意の$F$余代数$f: X\rightarrow 1 + X$が
+        $$ \mathrm{out}\circ u = (1_1+u)\circ f$$
+        を満たすとすると,これをpointwiseに書き直して
+        $$ u(x) = \left\{\begin{array}{cc}
+        0 & (f(x) = \mathrm{nil}\text{のとき}) \\
+        1 + u(f(x)) & (f(x) \neq \mathrm{nil}\text{のとき}) \\
+        \end{array}\right .
+        $$ 
+        となる。従って$f^n(x) = \mathrm{nil}$となる自然数$n$が存在する場合には
+        $$ u(x) = n $$
+        存在しない場合には
+        $$ u(x) = \infty $$
+        と$u$が一意に定まる。<span style="float:right">□</span>
+        </p>
+        </section>
+
+        <section>
+        <h3> anamorphism=展開 </h3>
+        <p>
+        anamorphismは$\mathrm{unfoldr}$に代表される,catamorphismとは逆に値からデータ構造を展開する形の再帰関数関数を表していると言えます。
+        </p>
+        <p>
+        また,無限リストなどの無限データ型を表している点も重要です。
+        </p>
+        </section>
+
+        <section>
+        <h3> 練習問題 </h3>
+        <p>
+        リストなどのanamorphismを導出して下さい。それが既存の$\mathrm{unfoldr}$などの関数と一致する事を確かめて下さい。
+        </p>
+        </section>
+
+        <section>
+        <h3> 帰納的データ型と余帰納的データ型 </h3>
+        <p>
+        自然数の例で見たように一般に始代数と終余代数は一致しません。始代数として定まるデータ型を<span style="color:red">帰納的データ型(inductive data type)</span>,終余代数として定まるデータ型を<span style="color:red">余帰納的データ型(coinductive data type)</span>などと呼びます。
+        </p>
+        <p style="font-size:80%">
+        Haskellなどでは帰納的データ型と余帰納的データ型は(ほぼ)一致するのでこれらは区別されていません。詳しくは後の回に扱います。一方Coqなどでは区別されています。
+        </p>
+        </section>
+
+        <section>
+        <h3> hylomorphism </h3>
+        <p>
+        始代数と終余代数が一致する圏では,以下のmorphismを考える事が出来ます。<small>これは後にさらに一般化されます。</small>
+        </p>
+        <div class="definition">
+        <p>
+        $$ \banana{\varphi}\circ\lens{\psi} $$
+        と表される射を<span style="color:red">hylomorphism</span>と言い,
+        $$ \hylo{\varphi,\psi} = \banana{\varphi}\circ\lens{\psi} $$
+        と表す。
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> hylomorphism </h3>
+        <p>
+        $ \banana{\varphi}\circ\lens{\psi} $は中間データを一旦生成してからそれを畳み込むというパターンの計算です。
+        </p>
+        <div align="center"> <img width="40%" src="fig/hylo.png"> </div>
+        <p>
+        中間データを生成しないようにhylomorphismを実装しておけば,このタイプの計算を効率化する事が出来ます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 練習問題 </h3>
+        <p>
+        <ul>
+          <li> 自然数型,リスト型,二分木などのhylomorphismを導出して下さい。 </li>
+          <li>一旦リスト$[1,2,3,\cdots,n]$を生成して,要素の積を掛ける事で$\mathrm{fact}$を計算出来ます。
+          この方法で$\mathrm{fact}$をcatamorphismとanamorphismの合成,hylomorphismの2通りの方法で実装してみて下さい。
+          </li>
+        </ul>
+        </p>
+        </section>
+
+        <section>
+        <h3> 第8回はここで終わります </h3>
+        <p>
+        お疲れ様でした。<br>
+        来週の前半は$CPO$と不動点,始代数・終余代数との関係について説明します。
+        来週の後半はもう少しだけプログラム運算をやります。
+        </p>
+        </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+        rollingLinks: false,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+      Reveal.addEventListener( 'slidechanged', function( event ) {
+        MathJax.Hub.Rerender(event.currentSlide);
+      });
+
+		</script>
+
+	</body>
+</html>
