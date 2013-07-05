@@ -487,14 +487,20 @@
         <section>
         <h3> 練習問題 </h3>
         <ul>
-          <li> $\mathrm{steep}$の例を適当な言語で実装して見て下さい </li>
+          <li> $\mathrm{steep}$の例を適当な言語で実装してみて下さい </li>
           <li>
           二分木が<span style="color:red">平衡状態</span>であるという事を,各節点で
-          $$ \frac{1}{3} \leqq \frac{n}{n+m+1}\leqq \frac{2}{3} $$
+          $$ 3(m+1) \geqq n+1\ \text{かつ}\ 3(n+1)\geqq m+1$$
           が成り立つ事とします。($n,m$は左右の部分木の節点数)<br>
           二分木が平衡状態か否かを判定する関数を相互再帰定理に基いて導出して下さい。
+          <img align="right" width="30%" src="fig/balanced_example.png">
+          <div style="font-size:70%">
+          <p>
+          [追記]この条件式は以下の論文の共著者である山本さんの進言を受けて,講義当日に提示した$1/3 \leqq n/(n+m+1)\leqq 2/3$から変更しました。
+          <ul><li> <a href="http://mew.org/~kazu/proj/weight-balanced-tree/">Weighted-Balanced Trees</a> </li></ul>
+          </p>
+          </div>
           </li>
-          <div align="center"><img width="30%" src="fig/balanced_example.png"> </div>
         </ul>
         </section>
 
