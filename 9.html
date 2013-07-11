@@ -423,10 +423,10 @@
           $$ f(n) = \mathrm{if}\ n < 10\ \mathrm{then}\ 0\ \mathrm{else}\ f(n+1) $$
         </div>
         <p class="fragment">
-        $n \geqq 10$の時この等式を満たす$f(n)$は存在しませんので,
+        $n \geqq 10$の時,$f(n)$を評価しても値は得られないので
         $$ f(n) = \left\{\begin{array}{cc}
         0 & \text{($n<10$のとき)} \\
-        \text{未定義} & \text{($n\geqq 10$のとき)}
+        \text{値なし} & \text{($n\geqq 10$のとき)}
         \end{array}\right.  $$
         の様になります。このように定義域の一部でしか定義されない関数を<span style="color:red">部分関数(partial function)</span>と言います。プログラムの意味論では部分関数を適切に表現する必要があります。
         </p>
