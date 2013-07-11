@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+    <title>圏論勉強会 第9回 @ ワークスアプリケーションズ</title>
+
+		<meta name="description" content="Seminar of category theory">
+    <meta name="author" content="Koichi Nakamura">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+    <meta http-equiv="X-UA-Compatible" CONTENT="IE=EmulateIE7" />
+
+		<!-- For syntax highlighting -->
+    <link rel="stylesheet" href="plugin/highlight/styles/github.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+        }
+      });
+    </script>
+
+    <style type="text/css">
+      <!--
+      div.definition {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 4px solid #333333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      div.theorem {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 4px solid #333333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      div.equation {
+        margin: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 2px solid #C0C0C0;
+      }
+      div.example {
+        margin: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 2px solid #C0C0C0;
+      }
+      --> 
+    </style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+        <section>
+        <h1>圏論勉強会<br>第9回</h1>
+        <h3>@ワークスアプリケーションズ</h3>
+        <small> 中村晃一 <br> 2013年7月11日</small>
+        </section>
+
+        <section>
+        <h3>謝辞</h3>
+        <p>
+        この勉強会の企画，会場設備の提供をして頂きました<br>
+        &#12849; ワークスアプリケーションズ様<br>
+        にこの場をお借りして御礼申し上げます。
+        </p>
+        </section>
+
+        <section>
+        <h3> この会について </h3>
+        <ul>
+          <li> <span style="color:red">圏論(category theory)</span>を題材にいろんなことを学びます。</li>
+          <li> 分かり易さを重視して初歩的な例を多用します。</li>
+          <li> 関数型言語の経験がある方がより楽しめると思います。資料中では主にHaskellを使います。 </li>
+          <li> 中高生も数人見ているらしいのでプログラミングと関係が浅い内容も取り上げます。</li>
+          <li> この資料は<a href="http://nineties.github.com/category-seminar/">http://nineties.github.com/category-seminar</a>に置いてあります。</li>
+        </ul>
+        </section>
+
+        <section>
+        <h2> 第9回 </h2>
+        <h3> 領域理論・不動点意味論 </h3>
+        </section>
+
+        <section>
+        <h3> 第9回の内容 </h3>
+        <p>
+        今回はプログラム意味論の理論の中で重要な「<span style="color:red">領域理論</span>」及び「<span style="color:red">不動点意味論</span>」について紹介します。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        本日の内容はとても2時間で扱いきれる様な物ではありませんので,初歩的な(しかし重要な)事柄のみを扱います。web上で得られる詳しい資料としては
+        </p>
+        <ul>
+          <li> プログラム意味論については<br>
+          <a style="font-size:80%" href="http://www.kurims.kyoto-u.ac.jp/~kenkyubu/kokai-koza/katsumata.pdf">勝股審也:プログラミング言語の意味論</a> </li>
+          <li> (来週やる)始代数・終余代数については<br>
+          <a style="font-size:80%" href="https://www.tu-braunschweig.de/Medien-DB/iti/survey_full.pdf">Jiri Adamek他"Initial algebras and terminal coalgebras: a survey" </a></li>
+          </li>
+        </ul>
+        <p>
+        などがあります。
+        </p>
+        </section>
+
+        <section>
+        <h3> プログラム意味論とは </h3>
+        </section>
+
+        <section>
+        <h3> プログラム意味論とは </h3>
+        <p>
+        プログラミング言語の意味を数学的に探求する理論計算機科学の分野を<span style="color:red">意味論(semantics)</span>と言います。
+        </p>
+        <div class="fragment" align="left">
+        <ul>
+          <li> 表示的意味論 </li>
+          <li> 操作的意味論 </li>
+          <li> 公理的意味論 </li>
+        </ul>
+        <p>
+        などの手法が存在します。
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> 表示的意味論とは </h3>
+        <p>
+        <span style="color:red">表示的意味論(denotational semantics)</span>では,データ領域やプログラムを集合や関数などの数学的対象(<span style="color:red">表示(denotation)</span>)に対応させる事によって意味を表現する手法を用います。
+        </p>
+        </section>
+
+        <section>
+        <h3> 例 </h3>
+        <p>
+        問:以下で定義された$\mathrm{fact}$の意味は？(引数は自然数とする)
+        </p>
+        <div class="equation">
+        $$\mathrm{fact}(n) = \mathrm{if}\ n = 0\ \mathrm{then}\ 1\ \mathrm{else}\ n*\mathrm{fact}(n-1)$$
+        </div>
+        <p class="fragment">
+        表示的意味論では(例えば)関数
+        $$ \mathrm{fact}(n) = n! \qquad (n\in\mathbb{N})$$
+        によって$\mathrm{fact}$の意味を表現します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 操作的意味論とは </h3>
+        <p>
+        <span style="color:red">操作的意味論(operational semantics)</span>では,状態遷移系(数学的に形式化されたインタプリタ)を定義し,
+        プログラムの1ステップの実行を状態遷移系への作用として記述する手法を用います。
+        </p>
+        </section>
+
+        <section>
+        <h3> 例 </h3>
+        <p>
+        問:以下で定義された$\mathrm{fact}$の意味は？(引数は自然数とする)
+        </p>
+        <div class="equation">
+        $$\mathrm{fact}(n) = \mathrm{if}\ n = 0\ \mathrm{then}\ 1\ \mathrm{else}\ n*\mathrm{fact}(n-1)$$
+        </div>
+        <p class="fragment" style="font-size:90%">
+        例えば,項書換え系という状態遷移系を用いた場合の$\mathrm{fact}(5)$の評価は
+        $$ \begin{aligned}
+        \mathrm{fact}(5) &\rightarrow \mathrm{if}\ 5 = 0\ \mathrm{then}\ 1\ \mathrm{else}\ 5*\mathrm{fact}(5-1) \\
+                         &\rightarrow 5*\mathrm{fact}(4) \\
+                         &\rightarrow 5*(\mathrm{if}\ 4 = 0\ \mathrm{then}\ 1\ \mathrm{else}\ 4*\mathrm{fact}(4-1))\\
+                         &\rightarrow \cdots
+        \end{aligned} $$
+        の様に進みます。このような意味の与え方が操作的意味論の手法です。
+        </p>
+        </section>
+
+        <section>
+        <h3> 公理的意味論とは </h3>
+        <p>
+        <span style="color:red">公理的意味論(axiomatic semantics)</span>では,公理と推論規則を定義する事によってプログラムの意味を記述する手法を用います。
+        </p>
+        </section>
+
+        <section>
+        <h3> 例 </h3>
+        <p>
+        問:以下で定義された$\mathrm{fact}$の意味は？(引数は自然数とする)
+        </p>
+        <div class="equation">
+        $$\mathrm{fact}(n) = \mathrm{if}\ n = 0\ \mathrm{then}\ 1\ \mathrm{else}\ n*\mathrm{fact}(n-1)$$
+        </div>
+        <div class="fragment" style="font-size:90%">
+        <p>
+        このプログラムに関して例えば以下の様な推論が行えます。
+        </p>
+        <ul>
+          <li> $n = 0$の時にプログラム$x = f(n)$を実行すると$x = 1$となる。
+        </ul>
+        <p>
+        こういった推論を厳密に行う為の規則を与える事によって,プログラムの意味を記述するのが公理的意味論の手法です。
+        </p>
+        </div>
+        <p class="fragment" style="font-size:90%">
+        手続き型言語の公理・推論規則の体系である<span style="color:red">ホーア論理(Hoare Logic)</span>が有名です。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        ３つの意味論の手法を紹介しましたが、今回取り扱うのは表示的意味論です。
+        </p>
+        </section>
+
+        <section>
+        <h3> 領域理論 </h3>
+        <p>
+        表示的意味論の土台が<span style="color:red">領域理論(domain theory)</span>です。
+        </p>
+        <p class="fragment">
+        表示的意味論は何らかの数学的対象の上に構築されますが,集合と(全域的)関数ではプログラムの意味を上手く表示出来ない事が判り
+        <span style="color:red">デイナ・スコット(Dana Scott)</span>などによって領域の研究が始められました。
+        </p>
+        </section>
+
+        <section>
+        <h3> 領域理論の要点 </h3>
+        <p>
+        領域理論では以下の事が主張されます。
+        </p>
+        <ul>
+          <li> 計算の領域は<span style="color:red">最小値を持つ完備半順序集合</span>である。 </li>
+          <li> 計算を表示する関数は<span style="color:red">連続関数</span>である。 </li>
+        </ul>
+        <p>
+        どのような意味か気になると思いますが,まずはいくつか定義と定理の確認を行います。
+        </p>
+        </section>
+
+        <section>
+        <h3> cpo </h3>
+        <p>
+        計算が行われる「領域」の定義です。
+        </p>
+        <div class="definition">
+        <p>
+        始対象を持ち$\omega$余完備な半順序集合を単に<span style="color:red">完備半順序集合(complete partial order)</span>と呼び,cpoと表記する。
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <p>
+        先ほどの圏論的な定義を翻訳すると以下のようになります。
+        </p>
+        <div class="definition">
+        <p>
+        完備半順序集合cpoとは半順序集合$(D,\leqq)$であり,
+        <ul>
+          <li> 最小値$0$を持つ。</li>
+          <li> 任意の$\omega$-chain
+          $$ x_0\leqq x_1\leqq x_2 \leqq x_3 \leqq \cdots $$
+          に対して上限$\displaystyle\lim_{\rightarrow}x_i$が存在する。すなわち,
+          $$ \begin{aligned}
+          & \text{任意の$i \in\omega$について} x_i \leqq \lim_{\rightarrow}x_i \\
+          & \text{任意の$i \in\omega$について} x_i \leqq x\ \text{ならば}\ \lim_{\rightarrow}x_i \leqq x
+          \end{aligned} $$
+          を満たす。
+          </li>
+        </ul>
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> 連続関数 </h3>
+        <div class="definition">
+          <p>
+          cpo $A$からcpo $B$への$\omega$余連続な函手$F$を単に<span style="color:red">連続関数(continuous function)</span>と呼び,$F:A\rightarrow B$と表す。
+          </p>
+        </div>
+        </section>
+
+        <section>
+        <p>
+        これも翻訳すると以下のようになります。
+        </p>
+        <div class="definition">
+        <p>
+        cpo間の連続関数$F: A\rightarrow B$とは以下の条件を満たすものである。
+        </p>
+        <ul>
+          <li> $\displaystyle a\leqq b\ \Rightarrow\ F(a)\leqq F(b)$ </li>
+          <li> $\displaystyle F(\lim_{\rightarrow}x_i) = \lim_{\rightarrow}F(x_i) $ </li>
+        </ul>
+        </div>
+        <p>
+        これから判るように、ここで単に「連続関数」と呼んでいるものは「<span style="color:red">単調な</span>連続関数」の事です。
+        </p>
+        </section>
+
+        <section>
+        <h3> 最小不動点定理 </h3>
+        <p>
+        完備半順序集合と連続関数を用いる事の大きな恩恵に以下の定理があります。
+        </p>
+        <div class="theorem">
+        <p>
+        $D$をcpo,$F: D\rightarrow D$を連続関数とすると,
+        $$ \color{red}{x = F(x)} $$
+        を満たす$x\in D$が必ず存在し,その最小の値$\theta$は
+        $$ \color{red}{\theta = \lim_{\rightarrow} F^i(0)} = \lim_{\rightarrow} F(F(\cdots F(0)\cdots)) $$
+        で与えられる。
+        </p>
+        </div>
+        <p>
+        一般に関数$f$に対して$x = f(x)$を満たす$x$を$f$の<span style="color:red">不動点(fixed point)</span>と言います。
+        </p>
+        </section>
+
+        <section>
+        <p style="font-size:70%">
+        【証明:不動点であること】<br>
+        $D$をcpo,$F:D\rightarrow D$を連続関数とする。<br>
+        $0$は始対象であるから
+        $$ 0 \leqq F(0) $$
+        が成り立つ。さらに$F$は単調であるからこの不等式より
+        $$ F(0) \leqq F^2(0) $$
+        が得られる。これを繰り返して$\omega$-chain
+        $$ 0 \leqq F(0) \leqq F^2(0) \leqq F^3(0) \leqq \cdots \quad\cdots (1) $$
+        を得る。すると$D$はcpoなので
+        $$ \lim_{\rightarrow} F^i(0) $$
+        が存在する。従って$F$は連続であるから
+        $$ F(\lim_{\rightarrow}F^i(0)) = \lim_{\rightarrow}F(F^i(0)) = \lim_{\rightarrow}F^{i+1}(0) = \lim_{\rightarrow}F^i(0) $$
+        となる。(最後の変形は,$\omega$-chain $\{F^{i+1}(0)\}$の先頭に$0\leqq F(0)$を繋げたものは$(1)$と一致する為。)<br>
+        従って$\displaystyle\lim_{\rightarrow}F^i(0)$は$F$の不動点である。 <span style="float:right">□</span>
+        </p>
+        </section>
+
+        <section>
+        <p style="font-size:70%">
+        【証明続き:最小の不動点であること】<br>
+        $F$の不動点$x = F(x)$が他に存在したと仮定すると,$0$は始対象であるから
+        $$ 0 \leqq x $$
+        が成り立ち,さらに$F$は単調であるから
+        $$ F(0) \leqq F(x) = x$$
+        が成り立つ。これを繰り返して任意の$i\in\omega$に対して
+        $$ F^i(0) \leqq x$$
+        が得られる。すると余極限$\displaystyle\lim_{\rightarrow}F^i(0)$の性質より
+        $$ \lim_{\rightarrow}F^i(0) \leqq x $$
+        となる。従って$\displaystyle\lim_{\rightarrow}F^i(0)$は$F$の最小の不動点である。
+<span style="float:right">□</span>
+        </p>
+        </section>
+
+        <section>
+        <h3> 最小不動点定理の重要性 </h3>
+        <p>
+        <span style="color:red">不動点</span>は<span style="color:red">再帰</span>と密接に関わります。最小不動点定理が重要であるのは,最小不動点の存在だけでなく,その<span style="color:red">具体的な構成方法</span>を与えるからです。
+        </p>
+        <div class="fragment">
+        <p>
+        「$X$は$F$の最小不動点である」という形で$X$について述べる事が出来れば
+        </p>
+        <ul>
+          <li> $X$を具体的に構成してしまう</li>
+          <li> 最小不動点の性質に基づいて,$X$の性質を検証する</li>
+        </ul>
+        <p>
+        といった事が可能になります。
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> 何故cpoを考えるのか？ </h3>
+        </section>
+
+        <section>
+        <p>
+        まず,$n$は自然数であるとして以下のコードの表示を考えてみて下さい。
+        </p>
+        <div class="equation">
+          $$ f(n) = \mathrm{if}\ n < 10\ \mathrm{then}\ 0\ \mathrm{else}\ f(n+1) $$
+        </div>
+        <p class="fragment">
+        $n \geqq 10$の時この等式を満たす$f(n)$は存在しませんので,
+        $$ f(n) = \left\{\begin{array}{cc}
+        0 & \text{($n<10$のとき)} \\
+        \text{未定義} & \text{($n\geqq 10$のとき)}
+        \end{array}\right.  $$
+        の様になります。このように定義域の一部でしか定義されない関数を<span style="color:red">部分関数(partial function)</span>と言います。プログラムの意味論では部分関数を適切に表現する必要があります。
+        </p>
+        </section>
+
+        <section>
+        <h3> ボトム </h3>
+        <p>
+        部分関数を表現する為に,<span style="color:red">ボトム(bottom)</span>と呼ばれる未定義値を表す値をデータ領域に追加します。
+        これは記号$\color{red}{\bot}$で表され,集合$A = \{a,b,c,\cdots\}$に$\bot$を追加した集合を
+        <div class="equation">
+        $$ A_{\bot} = \{\bot,a,b,c,\cdots\} $$
+        </div>
+        と表す事にします。$A_{\bot}$の$\bot$の事を$\bot_{A}$とも表します。
+        </p>
+        <p class="fragment">
+        例えば,先ほどの関数$f$は$f: \mathbb{N}_{\bot} \rightarrow \mathbb{N}_{\bot}$というドメイン・コドメインを持つ関数として表す事が出来ます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 部分オブジェクト </h3>
+        <p>
+        次に,領域$A_{\bot}$と$B_{\bot}$の直積
+        $$ A_{\bot}\times B_{\bot} = \{(a,b) | a\in A_{\bot}, b\in B_{\bot}\} $$
+        を考えると,<span style="color:red">一部だけが定義された状態のデータ</span>が生じます。
+        </p>
+        <p class="fragment">
+        例えば領域$\mathbb{N}_{\bot} \times\mathbb{N}_{\bot}$には
+        $$ (\bot, \bot),\ (1, \bot),\ (\bot, 0),\ (1, 2),\cdots $$
+        などのデータが含まれる事になります。
+        </p>
+        <p class="fragment">
+        この意味で領域の値を<span style="color:red">部分オブジェクト(partial object)</span>などとも呼びます。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        部分オブジェクトという概念が登場しましたが,これにcpoの構造を自然に入れる事が出来ます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 部分オブジェクトの順序 </h3>
+        <p>
+        まず$ A_{\bot} = \{\bot,a,b,c,\cdots \}$の各要素には
+        </p>
+        <div class="equation">
+        $$ a \leqq b \ \Leftrightarrow\ a = \bot\ \text{または}\ a = b$$
+        </div>
+        <p>
+        によって順序を入れます。この形の領域を<span style="color:red">平坦なcpo(flat cpo)</span>とも呼ばれます。
+        </p>
+        <p>
+        例えば$\mathbb{N}_{\bot}$の様子は下図の様になります。
+        </p>
+        <div align="center"> <img width="50%" src="fig/N_bot.png"> </div>
+        </section>
+
+        <section>
+        <h3> 部分オブジェクトの順序 </h3>
+        <p>
+        対$(a,b)$には
+        </p>
+        <div class="equation">
+        $$ (a_1,b_1) \leqq (a_2, b_2) \ \Leftrightarrow\ a_1\leqq a_2\text{かつ}b_1\leqq b_2$$
+      </div>
+        <p>
+        によって順序を入れます。
+        </p>
+        <p>
+        例えば$\mathbb{N}_{\bot}\times\mathbb{N}_{\bot}$の様子は下図の様になります。
+        </p>
+        <div align="center"> <img width="50%" src="fig/NN_bot.png"> </div>
+        </section>
+
+        <section>
+        <h3> 部分オブジェクトの順序 </h3>
+        <p>
+        さらに関数自体もデータの一種ですが,これにも半順序構造が入ります。
+        関数$f, g: A\rightarrow B$間の順序は
+        </p>
+        <div class="equation">
+        $$ g\leqq f\ \Leftrightarrow\ \text{全ての$x\in A$について}g(x)\leqq f(x) $$
+        </div>
+        <p>
+        によって順序を入れます。
+        </p>
+        <p>
+        例えば$f,g:\mathbb{N}_{\bot}\rightarrow\mathbb{N}_{\bot}$を
+        $$ \begin{align}
+        f(n) & = 0 \\
+        g(n) & = \mathrm{if}\ n < 10\ \mathrm{then}\ 0\ \mathrm{else}\ g(n+1)
+        \end{align} $$
+        と定義した場合$g\leqq f$となります。
+        </p>
+        </section>
+
+        <section>
+        <h3> cpoに関する定理 </h3>
+        <p>
+        cpoの構成に関しては以下のような定理が成り立ちます。
+        </p>
+        <div class="theorem">
+        <ul>
+          <li> $A,B$がcpoならば$A\times B$もcpo </li>
+          <li> cpo $A,B$に対し$[A\rightarrow B]$を$A$から$B$への連続関数の集合とすると$[A\rightarrow B]$もcpoである。
+        </ul>
+        </div>
+        <p style="font-size:90%">
+        時間の関係上証明は省略しますが
+        $$\begin{aligned}
+        & \bot_{A\times B} = (\bot_{A},\bot_{B}),\ \lim_{\rightarrow}(a_i,b_i) = (\lim_{\rightarrow}a_i,\lim_{\rightarrow}b_i) \\
+        & \bot_{[A\rightarrow B]} = \text{(常に$\bot_{B}$を返す関数)},\ (\lim_{\rightarrow}f_i)(x) = \lim_{\rightarrow}f_i(x)
+        \end{aligned}$$
+        とすれば良いです。
+        </p>
+        </section>
+
+
+        <section>
+        <h3> 順序関係の直感的な解釈 </h3>
+        <p>
+        部分オブジェクト$a$,$b$が
+        $$ a \leqq b$$
+        の関係であるという状況は
+        </p>
+        <ul>
+          <li> $b$は$a$より良く定義されている。 </li>
+          <li> $b$は$a$より詳しい情報を持っている。 </li>
+        </ul>
+        <p>
+        などと解釈する事が出来ます。
+        </p>
+        </section>
+
+        <section>
+        <h3> cpoの直感的な解釈 </h3>
+        <p>
+        今の考え方に基づくと,計算の領域としてcpoを用いる事が自然だと思えるのではないでしょうか。
+        </p>
+        <ul>
+          <li class="fragment"> 最小値$\bot$は「何も情報がない状態」を表している。 </li>
+          <li class="fragment"> $\omega$-chain
+          $$ x_0\leqq x_1\leqq x_2\leqq \cdots $$
+          は未定義部が減っていくようなデータの列に対応する。
+          </li>
+          <li class="fragment"> $\omega$余完備であるということは,この列の全ての情報を含む,最小のデータが存在する事を表す。
+          </li>
+        </ul>
+        </section>
+
+        <section>
+        <h3> 単調関数の直感的な解釈 </h3>
+        <p>
+        続いて関数$f: A\rightarrow B$が単調であるとは
+        </p>
+        <div class="equation">
+        $$ a \leqq b\ \Rightarrow\ f(a)\leqq f(b) $$
+        </div>
+        <p>
+        が成り立つ事でした。
+        </p>
+        <p class="fragment">
+        この条件は「入力の情報量を増やしたら,出力の情報量も増える」という事だと解釈出来ます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 再帰関数の不動点意味論 </h3>
+        </section>
+
+        <section>
+        <div style="font-size:85%">
+        <p>
+        例として再帰関数
+        </p>
+        <div class="equation">
+        $$\mathrm{fact}(n) = \mathrm{if}\ n = 0\ \mathrm{then}\ 1\ \mathrm{else}\ n*\mathrm{fact}(n-1)$$
+        </div>
+        <p>
+        を用います。
+        </p>
+        <div class="fragment">
+        <p>
+        $\lambda$記法を用いるとこれは
+        </p>
+        <div class="equation">
+          $$\mathrm{fact} = \lambda n. \mathrm{if}\ n = 0\ \mathrm{then}\ 1\ \mathrm{else}\ n*\mathrm{fact}(n-1)$$
+        </div>
+        <p>
+        とも表せます。
+        </p>
+        </div>
+        <div class="fragment">
+        <p>
+        右辺の$\mathrm{fact}$をさらに引数に持ち上げると
+        </p>
+        <div class="equation">
+          $$\mathrm{fact} = (\lambda f. \lambda n. \mathrm{if}\ n = 0\ \mathrm{then}\ 1\ \mathrm{else}\ n*f(n-1))(\mathrm{fact})$$
+        </div>
+        <p>
+        となります。
+        </p>
+        </div>
+        </div>
+        </section>
+
+        <section>
+        <p>
+        つまり,
+        </p>
+        <div class="equation">
+        $$ F(f) = \lambda n. \mathrm{if}\ n = 0\ \mathrm{then}\ 1\ \mathrm{else}\ n*f(n-1)$$
+        </div>
+        <p>
+        と置くと
+        $$ \mathrm{fact} = F(\mathrm{fact}) $$
+        と表されるので,
+        </p>
+        <center>「$\mathrm{fact}$(を表示する関数)は$F$(を表示する関数)の不動点である。」</center>
+        <p>
+        と述べる事が出来ます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 再帰関数と不動点 </h3>
+        <p>
+        このようにある再帰関数の表示$f$は適当な関数$F$を用いて
+        </p>
+        <center>「$f$は$F$の不動点である」</center>
+        <p>
+        という形で表現する事が出来ます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 最小不動点=ノイズが最小の不動点 </h3>
+        <p>
+        $F$の不動点は複数存在し得ますが,最小不動点$f$は
+        $$ g = F(g) $$
+        を満たすような$g$の中で<span style="color:red">情報量が最小</span>の関数であると直感的に説明する事が出来ます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 例 </h3>
+        <div class="equation">
+          $$ f(n) = \mathrm{if}\ n = 0\ \mathrm{then}\ 1\ \mathrm{else}\ f(n+1) $$
+        </div>
+        <p>
+        という関数を考えます。先ほどと同様にするとこれは
+        </p>
+        <div class="equation">
+        $$ F(f) = \lambda n. \mathrm{if}\ n = 0\ \mathrm{then}\ 1\ \mathrm{else}\ f(n+1)$$
+        </div>
+        <p>
+        の不動点という事になります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 例 </h3>
+        <p>
+        ここで$c\in\mathbb{N}_{\bot}$を任意の定数として
+        $$ f(x) = \mathrm{if}\ n=0\ \mathrm{then}\ 1\ \mathrm{else}\ c$$
+        という関数を考えると
+        $$ f = F(f) $$
+        が成り立つので不動点となりますが,例えば$c = 100$にした
+        </p>
+        <div class="equation">
+        $$ f(x) = \mathrm{if}\ n=0\ \mathrm{then}\ 1\ \mathrm{else}\ 100 $$
+        </div>
+        <p>
+        には元のプログラムに無い情報が含まれてしまっています。
+        </p>
+        </section>
+
+        <section>
+        <h3> 不動点意味論 </h3>
+        <p>
+        今述べたように再帰プログラムの表示$f$を
+        </p>
+        <center>
+          「$f$は$F$の<span style="color:red">最小不動点</span>である」
+        </center>
+        <p>
+        という形式で与える事が出来ます。このような意味論を<span style="color:red">不動点意味論(fixed point semantics)</span>と言います。
+        </p>
+        <div class="fragment">
+        <p>
+        さらに,領域としてcpoを取り,$F$が連続であるならば最小不動点定理によって
+        </p>
+        <div class="equation">
+        $$ f = \lim_{\rightarrow}F^i(\bot)$$
+        </div>
+        <p>
+        である事が得られます。
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> Haskellを使った説明 </h3>
+        <pre><code data-trim class="haskell" contenteditable>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</code></pre>
+        </section>
+
+        <section>
+        <h3> 不動点帰納法 </h3>
+        <p>
+        プログラムの意味を連続関数$F$の最小不動点
+        $$ f = \lim_{\rightarrow}F^i(\bot) $$
+        として与えられる事が分かりました。すると,$f$の構成方法に基づいて$f$の性質の検証を行う事が出来ます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 不動点帰納法 </h3>
+        <p>
+        cpo $D$の値を引数にとる命題$P(x)$が以下の条件を満たすとします。
+        </p>
+        <div class="equation">
+        <p>
+        任意の$\omega$-chain
+        $$x_0 \leqq x_1 \leqq x_2 \leqq \cdots $$
+        について
+        $$ P(x_0),P(x_1),\cdots\text{の全てが真ならば} P(\lim_{\rightarrow}x_i)\text{も真} $$
+        </p>
+        </div>
+        <p>
+        このような$P(x)$を<span style="color:red">許容的(admissible)</span>などと呼びます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 不動点帰納法 </h3>
+        <div class="definition">
+        <p>
+        $F: D\rightarrow D$をcpo $D$上の連続関数とし,$P(x)$を$D$上の許容的な述語とした時
+        </p>
+        <ul>
+          <li> $P(\bot)$が真 </li>
+          <li> 任意の$f\in D$について,$P(f)$が真ならば$P(F(f))$も真</li>
+        </ul>
+        <p>
+        であるならば,$\displaystyle P(\lim_{\rightarrow}F^i(\bot))$も真である。
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <p>
+        不動点帰納法の有名な例題を紹介します。
+        </p>
+        <div class="equation" style="font-size:90%">
+        <p>
+        $ F:[\mathbb{N}_{\bot}\rightarrow\mathbb{N}_{\bot}]\rightarrow [\mathbb{N}_{\bot}\rightarrow\mathbb{N}_{\bot}]$を
+        $$ F(f) = \lambda n. \mathrm{if}\ n > 100\ \mathrm{then}\ n-10\ \mathrm{else}\ f(f(n+11))$$
+        と定義し,$F$の最小不動点を$f$とする。<br>
+        ここで$g:\mathbb{N}_{\bot}\rightarrow\mathbb{N}_{\bot}$を
+        $$ g(n) = \mathrm{if}\ n>100\ \mathrm{then}\ n-10\ \mathrm{else}\ 91 $$
+        (但し$g(\bot) = \bot$)と定義すると
+        $$ f \leqq g $$
+        である事を示せ。
+        </p>
+        </div>
+        <p> この問題の$f$及び$g$は<span style="color:red">マッカーシーの91関数</span>と呼ばれます。 </p>
+        </section>
+
+        <section>
+        <p> 板書でやります。後で資料に反映させます。 </p>
+        </section>
+
+        <!--
+        <section>
+        <h3> 始代数と最小不動点 </h3>
+        </section>
+
+        <section>
+        <h3> Lambekの補題 </h3>
+        <p> 第7回に以下の定理を紹介しました。 </p>
+        <div class="theorem">
+        <p>
+        $(T,\mathrm{in})$が$F$始代数ならば$\mathrm{in}$は同型射
+        </p>
+        <div align="center"> <img width="40%" src="fig/initial_falgebra.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <h3> 始代数は不動点 </h3>
+        <p>
+        これからただちに次の結果が言えます。
+        </p>
+        <div class="theorem">
+        <p>
+        $(T, \mathrm{in})$が$F$始代数であるならば,$T$は$F$の不動点である。すなわち
+        $$ \color{red}{T \cong F(T)} $$
+        が成り立つ。
+        </p>
+        </div>
+        </section>
+        -->
+
+        <section>
+        <h3> 第9回はここで終わります </h3>
+        <p>
+        お疲れ様でした。<br>
+        領域理論、不動点意味論に思いの外時間がかかってしまったので,始代数・終余代数と不動点の関係,プログラム運算の続きは来週に回します。
+        </p>
+        </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+        rollingLinks: false,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+      Reveal.addEventListener( 'slidechanged', function( event ) {
+        MathJax.Hub.Rerender(event.currentSlide);
+      });
+
+		</script>
+
+	</body>
+</html>
