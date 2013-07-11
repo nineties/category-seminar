@@ -123,7 +123,7 @@
         <section>
         <h3> 第9回の内容 </h3>
         <p>
-        今回はプログラム意味論の理論の中で重要な「<span style="color:red">領域理論</span>」及び「<span style="color:red">不動点意味論</span>」について紹介します。
+        今回は「<span style="color:red">領域理論</span>」及び「<span style="color:red">不動点意味論</span>」というプログラム意味論の重要な分野について紹介します。
         </p>
         </section>
 
@@ -167,7 +167,7 @@
         <section>
         <h3> 表示的意味論とは </h3>
         <p>
-        <span style="color:red">表示的意味論(denotational semantics)</span>では,データ領域やプログラムを集合や関数などの数学的対象(<span style="color:red">表示(denotation)</span>)に対応させる事によって意味を表現する手法を用います。
+        <span style="color:red">表示的意味論(denotational semantics)</span>では,データ・プログラムを集合や関数などの数学的対象(<span style="color:red">表示(denotation)</span>)に対応させる事によって意味を表現する手法を用います。
         </p>
         </section>
 
@@ -203,7 +203,7 @@
         $$\mathrm{fact}(n) = \mathrm{if}\ n = 0\ \mathrm{then}\ 1\ \mathrm{else}\ n*\mathrm{fact}(n-1)$$
         </div>
         <p class="fragment" style="font-size:90%">
-        例えば,項書換え系という状態遷移系を用いた場合の$\mathrm{fact}(5)$の評価は
+        例えば,項書換え系という状態遷移系を用いると$\mathrm{fact}(5)$の評価は
         $$ \begin{aligned}
         \mathrm{fact}(5) &\rightarrow \mathrm{if}\ 5 = 0\ \mathrm{then}\ 1\ \mathrm{else}\ 5*\mathrm{fact}(5-1) \\
                          &\rightarrow 5*\mathrm{fact}(4) \\
@@ -247,7 +247,8 @@
 
         <section>
         <p>
-        ３つの意味論の手法を紹介しましたが、今回取り扱うのは表示的意味論です。
+        このようにプログラムへの意味の与え方には様々な方法があります。
+        今回紹介する「領域理論」「不動点意味論」は表示的意味論分野の理論となります。
         </p>
         </section>
 
@@ -296,7 +297,7 @@
         <p>
         完備半順序集合cpoとは半順序集合$(D,\leqq)$であり,
         <ul>
-          <li> 最小値$0$を持つ。</li>
+          <li> 最小値$0$を持つ。<span style="font-size:50%">(自然数の$0$ではなく,始対象の$0$です。)</span></li>
           <li> 任意の$\omega$-chain
           $$ x_0\leqq x_1\leqq x_2 \leqq x_3 \leqq \cdots $$
           に対して上限$\displaystyle\lim_{\rightarrow}x_i$が存在する。すなわち,
@@ -341,7 +342,7 @@
         <section>
         <h3> 最小不動点定理 </h3>
         <p>
-        完備半順序集合と連続関数を用いる事の大きな恩恵に以下の定理があります。
+        完備半順序集合と連続関数を用いる事の恩恵として以下の定理が得られます。
         </p>
         <div class="theorem">
         <p>
@@ -436,10 +437,15 @@
         <h3> ボトム </h3>
         <p>
         部分関数を表現する為に,<span style="color:red">ボトム(bottom)</span>と呼ばれる未定義値を表す値をデータ領域に追加します。
-        これは記号$\color{red}{\bot}$で表され,集合$A = \{a,b,c,\cdots\}$に$\bot$を追加した集合を
+        これは記号$\color{red}{\bot}$で表されます。
+        </p>
+        <p>
+        集合$A = \{a,b,c,\cdots\}$に$\bot$を追加した集合を
+        </p>
         <div class="equation">
         $$ A_{\bot} = \{\bot,a,b,c,\cdots\} $$
         </div>
+        <p>
         と表す事にします。
         </p>
         <p class="fragment">
@@ -476,7 +482,7 @@
         まず$ A_{\bot} = \{\bot,a,b,c,\cdots \}$の各要素には
         </p>
         <div class="equation">
-        $$ a \leqq b \ \Leftrightarrow\ a = \bot\ \text{または}\ a = b$$
+        $$ a \leqq b \ \mathrm{iff}\ a = \bot\ \text{または}\ a = b$$
         </div>
         <p>
         によって順序を入れます。この形の領域を<span style="color:red">平坦なcpo(flat cpo)</span>とも呼ばれます。
@@ -493,7 +499,7 @@
         対$(a,b)$には
         </p>
         <div class="equation">
-        $$ (a_1,b_1) \leqq (a_2, b_2) \ \Leftrightarrow\ a_1\leqq a_2\text{かつ}b_1\leqq b_2$$
+          $$ (a_1,b_1) \leqq (a_2, b_2) \ \mathrm{iff}\ a_1\leqq a_2\text{かつ}b_1\leqq b_2$$
       </div>
         <p>
         によって順序を入れます。
@@ -511,7 +517,7 @@
         関数$f, g: A\rightarrow B$間の順序は
         </p>
         <div class="equation">
-        $$ g\leqq f\ \Leftrightarrow\ \text{全ての$x\in A$について}g(x)\leqq f(x) $$
+          $$ g\leqq f\ \mathrm{iff}\ \text{全ての$x\in A$について}g(x)\leqq f(x) $$
         </div>
         <p>
         によって順序を入れます。
@@ -697,26 +703,26 @@
         $$ f(x) = \mathrm{if}\ n=0\ \mathrm{then}\ 1\ \mathrm{else}\ c$$
         という関数を考えると
         $$ f = F(f) $$
-        が成り立つので不動点となりますが,例えば$c = 100$にした
+        が成り立つ(練習問題)ので不動点となりますが,例えば$c = 100$にした
         </p>
         <div class="equation">
         $$ f(x) = \mathrm{if}\ n=0\ \mathrm{then}\ 1\ \mathrm{else}\ 100 $$
         </div>
         <p>
-        には元のプログラムに無い情報が含まれてしまっています。
+        には元のプログラムに無い情報が含まれてしまっています。これでは元のプログラムに適切な意味を与えられていると言えません。
         </p>
         </section>
 
         <section>
         <h3> 不動点意味論 </h3>
         <p>
-        今述べたように再帰プログラムの表示$f$を
+        そこで再帰プログラムの表示$f$を
         </p>
         <center>
           「$f$は$F$の<span style="color:red">最小不動点</span>である」
         </center>
         <p>
-        という形式で与える事が出来ます。このような意味論を<span style="color:red">不動点意味論(fixed point semantics)</span>と言います。
+        という形式で与える事にします。このような意味論を<span style="color:red">不動点意味論(fixed point semantics)</span>と言います。
         </p>
         <div class="fragment">
         <p>
@@ -732,37 +738,140 @@
         </section>
 
         <section>
+        <h3> 例 </h3>
+        <p>
+        $$ F(f) = \lambda n. \mathrm{if}\ n = 0\ \mathrm{then}\ 1\ \mathrm{else}\ n*f(n-1)$$
+        の最小不動点$\displaystyle f = \lim_{\rightarrow}F^i(\bot)$を調べます。
+        </p>
+        <p style="font-size:70%"> まず
+        $$F(\bot) = \lambda n.\mathrm{if}\ n=0\ \mathrm{then}\ 1\ \mathrm{else}\ \bot$$
+        となります。(乗算は$n*\bot = \bot$のように評価されます。)
+        </p>
+        <p style="font-size:70%">
+        すると
+        $$\begin{aligned}
+        F^2(\bot) &= \lambda n. \mathrm{if}\ n = 0\ \mathrm{then}\ 1\ \mathrm{else}\ n*F(\bot)(n-1)\\
+        &= \lambda n. \mathrm{if}\ n = 0\ \mathrm{then}\ 1\ \mathrm{else}\ n*(\mathrm{if}\ n-1=0\ \mathrm{then}\ 1\ \mathrm{else}\ \bot) \\
+        &= \lambda n. \mathrm{if}\ n = 0\ \mathrm{then}\ 1\ \mathrm{else}\ n*(\mathrm{if}\ n=1\ \mathrm{then}\ 1\ \mathrm{else}\ \bot) \\
+        &= \lambda n. \mathrm{if}\ n = 0\ \mathrm{then}\ 1\ \mathrm{else}\ (\mathrm{if}\ n=1\ \mathrm{then}\ 1*1\ \mathrm{else}\ \bot) \\
+        &= \lambda n. \mathrm{if}\ n < 2\ \mathrm{then}\ n!\ \mathrm{else}\ \bot\\
+        \end{aligned} $$
+        となります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 例(続き) </h3>
+        <p>
+        以下同様にすると
+        $$ F^i(\bot) = \lambda n. \mathrm{if}\ n < i\ \mathrm{then}\ n!\ \mathrm{else}\ \bot$$
+        が得られます。つまり$ F^i(\bot) $は$i$未満の自然数$n$については$n!$を返す関数です。
+        </p>
+        <p>
+        すると任意の$i$について
+        $$ F^i(\bot) \leqq f $$
+        を満たすような$f$は
+        $$ f = \lambda n. n! $$
+        しか無いのでこれが最小不動点となります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 例2 </h3>
+        <p>
+        今の例では,最小不動点を用いるありがたみが解りにくいと思いますので,有名な例をもう一つ紹介します。
+        </p>
+        <div class="equation">
+        <p> <span style="color:red">マッカーシーの91関数</span>
+        $$ f(n) = \mathrm{if}\ n > 100\ \mathrm{then}\ n-10\ \mathrm{else}\ f(f(n+11))$$
+        </p>
+        </div>
+        <p>
+        この$f$が一体どのような部分関数によって表示されるのか,パッと見ではよく分かりません。
+        しかし,以下の$F$の最小不動点を計算するだけで自動的に求めてしまうことが出来ます。
+        $$ F(f) = \lambda n. \mathrm{if}\ n > 100\ \mathrm{then}\ n-10\ \mathrm{else}\ f(f(n+11))$$
+        </p>
+        </section>
+
+        <section>
+        <h3> 例2(続き) </h3>
+        <p style="font-size:50%">
+        順番に計算してみると
+        $$\begin{aligned}
+        F(\bot)   &= \lambda n. \mathrm{if}\ n > 100\ \mathrm{then}\ n-10\ \mathrm{else}\ \bot \\
+        F^2(\bot) &= \lambda n. \mathrm{if}\ n > 100\ \mathrm{then}\ n-10\ \mathrm{else}\ F(\bot)(F(\bot)(n+11)) \\
+                  &= \lambda n. \mathrm{if}\ n > 100\ \mathrm{then}\ n-10\ \mathrm{else}\ F(\bot)(\mathrm{if}\ n+11 > 100\ \mathrm{then}\ n+11-10\ \mathrm{else}\ \bot) \\
+                  &= \lambda n. \mathrm{if}\ n > 100\ \mathrm{then}\ n-10\ \mathrm{else}\ F(\bot)(\mathrm{if}\ n > 89\ \mathrm{then}\ n+1\ \mathrm{else}\ \bot) \\
+                  &= \lambda n. \mathrm{if}\ n > 100\ \mathrm{then}\ n-10\ \mathrm{else}\ (\mathrm{if}\ n > 89\ \mathrm{then}\ F(\bot)(n+1)\ \mathrm{else}\ \bot) \\
+                  &= \lambda n. \mathrm{if}\ n > 100\ \mathrm{then}\ n-10\ \mathrm{else}\ (\mathrm{if}\ n > 89\ \mathrm{then}\ (\mathrm{if}\ n>99\ \mathrm{then}\ n-9\ \mathrm{else}\ \bot)\ \mathrm{else}\ \bot) \\
+                  &= \lambda n. \mathrm{if}\ n > 100\ \mathrm{then}\ n-10\ \mathrm{else}\ (\mathrm{if}\ n > 89\ \mathrm{then}\ (\mathrm{if}\ n>99\ \mathrm{then}\ n-9\ \mathrm{else}\ \bot)\ \mathrm{else}\ \bot) \\
+                  &= \lambda n. \mathrm{if}\ n > 100\ \mathrm{then}\ n-10\ \mathrm{else}\ (\mathrm{if}\ n =100 \ \mathrm{then}\ 91 \ \mathrm{else}\ \bot)
+        \end{aligned} $$
+        となります。$n-9$に辿り着くのは$n=100$の時のみである事に注意して下さい。
+        </p>
+        </section>
+
+        <section>
+        <h3> 例2(続き) </h3>
+        <p style="font-size:80%">
+        同様に計算を進めると
+        $$ F^i(\bot) = \lambda n. \mathrm{if}\ n > 100\ \mathrm{then}\ n-10\ \mathrm{else}\ (\mathrm{if}\ 100\leqq n < 99+i\ \mathrm{then}\ 91\ \mathrm{else}\ \bot)$$
+        が得られます。
+        </p>
+        <p style="font-size:80%">
+        従ってこの極限が最小不動点ですので,マッカーシーの91関数は
+        </p>
+        <div class="equation">
+        $$ f(n) = \mathrm{if}\ n > 100\ \mathrm{then}\ n-10\ \mathrm{else}\ 91 $$
+        </div>
+        <p>
+        という関数である事が判りました。
+        </p>
+        </section>
+
+        <section>
         <h3> Haskellを使った説明 </h3>
         <pre><code data-trim class="haskell" contenteditable>
+import Data.Function
 
+-- 実際に動くコードで最小不動点のアイデアを理解しましょう。
+-- fact(n) = n!の例を使います。
 
+-- 以下のfactFの最小不動点がfactです。
+factF :: (Integer -> Integer) -> (Integer -> Integer)
+factF f = \n -> if n == 0 then 1 else n*f(n-1)
 
+-- すると以下のような関数の列が出来ます。
+-- factNはN以下の自然数nについては正しくn!を返し,N+1以上の自然数についてはundefinedを返します。
+fact0 = factF undefined
+fact1 = factF (factF undefined)
+fact2 = factF (factF (factF undefined))
+fact3 = factF (factF (factF (factF undefined)))
+fact4 = factF (factF (factF (factF (factF undefined))))
 
-
-
-
-
-
-
-
-
-
-
-
+-- 求める関数factはこの列の極限です。
+-- Haskellの標準ライブラリには最小不動点を求める為の関数fixが用意されており
+-- 以下の様にfactを得る事が出来ます。
+fact = fix factF
 </code></pre>
         </section>
 
         <section>
         <h3> 不動点帰納法 </h3>
         <p>
-        プログラムの意味を連続関数$F$の最小不動点
+        連続関数$F$の最小不動点
         $$ f = \lim_{\rightarrow}F^i(\bot) $$
-        として与えられる事が分かりました。すると,$f$の構成方法に基づいて$f$の性質の検証を行う事が出来ます。
+        を計算する際に数列
+        $$ \bot,F(\bot),F^2(\bot),F^3(\bot),\cdots,F^i(\bot),\cdots $$
+        の一般項を求めましたが,これを厳密に行う為には<span style="color:red">数学的帰納法</span>に基づく証明が必要です。
+        </p>
+        <p>
+        このような不動点の構成に基づく帰納法を<span style="color:red">不動点帰納法</span>と言います。
         </p>
         </section>
 
         <section>
-        <h3> 不動点帰納法 </h3>
+        <h3> 不動点帰納法で利用できる命題 </h3>
         <p>
         cpo $D$の値を引数にとる命題$P(x)$が以下の条件を満たすとします。
         </p>
@@ -797,7 +906,7 @@
 
         <section>
         <p>
-        不動点帰納法の有名な例題を紹介します。
+        先ほどのマッカーシーの91関数に関する簡単な命題を証明してみます。
         </p>
         <div class="equation" style="font-size:90%">
         <p>
@@ -811,11 +920,33 @@
         である事を示せ。
         </p>
         </div>
-        <p> この問題の$f$及び$g$は<span style="color:red">マッカーシーの91関数</span>と呼ばれます。 </p>
+        <p style="font-size:80%">
+        $f\leqq g$が真であるということは($\mathbb{N}_{\bot}$が平坦なcpoなので)
+        $$ f(n) \neq \bot \ \text{ならば} f(n) = g(n) $$
+        という事を意味します。
+        </p>
         </section>
 
         <section>
-        <p> 板書でやります。後で資料に反映させます。 </p>
+        <p style="font-size:70%">
+        【証明】<br>
+        $\bot \leqq g$である事は明らか。<br>
+        $h:\mathbb{N}_{\bot}\rightarrow\mathbb{N}_{\bot}$が$h\leqq g$を満たすと仮定すると
+        $$ \begin{aligned}
+        F(h) &= \lambda n. \mathrm{if}\ n > 100\ \mathrm{then}\ n-10\ \mathrm{else}\ h(h(n+11))\\
+            &\leqq \lambda n. \mathrm{if}\ n > 100\ \mathrm{then}\ n-10\ \mathrm{else}\ g(g(n+11))\\
+            &= \lambda n. \mathrm{if}\ n > 100\ \mathrm{then}\ n-10\ \mathrm{else}\ g(\mathrm{if}\ n>89\ \mathrm{then}\ n+1\ \mathrm{else}\ 91) \\
+            &= \lambda n. \mathrm{if}\ n > 100\ \mathrm{then}\ n-10\ \mathrm{else}\ (\mathrm{if}\ n>89\ \mathrm{then}\ g(n+1)\ \mathrm{else}\ 91) \\
+            &= \lambda n. \mathrm{if}\ n > 100\ \mathrm{then}\ n-10\ \mathrm{else}\\
+            &\qquad (\mathrm{if}\ n>89\ \mathrm{then}\ (\mathrm{if}\ n>99\ \mathrm{then}\ n-9\ \mathrm{else}\ 91)\ \mathrm{else}\ 91) \\
+            &= \lambda n. \mathrm{if}\ n > 100\ \mathrm{then}\ n-10\ \mathrm{else}\ 91 \\
+            &= g
+
+        \end{aligned} $$
+        より$F(h)\leqq g$である。従って不動点帰納法により
+        $$ \lim_{\rightarrow}F^i(\bot) \leqq g$$
+        である。<span style="float:right">□</span>
+        </p>
         </section>
 
         <!--
