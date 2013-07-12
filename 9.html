@@ -859,14 +859,11 @@ fact = fix factF
         <section>
         <h3> 不動点帰納法 </h3>
         <p>
-        連続関数$F$の最小不動点
-        $$ f = \lim_{\rightarrow}F^i(\bot) $$
-        を計算する際に数列
+        数列
         $$ \bot,F(\bot),F^2(\bot),F^3(\bot),\cdots,F^i(\bot),\cdots $$
-        の一般項を求めましたが,これを厳密に行う為には<span style="color:red">数学的帰納法</span>に基づく証明が必要です。
-        </p>
-        <p>
-        このような不動点の構成に基づく帰納法を<span style="color:red">不動点帰納法</span>と言います。
+        の極限として最小不動点
+        $$ \lim_{\rightarrow}F^i(\bot) $$
+        が与えられるわけですが,この構造に基づいて<span style="color:red">帰納的に</span>最小不動点の性質について証明を行う事が出来ます。
         </p>
         </section>
 
@@ -902,6 +899,9 @@ fact = fix factF
         であるならば,$\displaystyle P(\lim_{\rightarrow}F^i(\bot))$も真である。
         </p>
         </div>
+        <p>
+        このような不動点の構成に基づく帰納法を<span style="color:red">不動点帰納法</span>と言います。
+        </p>
         </section>
 
         <section>
