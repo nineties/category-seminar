@@ -709,7 +709,7 @@
         $$ f(x) = \mathrm{if}\ n=0\ \mathrm{then}\ 1\ \mathrm{else}\ 100 $$
         </div>
         <p>
-        には元のプログラムに無い情報が含まれてしまっています。これでは元のプログラムに適切な意味を与えられていると言えません。
+        には元のプログラムに無い情報が含まれてしまっています。これでは適切な表示だと言えないでしょう。
         </p>
         </section>
 
@@ -842,12 +842,13 @@ factF :: (Integer -> Integer) -> (Integer -> Integer)
 factF f = \n -> if n == 0 then 1 else n*f(n-1)
 
 -- すると以下のような関数の列が出来ます。
--- factNはN以下の自然数nについては正しくn!を返し,N+1以上の自然数についてはundefinedを返します。
-fact0 = factF undefined
-fact1 = factF (factF undefined)
-fact2 = factF (factF (factF undefined))
-fact3 = factF (factF (factF (factF undefined)))
-fact4 = factF (factF (factF (factF (factF undefined))))
+-- factNはN未満の自然数nについては正しくn!を返し,N以上の自然数についてはundefinedを返します。
+fact0 = undefined
+fact1 = factF undefined
+fact2 = factF (factF undefined)
+fact3 = factF (factF (factF undefined))
+fact4 = factF (factF (factF (factF undefined)))
+fact5 = factF (factF (factF (factF (factF undefined))))
 
 -- 求める関数factはこの列の極限です。
 -- Haskellの標準ライブラリには最小不動点を求める為の関数fixが用意されており
