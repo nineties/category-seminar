@@ -958,6 +958,146 @@
         後半はより発展的・実用的なプログラム運算に関する各種定理について紹介します。
         </p>
         </section>
+
+        <section>
+        <h3> 練習問題解答 </h3>
+        </section>
+
+        <section>
+        <p>
+        catamorphismの導出を(本文中でも挙げましたが)自然数・リスト・二分木の例について説明します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 自然数のcatamorphism </h3>
+        <p>
+        自然数は函手$F(X) = 1+X$の始代数ですので、catamorphism $u$は左下の図を右の様に展開して
+        $$ \begin{aligned}
+        & u(\mathrm{zero}) = c \\
+        & u(\mathrm{succ}(n)) = f(u(n))
+        \end{aligned} $$
+        となります。
+        </p>
+        <div align="center"> <img width="100%" src="fig/nat_catamorphism.png"> </div>
+        </section>
+
+        <section>
+        <h3> 実装例 </h3>
+        <p> 以下の<code>foldN</code>が自然数に対するcatamorphismです。</p>
+<pre><code data-trim class="haskell" contenteditable>--代数的データ型として自然数を定義する場合
+-- data Nat = Zero | Succ Nat deriving (Show,Eq)
+-- 
+-- foldN :: (a -> a) -> a -> Nat -> a
+-- foldN f c = u
+--   where
+--   u Zero = c
+--   u (Succ n) = f (u n)
+
+-- 組み込みの整数を使った場合
+foldN :: (a -> a) -> a -> Int -> a
+foldN f c = u
+  where
+  u 0 = c
+  u n = f (u (n-1))
+
+-- foldNでの他の関数の実装例
+add x = foldN (+ 1) x
+mul x = foldN (+ x) 0
+pow x = foldN (* x) 1
+
+-- 漸化式 a(n+1) = f(a(n)), a(0) = c
+-- の一般解がfoldN c fとなります。
+sqrt2 = foldN (\x -> (x+2/x)/2) 2
+
+-- a(n+1) = (n+1)*a(n), a(0) = 1
+-- の様なより一般的な漸化式は、foldNのみでは書けないですが、
+-- fst . foldN f cの形に書くことが可能です。
+fact = fst . foldN (\(c,n) -> (c*n, n+1)) (1, 1)
+</code></pre>
+        </section>
+
+
+        <section>
+        <h3> リストのcatamorphism </h3>
+        <p>
+        リストは函手$F(X) = 1+A\times X$の始代数ですので、catamorphism $u$は左下の図を右の様に展開して
+        $$ \begin{aligned}
+        & u(\mathrm{nil}) = c \\
+        & u(\mathrm{cons}(a,as)) = f(a,u(as))
+        \end{aligned} $$
+        となります。
+        </p>
+        <div align="center"> <img width="100%" src="fig/list_catamorphism2.png"> </div>
+        </section>
+
+        <section>
+        <h3> 実装例 </h3>
+        <p> 以下の<code>foldr</code>がリストに対するcatamorphismです。</p>
+<pre><code data-trim class="haskell" contenteditable>import Prelude hiding (foldr,length,sum,product)
+
+--代数的データ型としてリストを定義する場合
+--data List a = Nil | Cons a (List a) deriving (Show,Eq)
+--
+--foldr :: (a -> b -> b) -> b -> List a -> b
+--foldr f c = u
+--  where
+--  u Nil = c
+--  u (Cons a as) = f a (u as)
+
+-- 組み込みのリストを使った場合
+foldr :: (a -> b -> b) -> b -> [a] -> b
+foldr f c = u
+  where
+  u [] = c
+  u (a:as) = f a (u as)
+
+-- Lambekの補題より
+-- x == foldr (:) [] x
+-- が成立します。
+
+-- foldrでの他の関数の実装例
+length = foldr (\_ x -> x + 1) 0
+sum = foldr (+) 0
+product = foldr (*) 1
+</code></pre>
+        </section>
+
+        <section>
+        <h3> 二分木のcatamorphism </h3>
+        <p>
+        葉(leaf)に値を持つタイプの二分木は函手$F(X) = A+X\times X$の始代数ですので、catamorphism $u$は左下の図を右の様に展開して
+        $$ \begin{aligned}
+        & u(\mathrm{leaf}(a)) = c(a) \\
+        & u(\mathrm{node}(l,r)) = f(u(l), u(r))
+        \end{aligned} $$
+        となります。
+        </p>
+        <div align="center"> <img width="100%" src="fig/btree_catamorphism.png"> </div>
+        </section>
+
+        <section>
+        <h3> 実装例 </h3>
+        <p> 以下の<code>foldT</code>が二分木に対するcatamorphismです。</p>
+<pre><code data-trim class="haskell" contenteditable>import Prelude hiding (sum,product)
+
+data BTree a = Leaf a | Node (BTree a) (BTree a) deriving (Show,Eq)
+
+foldT :: (b -> b -> b) -> (a -> b) -> BTree a -> b
+foldT f c = u
+  where
+  u (Leaf a) = c a
+  u (Node l r) = f (u l) (u r)
+
+-- Lambekの補題より
+-- x == foldT Node Leaf x
+-- が成立します。
+
+size    = foldT (+) (const 1)
+sum     = foldT (+) id
+product = foldT (*) id
+</code></pre>
+        </section>
 			</div>
 		</div>
 
