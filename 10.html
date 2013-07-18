@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+    <title>圏論勉強会 第10回 @ ワークスアプリケーションズ</title>
+
+		<meta name="description" content="Seminar of category theory">
+    <meta name="author" content="Koichi Nakamura">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+    <meta http-equiv="X-UA-Compatible" CONTENT="IE=EmulateIE7" />
+
+		<!-- For syntax highlighting -->
+    <link rel="stylesheet" href="plugin/highlight/styles/github.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+        }
+      });
+    </script>
+
+    <style type="text/css">
+      <!--
+      div.definition {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 4px solid #333333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      div.theorem {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 4px solid #333333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      div.equation {
+        margin: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 2px solid #C0C0C0;
+      }
+      div.example {
+        margin: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 2px solid #C0C0C0;
+      }
+      --> 
+    </style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+        <section>
+        <h1>圏論勉強会<br>第10回</h1>
+        <h3>@ワークスアプリケーションズ</h3>
+        <small> 中村晃一 <br> 2013年7月18日</small>
+        </section>
+
+        <section>
+        <h3>謝辞</h3>
+        <p>
+        この勉強会の企画，会場設備の提供をして頂きました<br>
+        &#12849; ワークスアプリケーションズ様<br>
+        にこの場をお借りして御礼申し上げます。
+        </p>
+        </section>
+
+        <section>
+        <h3> この会について </h3>
+        <ul>
+          <li> <span style="color:red">圏論(category theory)</span>を題材にいろんなことを学びます。</li>
+          <li> 分かり易さを重視して初歩的な例を多用します。</li>
+          <li> 関数型言語の経験がある方がより楽しめると思います。資料中では主にHaskellを使います。 </li>
+          <li> 中高生も数人見ているらしいのでプログラミングと関係が浅い内容も取り上げます。</li>
+          <li> この資料は<a href="http://nineties.github.com/category-seminar/">http://nineties.github.com/category-seminar</a>に置いてあります。</li>
+        </ul>
+        </section>
+
+        <section>
+        <h2> 第10回 </h2>
+        <h3> 始代数・終余代数と不動点,型函手 </h3>
+        </section>
+
+        <section>
+        $$ \newcommand\banana[1]{{(\hspace{-.2em}|#1|\hspace{-.2em})}} $$
+        </section>
+
+        <section>
+        <h3> 第10回の内容 </h3>
+        <p>
+        第7・8回に紹介した<span style="color:red">始代数・終余代数</span>と前回紹介した<span style="color:red">不動点意味論</span>の関連について説明します。データ型と関係の深い函手である,型函手というものの紹介をします。
+        </p>
+        </section>
+
+        <section>
+        <h3> 始代数・終余代数と不動点 </h3>
+        </section>
+
+        <section>
+        <h3> 復習: Lambekの補題 </h3>
+        <div class="theorem">
+        <p>
+        $(T,\mathrm{in})$が$F$始代数ならば$\mathrm{in}$は同型射、すなわち
+        $$ \color{red}{T \cong F(T)} $$
+        である。
+        </p>
+        <div align="center"> <img width="40%" src="fig/lambek_lemma2.png"> </div>
+        </div>
+        <p class="fragment">
+        これは<span style="color:red">対象$T$が自己函手$F$の不動点</span>であるという事を表します。
+        双対性により,終余代数についても同じ事が言えます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 始代数・終余代数は不動点 </h3>
+        <div class="theorem">
+        <p>
+        圏$\mathbf{C}$,自己函手$F:\mathbf{C}\rightarrow\mathbf{C}$について、
+        <ul>
+          <li> $F$始代数が存在するならば、それは$F$の不動点である。</li>
+          <li> $F$終余代数が存在するならば、それは$F$の不動点である。</li>
+        </ul>
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <p>
+        以後,$F$始代数と終余代数を区別する為に,始代数を<span style="color:red">$\mu F$</span>,終余代数を<span style="color:red">$\nu F$</span>と表します。
+        </p>
+        <div align="center"> <img width="90%" src="fig/muF_nuF.png"> </div>
+        </section>
+
+        <section>
+        <h3> 簡単な応用 </h3>
+        <p>
+        <span style="color:red">函手$F$に不動点が存在しなければ始代数も終余代数も存在しない</span>という事が言えます。
+        </p>
+        <div class="fragment">
+        <p>
+        有名な例は冪集合函手$\mathcal{P}: \mathbf{Sets}\rightarrow \mathbf{Sets}$です。これは
+        </p>
+        <ul>
+          <li> 集合$X$を冪集合$\mathcal{P}(X)$に移す。</li>
+          <li> 関数$f: X\rightarrow Y$を$\mathcal{P}(f): \mathcal{P}(X) \ni A \longmapsto f(A) \in \mathcal{P}(Y)$に移す。</li>
+        </ul>
+        <p>
+        という函手ですが、カントールの定理(第5回)より任意の集合$A$に対して
+        $$ A \not\cong \mathcal{P}(A) $$
+        なので,$\mu\mathcal{P}$も$\nu\mathcal{P}$も存在しません。
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> 復習: 連続関数$F$の最小不動点 </h3>
+        <p>
+        cpo D上の連続関数$F:D\rightarrow D$の最小不動点は
+        $$ \bot \leqq F(\bot) \leqq F^2(\bot) \leqq F^3(\bot) \leqq $$
+        という$\omega$-chainの余極限
+        $$ \lim_{\stackrel{\longrightarrow}{i \in\omega}}F^i(\bot) $$
+        として具体的に構成出来るのでした。
+        </p>
+        </section>
+
+        <section>
+        <h3> 始代数は最小不動点 </h3>
+        <p>
+        「cpo上の連続関数の最小不動点の構成方法」を一般化する事で(圏と$F$が良い性質を持つ場合には)$F$始代数の具体的な構成を与える事が出来ます。
+        <p>
+        <p class="fragment">
+        この意味で$F$始代数$\mu F$は<span style="color:red">$F$の最小不動点(least fixedpoint)</span>と呼ばれます。
+        </p>
+        </section>
+
+        <section>
+        <h3> initial $\omega$-chain </h3>
+        <p>
+        $\mathbf{C}$が始対象$0$をもつ場合,任意の自己函手$F:\mathbf{C}\rightarrow\mathbf{C}$に対して
+        $$ !: 0 \rightarrow F(0) $$
+        という射が<span style="color:red">唯一</span>に定まります。さらに$F$によって移すと
+        $$ F(!): F(0)\rightarrow F^2(0) $$
+        という射になります。
+        </p>
+        <p>
+        これを繰り返して出来る列を$F$の<span style="color:red">initial $\omega$-chain</span>と呼びます。
+        </p>
+        <div align="center"> <img width="100%" src="fig/initial_omega_chain.png"> </div>
+        </section>
+
+        <section>
+        <h3> initial $\omega$-chainの例1 </h3>
+        <p>
+        cpoの始対象は最小値$\bot$であり,射は順序$\leqq$ですから,任意の自己函手$F$について
+        $$ \bot \leqq F(\bot) \leqq F^2(\bot) \leqq F^3(\bot) \leqq $$
+        がinitial $\omega$-chainです。
+        </p>
+        </section>
+
+        <section>
+        <h3> initial $\omega$-chainの例2 </h3>
+        <p>
+        圏を$\mathbf{Sets}$,函手を$F(X) = X + 1$とした場合を考えます。
+        </p>
+        <div class="fragment">
+        <p>
+        $\mathbf{Sets}$において始対象$0$は空集合,終対象$1$は一点集合,余積$A+B$は$A$,$B$の直和でしたので,<span style="color:red">$F^i(0)$は要素数が$i$の集合</span>となります。<span style="font-size:60%">($0 + 1 \cong 1$, $(A+B)+C\cong A+B+C$に注意。)</span>
+        </p>
+        <div align="center"> <img width="90%" src="fig/initial_omega_chain2.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <h3> initial $\omega$-chainの例2 </h3>
+        <p>
+        また,$!$は空関数でした。さらに$f: X\rightarrow Y$に対して$F(f): X + 1 \rightarrow Y + 1$は
+        $$ F(f) = f + 1_1 $$
+        と定義されるので,$F^i(!)$の様子は下図の様になります。
+        </p>
+        <div align="center"> <img width="90%" src="fig/initial_omega_chain3.png"> </div>
+        </section>
+
+        <section>
+        <h3> 定理 </h3>
+        <div class="theorem">
+        <p>
+        圏$\mathbf{C}$が始対象を持つ$\omega$余完備な圏であるとする。自己函手$F: \mathbf{C}\rightarrow\mathbf{C}$が$\omega$余連続ならば,$F$始代数が存在し
+        $$ \mu F = \lim_{\stackrel{\longrightarrow}{i \in \omega}} F^i(0) $$
+        である。
+        </p>
+        </div>
+        <p style="font-size:80%">
+        注:「$\omega$余完備」の条件は「$F$のinitial $\omega$-chainの余極限が存在」、
+        「$\omega$余連続」の条件は「$F$のinitial $\omega$-chainの余極限を保つ」と弱めても良いです。
+        </p>
+        </section>
+
+        <section>
+        <p style="font-size:80%">
+        $\displaystyle \mu F = \lim_{\stackrel{\longrightarrow}{i \in \omega}}F^i(0) $ とおいて,これが始代数である事を示します。
+        </p>
+        <p style="font-size:80%">
+        【証明】<br>
+        $F$が$\omega$余連続であることより,
+        $$ F(\mu F) = F(\lim_{\rightarrow}F^i(0)) \cong \lim_{\rightarrow}F^{i+1}(0) = \mu F\quad \cdots (1)$$
+        である。
+        ここで,$F$のinitial $\omega$-chainの余極限の錐を$(\mu F, q_i)$とおく。すると,$(F(\mu F), F(q_{i-1}))$(但し$0$から$F(\mu F)$の射は$!$)もinitial $\omega$-chainを底とする錐となるが,$(1)$よりこれも余極限の錐である。
+        </p>
+        <div align="center"> <img width="90%" src="fig/initial_algebra_is_least_fixedpoint3.png"> </div>
+        </section>
+
+        <section>
+        <p style="font-size:80%">
+        従って$(F(\mu F), F(q_{i-1}))$から$(\mu F, q_i)$への射が唯一つ存在するので,これを$\mathrm{in}$と呼ぶ事にする。すなわち,$\mathrm{in}$は任意の$i \in \omega$に対して
+        $$ q_{i+1} = \mathrm{in}\circ F(q_i) \quad\cdots (2)$$
+        を満たす。この$(\mu F, \mathrm{in})$の組が$F$始代数となる事を示せば良い。<br>
+        </p>
+        <div align="center"><img width="40%" src="fig/initial_algebra_is_least_fixedpoint4.png"> </div>
+        </section>
+
+        <section>
+        <p style="font-size:80%">
+        ここで,$F$代数$x: F(X)\rightarrow X$を任意に取ると
+        $$ (X, x\circ F(x)\circ \cdots\circ F^{i-1}(x)\circ F^i(!_X)) $$
+        がinitial $\omega$-chainを底とする錐をなす。これを$(X, x_i)$と置く。
+        </p>
+        <div align="center"><img width="90%" src="fig/initial_algebra_is_least_fixedpoint5.png"> </div>
+        </section>
+
+        <section>
+        <p style="font-size:80%">
+        従って全ての$i \in \omega$について
+        $$ u\circ q_i = x_i $$
+        を満たす$u: \mu F\rightarrow X$が唯一つ存在する。すると
+        $$ u\circ \mathrm{in}, x\circ F(u): F(\mu F)\rightarrow X$$
+        という2つの射が得られるが(2)よりこれらは余極限錐$(F(\mu F), F(q_{i-1}))$から$(X, x_i)$への射となり,そのような射が唯一である事から
+        $$ u\circ \mathrm{in} = x\circ F(u) $$
+        を満たす。逆に$v \circ \mathrm{in} = x\circ F(v)$を満たす$v: \mu F\rightarrow X$が存在するならば,以上の議論を逆に辿って$u = v$を得る。従って,
+        $$ u\circ \mathrm{in} = x\circ F(u) $$
+        を満たす$u$が唯一つ存在する事が示されたので,$(\mu F,\mathrm{in})$は始代数である。<span style="float:right">□</span>
+        </p>
+        </section>
+
+        <section>
+        <h3> 終余代数は最大不動点 </h3>
+        <div class="theorem">
+        <p>
+        圏$\mathbf{C}$が終対象を持つ$\omega^{\mathrm{op}}$完備な圏であるとする。自己函手$F:\mathbf{C}\rightarrow\mathbf{C}$が$\omega^{\mathrm{op}}$連続ならば,$F$終余代数が存在し
+        $$ \nu F = \lim_{\stackrel{\longleftarrow}{i \in \omega}} F^i(1) $$
+        </p>
+        </div>
+        <p>
+        始代数の双対が終余代数ですので、自動的にこの定理を得ます。
+        つまり,以下の$\omega^{\mathrm{op}}$-chainの極限が終余代数となります。
+        </p>
+        <div align="center"> <img width="80%" src="fig/terminal_omegaop_chain.png"> </div>
+        </section>
+
+        <section>
+        <h3> 何が嬉しいのか？ </h3>
+        <p>
+        前回の不動点意味論の所でも説明しましたが,ある概念の「具体的な構成方法を得る」事が出来ると
+        </p>
+        <ul>
+          <li> その概念の理解が深まる(特に直感的な理解を得られる)。</li>
+          <li> その構成方法に基づく証明が可能になる。 </li>
+        </ul>
+        <p>
+        などの有り難みがあります。
+        </p>
+        </section>
+
+        <section>
+        <h3> Haskellでの例 </h3>
+        <p>
+        データ型が函手の不動点であるという事を理解する為に、少しコードを書いてみます。
+        </p>
+<pre><code data-trim class="haskell" contenteditable>
+
+
+
+
+
+
+
+
+
+</code></pre>
+        </section>
+
+        <section>
+        <p>
+        前回紹介した以下のpdfに様々な例も含めて非常に詳しく解説がありますので、是非参照して下さい。
+        </p>
+        <ul>
+        <li>
+        <a style="font-size:80%" href="https://www.tu-braunschweig.de/Medien-DB/iti/survey_full.pdf">Jiri Adamek他"Initial algebras and terminal coalgebras: a survey" </a></li>
+        </li>
+        </ul>
+        </section>
+
+        <section>
+        <h3> 型函手 </h3>
+        </section>
+
+        <section>
+        <h3> 型函手とは？ </h3>
+        <p>
+        データ型に関係する概念として「型函手」というものがあります。
+        </p>
+        <div class="fragment">
+        <p>
+        例えば,
+        </p>
+        <ul>
+          <li> 型$A$をリスト型$[A]$ </li>
+          <li> 関数$f$を$\mathrm{map}\ f$ </li>
+        </ul>
+        <p>
+        に対応させる事は函手となりますが,これが<span style="color:red">型函手(type functor)</span>の例です。
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <p>
+        型函手はcatamorphismに基づいて定義する事が可能ですので、今回はその方法とそこから導出されるプログラム運算の規則に紹介をします。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        積圏$\mathbf{D}\times\mathbf{C}$から$\mathbf{C}$への函手
+        $$ F: \mathbf{D}\times\mathbf{C}\rightarrow\mathbf{C} $$
+        が型函手の材料となります。ドメインが積圏である函手を<span style="color:red">双函手(bifunctor)</span>などと言います。
+        </p>
+        <div class="fragment">
+        <p>
+        例えば
+        $$ F(X, Y) = 1 + X\times Y$$
+        などが双函手の例です。これは以下のような函手です。
+        </p>
+        <ul>
+          <li> 対象$(X,Y)$を対象$1 + X\times Y$に移す。</li>
+          <li> 射$(f,g)$を射$1 + f\times g$に移す。</li>
+        </ul>
+        </div>
+        </section>
+
+        <section>
+        <p>
+        双函手$F: \mathbf{D}\times\mathbf{C}\rightarrow\mathbf{C} $の<span style="color:red">第一引数を対象$A$に固定</span>すると$\mathbf{C}$上の自己函手が出来ます。これを
+        $$ F_A: \mathbf{C} \rightarrow \mathbf {C}$$
+        と表す事にします。
+        </p>
+        <p class="fragment">
+        例えば,$F(X,Y) = 1 + X\times Y$とした場合
+        $$ F_A(X) = 1 + A\times X $$
+        という自己函手が得られます。すると「$F_A$の始代数$=$$A$型のリスト」のリストとなります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 型函手 </h3>
+        <div class="definition">
+        <p>
+        双函手$F:\mathbf{D}\times\mathbf{C}\rightarrow\mathbf{C}$を,任意の$\mathbf{D}$の対象$A$に対して$F_A$の始代数$(T_A,\mathrm{in}_A)$が存在するものとする。
+        </p>
+        <p>
+        この時,以下の対応$T$は自己函手$\mathbf{C}\rightarrow\mathbf{C}$となり,これを$F$から導出される<span style="color:red">型函手(type functor)</span>と言う。
+        </p>
+        <ul>
+          <li> 対象$A$を対象$T_A$に移す。 </li>
+          <li> 射$f:A\rightarrow B$を$T(f) = \banana{\mathrm{in}_B\circ F(f,1_B)}$に移す。 </li>
+        </ul>
+        </div>
+        <div align="center"> <img width="60%" src="fig/type_functor.png"> </div>
+        </section>
+
+        <section>
+        <h3> 例 </h3>
+        <div style="font-size:80%">
+        <p> $T(f) = \banana{\mathrm{in}_B\circ F(f,1_B)}$の部分がよく解らないと思うので具体例を見てみます。</p>
+        <p class="fragment">
+        $$ F(A,X) = 1 + A\times X $$
+        と置くと,$T_A$は$A$型のリストに相当します。すると
+        $$ T(f) = \banana{\mathrm{in}\circ F(f,1)} = \banana{[\mathrm{nil},\mathrm{cons}]\circ (1 + f\times 1)} = \banana{[\mathrm{nil},\mathrm{cons}\circ (f\times 1)]}$$
+        すなわち,$T(f) = \mathrm{foldr}\ \mathrm{nil}\ (\mathrm{cons}\circ (f\times 1))$となります。これが$\mathrm{map}\ f$と等しくなる事を確認しましょう。
+        </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> 復習: catamorphismの反射則,融合則 </h3>
+        <p style="font-size:80%">
+        catamorphismは始対象からの射ですので,今の法則がそのまま成り立ちます。
+        <div class="theorem">
+        <p>
+        $(T,\mathrm{in})$が$F$始代数ならば
+        $$ \banana{\mathrm{in}} = 1_T \quad\text{(反射則)}$$
+        また$h\circ f=g\circ F(h)$が成り立つならば
+        $$h\circ\banana{f}=\banana{g} \quad\text{(融合則)}$$
+        </p>
+        </div>
+        <div align="center"> <img width="70%" src="fig/cata_reflection_fusion.png"> </div>
+        </section>
+
+        <section>
+        <h3> 型函手の融合則 </h3>
+        <p> $T$が函手である事を示す前に,以下の法則を確認します。</p>
+        <div class="theorem">
+          $$ \banana{f}\circ T(g) = \banana{f\circ F(g,1)} $$
+        </div>
+        <p style="font-size:70%">
+        [証明]<br>
+        双函手であることより$ f\circ F(g,\banana{f}) = f\circ F(g,\banana{f}) $を変形して
+        $$ f\circ F(1,\banana{f})\circ F(g,1) = f\circ F(g,1)\circ F(1,\banana{f}) $$
+        を得る。するとcatamorphismの定義より
+        $$ \banana{f}\circ\mathrm{in}\circ F(g,1) = f\circ F(g,1)\circ F(1,\banana{f}) $$
+        となる。これにcatamorphismの融合則を用いて
+        $$ \banana{f}\circ\banana{\mathrm{in}\circ F(g,1)} = \banana{f\circ F(g,1)} $$
+        すなわち
+          $$ \banana{f}\circ T(g) = \banana{f\circ F(g,1)} $$
+        となる。<span style="float:right">□</span>
+        </p>
+        </section>
+
+        <section>
+        <h3> 函手である事の証明 </h3>
+        <p style="font-size:80%">
+        【恒等射を保つ事】<br>
+        $ F(1,1) $は積圏の恒等射なので反射則より,$$T(1_A) = \banana{\mathrm{in}\circ 1} = \banana{\mathrm{in}} = 1_{T_A}$$
+        【合成射を保つ事】<br>
+        型函手の融合則を用いて
+        $$\begin{aligned}
+        T(f)\circ T(g) &= \banana{\mathrm{in}\circ F(f,1)}\circ T(g)\\
+                       &= \banana{\mathrm{in}\circ F(f,1)\circ F(g,1)} \\
+                       &= \banana{\mathrm{in}\circ F(f\circ g,1)} \\
+                       &= T(f\circ g)
+        \end{aligned} $$
+        <span style="float:right">□</span>
+        </p>
+        </section>
+
+        <section>
+        <h3> 練習問題 </h3>
+        <p>
+        練習として以下の様な事をやってみると良いと思います。
+        </p>
+        <ul>
+          <li> 二分木などの型函手及び融合則の導出 </li>
+          <li> $\mathrm{map}\ f\circ\mathrm{map}\ g = \mathrm{map}\ (f\circ g)$などの法則の導出。</li>
+        </ul>
+        </section>
+
+        <section>
+        <h3> 第10回はここで終わります </h3>
+        <p>
+        お疲れ様でした。<br>
+        次回は冪対象という新たな概念を紹介した後,Curry-Howard-Lambek対応というものの紹介をしたいと思います。
+        </p>
+        </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+        rollingLinks: false,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+      Reveal.addEventListener( 'slidechanged', function( event ) {
+        MathJax.Hub.Rerender(event.currentSlide);
+      });
+
+		</script>
+
+	</body>
+</html>
