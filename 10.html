@@ -355,20 +355,19 @@
 <pre><code data-trim class="haskell" contenteditable>{-# LANGUAGE DeriveFunctor, TypeSynonymInstances, FlexibleInstances #-}
 import Prelude hiding (succ, sum)
 
--- Haskellでは、以下の様に定義すると「函手fの最小不動点」を得る事が出来ます。
--- また、Haskellでは最小不動点と最大不動点は(ほぼ)一致します。
+-- Haskellでは、以下のFixを使うと「函手fの最小不動点」を得る事が出来ます。
+-- また、Haskellでは最小不動点と最大不動点は(細い事を気にしなければ)一致します。
 -- 結局始代数・終余代数は以下のFixで作る事が出来ます。
 --
 -- 以下の定義は Fix f = f (Fix f) という不動点の等式に対応します。
 newtype Fix f = In { out :: f (Fix f) }
 
--- F始代数のcatamorphismの図式から
--- (cata phi) . in = phi . F(cata phi)
--- が成り立ちます。inの逆射を右から掛けると
--- cata phi = phi . F(cata phi) . in^(-1)
--- となりますが、これをそのままコードにすると
--- 以下の様になります。
-
+-- F始代数の定義より
+-- u . in = phi . F(u)
+-- を満たすuはphiに対して一意に定まります。これにinの逆射を右から掛けると
+-- u = phi . F(u) . in^(-1)
+-- となるので,u = cata phiとしてそのままコードにすると以下のような汎用的な
+-- 関数を得ます。
 cata :: Functor f => (f a -> a) -> Fix f -> a
 cata phi = phi . fmap (cata phi) . out
 
@@ -422,7 +421,7 @@ instance Show a => Show (List a) where
         phi Nil = []
         phi (Cons a x) = a:x
 
--- 畳み込みの例。
+-- 畳み込みの例。foldrに相当します。
 sum = cata phi
     where
     phi Nil = 0
