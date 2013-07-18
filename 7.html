@@ -1001,6 +1001,11 @@ foldN f c = u
   u 0 = c
   u n = f (u (n-1))
 
+
+-- 反射則より(xが自然数なら)
+-- x == foldN (+ 1) 0 x
+-- が成立します。
+
 -- foldNでの他の関数の実装例
 add x = foldN (+ 1) x
 mul x = foldN (+ x) 0
@@ -1052,7 +1057,7 @@ foldr f c = u
   u [] = c
   u (a:as) = f a (u as)
 
--- Lambekの補題より
+-- 反射則より
 -- x == foldr (:) [] x
 -- が成立します。
 
@@ -1089,7 +1094,7 @@ foldT f c = u
   u (Leaf a) = c a
   u (Node l r) = f (u l) (u r)
 
--- Lambekの補題より
+-- 反射則より
 -- x == foldT Node Leaf x
 -- が成立します。
 
