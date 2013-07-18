@@ -302,23 +302,62 @@
         <p style="font-size:80%">
         ここで,$F$代数$x: F(X)\rightarrow X$を任意に取ると
         $$ (X, x\circ F(x)\circ \cdots\circ F^{i-1}(x)\circ F^i(!_X)) $$
-        がinitial $\omega$-chainを底とする錐をなす。これを$(X, x_i)$と置く。
+        がinitial $\omega$-chainを底とする錐をなす。これを$(X, x_i)$と置くと
+        $x_0 = !_X$であり,
+        $$ \begin{aligned}
+        x_{i+1} &= x\circ F(x)\circ \cdots\circ F^i(x)\circ F^{i+1}(!_X)  \\
+                &= x\circ F(x\circ \cdots F^{i-1}(x)\circ F^i(!_X))  \\
+                &= x\circ F(x_i) \quad \cdots (3)
+        \end{aligned} $$
+        が成り立つ。
         </p>
         <div align="center"><img width="90%" src="fig/initial_algebra_is_least_fixedpoint5.png"> </div>
         </section>
 
         <section>
         <p style="font-size:80%">
-        従って全ての$i \in \omega$について
-        $$ u\circ q_i = x_i $$
-        を満たす$u: \mu F\rightarrow X$が唯一つ存在する。すると
-        $$ u\circ \mathrm{in}, x\circ F(u): F(\mu F)\rightarrow X$$
-        という2つの射が得られるが(2)よりこれらは余極限錐$(F(\mu F), F(q_{i-1}))$から$(X, x_i)$への射となり,そのような射が唯一である事から
-        $$ u\circ \mathrm{in} = x\circ F(u) $$
-        を満たす。逆に$v \circ \mathrm{in} = x\circ F(v)$を満たす$v: \mu F\rightarrow X$が存在するならば,以上の議論を逆に辿って$u = v$を得る。従って,
-        $$ u\circ \mathrm{in} = x\circ F(u) $$
-        を満たす$u$が唯一つ存在する事が示されたので,$(\mu F,\mathrm{in})$は始代数である。<span style="float:right">□</span>
+        従って$(X,x_i)$が錐であることより,錐$(\mu F,q_i)$への射$u$,すなわち
+        $$ u\circ q_i = x_i \quad\cdots (4) $$
+        が任意の$i \in \omega$について成立するような$u: X\rightarrow \mu F$が唯一つ存在する。
         </p>
+        <div align="center"><img width="60%" src="fig/initial_algebra_is_least_fixedpoint6.png"> </div>
+        <p style="font-size:80%">
+        <img align="right" width="30%" src="fig/initial_algebra_is_least_fixedpoint7.png">
+        すると右図の様な四角形が出来るが,これが可換である事つまり
+        $$ u\circ\mathrm{in} = x\circ F(u)$$
+        とこれを満たす$u$が他には存在しない事を示せば$(\mu F, \mathrm{in})$が始代数となる事の証明が完了する。
+        </p>
+        </section>
+
+        <section>
+        <p style="font-size:80%">
+        まず$(3),(4)$より
+        $$ x\circ F(u) \circ F(q_{i-1}) = x\circ F(u\circ q_{i-1}) = x\circ F(x_{i-1}) = x_i$$
+        が成り立つ。また$(2),(4)$より
+        $$ u\circ\mathrm{in}\circ F(q_{i-1}) = u\circ q_i = x_i $$
+        も成り立つ。すると下図の様に,$u\circ\mathrm{in}$と$x\circ F(u)$は錐$(F(\mu F),F(q_{i-1}))$から錐$(X,x_i)$への射となるが$(F(\mu F),F(q_{i-1}))$も極限錐であることより,そのような射は唯一に定まる。すなわち
+        $$ u\circ\mathrm{in} = x\circ F(u)$$
+        が成り立つ。
+        <div align="center"><img width="60%" src="fig/initial_algebra_is_least_fixedpoint8.png"> </div>
+        </p>
+        </section>
+
+        <section>
+        <p style="font-size:80%">
+        一方
+        $$ v\circ\mathrm{in} = x\circ F(v)$$
+        を満たす$v: \mu F \rightarrow X$が存在すると仮定すると,両辺に$F(q_i)$を掛けて$(2)$を用いる事により
+        $$ v\circ q_{i+1} = x\circ F(v)\circ F(q_i) = x\circ F(v\circ q_i) $$
+        となる。するともし$v\circ q_i = x_i$であるならば$(3)$により
+        $$ v\circ q_{i+1} = x\circ F(x_i) = x_{i+1} $$
+        となる。ここで,$q_0$,$x_0$が共に始対象からの射であることより$ v\circ q_0 = x_0 $
+        であるから,帰納的に任意の$i\in\omega $に対して
+        $$ v\circ q_i = x_i$$
+        が成り立つ。ところで$(4)$が任意の$i\in\omega$について成り立つ$u$は唯一に定まるのであったから,
+        $ u = v $
+        である。以上より任意の$x:F(X)\rightarrow X$に対して
+        $$ u\circ\mathrm{in} = x\circ F(u)$$
+        を満たす$u$が一意に定まる事が示されたので$(\mu F, \mathrm{in})$は始代数である。<span style="float:right">□</span>
         </section>
 
         <section>
@@ -352,8 +391,7 @@
 
         <section>
         <h3> Haskellでの実装例 </h3>
-<pre><code data-trim class="haskell" contenteditable>
-{-# LANGUAGE DeriveFunctor, TypeSynonymInstances, FlexibleInstances #-}
+<pre><code data-trim class="haskell" contenteditable>{-# LANGUAGE DeriveFunctor, TypeSynonymInstances, FlexibleInstances #-}
 import Prelude hiding (succ,sum)
 
 -- Haskellでは、以下のFixを使うと「函手fの最小不動点」を得る事が出来ます。
