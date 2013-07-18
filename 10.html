@@ -352,12 +352,13 @@
 
         <section>
         <h3> Haskellでの実装例 </h3>
-<pre><code data-trim class="haskell" contenteditable>{-# LANGUAGE DeriveFunctor, TypeSynonymInstances, FlexibleInstances #-}
-import Prelude hiding (succ, sum)
+<pre><code data-trim class="haskell" contenteditable>
+{-# LANGUAGE DeriveFunctor, TypeSynonymInstances, FlexibleInstances #-}
+import Prelude hiding (succ,sum)
 
 -- Haskellでは、以下のFixを使うと「函手fの最小不動点」を得る事が出来ます。
 -- また、Haskellでは最小不動点と最大不動点は(細い事を気にしなければ)一致します。
--- 結局始代数・終余代数は以下のFixで作る事が出来ます。
+-- 結局始代数・終余代数は全て以下のFixで作る事が出来ます。
 --
 -- 以下の定義は Fix f = f (Fix f) という不動点の等式に対応します。
 newtype Fix f = In { out :: f (Fix f) }
@@ -368,8 +369,16 @@ newtype Fix f = In { out :: f (Fix f) }
 -- u = phi . F(u) . in^(-1)
 -- となるので,u = cata phiとしてそのままコードにすると以下のような汎用的な
 -- 関数を得ます。
+
 cata :: Functor f => (f a -> a) -> Fix f -> a
 cata phi = phi . fmap (cata phi) . out
+
+-- 同様に
+-- out . u = F(u) . psi
+-- を満たすuがpsiに対応するanamorphismなので、
+-- 以下のコードを得ます。
+ana :: Functor f => (a -> f a) -> a -> Fix f
+ana psi = In . fmap (ana psi) . psi
 
 -- ## 自然数の導出 ##
 
@@ -392,13 +401,20 @@ instance Show Nat where
         phi Zero = 0
         phi (Succ x) = x + 1
 
--- 畳み込みの例。 
+-- foldの例。 
 -- > sqrt2 (succ (succ (succ zero)))
 -- 1.4142156862745097
 sqrt2 = cata phi
     where
     phi Zero = 2
     phi (Succ x) = (x+2/x)/2
+
+-- unfoldの例。
+-- > ilog2 12348712
+-- 3
+ilog2 = ana psi
+    where
+    psi x = if x `mod` 2 == 1 then Zero else Succ (x `div` 2)
 
 -- ## リストの導出 ##
 
@@ -421,11 +437,18 @@ instance Show a => Show (List a) where
         phi Nil = []
         phi (Cons a x) = a:x
 
--- 畳み込みの例。foldrに相当します。
+-- foldの例。
 sum = cata phi
     where
     phi Nil = 0
     phi (Cons a x) = a + x
+
+-- unfoldの例。
+-- > natFrom 10
+-- [10,11,12,13,14,15,....
+natFrom = ana psi
+    where
+    psi n = Cons n (n+1)
 </code></pre>
         </section>
 
