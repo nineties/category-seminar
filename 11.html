@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+    <title>圏論勉強会 第11回 @ ワークスアプリケーションズ</title>
+
+		<meta name="description" content="Seminar of category theory">
+    <meta name="author" content="Koichi Nakamura">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+    <meta http-equiv="X-UA-Compatible" CONTENT="IE=EmulateIE7" />
+
+		<!-- For syntax highlighting -->
+    <link rel="stylesheet" href="plugin/highlight/styles/github.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+        }
+      });
+    </script>
+
+    <style type="text/css">
+      <!--
+      div.definition {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 4px solid #333333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      div.theorem {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 4px solid #333333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      div.equation {
+        margin: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 2px solid #C0C0C0;
+      }
+      div.example {
+        margin: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 2px solid #C0C0C0;
+      }
+      --> 
+    </style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+        <section>
+        <h1>圏論勉強会<br>第11回</h1>
+        <h3>@ワークスアプリケーションズ</h3>
+        <small> 中村晃一 <br> 2013年7月25日</small>
+        </section>
+
+        <section>
+        <h3>謝辞</h3>
+        <p>
+        この勉強会の企画，会場設備の提供をして頂きました<br>
+        &#12849; ワークスアプリケーションズ様<br>
+        にこの場をお借りして御礼申し上げます。
+        </p>
+        </section>
+
+        <section>
+        <h3> この会について </h3>
+        <ul>
+          <li> <span style="color:red">圏論(category theory)</span>を題材にいろんなことを学びます。</li>
+          <li> 分かり易さを重視して初歩的な例を多用します。</li>
+          <li> 関数型言語の経験がある方がより楽しめると思います。資料中では主にHaskellを使います。 </li>
+          <li> 中高生も数人見ているらしいのでプログラミングと関係が浅い内容も取り上げます。</li>
+          <li> この資料は<a href="http://nineties.github.com/category-seminar/">http://nineties.github.com/category-seminar</a>に置いてあります。</li>
+        </ul>
+        </section>
+
+        <section>
+        <h2> 第11回 </h2>
+        <h3> 指数対象・デカルト閉圏 </h3>
+        </section>
+
+        <section>
+        $$ \newcommand\banana[1]{{(\hspace{-.2em}|#1|\hspace{-.2em})}} $$
+        </section>
+
+        <section>
+        <h3> 第11回の内容 </h3>
+        <p>
+        これまでに説明した極限・余極限とは異なる形の普遍性を持つ<span style="color:red">指数対象</span>という概念と、それに基づく<span style="color:red">デカルト閉圏</span>という圏、Curry-Howard-Lambek対応という定理について説明します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 指数対象 </h3>
+        </section>
+
+        <section>
+        <h3> 関数の集合に構造を入れる </h3>
+        <p>
+        第4回に
+        </p>
+        <ul>
+          <li> $\mathrm{Hom}_{\mathbf{Mon}}(A,B)$にもモノイドの構造が入る </li>
+          <li> $\mathrm{Hom}_{\mathbf{Pos}}(A,B)$も半順序集合となる </li>
+        </ul>
+        <p>
+        など、関数の集合にpointwiseに演算・関係を定義して構造を入れるという話題を紹介しました。
+        </p>
+        </section>
+
+        <section>
+        <h3> 指数対象とは </h3>
+        <p>
+        関数の集合に構造を入れてそれ自体を考察の対象にする場合、その集合を関数空間(function space)などと呼びますが、その圏論的な一般化が<span style="color:red">指数対象(exponential object)</span>です。$A$から$B$への指数対象を<span style="color:red">$B^A$</span>と表します。
+        </p>
+        <p class="fragment">
+        また、$\mathrm{Hom}_{\mathbf{C}}(A,B)$は$\mathbf{Sets}$の対象ですが、<br>
+        「$\mathrm{Hom}_{\mathbf{C}}(A,B)$に$\mathbf{C}$の対象と同じ構造を入れたもの」<br>
+        は$\mathbf{C}$の対象である事に注意しましょう。指数対象は<span style="color:red">圏$\mathbf{C}$の中で$\mathrm{Hom}$集合を表現する対象</span>とも言えます。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\mathbf{Sets}$で考える </h3>
+        <p>
+        $\mathbf{Sets}$においては
+        $$ B^A \cong \mathrm{Hom}(A, B) $$
+        なのでとても分り易いです。まずこれを考えて、その後一般化しましょう。
+        </p>
+        <p class="fragment">
+        さて「対象$B^A$は$A$から$B$への射の集合である」という定義は対象の内部構造を述べているので一般化出来ません。対象$B^A$と外部との関係によって定式化する方法を考えます。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        そこで任意の対象$X$から指数対象への射$g: X\rightarrow B^A$がどのように定まるかを考えます。
+        </p>
+        <p class="fragment">
+        $\mathbf{Sets}$で解釈すると,$g$は「$A$から$B$への関数を返す関数」なので任意の$x\in X$と$a \in A$に対して
+        $$ g(x)(a) \in B $$
+        となります。
+        </p>
+        <p class="fragment">
+        つまり$g$は
+        $$ g(x)(a) = f(x, a) $$
+        を満たす関数$f: X\times A \rightarrow B$と一対一に対応します。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        $h\in B^A$を$a \in A$に適用する関数
+        $$ \epsilon: B^A\times A \ni (h,a) \longmapsto h(a) \in B $$
+        を用意すれば、等式$g(x)(a) = f(x, a)$は
+        $$ \epsilon \circ (g\times 1_A) = f$$
+        と表されます。
+        </p>
+        <div align="center"> <img width="50%" src="fig/exponential_in_sets.png"> </div>
+        </section>
+
+        <section>
+        <p>
+        まとめると、$\mathbf{Sets}$における$A$から$B$への指数対象とは
+        集合と関数の組$(B^A, \epsilon)$であり、
+        任意の関数$f: X\times A \rightarrow B$に対して
+        $$ \epsilon \circ (g\times 1_A) = f $$
+        を満たす$g$が唯一に定まる事であると表現出来そうです。
+        </p>
+        <div align="center"> <img width="50%" src="fig/exponential_in_sets.png"> </div>
+        </section>
+
+        <section>
+        <h3> 指数対象の定義 </h3>
+        <div class="definition" style="font-size:90%">
+        <p>
+        $\mathbf{C}$を任意の二対象の積を持つ圏とする。対象と射の組$(B^A, \epsilon)$が$A$から$B$への
+        <span style="color:red">指数対象(exponential)</span>であるとは、任意の対象$X$と射$f: X\times A\rightarrow B$に対して
+        $$ \epsilon\circ (\widetilde{f}\times 1_A) = f $$
+        を満たす$\widetilde{f}: X\rightarrow B^A$が唯一つ存在する事である。また$\epsilon: B^A\times A \rightarrow B$を<span style="color:red">評価射(evaluation map)</span>と呼ぶ。
+        </p>
+        <div align="center"> <img width="30%" src="fig/exponential.png"> </div>
+        </div>
+        <p style="font-size:90%">
+        指数対象は同型を除いて一意となります(練習問題)。
+        </p>
+        </section>
+
+        <section>
+        <h3> カリー化 </h3>
+        <p>
+        $f$を$\widetilde{f}$に変換する事を<span style="color:red">カリー化(currying)</span>と言います。
+        また、カリー化の逆変換を<span style="color:red">非カリー化(uncurrying)</span>と呼び、$\overline{(-)}$と表します。
+        $g$の非カリー化は先ほどの定義より
+        $$ \overline{g} = \epsilon \circ (g\times 1) $$
+        で与えられます。
+        </p>
+        <p>
+        これらは以下の同型対応を与えます。
+        </p>
+        <div class="equation">
+          $$ \widetilde{(-)}: \mathrm{Hom}_{\mathbf{C}}(X\times A, B) \cong \mathrm{Hom}_{\mathbf{C}}(X, B^A): \overline{(-)} $$
+        </div>
+        </section>
+
+        <section>
+        <h3> デカルト閉圏 </h3>
+        <div class="definition">
+          <p>
+          圏$\mathbf{C}$において
+          </p>
+          <ul>
+            <li> 任意の有限個の対象の積が存在する。 <br>
+            つまり、終対象と任意の二対象の積が存在する。(第6回)
+            </li>
+            <li> 任意の対象$A$,$B$について$B^A$が存在する。 </li>
+          </ul>
+          <p>
+          ならば$\mathbf{C}$を<span style="color:red">デカルト閉圏(cartesian closed category)</span>と言う。CCCと略記する事もある。
+          </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> デカルト閉圏の性質 </h3>
+        <p>
+        任意の対象$A$に対して
+        </p>
+        <div class="equation">
+        $$  A^1 \cong A $$
+        </div>
+        <p>
+        任意の対象$A,B,C$に対して
+        </p>
+        <div class="equation">
+        $$ C^{A\times B} \cong (C^B)^A $$
+        </div>
+        <p>
+        が成り立ちます。
+        </p>
+        </section>
+
+        <section>
+        <p style="font-size:80%">
+        【$A^1\cong A$の証明】<br>
+        <img align="right" width="40%" src="fig/exponential_prop1.png">
+        対象$A$から終対象への唯一の射を$!_A$と表す。<br>
+        任意の$f: X\times 1 \rightarrow A$に対して,
+        $$ \pi_1\circ (\widetilde{f}\times 1_1) = f $$
+        を満たす$\widetilde{f}$は
+        $$ \widetilde{f}\times 1_1 = \langle \widetilde{f}\circ\pi_1, !_{X\times 1}\rangle $$
+        を代入して$$\widetilde{f}\circ\pi_1 = f$$を満たす。従って積の普遍性より
+        $$ \widetilde{f} = f\circ \langle 1_{X\times 1}, !_{X\times 1}\rangle $$
+        と$\widetilde{f}$が唯一に定まるので$(A,\pi_1)$が$A^1$と評価射である。
+<span style="float:right">□</span>
+        </p>
+        </section>
+
+        <section>
+        <p style="font-size:70%">
+        【$C^{A\times B}\cong (C^B)^A$の証明】<br>
+        対象$A$から終対象への唯一の射を$!_A$と表す。<br>
+        $C^{A\times B}$の評価射を$\epsilon$とする。
+        $C^B$の評価射を$\varepsilon$とする。
+        </p>
+        <img width="40%" src="fig/exponential_prop2.png">
+        <img width="40%" src="fig/exponential_prop3.png">
+
+        <p style="font-size:70%">
+        ここで積の結合性(第6回)より同型
+        $$\mathrm{assoc}: (X\times Y)\times Z \cong X\times (Y\times Z)$$
+        が存在するので
+        $$ \epsilon' = \epsilon\circ \mathrm{assoc}$$
+        とおく。
+        <div align="center"><img width="50%" src="fig/exponential_prop4.png"></div>
+        </p>
+        </section>
+
+        <section>
+        <img width="40%" align="right" src="fig/exponential_prop5.png">
+        <p style="font-size:70%">
+        この$\epsilon'$をカリー化した射$\widetilde{\epsilon'}: C^{A\times B}\times A \rightarrow C^B$は
+        $$ \varepsilon\circ (\widetilde{\epsilon'}\times 1_B) = \epsilon' $$
+        を満たす事に注意する。<br>
+        ここで$(C^{A\times B}, \widetilde{\epsilon'})$が$(C^B)^A$と同じ普遍性を満たす事を示せば証明が完了する。そこで$f: X\times A \rightarrow C^B$に対して$u: X\rightarrow C^{A\times B}$が存在し
+        $$ \widetilde{\epsilon'}\circ(u\times 1_A) = f$$
+        が成り立つと仮定すると、両辺に$1_B$を掛けて
+        $$ (\widetilde{\epsilon'}\times 1_B)\circ ((u\times 1_A)\times 1_B) = f\times 1_B$$
+        となり、さらに$\varepsilon$を掛けると
+        $$ \epsilon'\circ ((u\times 1_A)\times 1_B) = \varepsilon\circ (f\times 1_B)$$
+        となる。
+        </p>
+        </section>
+
+        <section>
+        <p style="font-size:70%">
+        すると両辺の結合を調整して
+        $$ \epsilon \circ \mathrm{assoc} \circ ((u\times 1_A)\times 1_B)\circ \mathrm{assoc}^{-1} = \varepsilon\circ (f\times 1_B)\circ \mathrm{assoc}^{-1}$$
+        すなわち
+        $$ \epsilon \circ (u\times 1_{A\times B}) = \varepsilon\circ (f\times 1_B)\circ \mathrm{assoc}^{-1}$$
+        となるから、$u$は$\varepsilon\circ (f\times 1_B)\circ \mathrm{assoc}^{-1}$をカリー化したものとして一意に定まる。従って$C^{A\times B}$は$(C^B)^A$の条件を満たすので、そのような対象が同型を除いて一意であることより
+        $$ C^{A\times B} \cong (C^B)^A$$
+        である。<span style="float:right">□</span>
+        </p>
+        </section>
+
+        <section>
+        <h3> もっと良い見方 </h3>
+        <p>
+        $C^{A\times B}\cong (C^B)^A$を直接的に証明しましたが、もっと良い見方があります。
+        </p>
+        <p class="fragment">
+        $\mathrm{Hom}_{\mathbf{C}}(X,Y)$を$\mathrm{C}$内部で表したのが$X^Y$だと思うとこの同型は
+        先ほど紹介した同型
+        $$ \mathrm{Hom}_{\mathbf{C}}(A\times B, C)\cong\mathrm{Hom}_{\mathbf{C}}(A,C^B) $$
+        を$\mathbf{C}$の内部で表したものに他ならないという事が解ります。
+        </p>
+        <p class="fragment">
+        このような事が出来る背景には<span style="color:red">米田の補題</span>という定理がありますが、来週扱う予定です。
+        </p>
+        </section>
+
+        <section>
+        <p> 同様に
+        $$ \begin{aligned}
+        &\mathrm{Hom}_{\mathbf{C}}(A, 1) \cong 1\\
+        & \mathrm{Hom}_{\mathbf{C}}(A, B\times C) \cong \mathrm{Hom}_{\mathbf{C}}(A, B)\times \mathrm{Hom}_{\mathbf{C}}(A, C)
+        \end{aligned} $$
+        に対応して
+        </p>
+        <div class="equation">
+        $$ \begin{aligned}
+        &1^A \cong 1 \\
+        &(B\times C)^A \cong B^A\times C^A
+        \end{aligned} $$
+        </div>
+        <p>
+        が成り立ちます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 分配的な圏 </h3>
+        <p>
+        積と余積を持つ圏$\mathbf{C}$において任意の対象$A,B,C$に対して同型
+        $$ A\times B + A \times C \cong A\times (B + C) $$
+        が成り立つ時その圏は<span style="color:red">分配的(distributive)</span>であると言いますが、デカルト閉圏に関して以下の事実が成り立ちます。
+        </p>
+        <div class="theorem">
+          <p>
+          デカルト閉圏に始対象と任意の$A,B$の余積$A+B$が存在するならば、分配的である。
+          </p>
+        </div>
+        </section>
+
+        <section>
+        <p style="font-size:80%">
+        詳しい証明は来週やります。ただし今まで学んだ定理を使うと、任意の$X$に対して
+        $$\begin{aligned}
+        \mathrm{Hom}(A\times (B+C), X) &\cong \mathrm{Hom}(B+C,X^A) \\
+        &\cong \mathrm{Hom}(B,X^A)\times \mathrm{Hom}(C,X^A) \\
+        &\cong \mathrm{Hom}(A\times B, X)\times\mathrm{hom}(A\times C,X)\\
+        & \cong \mathrm{Hom}(A\times B + A\times C, X)
+        \end{aligned} $$
+        が成り立つという所が証明の本質です。
+        </p>
+        </section>
+
+        <section>
+        <h3> $(-)^A$の函手性 </h3>
+        <div class="theorem">
+        <p>
+        デカルト閉圏$\mathbf{C}$において、対象$A$を固定して
+        </p>
+        <ul>
+          <li> 対象$X$を$X^A$に </li>
+          <li> 射$f$を$\widetilde{f\circ \epsilon}$に
+        </ul>
+        <p>
+        対応させる事は函手$(-)^A: \mathbf{C}\rightarrow\mathbf{C}$となる。
+        </p>
+        </div>
+        <div align="center"><img width="90%" src="fig/exponential_functor.png"></div>
+        </section>
+
+        <section>
+        <p>
+        証明は練習問題としますが、具体例として$\mathbf{Sets}$の場合を考えてみます。
+        </p>
+        <p>
+        $\mathbf{Sets}$における$X^A$は$\mathrm{Hom}(A, X)$の事でした。
+        また評価射$\epsilon$は
+        $$ \epsilon (g,a) = g(a) $$
+        により定義されるので
+        $$ f\circ \epsilon (g,a) = f\circ g(a) $$
+        となります。これをカリー化したものは
+        $$ \widetilde{f\circ\epsilon}(g) = f\circ g$$
+        なので$f^A$は「$f$を左から合成する関数」になります。
+        </p>
+        <p class="fragment">
+        つまり$\mathbf{Sets}$における函手$(-)^A$は($\mathbf{Sets}$から$\mathbf{Sets}$への)共変$\mathrm{Hom}$函手に他なりません。
+        </p>
+        </section>
+
+        <section>
+        <h3> Curry-Howard-Lambek対応 </h3>
+        </section>
+
+        <section>
+        <h3> Curry-Howard-Lambek対応とは </h3>
+        <p>
+        <span style="color:red">Curry-Howard対応</span>とは論理の体系と計算の体系の同型関係を指し、様々なバリエーションが存在します。特に<span style="color:red">Curry-Howard-Lambek対応</span>とは直観主義命題論理、型付き$\lambda$計算、デカルト閉圏の間に同型対応が存在するというものです。
+        </p>
+        </section>
+
+        <section>
+        <h3> 形式的証明 </h3>
+        <p>
+        <span style="color:red">形式的証明(formal proof)</span>とは、
+        証明を論理式の機械的な変形(推論)の列として表す事を言います。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\wedge,\Rightarrow$-論理 </h3>
+        <p>
+        形式的証明の体系には様々なものが存在しますが、ここでは論理記号として$\wedge$と$\Rightarrow$のみを用いる直観主義命題論理の自然演繹と呼ばれる体系を紹介します。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\wedge,\Rightarrow$-論理の論理式 </h3>
+        <ul>
+          <li> 命題変数: $P,Q,R,\cdots$ </li>
+          <li> 論理記号: $P\wedge Q$, $P\Rightarrow Q$ </li>
+        </ul>
+        <p>
+        によって帰納的に構築される論理式が$\wedge,\Rightarrow$論理の論理式です。
+        </p>
+        <p>
+        結合順位は$\wedge$の方が高く、例えば
+        $ P\wedge Q \Rightarrow P$
+        は$(P\wedge Q)\Rightarrow P$の意味です。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\wedge,\Rightarrow$-論理における証明の規則 </h3>
+        <p>
+        前提(論理式の列)$A_0,A_1,\cdots,A_n$の下での$P$の証明を
+        $$ A_0,A_1,\cdots,A_n \vdash P$$
+        と書きます。前提の順序は自由に並べ替えて良いです。<br>
+        この体系では、以下の規則に従って上から下へ証明を書き換えていく事によって求める証明を導出します。
+        ($\Gamma$は$0$個以上の論理式の列)
+        </p>
+        <div style="font-size:80%">
+        $$ \begin{aligned}
+        &\frac{}{\Gamma,A \vdash A}\text{id} \\
+        &\frac{\Gamma\vdash A\quad\Gamma\vdash B}{\Gamma\vdash A\wedge B}\text{$\wedge$-intro}\quad\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash A}\text{$\wedge$-elim1}\quad
+        \frac{\Gamma\vdash A\wedge B}{\Gamma\vdash B}\text{$\wedge$-elim2}\\
+        &\frac{\Gamma,A\vdash B}{\Gamma\vdash A\Rightarrow B}\text{$\Rightarrow$-intro}\quad\frac{\Gamma\vdash A\Rightarrow B\quad \Gamma\vdash A}{\Gamma\vdash B}\text{$\Rightarrow$elim}
+        \end{aligned} $$
+        </div>
+        </section>
+
+        <section>
+        <h3> 証明の導出の例 </h3>
+        <p>
+        例えば$$ \vdash A\Rightarrow (B\Rightarrow A)$$
+        の導出は以下のようになります。
+        </p>
+        <div align="center"><img width="60%" src="fig/natural_deduction_example.png"></div>
+        </section>
+
+        <section>
+        <h3> $\wedge,\Rightarrow$-論理とCCC </h3>
+        <div align="left">
+        <ul>
+          <li> 対象: 論理式 </li>
+          <li> 射: 証明 <br>
+          但し$ A_0,\cdots,A_n \vdash A $
+          に対し射
+          $$ A_0\times \cdots\times A_n \rightarrow A$$
+          を割り当てる。</li>
+        </ul>
+        </div>
+        <p>
+        とすると$\wedge,\Rightarrow$-論理の体系をCCC上で解釈する事が出来ます。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\wedge,\Rightarrow$-論理とCCC </h3>
+        <p> 対応は以下のようになります。 </p>
+        <div style="font-size:70%">
+        $$ \begin{aligned}
+        &\frac{}{\Gamma, A\vdash A}\text{id} \Leftrightarrow \frac{}{\pi_2: \Gamma\times A \rightarrow A} \\ 
+        &\frac{\Gamma\vdash A\quad\Gamma\vdash B}{\Gamma\vdash A\wedge B}\text{$\wedge$-intro} \Leftrightarrow \frac{f:\Gamma \rightarrow A\quad g:\Gamma \rightarrow B}{\langle f,g\rangle: \Gamma \rightarrow A \times B} \\
+        &\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash A}\text{$\wedge$-elim1}\Rightarrow \frac{f:\Gamma \rightarrow A\times B}{\pi_1\circ f: \Gamma\rightarrow A}\\
+        &\frac{\Gamma\vdash A\wedge B}{\Gamma\vdash B}\text{$\wedge$-elim2}\Rightarrow \frac{f:\Gamma \rightarrow A\times B}{\pi_2\circ f: \Gamma\rightarrow B}\\
+        &\frac{\Gamma,A\vdash B}{\Gamma\vdash A\Rightarrow B}\text{$\Rightarrow$-intro} \Rightarrow \frac{f:\Gamma\times A\rightarrow B}{\widetilde{f}:\Gamma\rightarrow B^A}\\
+        &\frac{\Gamma\vdash A\Rightarrow B\quad \Gamma\vdash A}{\Gamma\vdash B}\text{$\Rightarrow$elim}\Rightarrow \frac{f:\Gamma\rightarrow B^A \quad g:\Gamma \rightarrow A}{\epsilon\circ \langle f,g \rangle : \Gamma \rightarrow B}
+        \end{aligned} $$
+        </div>
+        </section>
+
+        <section>
+        <h3> モデル </h3>
+        <p>
+        形式証明の体系には「記号」しか無いわけですが、今の対応によって「記号」に具体的な数学対象である「CCCの対象・射」を割り当てる事が出来ます。
+        この事をCCCはその体系の<span style="color:red">モデル(model)</span>である等と言います。
+        </p>
+        <p>
+        形式体系とモデルの関係に関して、「証明出来るなら真である」という<span style="color:red">健全性(soundness)</span>や「真ならば証明出来る」<span style="color:red">という完全性(completeness)</span>などの重要な性質があります。時間の関係上この勉強会では深く扱えませんが是非テキストを読んでみて下さい。
+        </p>
+        </section>
+
+        <section>
+        <h3> 型付き$\lambda$計算 </h3>
+        <p>
+        $\lambda$計算とは「計算」という概念を数学的に定式化する手法の一つで、関数型言語の基礎にあります。
+        「計算」にもいろいろな考え方がありますが、$\lambda$計算は式(項)を書き換えていくという形式の計算を形式化したものです。
+        </p>
+        </section>
+
+        <section>
+        <h3> 型付き$\lambda$計算の文法・型 </h3>
+        <p>
+        型付き$\lambda$計算の文法及び片付け規則は以下のようになります。これを言語$L$と表す事にします。
+        </p>
+        <div style="font-size:70%">
+        <ul>
+          <li> 基本型: $A,B,C\cdots$ </li>
+          <li> 型: $A, A\rightarrow B, A\times B, \cdots$ </li>
+          <li> 項:
+          $$ \begin{aligned}
+          &x,y,z,\cdots : A \quad \text{$A$型の変数} \\
+          &a,b,c,\cdots : A \quad \text{$A$型の項} \\
+          &(a, b): A\times B \quad (a:A, b:B) \quad \text{$A\times B$型のペア} \\
+          &\pi_1\ c: A \quad (c: A\times B) \quad \text{ペアの第1要素} \\
+          &\pi_2\ c: B \quad (c: A\times B) \quad \text{ペアの第2要素} \\
+          &ca: B \quad (c: A\rightarrow B, a: A) \quad \text{関数適用} \\
+          &\lambda x.b: A\rightarrow B (x: A, b: B) \quad \text{$\lambda$抽象}
+          \end{aligned} $$
+          </li>
+        </ul>
+        </div>
+        </section>
+
+        <section>
+        <h3> $L$上の同値関係 </h3>
+        <p>
+        言語$L$の上にいくつか公理(この場合は同値関係)を追加すると一つの$\lambda$計算の体系$\mathcal{L}$が出来上がります。基本となる関係は以下のものです。
+        $$\begin{aligned}
+        & \pi_1(a,b) = a\quad \pi_2(a,b) = b\quad (\pi_1(c),\pi_2(c)) = c\\
+        & (\lambda x.b)a = b[a/x] \\
+        & \lambda x.cx = c\quad (\text{変数$x$が$c$の中に自由には現れない時})\\
+        & \lambda x.c = \lambda y.c[y/x] \quad(\text{変数$y$が$c$の中に自由には現れない時})
+        \end{aligned}$$
+        ここで$b[a/x]$とは項$b$内の$x$を$a$に置き換えるという意味です。体系$\mathcal{L}$の下で$a = b$となる事を
+        $$ \mathcal{L}\vdash a = b $$
+        と表します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 型付き$\lambda$計算とCCC </h3>
+        <p>
+        $\lambda$計算の体系$\mathcal{L}$が与えられた時に
+        </p>
+        <div align="left">
+        <ul>
+          <li> 対象: $\mathcal{L}$の型 </li>
+          <li> 射: 自由変数を持たない$\lambda$項$c: A\rightarrow B$を関係
+          $$ \mathcal{L}\vdash a = b $$
+          によって同一視した物($[c]$と表す)。 </li>
+        </ul>
+        <div>
+        <p>
+        とすると言語$L$の項にCCC上の対象・射を用いて意味を与える事が出来ます。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        この場合の恒等射・関数合成は
+        $$ \begin{aligned}
+        &1_A = [\lambda x.x] \quad (x: A) \\
+        &g\circ f = [\lambda x. g(fx)] \quad (f:A\rightarrow B,g:B\rightarrow C, x:A)
+        \end{aligned} $$
+        となります。各法則の確認は練習問題とします。
+        </p>
+        <p>
+        また型$A\times B$が積$A\times B$、型$A\rightarrow B$が指数対象$B^A$に対応します。この時
+        $$ \begin{aligned}
+        & \langle [f], [g]\rangle = [\lambda x. (fx, gx)]\\
+        & \pi_1 = [\lambda x.\pi_1\ x] \\
+        & \pi_2 = [\lambda x.\pi_2\ x] \\
+        & \widetilde{[f]} = [\lambda x.\lambda y. f(x,y)] \\
+        & \epsilon = [\lambda x. (\pi_1\ x)(\pi_2\ x)]
+        \end{aligned} $$
+        となります。積・余積に関しての確認は練習問題とします。
+        </p>
+        </section>
+
+        <section>
+        <p>
+        指数対象に関して$\epsilon\circ(\widetilde{[f]}\times 1_A) = [f]$が成り立つという事の証明だけ書いてみます。
+        </p>
+        <p>
+        手書きでやります。後で資料に追記しておきます。
+        </p>
+        <!--:
+        <p style="font-size:70%">
+        【証明】<br>
+        任意の$[f]: X\times A \rightarrow B$に対して
+        $$ \begin{aligned}
+          &\epsilon\circ(\widetilde{[f]}\times 1_A)
+        = &\epsilon \circ \langle \widetilde{[f]}\circ\pi_1, \pi_2\rangle \\
+        = &[\lambda x. (\pi_1\ x)(\pi_2\ x)]\circ[\lambda x. ([\lambda x.\lambda y. f(x, y)]\circ[\lambda x.\pi_1\ x],  [\lambda x.\pi_2\ x])]
+        = &[\lambda x. (\pi_1\ x)(\pi_2\ x)]\circ[\lambda x. ([\lambda y. \pi_1\ f(x,y)], [\lambda x.\pi_2\ x])] \\
+        = &[\lambda z. 
+        -->
+        </p>
+        </section>
+
+        <section>
+        <h3> 何が嬉しいのか？ </h3>
+        <p>
+        この同型対応は、ある分野での発見・手法を他の分野に応用するといった研究方法を可能にします。また、ある論理体系を見つけた時「対応する計算の体系は何か？」などといった研究の指針を与えます。
+        具体的な応用としては定理証明支援系が挙げられます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 第11回はここで終わります </h3>
+        <p>
+        お疲れ様でした。<br>
+        次回は自然性及び随伴という概念の紹介をする予定です。
+        </p>
+        </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+        rollingLinks: false,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+      Reveal.addEventListener( 'slidechanged', function( event ) {
+        MathJax.Hub.Rerender(event.currentSlide);
+      });
+
+		</script>
+
+	</body>
+</html>
