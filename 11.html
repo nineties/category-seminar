@@ -351,7 +351,7 @@
         $C^{A\times B}\cong (C^B)^A$を直接的に証明しましたが、もっと良い見方があります。
         </p>
         <p class="fragment">
-        $\mathrm{Hom}_{\mathbf{C}}(X,Y)$を$\mathrm{C}$内部で表したのが$X^Y$だと思うとこの同型は
+        $\mathrm{Hom}_{\mathbf{C}}(X,Y)$を$\mathrm{C}$内部で表したのが$Y^X$だと思うとこの同型は
         先ほど紹介した同型
         $$ \mathrm{Hom}_{\mathbf{C}}(A\times B, C)\cong\mathrm{Hom}_{\mathbf{C}}(A,C^B) $$
         を$\mathbf{C}$の内部で表したものに他ならないという事が解ります。
@@ -640,28 +640,49 @@
         & \widetilde{[f]} = [\lambda x.\lambda y. f(x,y)] \\
         & \epsilon = [\lambda x. (\pi_1\ x)(\pi_2\ x)]
         \end{aligned} $$
-        となります。積・余積に関しての確認は練習問題とします。
+        となります。積の定義を満たす事の確認は練習問題とします。
         </p>
         </section>
 
         <section>
         <p>
-        指数対象に関して$\epsilon\circ(\widetilde{[f]}\times 1_A) = [f]$が成り立つという事の証明だけ書いてみます。
+        指数対象に関して$\epsilon\circ(\widetilde{f}\times 1_A) = f$が成り立つ$\widetilde{f}$が一意に定まるという事の証明だけ書いてみます。
         </p>
-        <p>
-        手書きでやります。後で資料に追記しておきます。
-        </p>
-        <!--:
-        <p style="font-size:70%">
+        <p style="font-size:60%">
         【証明】<br>
-        任意の$[f]: X\times A \rightarrow B$に対して
+        任意の$f: X\times A\rightarrow B$に対して
+        $$\begin{aligned}
+        \epsilon\circ(\widetilde{f}\times 1_A) &= \epsilon \circ \langle \widetilde{f}\circ\pi_1, \pi_2\rangle \\
+        &= (\lambda x.(\pi_1\ x)(\pi_2\ x))\circ (\lambda y. ((\widetilde{f}\circ\pi_1)y, \pi_2\ y)) \\
+        &= \lambda z.(\lambda x.(\pi_1\ x)(\pi_2\ x))((\lambda y. ((\widetilde{f}\circ\pi_1)y, \pi_2\ y))z) \\
+        &= \lambda z.(\lambda x.(\pi_1\ x)(\pi_2\ x))((\widetilde{f}\circ\pi_1)z, \pi_2\ z) \\
+        &= \lambda z.((\widetilde{f}\circ\pi_1)z)(\pi_2\ z)\\
+        &= \lambda z.((\lambda x. \widetilde{f}(\pi_1\ x))z)(\pi_2\ z)\\
+        &= \lambda z.(\widetilde{f}(\pi_1\ z))(\pi_2\ z)\\
+        &= \lambda z.((\lambda x.\lambda y. f(x,y))(\pi_1\ z))(\pi_2\ z)\\
+        &= \lambda z.(\lambda y. f(\pi_1\ z, y))(\pi_2\ z)\\
+        &= \lambda z. f(\pi_1\ z, \pi_2\ z)\\
+        &= \lambda z. fz\\
+        &= f
+        \end{aligned} $$
+        </p>
+        </section>
+        <section>
+        <p style="font-size:60%">
+        一方$\epsilon\circ(u\times 1_A) = f$が成り立つと仮定すると
         $$ \begin{aligned}
-          &\epsilon\circ(\widetilde{[f]}\times 1_A)
-        = &\epsilon \circ \langle \widetilde{[f]}\circ\pi_1, \pi_2\rangle \\
-        = &[\lambda x. (\pi_1\ x)(\pi_2\ x)]\circ[\lambda x. ([\lambda x.\lambda y. f(x, y)]\circ[\lambda x.\pi_1\ x],  [\lambda x.\pi_2\ x])]
-        = &[\lambda x. (\pi_1\ x)(\pi_2\ x)]\circ[\lambda x. ([\lambda y. \pi_1\ f(x,y)], [\lambda x.\pi_2\ x])] \\
-        = &[\lambda z. 
-        -->
+        &(\epsilon\circ(u\times 1_A))(x,y) = f(x,y)\\
+        \Rightarrow & \epsilon((u \times 1_A)(x,y)) = f(x,y) \\
+        \Rightarrow & \epsilon(ux,y) = f(x,y) \\
+        \Rightarrow & (\lambda x.(\pi_1\ x)(\pi_2\ x))(ux,y) = f(x,y) \\
+        \Rightarrow & (ux)y = f(x,y) \\
+        \Rightarrow & \lambda y.(ux) y = \lambda y.f(x,y) \\
+        \Rightarrow & ux = \lambda y.f(x,y) \\
+        \Rightarrow &\lambda x.ux = \lambda x.\lambda y.f(x,y)\\
+        \Rightarrow & u = \lambda x.\lambda y.f(x,y)
+        \Rightarrow & u = \widetilde{f}
+        \end{aligned}$$
+        より$u$は唯一に定まる。
         </p>
         </section>
 
