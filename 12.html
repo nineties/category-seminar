@@ -139,7 +139,7 @@
         <div align="left">
           函手$F, G: \mathbf{C}\rightarrow\mathbf{D}$間の<span style="color:red">自然変換(<span style="font-size:90%">natural transformation</span>)</span>
         $$ \vartheta: F \rightarrow G$$
-        とは,$\mathbf{D}$の射$\vartheta_X: F(X) \rightarrow G(X)$の集合であり,任意の$\mathbf{C}$の射$f: A\rightarrow B$に対して下図が可換であるもの。
+        とは,$\mathbf{D}$の射$\vartheta_X: F(X) \rightarrow G(X)$の集合であり,任意の$\mathbf{C}$の射$f: X\rightarrow B$に対して下図が可換であるもの。
         $\vartheta_X$を$\vartheta$の<span style="color:red">$X-$成分(component)</span>と言う。
         </div>
         <div align="center"> <img width="55%" src="fig/natural_transformation.png"> </div>
@@ -497,13 +497,13 @@
         <h3> 米田の原理の使用例 </h3>
         <p>
         前回複雑な証明を行った同型
-        $$ (A^B)^C \cong A^(B\times C) $$
+        $$ (A^B)^C \cong A^{(B\times C)} $$
         は、任意の$X$に対して
         $$ \begin{aligned}
         \mathrm{Hom}(X, (A^B)^C) & \cong \mathrm{Hom}(X\times C, A^B) \\
                                  & \cong \mathrm{Hom}((X\times C)\times B, A) \\
                                  & \cong \mathrm{Hom}(X\times (B\times C), A) \\
-                                 & \cong \mathrm{Hom}(X, A^(B\times C)) \\
+                                 & \cong \mathrm{Hom}(X, A^{(B\times C)}) \\
         \end{aligned} $$
         が成り立つ事と、curry化・積の結合則が自然同型である事から示されます。
         </p>
@@ -622,7 +622,7 @@
         <p>
         は
         $$ (-)\times A \vdash (-)^A $$
-        という随伴に対応しています。そして、この随伴の単位元が評価射(evaluation map)となります。
+        という随伴に対応しています。そして、この随伴の余単位元が評価射(evaluation map)となります。
         </p>
         </section>
 
