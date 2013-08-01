@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+    <title>圏論勉強会 第12回 @ ワークスアプリケーションズ</title>
+
+		<meta name="description" content="Seminar of category theory">
+    <meta name="author" content="Koichi Nakamura">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+    <meta http-equiv="X-UA-Compatible" CONTENT="IE=EmulateIE7" />
+
+		<!-- For syntax highlighting -->
+    <link rel="stylesheet" href="plugin/highlight/styles/github.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+        }
+      });
+    </script>
+
+    <style type="text/css">
+      <!--
+      div.definition {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 4px solid #333333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      div.theorem {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 4px solid #333333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      }
+      div.equation {
+        margin: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 2px solid #C0C0C0;
+      }
+      div.example {
+        margin: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 2px solid #C0C0C0;
+      }
+      --> 
+    </style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+        <section>
+        <h1>圏論勉強会<br>第12回</h1>
+        <h3>@ワークスアプリケーションズ</h3>
+        <small> 中村晃一 <br> 2013年8月1日</small>
+        </section>
+
+        <section>
+        <h3>謝辞</h3>
+        <p>
+        この勉強会の企画，会場設備の提供をして頂きました<br>
+        &#12849; ワークスアプリケーションズ様<br>
+        にこの場をお借りして御礼申し上げます。
+        </p>
+        </section>
+
+        <section>
+        <h3> この会について </h3>
+        <ul>
+          <li> <span style="color:red">圏論(category theory)</span>を題材にいろんなことを学びます。</li>
+          <li> 分かり易さを重視して初歩的な例を多用します。</li>
+          <li> 関数型言語の経験がある方がより楽しめると思います。資料中では主にHaskellを使います。 </li>
+          <li> 中高生も数人見ているらしいのでプログラミングと関係が浅い内容も取り上げます。</li>
+          <li> この資料は<a href="http://nineties.github.com/category-seminar/">http://nineties.github.com/category-seminar</a>に置いてあります。</li>
+        </ul>
+        </section>
+
+        <section>
+        <h2> 第12回 </h2>
+        <h3> 自然性・米田の補題 </h3>
+        </section>
+
+
+        <section>
+        <h3> 第12回の内容 </h3>
+        <p>
+        圏論はもともと<span style="color:red">自然性</span>というものを記述する為に生まれました。今回は自然性と圏論の重要な定理である米田の補題の紹介をします。
+        また、来週の内容を先取りして随伴を少しだけやります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 自然変換・自然同型 </h3>
+        </section>
+
+        <section id="natural_transformation">
+        <h3> 自然変換 </h3>
+        <div class="definition">
+        <div align="left">
+          函手$F, G: \mathbf{C}\rightarrow\mathbf{D}$間の<span style="color:red">自然変換(<span style="font-size:90%">natural transformation</span>)</span>
+        $$ \vartheta: F \rightarrow G$$
+        とは,$\mathbf{D}$の射$\vartheta_X: F(X) \rightarrow G(X)$の集合であり,任意の$\mathbf{C}$の射$f: A\rightarrow B$に対して下図が可換であるもの。
+        $\vartheta_X$を$\vartheta$の<span style="color:red">$X-$成分(component)</span>と言う。
+        </div>
+        <div align="center"> <img width="55%" src="fig/natural_transformation.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <h3> 自然性とは </h3>
+        <p>
+        圏論において主に興味の対象となるのは、個々の対象や射ではなく様々な<span style="color:red">構成(construction)</span>です。
+        </p>
+        <p>
+        構成は函手として扱われる事が多いですが、自然性とは構成と構成の関係の整合性を表します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 自然性の例 </h3>
+        <p>
+        構成$ F(X) = X\times B$と$G(X) = X$に対して$A\times B$の第一成分を取り出す射影を${\pi_1}_{X}$
+        を$X$-成分とする自然変換
+        $$ \pi_1 : F\rightarrow G $$
+        が存在します。$ {\pi_1}_{A'}\circ (f\times 1) = f\circ{\pi_1}_{A} $が成立する事を確認して下さい。
+        </p>
+        <div align="center"> <img width="40%" src="fig/natural_transformation_example.png"> </div>
+        </section>
+
+        <section id="natural_isomorphism">
+        <h3> 自然同型 </h3>
+        <div class="definition">
+        <div align="left">
+          自然変換$\vartheta: F\rightarrow G$が<span style="color:red">自然同型(natural isomorphism)</span>であるとは、
+          $\vartheta$の全ての成分が同型射である事である。函手$F,G$間に自然同型が存在する時
+          $$ F\cong G$$
+          と表す。
+        </div>
+        </div>
+        </section>
+
+        <section>
+        <h3> 自然同型の例 </h3>
+        <div class="theorem">
+        <p>
+        $$ A\times (B\times C) \cong (A\times B)\times C$$
+        は$A,B,C$のいずれに関しても自然である。
+        </p>
+        </div>
+        <p>
+        「$A,B,C$のいずれに関しても」というのは
+        </p>
+        <ul>
+          <li> 函手$-\times(B\times C)$と$(-\times B)\times C$ </li>
+          <li> 函手$A\times(-\times C)$と$(A\times -)\times C$ </li>
+          <li> 函手$A\times(B\times -)$と$(A\times B)\times -$ </li>
+        </ul>
+        <p>
+        のいずれもが自然同型である事を言います。
+        </p>
+        </section>
+
+        <section>
+        <h3> 函手圏 </h3>
+        <p>
+        圏$\mathbf{C}$と圏$\mathbf{D}$を固定します。
+        </p>
+        <ul>
+          <li> 対象: $\mathbf{C}$から$\mathbf{D}$への函手 </li>
+          <li> 射: 自然変換 </li>
+        </ul>
+        <p>
+        からなる圏を<span style="color:red">函手圏(functor category)</span>と言い$\mathbf{D}^\mathbf{C}$と表します(第3回の復習)。
+        </p>
+        <p>
+        自然同型は函手圏における同型に他なりません。
+        </p>
+        </section>
+
+        <section>
+        <div align="center"> <img width="70%" src="fig/functor_category.png"> </div>
+        </section>
+
+        <!--
+        <section>
+        <h3> $\mathbf{C}^\mathbf{1}$ </h3>
+        <img align="right" width="50%" src="fig/functor_category2.png">
+        <p style="font-size:80%">
+        $\mathbf{C}^\mathbf{1}$の対象は$\mathbf{1}$から$\mathbf{C}$への函手です。これは$\mathbf{C}$の対象と同一視出来るので同じ記号で表す事にします。函手$A$の像(行き先)は対象$A$一つですから,任意の射$f: A\rightarrow B$が一つの自然変換を定めます。逆も然りです。
+        </p>
+        <p class="fragment" style="font-size:80%">
+        つまり
+        $$ \mathbf{C}^\mathbf{1} \cong \mathbf{C} \quad \text{in $\mathbf{Cat}$}$$ 
+        です。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\mathbf{C}^\mathbf{0}$ </h3>
+        <img align="right" width="50%" src="fig/functor_category3.png">
+        <p style="font-size:80%">
+        $\mathbf{C}^\mathbf{0}$の対象は空圏$\mathbf{0}$から$\mathbf{C}$への函手つまり,$0_{\mathbf{C}}$一つだけです。すると$0_{\mathbf{C}}$の像は空集合ですので,自然変換は$0_{\mathbf{C}}$をそれ自身に写すもののみです。
+        </p>
+        <p class="fragment" style="font-size:80%">
+        つまり$\mathbf{C}^\mathbf{0}$は対象が一つで恒等射のみなので
+        $$ \mathbf{C}^\mathbf{0} \cong \mathbf{1} \quad \text{in $\mathbf{Cat}$}$$ 
+        です。
+        </p>
+        </section>
+
+        <section>
+        <h3> $\mathbf{C}^{\rightarrow}$ </h3>
+        <img align="right" width="50%" src="fig/functor_category4.png">
+        <p style="font-size:80%">
+        $\mathbf{2}$から$\mathbf{C}$への函手のなす圏を考えます。
+        積圏$\mathbf{C}\times\mathbf{C}$と混同しないように$\mathbf{C}^{\rightarrow}$と表す事にします。
+        </p>
+        <p style="font-size:80%">
+        前に見たようにこの圏の対象は$\mathbf{C}$の射です(右図では$f$と$g$)。
+        すると右図のような四角い可換図式を作る$2$つの射(右図では$\tau$と$\sigma$)が自然変換です。
+        </p>
+        <p class="fragment" style="font-size:80%">
+        この様な「射」を対象とし「可換図式」を射とする圏を<span style="color:red">射圏(arrow category)</span>と言います。
+        </p>
+        </section>
+        -->
+
+        <section>
+        <h3> 函手圏=指数対象 </h3>
+        <p>
+        圏が対象、函手が射である圏を$\mathbf{Cat}$と言いましたが、<span style="color:red">函手圏$\mathbf{D}^\mathbf{C}$は$\mathbf{Cat}$における指数対象</span>となります。
+        </p>
+        <p>
+        $\mathbf{Cat}$には終対象$\mathbf{1}$と積圏$\mathbf{C}\times\mathbf{D}$が存在するので、$\mathbf{Cat}$はデカルト閉圏であるという事になります。
+        </p>
+        <p>
+        証明はAwodey本の7.6節を参照して下さい。
+        </p>
+        </section>
+
+        <section>
+        <h3> 函手圏の$\mathrm{Hom}$集合 </h3>
+        <p>
+        函手圏$\mathbf{D}^\mathbf{C}$における$\mathrm{Hom}(F,G)$は、自然変換
+        $$\vartheta: F\rightarrow G$$
+        の集合となります。分り易さの為に
+        $$ \mathrm{Nat}(F, G) = \mathrm{Hom}_{\mathbf{D}^\mathbf{C}}(F, G) $$
+        と略記します。
+        </p>
+        </section>
+
+        <section>
+        <h3> 米田の補題 </h3>
+        </section>
+
+        <section>
+        <h3> 集合値函手 </h3>
+        <p>
+        コドメインが$\mathbf{Sets}$である函手
+        $$ F: \mathbf{C}\rightarrow\mathbf{Sets}$$
+        を<span style="color:red">集合値函手(Set-valued functor)</span>と言います。
+        </p>
+        <p>
+        何故このようなものが重要になるかですが、函手圏$\mathbf{D}^\mathbf{C}$には$\mathbf{D}$の構造が反映される(第4回)という話を思い出しましょう。集合値函手のなす圏
+        $$ \mathbf{Sets}^{\mathbf{C}} $$
+        には$\mathbf{Sets}$の性質が遺伝するので、それを使って間接的に$\mathbf{C}$に関して調べる事が出来るようになります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 米田の補題 </h3>
+        <div class="theorem">
+          <p>
+          $\mathbf{C}$を圏とする。任意の$\mathbf{C}$の対象$X$と、函手$F:\mathbf{C}^{\mathrm{op}}\rightarrow\mathbf{Sets}$に対して
+          $$ \mathrm{Nat}(\mathrm{Hom}_{\mathbf{C}}(-, X), F) \cong F(X) $$
+          である。さらにこの同型は$F$と$X$に関して自然である。
+          </p>
+        </div>
+        </section>
+
+        <section>
+        <p style="font-size:80%">
+        $F$に関して自然というのは任意の自然変換$\vartheta:F\rightarrow G$に対して、以下の図式が可換となる事を言います。
+        </p>
+        <div align="center"> <img width="60%" src="fig/yoneda_lemma_1.png"> </div>
+        <p style="font-size:80%">
+        $X$に関して自然というのは任意の$\mathbf{C}$の射$f:X\rightarrow Y$に対して、以下の図式が可換となる事を言います。
+        </p>
+        <div align="center"> <img width="60%" src="fig/yoneda_lemma_2.png"> </div>
+        </section>
+
+        <section>
+        <h3> 具体例:その1 </h3>
+        <div style="font-size:90%">
+        <p>
+        証明の前に$F,X$に具体的な函手・対象を当てはめた例を見てみます。
+        </p>
+        <div class="fragment">
+        <p>
+        まず$X = A\times B$,$F(X) = \mathrm{Hom}(X,A)\times\mathrm{Hom}(X,B)$とおいてみると、米田の補題は
+        </p>
+        <div class="equation">
+        $$ \begin{aligned}
+        &\mathrm{Nat}(\mathrm{Hom}(-,A\times B), \mathrm{Hom}(-,A)\times\mathrm{Hom}(-,B)) \\
+        \cong &\mathrm{Hom}(A\times B,A)\times\mathrm{Hom}(A\times B, B) 
+        \end{aligned} $$
+        </div>
+        <p>
+        であるということを言っています。
+        </p>
+        <p>
+        $\mathrm{Nat}$の要素のうち自然同型であるものにだけ注目すれば、この等式は$\langle f,g\rangle$と$(f,g)$の間の一対一対応が$(\pi_1,\pi_2)$によって定まるという既知の事実が含まれています。
+        </p>
+        </div>
+        </div>
+        </section>
+
+        <section>
+        <h3> 具体例:その2 </h3>
+        <p style="font-size:90%">
+        $ X = B^A$, $F(X) = \mathrm{Hom}(X\times A, B)$とおいてみると
+        $$ \begin{aligned}
+        &\mathrm{Nat}(\mathrm{Hom}(-,B^A),\mathrm{Hom}(-\times A,B)) \\
+        \cong & \mathrm{Hom}(B^A\times A, B) \\
+        \end{aligned} $$
+        が成り立ちます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 米田の補題の証明の概略 </h3>
+        <div style="font-size:80%">
+        <p>
+        関数$\phi: \mathrm{Nat}(\mathrm{Hom}(-,X),F) \rightarrow F(X)$を
+        自然変換$\vartheta \in \mathrm{Nat}(\mathrm{Hom}(-,X),F)$に対して
+        $$ \phi(\vartheta) = \vartheta_X(1_X) $$
+        と定めます。逆に
+        関数$\psi:F(X)\rightarrow\mathrm{Nat}(\mathrm{Hom}(-,X),F)$を任意の$x\in F(X)$に対して
+        $$ \psi(x)_A(f) = F(f)(x) \qquad (f:A\rightarrow B)$$
+        によって定めます。そして
+        </p>
+        <ul>
+          <li> $\psi(x)$が自然変換である事。 </li>
+          <li> $\psi = \phi^{-1}$である事。</li>
+          <li> $F,X$に関する自然性。 </li>
+        </ul>
+        <p>
+        を示せば証明が完了します。全部やると長くなるので$\psi=\phi^{-1}$の証明だけ紹介します。詳しくはAwodey本の8.3節を参照して下さい。
+        </p>
+        </div>
+        </section>
+
+        <!--
+        <section>
+        <p style="font-size:80%">
+        【証明:$\psi(x)$が自然変換である事]<br>
+        任意の$f:A\rightarrow B$に対して以下の図式の可換性を示せば良い。
+        任意の射$g\in\mathrm{Hom}(B,X)$に対して
+        $$ \begin{aligned}
+        \psi(x)_A\circ\mathrm{Hom}(f,X)(g) &= \psi(x)_A\circ(g\circ f) \\
+                                           &= F(g\circ f)(x) \\
+                                           &= F(f)\circ F(g)(x)\\
+                                           &= F(f)(\psi(x)_B(g))\\
+                                           &= F(f)\circ\psi(x)_B(g)
+        \end{aligned} $$
+        である。
+        </p>
+        <div align="center"> <img width="40%" src="fig/yoneda_lemma_3.png"> </div>
+        </section>
+        -->
+
+        <section>
+        <p style="font-size:80%">
+        【証明:$\psi=\phi^{-1}$である事]<br>
+        任意の$f: B\rightarrow A$に対して
+        $$ \begin{aligned}
+        \psi(\phi(\vartheta))_B(f) = \psi(\vartheta_A(1_A))_B(f) \\
+                                 = F(f)(\vartheta_A(1_A)) \\
+                                 = (\vartheta_B\circ \mathrm{Hom}(f,X))(1_A) \\
+                                 = \vartheta_B(1_A\circ f) \\
+                                 = \vartheta_B(f) \\
+        \end{aligned} $$
+        であるので$\psi\circ\phi = 1$である。
+        また任意の$x \in F(X)$に対して
+        $$ \begin{aligned}
+        \phi(\psi(x)) &= \psi(x)(1_X) \\
+                      &= F(1_X)(x) \\
+                      &= 1_{F(X)}(x) \\
+                      &= x
+        であるので$\phi\circ\psi = 1$である。以上より
+        $$ \psi^{-1} = \phi$$
+        である。<span style="float:right">□</span>
+        </p>
+        </section>
+
+        <section>
+        <h3> 米田の補題の双対 </h3>
+        <p>
+        $\mathbf{C}^\mathrm{op}$を$\mathbf{C}$に取り替えると以下の双対な定理も成立します。
+        </p>
+        <div class="theorem">
+          <p>
+          $\mathbf{C}$を圏とする。任意の$\mathbf{C}$の対象$X$と、函手$F:\mathbf{C}\rightarrow\mathbf{Sets}$に対して
+          $$ \mathrm{Nat}(\mathrm{Hom}_{\mathbf{C}}(X, -), F) \cong F(X) $$
+          である。さらにこの同型は$F$と$X$に関して自然である。
+          </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> Haskellのコードに翻訳してみる </h3>
+<pre><code data-trim class="haskell" contenteditable>
+
+
+
+
+
+
+
+
+
+
+
+
+</code></pre>
+        </section>
+
+        <section>
+        <h3> 米田の補題の応用 </h3>
+        <p>
+        米田の補題より任意の$A,B$に対して
+        $$ \mathrm{Hom}_{\mathbf{Sets}^{\mathbf{C}^{\mathrm{op}}}}(\mathrm{Hom}(-,A),\mathrm{Hom}(-,B)) \cong \mathrm{Hom}_{\mathbf{C}}(A,B) $$
+        が成立する事が導かれます。
+        </p>
+        <div align="center"> <img width="30%" src="fig/yoneda_principle.png"> </div>
+        </section>
+
+        <section>
+        <h3> 米田の原理 </h3>
+        <p>
+        今の等式より、以下の定理が得られます。これを<span style="color:red">米田の原理(Yoneda principle)</span>などと呼ぶ事もあります。
+        </p>
+        <div class="theorem">
+          <p>
+          $$ \mathrm{Hom}(-,A)\cong \mathrm{Hom}(-,B)\ \Rightarrow A\cong B $$
+          すなわち、任意の$X$に対して自然同型
+          $$ \mathrm{Hom}(X,A)\cong \mathrm{Hom}(X,B)$$
+          が存在するならば
+          $$ A \cong B $$
+          である。
+          </p>
+        </div>
+        </section>
+
+        <section>
+        <h3> 米田の原理の使用例 </h3>
+        <p>
+        前回複雑な証明を行った同型
+        $$ (A^B)^C \cong A^(B\times C) $$
+        は、任意の$X$に対して
+        $$ \begin{aligned}
+        \mathrm{Hom}(X, (A^B)^C) & \cong \mathrm{Hom}(X\times C, A^B) \\
+                                 & \cong \mathrm{Hom}((X\times C)\times B, A) \\
+                                 & \cong \mathrm{Hom}(X\times (B\times C), A) \\
+                                 & \cong \mathrm{Hom}(X, A^(B\times C)) \\
+        \end{aligned} $$
+        が成り立つ事と、curry化・積の結合則が自然同型である事から示されます。
+        </p>
+        </section>
+
+        <section>
+        <h3> 米田埋め込み </h3>
+        <p>
+        米田の原理では対象$A$と函手$\mathrm{Hom}(-, A)$の対応が重要な役割を果たしました。この対応は函手
+        $$ y = \mathrm{Hom}(-, A): \mathbf{C}\rightarrow\mathbf{Sets}^{\mathbf{C}^\mathrm{op}} $$
+        となりますが、これを<span style="color:red">米田埋め込み(Yoneda embedding)</span>と呼びます。
+        </p>
+        <p class="fragment">
+        圏$\mathbf{C}$をより良い性質を持った$\mathbf{Sets}^{\mathbf{C}^\mathrm{op}}$に一旦埋め込む事によって、先ほどのように見通しの良い議論を行う事が可能になります。圏論における重要な道具の一つです。
+        </p>
+        <div align="left" style="font-size:50%">
+          函手$F$が「埋め込みである」とは各$\mathrm{Hom}$集合($\mathrm{Hom}(A,B)$と$\mathrm{Hom}(F(A),F(B))$)が同型であり、さらに$F$が対象に関して単射である事を言います。
+        </div>
+        </section>
+
+        <section>
+        <h3> 随伴 </h3>
+        </section>
+
+        <section>
+        <p>
+        随伴は来週もやりますが、少しだけ先取りします。
+        </p>
+        </section>
+
+        <section>
+        <h3> 随伴とは </h3>
+        <p>
+        圏論の創始者の１人であるS.MacLaneは
+        </p>
+        <div align="center"> "Adjunction arises everywhere" </div>
+        <p>
+        というスローガンを掲げました。この勉強会でこれまで説明した事の殆ど全てを、随伴によって説明する事が出来ます。
+        </p>
+        </section>
+
+        <section id="adjunction">
+        <h3> 随伴 </h3>
+        <div class="definition">
+        <p>
+        圏$\mathbf{C},\mathbf{D}$と函手$F: C\leftrightarrows D: G$について,
+        任意の$X,Y$に関して自然な同型
+        $$ \phi: \mathrm{Hom}_{\mathbf{D}}(F(X), Y) \cong \mathrm{Hom}_{\mathbf{C}}(X, G(Y)) $$
+        が存在するならば$(F,G,\phi)$を<span style="color:red">随伴(adjunction)</span>と言う。また$F$を$G$の<span style="color:red">左随伴(left adjoint)</span>,$G$を$F$の<span style="color:red">右随伴(right adjoint)</span>と言い
+        $$ F\vdash G$$
+        と表す。
+        </p>
+        <div align="center"> <img width="50%" src="fig/adjunction.png"> </div>
+        </div>
+        </section>
+
+        <section>
+        <h3> 単位元と余単位元 </h3>
+        <div class="definition">
+        <p>
+        随伴$(F,G,\phi)$に対して
+        $$ \eta_X = \phi(1_{F(X)})\qquad \epsilon_Y = \phi^{-1}(1_{G(Y)}) $$
+        により定まる自然変換$\eta: 1_{\mathbf{C}}\rightarrow G\circ F$及び,$\epsilon: F\circ G\rightarrow 1_{\mathbf{D}}$を随伴の<span style="color:red">単位元(unit)</span>、<span style="color:red">余単位元(counit)</span>という。
+        </p>
+        <img width="45%" src="fig/unit_of_adjunction.png">
+        <img width="45%" src="fig/counit_of_adjunction.png">
+        </div>
+        </section>
+
+        <section>
+        <h3> 随伴の例:その1 </h3>
+        <p style="font-size:80%">
+        圏$\mathbf{C}$が任意の二対象の積をもつ場合
+        $$ \Delta(X) = (X, X)$$
+        で定義される函手(対角函手)$\Delta: \mathbf{C}\rightarrow\mathbf{C}\times\mathbf{C}$の右随伴が函手
+        $$ \times (A,B) = A\times B $$
+        となります。すなわち
+        $$ \Delta \vdash \times $$
+        です。
+        </p>
+        <div align="center"> <img width="60%" src="fig/adjunction_example1.png"> </div>
+        </section>
+
+        <section>
+        <h3> $\Delta\vdash\times$の余単位元 </h3>
+        <p>
+        また
+        $$ \langle \pi_1, \pi_2 \rangle = 1_{A\times B} $$
+        である事から
+        $$ \epsilon_{A\times B} = \phi^{-1}(1_{A\times B}) = (\pi_1, \pi_2) $$
+        となります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 随伴の例:その2 </h3>
+        <p>
+        全く同様になりますが、対角函手
+        $$ \Delta(X) = (X, X) $$
+        の左随伴が函手
+        $$ +(A,B) = A + B$$
+        となります。すなわち
+        $$ + \vdash \Delta \vdash \times $$
+        という関係があります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 随伴の例:その3 </h3>
+        <p>
+        前回やったカリー化
+        </p>
+        <div class="equation">
+          $$ \widetilde{(-)}: \mathrm{Hom}_{\mathbf{C}}(X\times A, B) \cong \mathrm{Hom}_{\mathbf{C}}(X, B^A): \overline{(-)} $$
+        </div>
+        <p>
+        は
+        $$ (-)\times A \vdash (-)^A $$
+        という随伴に対応しています。そして、この随伴の単位元が評価射(evaluation map)となります。
+        </p>
+        </section>
+
+        <section>
+        <h3> 第12回はここで終わります </h3>
+        <p>
+        お疲れ様でした。<br>
+        今回紹介した他にも随伴の例が沢山ありますので、最終回はそれらの紹介と随伴に関する重要定理の紹介をした後、モナドをやります。
+        </p>
+        </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+        rollingLinks: false,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+      Reveal.addEventListener( 'slidechanged', function( event ) {
+        MathJax.Hub.Rerender(event.currentSlide);
+      });
+
+		</script>
+
+	</body>
+</html>
