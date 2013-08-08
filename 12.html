@@ -553,7 +553,7 @@
         任意の$X,Y$に関して自然な同型
         $$ \phi: \mathrm{Hom}_{\mathbf{D}}(F(X), Y) \cong \mathrm{Hom}_{\mathbf{C}}(X, G(Y)) $$
         が存在するならば$(F,G,\phi)$を<span style="color:red">随伴(adjunction)</span>と言う。また$F$を$G$の<span style="color:red">左随伴(left adjoint)</span>,$G$を$F$の<span style="color:red">右随伴(right adjoint)</span>と言い
-        $$ F\vdash G$$
+        $$ F\dashv G$$
         と表す。
         </p>
         <div align="center"> <img width="50%" src="fig/adjunction.png"> </div>
@@ -581,14 +581,14 @@
         で定義される函手(対角函手)$\Delta: \mathbf{C}\rightarrow\mathbf{C}\times\mathbf{C}$の右随伴が函手
         $$ \times (A,B) = A\times B $$
         となります。すなわち
-        $$ \Delta \vdash \times $$
+        $$ \Delta \dashv \times $$
         です。
         </p>
         <div align="center"> <img width="60%" src="fig/adjunction_example1.png"> </div>
         </section>
 
         <section>
-        <h3> $\Delta\vdash\times$の余単位元 </h3>
+        <h3> $\Delta\dashv\times$の余単位元 </h3>
         <p>
         また
         $$ \langle \pi_1, \pi_2 \rangle = 1_{A\times B} $$
@@ -606,7 +606,7 @@
         の左随伴が函手
         $$ +(A,B) = A + B$$
         となります。すなわち
-        $$ + \vdash \Delta \vdash \times $$
+        $$ + \dashv \Delta \dashv \times $$
         という関係があります。
         </p>
         </section>
@@ -621,7 +621,7 @@
         </div>
         <p>
         は
-        $$ (-)\times A \vdash (-)^A $$
+        $$ (-)\times A \dashv (-)^A $$
         という随伴に対応しています。そして、この随伴の余単位元が評価射(evaluation map)となります。
         </p>
         </section>
