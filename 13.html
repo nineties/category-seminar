@@ -120,7 +120,7 @@
         </section>
 
         <section>
-        <h2> 第12回 </h2>
+        <h2> 第13回 </h2>
         <h3> 随伴・モナド </h3>
         </section>
 
@@ -145,7 +145,7 @@
         任意の$X,Y$に関して自然な同型
         $$ \phi: \mathrm{Hom}_{\mathbf{D}}(F(X), Y) \cong \mathrm{Hom}_{\mathbf{C}}(X, G(Y)) $$
         が存在するならば$(F,G,\phi)$を<span style="color:red">随伴(adjunction)</span>と言う。また$F$を$G$の<span style="color:red">左随伴(left adjoint)</span>,$G$を$F$の<span style="color:red">右随伴(right adjoint)</span>と言い
-        $$ F\vdash G$$
+        $$ F\dashv G$$
         と表す。
         </p>
         <div align="center"> <img width="50%" src="fig/adjunction.png"> </div>
@@ -180,7 +180,7 @@
         <section>
         <h3> Unit definition </h3>
         <p style="font-size:90%">
-        函手$F: \mathbf{C}\leftrightarrows \mathbf{D}: G$が随伴$F\vdash G$をなす事は以下と同値。
+        函手$F: \mathbf{C}\leftrightarrows \mathbf{D}: G$が随伴$F\dashv G$をなす事は以下と同値。
         </p>
         <div class="definition" style="font-size:90%">
         <p>
@@ -298,7 +298,7 @@
         <h3> Counit definition </h3>
         <div style="font-size:90%">
         <p>
-        函手$F: \mathbf{C}\leftrightarrows \mathbf{D}: G$が随伴$F\vdash G$をなす事は以下と同値。
+        函手$F: \mathbf{C}\leftrightarrows \mathbf{D}: G$が随伴$F\dashv G$をなす事は以下と同値。
         </p>
         <div class="definition">
         <p>
@@ -339,7 +339,7 @@
         <section>
         <p>
         つまり,対角函手$\Delta(X):\mathbf{C}\rightarrow\mathbf{C}\times\mathbf{C}$が右随伴を持つのは,$\mathbf{C}$が任意の二対象の積を持つ時であり
-        $$ \Delta \vdash \times $$
+        $$ \Delta \dashv \times $$
         となります。
         </p>
         </section>
@@ -347,9 +347,9 @@
         <section>
         <p>
         同様にして対角函手$\Delta$が左随伴を持つのは,$\mathbf{C}$が任意の二対象の余積を持つ時であり
-        $$ + \vdash \Delta $$
+        $$ + \dashv \Delta $$
         となります。まとめると,
-        $$ + \vdash \Delta \vdash \times $$
+        $$ + \dashv \Delta \dashv \times $$
         という関係があります。
         </p>
         </section>
@@ -372,7 +372,7 @@
         <div class="theorem">
         <p>
         インデックス圏$\mathbf{J}$に対して$\Delta_{\mathbf{J}}$が左随伴・右随伴を持つならば
-        $$ \lim_{\stackrel{\longrightarrow}{\mathbf{J}}} \vdash \Delta_{\mathbf{J}} \vdash \lim_{\stackrel{\longleftarrow}{\mathbf{J}}} $$
+        $$ \lim_{\stackrel{\longrightarrow}{\mathbf{J}}} \dashv \Delta_{\mathbf{J}} \dashv \lim_{\stackrel{\longleftarrow}{\mathbf{J}}} $$
         が成立する。
         </p>
         </div>
@@ -408,7 +408,7 @@
         </p>
         <p>
         つまり
-        $$ (-)\times A \vdash (-)^A $$
+        $$ (-)\times A \dashv (-)^A $$
         という関係があります。
         </p>
         </div>
@@ -459,7 +459,7 @@
         <div class="theorem">
           <p>
           $F$に右随伴が存在するならば,それは同型を覗いて一意である。すなわち
-          $$ F\vdash G,\ F\vdash H$$
+          $$ F\dashv G,\ F\dashv H$$
           ならば$G \cong H$である。左随伴に関しても同様。
           </p>
         </div>
@@ -480,7 +480,7 @@
         <h3> 随伴と連続性 </h3>
         <div class="theorem">
           <p>
-          $$ F\vdash G \qquad (F:\mathbf{C}\leftrightarrows\mathbf{D}:G)$$
+          $$ F\dashv G \qquad (F:\mathbf{C}\leftrightarrows\mathbf{D}:G)$$
           の時$F$は余連続,$G$は連続。
           </p>
         </div>
@@ -503,7 +503,7 @@
         <h3> 随伴の連続性の例 </h3>
         <p style="font-size:80%">
         デカルト閉圏$\mathbf{C}$が任意の有限余積を持つとします。
-        $$(-)\times A\vdash (-)^A$$
+        $$(-)\times A\dashv (-)^A$$
         だったので今の定理より
         $$ \begin{aligned}
         & 1^A \cong 1 \\
@@ -628,28 +628,10 @@
         </section>
 
         <section>
-        <h3> Haskellにおけるモナドとの対応 </h3>
-<pre><code data-trim class="haskell" contenteditable>
-
-
-
-
-
-
-
-
-
-
-
-
-</code></pre>
-        </section>
-
-        <section>
         <h3> 随伴とモナドの関係 </h3>
         <div class="theorem">
         <p>
-        随伴$F\vdash G$の単位元・余単位元を$\eta,\epsilon$とすると
+        随伴$F\dashv G$の単位元・余単位元を$\eta,\epsilon$とすると
         </p>
         <ul>
           <li> 自己函手$T = G\circ F: \mathbf{C}\rightarrow\mathbf{C}$ </li>
@@ -718,17 +700,17 @@
         <h3> 随伴からリストモナドを導出する例 </h3>
         <p style="font-size:80%">
         自由モノイドの構成と忘却函手の随伴
-        $$ F \vdash |-| $$
+        $$ F \dashv |-| $$
         からモナドを導出すると，先ほどのリストモナドが得られます。
         まず任意の集合$A$に対して$F(A)$が自由モノイド，$|F(A)|$がその台集合なので
         $$ T(A) = |F(A)| = \text{($A$の要素からなる有限列の集合)} $$
         となります。また，$ \eta_X(a) = [a] $でであり，
-        $$ \eta_Y([a_1,\cdots,a_n]) = a_1\circ\cdots\circ a_n $$
-        だったので，$\eta_{F(X)}$は
-        $$ \eta_{F(X)}([a_1,\cdots,a_n]) = a_1\append\cdots\append a_n$$
+        $$ \epsilon_Y([a_1,\cdots,a_n]) = a_1\circ\cdots\circ a_n $$
+        だったので，$\epsilon_{F(X)}$は
+        $$ \epsilon_{F(X)}([a_1,\cdots,a_n]) = a_1\append\cdots\append a_n$$
         になります。($F(X)$は自由モノイドなのでその演算は連結捜査)
         従って，
-        $$ \mu_X = |\eta_{F(X)}|([a_1,\cdots,a_n]) = a_1\append\cdots\append a_n$$
+        $$ \mu_X = |\epsilon_{F(X)}|([a_1,\cdots,a_n]) = a_1\append\cdots\append a_n$$
         となります。
         </p>
         </section>
@@ -737,7 +719,7 @@
         <h3> 練習問題 </h3>
         <p>
         随伴
-        $$ (-)\times S \vdash (-)^S $$
+        $$ (-)\times S \dashv (-)^S $$
         からモナドを導出して下さい。
         </p>
         </section>
@@ -886,7 +868,7 @@
         </p>
         <div align="center"> <img width="60%" src="fig/computational_effect3.png"> </div>
         <p>
-        例えば，$T$が副作用を表しているならば$T^2$は「副作用が2度行われる」という計算作用を表します。
+        例えば，$T$が副作用を表しているならば$T^2$は「副作用が2度発生する」という計算作用を表します。
         </p>
         </section>
 
@@ -901,7 +883,7 @@
         </section>
 
         <section>
-        <h3> 「何もしない」作用 </h3>
+        <h3> 「何もしない」計算 </h3>
         <p>
         また「何もしない」という計算を表現出来る必要もあります。これは自然変換
         $$ \eta: 1_{\mathbf{C}}\rightarrow T $$
@@ -921,9 +903,9 @@
         </section>
 
         <section>
-        <h3> 「何もしない」作用は単位的 </h3>
+        <h3> 「何もしない」計算は単位的 </h3>
         <p>
-        $\eta_X$は「何もしない」ので，計算作用の畳み込みに関して単位元として振る舞うはずです。これがモナドの二つ目の等式
+        $\eta_X$は「何もしない」計算なので，計算作用の畳み込みに関して単位元として振る舞うはずです。これがモナドの二つ目の等式
         $$ \mu_X \circ \eta_{T(X)} = \mu_X\circ T(\eta_X) = 1_{T(X)}$$
         です。
         </p>
@@ -940,8 +922,9 @@
           <li> $\mu$は積み重なった作用の畳み込み </li>
         </ul>
         <p>
-        計算は射$f: A\rightarrow T(B)$で表し，射$f:A\rightarrow T(B)$と$g: A\rightarrow 
-        $$ g\circ_K f = \mu_C\circ T(g) \circ f
+        計算はクライスリ射$f: A\rightarrow T(B)$で表し，射$f:A\rightarrow T(B)$と$g: B\rightarrow T(C)$の合成は
+        $$ g\circ_K f = \mu_C\circ T(g)\circ f $$
+        によって行う。
         </p>
         </section>
 
